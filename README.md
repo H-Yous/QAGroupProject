@@ -39,13 +39,12 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
 ## Java Backend
 ### Structure
 #### Packages
-* QACinemas
-  * src/main/control
-  * src/main/models
-  * src/main/repository
-  * src/main/java
-  * src/main/resources
-  * src/test/java
+* qacinemas
+  * qacinemas.main
+  * qacinemas.models
+  * qacinemas.repository
+  * qacinemas.control
+  * qacinemas.test
 #### Classes
 * [x] Movie
 * [x] MovieController
