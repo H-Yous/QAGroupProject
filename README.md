@@ -1,5 +1,3 @@
-# QAGroupProject
-
 - [QAGroupProject](#qagroupproject)
   * [Introduction](#introduction)
   * [Setup](#setup)
@@ -7,9 +5,10 @@
     + [Structure](#structure)
       - [Packages](#packages)
       - [Classes](#classes)
+      - [Interfaces](#interfaces)
       - [Methods](#methods)
   * [React Frontend](#react-frontend)
-  * [Testing](#testing)
+  * [List of Tests](#list-of-tests)
   * [Current Todo list for readme](#current-todo-list-for-readme)
 
 ## Introduction
