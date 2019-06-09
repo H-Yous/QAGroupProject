@@ -19,36 +19,52 @@ This is a group project by Ali, Farhan, Humza, Jay, Mark, and Nick. The project 
 Install springboot and maven. Download from git. You will also need to install node.js on your system.
 ## npm Setup
 Open the command line in the root directory of the application:
-`npm install --save reactstrap react react-dom`
-`cd qacinemas`
+```
+npm install --save bootstrap
+npm install --save reactstrap react react-dom
+cd qacinemas
+```
 #### Run a local instance
-`npm start` will open a local instance at `http:\\localhost:5000`. 
+```
+npm start
+```
+will open a local instance at `http:\\localhost:5000`. 
 #### Run local and network instances
-`npm run build`, `npm serve -s build` will open a local instance at `http:\\localhost:5000` and a network instance at `%NETWORK_IP%:5000`, for instance `http:\\192.168.23.1:5000`.
+```
+npm run build
+npm serve -s build
+```
+will open a local instance at `http:\\localhost:5000` and a network instance at `%YOUR_NETWORK_IP%:5000`.
 > Proposed Project Structure, NOT FINAL
 ## Java Backend
 ### Structure
 #### Packages
 * QACinemas
-  * Controllers
-  * Repos
-  * Models
-  * Interfaces
+  * src/main/control
+  * src/main/models
+  * src/main/repository
+  * src/main/java
+  * src/main/resources
+  * src/test/java
 #### Classes
-* CinemaController
-* ScreenController
-* UserController
-* CinemaRepo
-* ScreenRepo
-* UserRepo
-* CinemaScreen
-* CinemaUser
+* [x] Movie
+* [x] MovieController
+* [ ] CinemaController
+* [ ] ScreenController
+* [ ] UserController
+* [ ] CinemaRepo
+* [ ] ScreenRepo
+* [ ] UserRepo
+* [ ] CinemaScreen
+* [ ] CinemaUser
 #### Interfaces
-* ConstantsInterface
+* [ ] ConstantsInterface
+* [x] MovieRepository
 #### Methods
 ## React Frontend
 ## List of Tests
 ## Current Todo list for readme
+- [x] create empty application with MongoDB/Spring/React/Bootstrap structure
 - [ ] full setup guide
 - [ ] finalised Project Structure
 - [ ] explain EVERY class
