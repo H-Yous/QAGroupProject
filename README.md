@@ -16,7 +16,15 @@
 ## Introduction
 This is a group project by Ali, Farhan, Humza, Jay, Mark, and Nick. The project itself is a cinema website with CRUD functionality to a persistent MongoDB database, Spring Boot backend and React frontend. A link to the backlog is given by [Atlassian](https://qacacademypurple.atlassian.net/secure/RapidBoard.jspa?rapidView=29&projectKey=CL2&view=planning.nodetail&selectedIssue=CL2-5).
 ## Setup
-Install springboot and maven. Download from git. 
+Install springboot and maven. Download from git. You will also need to install node.js on your system.
+## npm Setup
+Open the command line in the root directory of the application:
+`npm install --save reactstrap react react-dom`
+`cd qacinemas`
+#### Run a local instance
+`npm start` will open a local instance at `http:\\localhost:5000`. 
+#### Run local and network instances
+`npm run build`, `npm serve -s build` will open a local instance at `http:\\localhost:5000` and a network instance at `%NETWORK_IP%:5000`, for instance `http:\\192.168.23.1:5000`.
 > Proposed Project Structure, NOT FINAL
 ## Java Backend
 ### Structure
