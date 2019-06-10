@@ -45,7 +45,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void getUpcomingMovies() {
-		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=319d7e3859642548e10f6ace5cd3a672";
+		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
@@ -55,7 +55,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		populateMovieTitleList(resultsArray);
 		populateMovieIdList(resultsArray);
 
-		movieTitle.stream().forEach(x -> movieTitleUrls.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
+		movieTitle.stream().forEach(x -> movieTitleUrls.add("http://www.omdbapi.com/?apikey==" + x));
 
 		movieTitleUrls.stream().forEach(x -> populateMoviePosterUrlList(x));
 
