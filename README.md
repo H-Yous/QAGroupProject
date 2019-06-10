@@ -33,6 +33,7 @@ will open a local instance at `http:\\localhost:5000`.
 #### Run local and network instances
 ```
 npm run build
+npm install -g serve
 npm serve -s build
 ```
 will open a local instance at `http:\\localhost:5000` and a network instance at `%YOUR_NETWORK_IP%:5000`.
