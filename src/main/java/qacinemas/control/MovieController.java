@@ -3,7 +3,10 @@ package qacinemas.control;
 import java.util.List;
 
 import javax.validation.Valid;
-
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbMovies;
+import info.movito.themoviedbapi.TmdbMovies.MovieMethod;
+import info.movito.themoviedbapi.model.MovieDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import info.movito.themoviedbapi.TmdbApi;
-import info.movito.themoviedbapi.TmdbMovies;
-import info.movito.themoviedbapi.TmdbMovies.MovieMethod;
-import info.movito.themoviedbapi.model.MovieDb;
+
+
 import qacinemas.models.Movie;
 import qacinemas.repository.MovieRepo;
 
@@ -34,6 +35,7 @@ public class MovieController {
 	
 	//TmdbMovies tmdbMovies = new TmdbApi("d031a10afed58ff3ceb6bf78a715466a").getMovies();
 	//MovieDb tmdbMovie;
+
 	
 	@GetMapping("/movies")
 	public List<Movie> getAllMovies(){
@@ -41,6 +43,8 @@ public class MovieController {
 		return movieRepoRefVar.findAll(sortByCreatedAtDesc);
 	}
 
+	
+	
 	@PostMapping("/movies")
     public Movie createMovie(@Valid @RequestBody Movie movie) {
         return movieRepoRefVar.save(movie);
@@ -57,6 +61,7 @@ public class MovieController {
 //	public ResponseEntity<MovieDb> getTmdbMovieById(@PathVariable("tmdb_id") int tmdb_id){
 //		return ResponseEntity.ok().body(tmdbMovies.getMovie(tmdb_id, "en"));
 //	}
+
 	
 	@PutMapping(value="/movies/{id}")
 	public ResponseEntity<Movie> updateMovie(@PathVariable("id") String id, @Valid @RequestBody Movie movie){

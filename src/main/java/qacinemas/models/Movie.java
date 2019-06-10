@@ -11,7 +11,7 @@ import info.movito.themoviedbapi.model.MovieDb;
 
 @Document(collection = "Movies")
 public class Movie {
-	
+
 	@Id
 	private String id;
 
@@ -21,7 +21,8 @@ public class Movie {
 	private String title;
 
 	public Movie() {
-		
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public String getTitle() {
 		return title;

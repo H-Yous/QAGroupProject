@@ -1,0 +1,6 @@
+qacinemas\control\MovieController.class
+qacinemas\QACinemasApp.class
+qacinemas\repository\MovieRepo.class
+qacinemas\service\MovieService.class
+qacinemas\service\MovieServiceImpl.class
+qacinemas\models\Movie.class
