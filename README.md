@@ -34,7 +34,7 @@ will open a local instance at `http:\\localhost:5000`.
 ```
 npm run build
 npm install -g serve
-npm serve -s build
+npx serve -s build
 ```
 will open a local instance at `http:\\localhost:5000` and a network instance at `%YOUR_NETWORK_IP%:5000`.
 > Proposed Project Structure, NOT FINAL
