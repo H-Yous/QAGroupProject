@@ -22,6 +22,7 @@ Open the command line in the root directory of the application:
 ```
 npm install --save bootstrap
 npm install --save reactstrap react react-dom
+npm install react-scripts
 cd qacinemas
 ```
 #### Run a local instance
