@@ -10,15 +10,13 @@ import com.qa.QACinema.repository.UpcomingMovieRepository;
 
 @Service
 public class MovieServiceImpl implements MovieService {
-	
+
 	@Autowired
 	UpcomingMovieRepository upcomingMovieRepository;
-	
+
 	@Override
 	public List<UpcomingMovie> findAll() {
 		return upcomingMovieRepository.findAll();
 	}
-	
-	
-	
+
 }

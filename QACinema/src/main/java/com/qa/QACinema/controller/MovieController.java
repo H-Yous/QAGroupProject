@@ -15,17 +15,14 @@ import com.qa.QACinema.service.MovieService;
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-	
+
 	@Autowired
 	MovieService movieService;
-	
-	@GetMapping
+
+	@GetMapping("/getUpcoming")
 	public ResponseEntity<?> getUpcoming() {
 		List<UpcomingMovie> result = movieService.findAll();
-		return new ResponseEntity(result, HttpStatus.OK);
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-	
-	
-	
 
 }

@@ -8,8 +8,7 @@ public class QaCinemaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(QaCinemaApplication.class, args);
-		
-		
+
 	}
 
 }

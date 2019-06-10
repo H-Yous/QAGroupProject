@@ -1,9 +1,7 @@
 package com.qa.QACinema;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.json.JSONArray;
@@ -22,19 +20,20 @@ import com.qa.QACinema.repository.UpcomingMovieRepository;
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
 	private String getUpComingMoviesURI;
-	private JSONObject aMovie;
 	private RestTemplate restTemplate;
 	private String returnedJsonString;
 
-	JSONObject returnedJsonStringAsObj;
-	JSONArray resultsArray;
+	private JSONObject returnedJsonStringAsObj;
+	private JSONArray resultsArray;
 
-	List<String> movieId = new ArrayList<String>();
-	List<String> movieName = new ArrayList<String>();
-	List<String> moviePosterUrl = new ArrayList<String>();
-	List<String> movieDescription = new ArrayList<String>();
-	
-	UpcomingMovie upComingMovie;
+	private List<String> movieId = new ArrayList<String>();
+	private List<String> movieTitle = new ArrayList<String>();
+	private List<String> moviePosterUrl = new ArrayList<String>();
+	private List<String> movieDescription = new ArrayList<String>();
+
+	private List<String> movieTitleUrls = new ArrayList<String>();
+
+	private UpcomingMovie upComingMovie;
 
 	@Autowired
 	UpcomingMovieRepository upcomingMovieRepository;
@@ -42,44 +41,61 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 
-		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
+		getUpcomingMovies();
+	}
+
+	private void getUpcomingMovies() {
+		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=319d7e3859642548e10f6ace5cd3a672";
 		restTemplate = new RestTemplate();
+
 		returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
-		
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
 
-		for (int x = 0; x < resultsArray.length(); x++) {
-			aMovie = resultsArray.getJSONObject(x);
-			movieName.add(aMovie.getString("title"));
-			movieId.add(Integer.toString(aMovie.getInt("id")));
-		}
+		populateMovieTitleList(resultsArray);
+		populateMovieIdList(resultsArray);
 
-		for (int x = 0; x < movieName.size(); x++) {
+		movieTitle.stream().forEach(x -> movieTitleUrls.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
 
-			getUpComingMoviesURI = "http://www.omdbapi.com/?apikey==" + movieName.get(x);
+		movieTitleUrls.stream().forEach(x -> populateMoviePosterUrlList(x));
 
-			restTemplate = new RestTemplate();
-			returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
+		movieTitleUrls.stream().forEach(x -> populateMovieDescriptionList(x));
 
-			returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-			moviePosterUrl.add(returnedJsonStringAsObj.getString("Poster"));
-			movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
-		}
-		
-		for (int x = 0; x < movieName.size(); x++) {
-			
-			upComingMovie = new UpcomingMovie();
-			
-			upComingMovie.setMovieId(movieId.get(x));
-			upComingMovie.setTitle(movieName.get(x));
-			upComingMovie.setDescription(movieDescription.get(x));
-			upComingMovie.setPoster(moviePosterUrl.get(x));
-			
-			upcomingMovieRepository.insert(upComingMovie);
-			
-		}
-		
+		movieId.stream().forEach(x -> populateDBWithUpcomingMovies(movieId.indexOf(x)));
+
 	}
 
+	private void populateMovieTitleList(JSONArray movies) {
+		StreamSupport.stream(movies.spliterator(), false).map(aMovie -> (JSONObject) aMovie)
+				.forEach(aMovie -> movieTitle.add(aMovie.getString("title")));
+	}
+
+	private void populateMovieIdList(JSONArray movies) {
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aMovie -> (JSONObject) aMovie)
+				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
+	}
+
+	private void populateMoviePosterUrlList(String aMovieUrl) {
+		getUpComingMoviesURI = aMovieUrl;
+		returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		moviePosterUrl.add(returnedJsonStringAsObj.getString("Poster"));
+	}
+
+	private void populateMovieDescriptionList(String aMovieUrl) {
+		getUpComingMoviesURI = aMovieUrl;
+		returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
+	}
+
+	private void populateDBWithUpcomingMovies(int index) {
+		upComingMovie = new UpcomingMovie();
+		upComingMovie.setMovieId(movieId.get(index));
+		upComingMovie.setTitle(movieTitle.get(index));
+		upComingMovie.setDescription(movieDescription.get(index));
+		upComingMovie.setPoster(moviePosterUrl.get(index));
+
+		upcomingMovieRepository.insert(upComingMovie);
+	}
 }
