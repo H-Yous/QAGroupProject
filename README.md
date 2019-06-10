@@ -45,6 +45,7 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
   * qacinemas.main
   * qacinemas.models
   * qacinemas.repository
+  * qacinemas.service
   * qacinemas.control
   * qacinemas.test
 #### Classes
