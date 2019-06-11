@@ -1,5 +1,7 @@
 import React, {Component } from 'react'
 import axios from 'axios' 
+import  ControlledCarousel  from './components/Carousel'; 
+
 
 class Home extends Component {
     componentDidMount(){
@@ -8,13 +10,13 @@ class Home extends Component {
         console.log(res)
             })
         }
-
-
+        
         render() {
             return  ( 
 
                     <div> 
                     <h2>Hello World</h2>
+                    <ControlledCarousel /> 
                     <p>Passage its ten led hearted removal cordial. Preference any astonished unreserved mrs. 
                     Prosperous understood middletons in conviction an uncommonly do. Supposing so be resolving breakfast am or perfectly. Is drew am hill from mr. Valley by oh twenty direct me so. Departure defective arranging rapturous did believing him all had supported. Family months lasted simple set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected he resolving agreement perceived at an. </p>
                     <p>Received shutters expenses ye he pleasant. Drift as blind above at up. No up simple county stairs do should praise as. Drawings sir gay together landlord had law smallest. Formerly welcomed attended declared met say unlocked. Jennings outlived no dwelling denoting in peculiar as he believed. Behaviour excellent middleton be as it curiosity departure ourselves. 
