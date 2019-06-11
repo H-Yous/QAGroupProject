@@ -24,7 +24,16 @@ This is a full-stack application of a cinema website created for [QA Consulting]
 A link to the backlog is given by [Atlassian](https://qacacademypurple.atlassian.net/secure/RapidBoard.jspa?rapidView=29&projectKey=CL2&view=planning.nodetail&selectedIssue=CL2-5).
 
 ## Setup
-Install springboot and maven. Download from git. You will also need to install node.js on your system.
+Clone this repository to a folder.
+### Install node and npm - WINDOWS
+Go to this website [node](https://nodejs.org/en/) and download the installer. Check node is installed 
+> node -v
+Check npm is installed
+> npm -v
+Update npm to the latest version
+> npm install npm@latest -g
+### Install Maven
+
 ## npm Setup
 Open the command line in the root directory of the application:
 ```
