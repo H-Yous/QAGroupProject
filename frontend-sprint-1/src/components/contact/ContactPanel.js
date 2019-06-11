@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {Container, Row, Col} from 'react-bootstrap';
+import Script from 'react-script-tag';
 
 class ContactPanel extends Component{
     render(){
@@ -20,6 +21,16 @@ class ContactPanel extends Component{
                         <input type="submit" value="submit" />
                     </View>
                 </form>
+
+                <Script
+                    src="https://static.citymapper.com/js/embed/widget.js"
+                    data-slug="aqdr31qt5m"
+                    data-width="300"
+                    type="text/javascript"
+                    onLoad={this._onMyScriptLoad}
+                    onError={this._onMyScriptError}
+                    async
+                />
             </div>
         );
     };
