@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-
-
 import './nowShowing.css';
 
 class Title extends Component{
-
-    render(){
-        const{Title} = this.props;
+    render() {
+        const{title} = this.props;
 
         return(
-            <span className='title'>{Title}</span>
+            <span className='title'>
+                <h3>Split</h3>
+            </span>
         )
     }
 }
