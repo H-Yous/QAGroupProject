@@ -3,25 +3,18 @@
     padding:30px;
     Margin:50px;
     border:1px solid black;
- 
-
 }
 .poster{
-
- 
-
+    justify-content: row
 }
 .title{
-
-
-    
+    justify-content: row
 }
-.info{
-   
-
+.information{
+    justify-content: row
 }
-.Showing-Times{
-    
+.showtimes{
+    justify-content: row
 }
 
 
