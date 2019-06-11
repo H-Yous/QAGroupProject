@@ -2,12 +2,10 @@ package qacinemas.models;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import info.movito.themoviedbapi.TmdbApi;
-import info.movito.themoviedbapi.TmdbMovies;
-import info.movito.themoviedbapi.model.MovieDb;
 
 @Document(collection = "Movies")
 public class Movie {
