@@ -1,6 +1,20 @@
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\models\Movie.java
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\service\MovieService.java
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\control\MovieController.java
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\repository\MovieRepo.java
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\service\MovieServiceImpl.java
-C:\Users\Admin\Documents\workspace-sts-3.9.8.RELEASE\QACinemasAID\src\main\java\qacinemas\QACinemasApp.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\repository\ShowingRepository.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\UpcomingMovieServiceImpl.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\UpcomingMovieService.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\repository\MovieRepo.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\enumpackage\DayTypes.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\models\Movie.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\ApplicationStartup.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\MovieService.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\control\UpcomingMovieController.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\models\Showing.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\enumpackage\ShowSlots.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\repository\UpcomingMovieRepository.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\control\MovieController.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\enumpackage\ScreenType.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\models\UpcomingMovie.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\control\ShowingController.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\MovieServiceImpl.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\ShowingServiceImpl.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\QACinemasApp.java
+C:\Users\Admin\Documents\QAGROUPP\showing branch\QAGroupProject\working-backend-sprint1\src\main\java\qacinemas\service\ShowingService.java
