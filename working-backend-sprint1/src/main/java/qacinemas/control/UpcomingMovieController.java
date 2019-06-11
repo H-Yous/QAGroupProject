@@ -1,4 +1,4 @@
-package com.qa.QACinema.controller;
+package qacinemas.control;
 
 import java.util.List;
 
@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.QACinema.domain.UpcomingMovie;
-import com.qa.QACinema.service.MovieService;
+import qacinemas.models.UpcomingMovie;
+import qacinemas.service.UpcomingMovieService;
 
 @RestController
-@RequestMapping("/movies")
-public class MovieController {
-
+@RequestMapping("/api")
+public class UpcomingMovieController {
+	
 	@Autowired
-	MovieService movieService;
+	UpcomingMovieService upcomingMovieService;
 
-	@GetMapping("/getUpcoming")
+	@GetMapping("/getUpcomingMovies")
 	public ResponseEntity<?> getUpcoming() {
-		List<UpcomingMovie> result = movieService.findAll();
+		List<UpcomingMovie> result = upcomingMovieService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 

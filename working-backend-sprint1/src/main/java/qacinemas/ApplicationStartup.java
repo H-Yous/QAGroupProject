@@ -1,4 +1,4 @@
-package com.qa.QACinema;
+package qacinemas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,10 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.qa.QACinema.domain.UpcomingMovie;
-import com.qa.QACinema.repository.UpcomingMovieRepository;
+import qacinemas.models.UpcomingMovie;
+import qacinemas.repository.UpcomingMovieRepository;
 
 @Component
-
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
 	private String getUpComingMoviesURI;
@@ -45,7 +44,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void getUpcomingMovies() {
-		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
+		getUpComingMoviesURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(getUpComingMoviesURI, String.class);
@@ -55,7 +54,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		populateMovieTitleList(resultsArray);
 		populateMovieIdList(resultsArray);
 
-		movieTitle.stream().forEach(x -> movieTitleUrls.add("http://www.omdbapi.com/?apikey==" + x));
+		movieTitle.stream().forEach(x -> movieTitleUrls.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
 
 		movieTitleUrls.stream().forEach(x -> populateMoviePosterUrlList(x));
 
