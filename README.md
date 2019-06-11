@@ -1,4 +1,4 @@
-# QAGroupProject
+# QAGroupProject -   dev-branch
 
  * [Introduction](#introduction)
  * [Setup](#setup)
@@ -55,7 +55,7 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
   * qacinemas.repository
   * qacinemas.service
   * qacinemas.control
-  * qacinemas.test
+* qacinemas.test
 #### Classes
 * [x] Movie
 * [x] MovieController
