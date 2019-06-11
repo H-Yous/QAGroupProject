@@ -1,21 +1,17 @@
 import React, {Component } from 'react'
-import axios from 'axios' 
+
 import  ControlledCarousel  from './components/Carousel'; 
+import grabPoster from './components/grabPoster';
 
 
 class Home extends Component {
-    componentDidMount(){
-        axios.get('http://localhost:8080/api/movies')
-        .then(res => {
-        console.log(res)
-            })
-        }
-        
+
         render() {
             return  ( 
 
                     <div> 
                     <h2>Hello World</h2>
+                    <grabPoster />
                     <ControlledCarousel /> 
                     <p>Passage its ten led hearted removal cordial. Preference any astonished unreserved mrs. 
                     Prosperous understood middletons in conviction an uncommonly do. Supposing so be resolving breakfast am or perfectly. Is drew am hill from mr. Valley by oh twenty direct me so. Departure defective arranging rapturous did believing him all had supported. Family months lasted simple set nature vulgar him. Picture for attempt joy excited ten carried manners talking how. Suspicion neglected he resolving agreement perceived at an. </p>
@@ -26,4 +22,5 @@ class Home extends Component {
             )
     }
 }
+
 export default Home
