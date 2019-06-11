@@ -37,7 +37,7 @@ class ControlledCarousel extends React.Component {
                 className="d-block w-100"
                 src={it}
                 alt="First slide" 
-                height="500"
+                height="575"
                 
                 
               />
@@ -51,7 +51,7 @@ class ControlledCarousel extends React.Component {
                 className="d-block w-100"
                 src={aliens}
                 alt="Third slide"
-                height="500"
+                height="575"
                
                 
               />
@@ -66,7 +66,7 @@ class ControlledCarousel extends React.Component {
                 className="d-block w-100"
                 src={avengers}
                 alt="Third slide"
-                height="500"
+                height="575"
 
               />
     

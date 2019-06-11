@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react';
+import ContactPanel from './components/contact/ContactPanel.js';
 
+class Contact extends Component{
+    render(){
+        return(
+            <ContactPanel />
+        )
+    }
+}
 
-export const Contact = () => (
-
-<div> 
-<h2>Contact</h2>
-
-</div>
-)
+export default Contact;

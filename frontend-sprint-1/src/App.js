@@ -6,7 +6,7 @@ import { NewReleases } from './NewReleases';
 import { Events } from './Events'; 
 import { Screens } from './Screens'; 
 import { About } from './About'; 
-import { Contact } from './Contact'; 
+import Contact from './Contact.js'; 
 import { NoMatch } from './NoMatch'; 
 import { Layout } from './components/Layout'; 
 import { NavigationBar} from './components/NavigationBar';
