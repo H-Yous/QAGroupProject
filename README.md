@@ -28,10 +28,13 @@ Clone this repository to a folder.
 ### Install node and npm - WINDOWS
 Go to this website [node](https://nodejs.org/en/) and download the installer. Check node is installed 
 > node -v
+
 Check npm is installed
 > npm -v
+
 Update npm to the latest version
 > npm install npm@latest -g
+
 ### Install Maven
 
 ## npm Setup
