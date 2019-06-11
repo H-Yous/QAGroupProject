@@ -3,10 +3,7 @@ package qacinemas.control;
 import java.util.List;
 
 import javax.validation.Valid;
-import info.movito.themoviedbapi.TmdbApi;
-import info.movito.themoviedbapi.TmdbMovies;
-import info.movito.themoviedbapi.TmdbMovies.MovieMethod;
-import info.movito.themoviedbapi.model.MovieDb;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +16,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 
 import qacinemas.models.Movie;
 import qacinemas.repository.MovieRepo;
@@ -82,4 +77,8 @@ public class MovieController {
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
+	
+
+	
+	
 }
