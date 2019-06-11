@@ -1,20 +1,28 @@
-# QAGroupProject - dev-branch
+# QAGroupProject
 
-- [QAGroupProject](#qagroupproject)
-  * [Introduction](#introduction)
-  * [Setup](#setup)
-  * [Java Backend](#java-backend)
-    + [Structure](#structure)
-      - [Packages](#packages)
-      - [Classes](#classes)
-      - [Interfaces](#interfaces)
-      - [Methods](#methods)
-  * [React Frontend](#react-frontend)
-  * [List of Tests](#list-of-tests)
-  * [Current Todo list for readme](#current-todo-list-for-readme)
+ * [Introduction](#introduction)
+ * [Setup](#setup)
+ * [Java Backend](#java-backend)
+   + [Structure](#structure)
+     - [Packages](#packages)
+     - [Classes](#classes)
+     - [Interfaces](#interfaces)
+     - [Methods](#methods)
+ * [React Frontend](#react-frontend)
+ * [List of Tests](#list-of-tests)
+ * [Current Todo list for readme](#current-todo-list-for-readme)
 
 ## Introduction
-This is a group project by Ali, Farhan, Humza, Jay, Mark, and Nick. The project itself is a cinema website with CRUD functionality to a persistent MongoDB database, Spring Boot backend and React frontend. A link to the backlog is given by [Atlassian](https://qacacademypurple.atlassian.net/secure/RapidBoard.jspa?rapidView=29&projectKey=CL2&view=planning.nodetail&selectedIssue=CL2-5).
+This is a full-stack application of a cinema website created for [QA Consulting](https://consulting.qa.com/) with CRUD functionality created by Ali, Farhan, Humza, Jay, Mark, and Nick. This system is built with the following technologies:
+
+- [Spring boot](https://spring.io/projects/spring-boot) for the backend.
+
+- [ReactJS](https://reactjs.org/) for the frontend.
+
+- [MongoDB](https://www.mongodb.com/) for the database.
+
+A link to the backlog is given by [Atlassian](https://qacacademypurple.atlassian.net/secure/RapidBoard.jspa?rapidView=29&projectKey=CL2&view=planning.nodetail&selectedIssue=CL2-5).
+
 ## Setup
 Install springboot and maven. Download from git. You will also need to install node.js on your system.
 ## npm Setup
@@ -42,6 +50,7 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
 ### Structure
 #### Packages
 * qacinemas
+  * qacinemas.main
   * qacinemas.models
   * qacinemas.repository
   * qacinemas.service
@@ -50,9 +59,6 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
 #### Classes
 * [x] Movie
 * [x] MovieController
-* [x] MovieRepo
-* [x] MovieServiceImpl
-* [x] QACinemasApp
 * [ ] CinemaController
 * [ ] ScreenController
 * [ ] UserController
@@ -64,7 +70,6 @@ will open a local instance at `http:\\localhost:5000` and a network instance at 
 #### Interfaces
 * [ ] ConstantsInterface
 * [x] MovieRepository
-* [x] MovieService
 #### Methods
 ## React Frontend
 ## List of Tests
