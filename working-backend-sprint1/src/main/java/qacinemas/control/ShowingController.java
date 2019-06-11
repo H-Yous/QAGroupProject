@@ -31,7 +31,7 @@ public class ShowingController {
 	
 	@PostMapping("/showing")
     public ResponseEntity<?> createShowing(@Valid @RequestBody Showing showing) {
-		Showing result=showingService.createShowing(showing);
+		String result=showingService.createShowing(showing);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
     }
 }
