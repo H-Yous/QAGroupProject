@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Home } from './Home'; 
+import Home from './Home'; 
 import NowShowing from './NowShowing.js'; 
 import { NewReleases } from './NewReleases'; 
 import { Events } from './Events'; 
