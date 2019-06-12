@@ -18,49 +18,48 @@ export default class ContactPanel extends Component{
     static sender = 'visitor@purpleqacinemas.com';
 
     handleChange(event) {
-        
         this.setState({
             feedback: event.target.value
         });
-      }
+    }
 
-      handleSubmit (event) {
+    handleSubmit (event) {
         event.preventDefault()
-    
+
         //use this!
         console.log(process.env.REACT_APP_EMAILJS_RECEIVER);
 
         const {
-          REACT_APP_EMAILJS_RECEIVER: receiverEmail,
-          REACT_APP_EMAILJS_TEMPLATEID: template
+            REACT_APP_EMAILJS_RECEIVER: receiverEmail,
+                REACT_APP_EMAILJS_TEMPLATEID: template
         } = this.props.env
-    
+
         this.sendFeedback(
-          template,
-          this.props.senderEmail,
-          receiverEmail,
-          this.state.feedback)
-    
+            template,
+            this.props.senderEmail,
+            receiverEmail,
+            this.state.feedback)
+
         this.setState({
-          formSubmitted: true
+            formSubmitted: true
         })
-      }
-    
-      sendFeedback (templateId, senderEmail, receiverEmail, feedback) {
+    }
+
+    sendFeedback (templateId, senderEmail, receiverEmail, feedback) {
         window.emailjs.send(
-          'mailgun',
-          templateId,
-          {
+            'mailgun',
+            templateId,
+        {
             senderEmail,
             receiverEmail,
             feedback
-          })
-          .then(res => {
+        })
+            .then(res => {
             this.setState({ formEmailSent: true })
-          })
+        })
 
-          .catch(err => console.error('Failed to send feedback. Error: ', err))
-      }
+        .catch(err => console.error('Failed to send feedback. Error: ', err))
+    }
 
     render(){
         return(
@@ -99,6 +98,7 @@ export default class ContactPanel extends Component{
                                     type="submit"
                                     value="Submit"
                                 />
+                                
                             </View>
                         </form>
                     </div>

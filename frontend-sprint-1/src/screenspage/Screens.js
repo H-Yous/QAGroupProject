@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 
-
-import screen1 from './screenspage/Screen1.png';
-import screen2 from './screenspage/Screen2.png';
-import screen3 from './screenspage/Screen3.png';
-
+import screen1 from './Screen1.png';
+import screen2 from './Screen2.png';
+import screen3 from './Screen3.png';
 
 
-import CreateScreen from './components/screenspage/CreateScreen';
+
+import CreateScreen from './CreateScreen';
 
 
 class Screens extends Component{

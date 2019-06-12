@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './nowShowing.css';
-import posterjpg from './split.jpg';
+import posterjpg from '../assets/avengers.jpg';
 
 class Poster extends Component{
     render() {
@@ -10,7 +10,7 @@ class Poster extends Component{
             <img
                 className="poster"
                 src={posterjpg}
-                alt='split'
+                alt='avengers'
                 width="200"
                 height="300"
             />

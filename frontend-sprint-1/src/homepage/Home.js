@@ -1,7 +1,7 @@
 import React, {Component } from 'react'
 
-import  ControlledCarousel  from './components/Carousel'; 
-import grabPoster from './components/grabPoster';
+import  ControlledCarousel  from '../components/Carousel'; 
+import grabPoster from '../components/grabPoster';
 
 
 class Home extends Component {

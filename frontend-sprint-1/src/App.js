@@ -4,7 +4,7 @@ import Home from './homepage/Home';
 import NowShowing from './nowshowingpage/NowShowing.js'; 
 import { NewReleases } from './newreleasespage/NewReleases'; 
 import { Events } from './Events'; 
-import { Screens } from './screenspage/Screens'; 
+import  Screens  from './screenspage/Screens'; 
 import Login from './loginpage/Login.js';
 import  About  from './aboutpage/About.js'; 
 import Classifications from "./classificationpage/Classifications.js";
@@ -31,9 +31,9 @@ class App extends Component {
     return (
       <React.Fragment> 
         <Layout>
-        <Router>
-        <NavigationBar />
-        <Jumbotron />
+          <Router>
+          <NavigationBar />
+          <Jumbotron />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/nowShowing" component={NowShowing} />
@@ -43,9 +43,10 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path = "/" component={Contact} />
             <Route exact path="/contact" render={ContactPage} />
+            <Route path = "/login" component={Login} />
             <Route component={NoMatch} />
           </Switch>
-        </Router>
+          </Router>
         </Layout>
       </React.Fragment> 
     );

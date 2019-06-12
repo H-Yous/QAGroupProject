@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ContactPanel from './contactpage/ContactPanel.js';
+import ContactPanel from './ContactPanel.js';
 
 class Contact extends Component{
     render(){
