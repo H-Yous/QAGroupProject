@@ -5,8 +5,11 @@ import NowShowing from './NowShowing.js';
 import { NewReleases } from './NewReleases'; 
 import { Events } from './Events'; 
 import { Screens } from './Screens'; 
+import Login from './Login.js';
 import { About } from './About'; 
+import Classifications from "./Classifications.js";
 import Contact from './Contact.js'; 
+import  Payment  from './Payment.js'; 
 import { NoMatch } from './NoMatch'; 
 import { Layout } from './components/Layout'; 
 import { NavigationBar} from './components/NavigationBar';
@@ -17,7 +20,6 @@ import { env } from './config';
 class App extends Component {
   
   render() {
-
     const ContactPage = (props) => {
       return (
         <Contact
