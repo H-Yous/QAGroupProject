@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 
 import screen1 from './components/screenspage/Screen1.png';
 import screen2 from './components/screenspage/Screen2.png';
+import screen3 from './components/screenspage/Screen3.png';
 
 
 
@@ -14,9 +15,6 @@ class Screens extends Component{
         return(
             
             <center>
-                <CreateScreen
-                eventkey = '1-1-1'
-                />
                 <br/>
                 <br/>
             <div>
@@ -36,6 +34,16 @@ class Screens extends Component{
                     <img
                     src={screen2}
                     height={500}
+                    width={698}
+                    />
+                </div>
+                <br/>
+                <br/>
+                Screen Three
+                <div>
+                    <img
+                    src={screen3}
+                    height={700}
                     width={698}
                     />
                 </div>
