@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 
 
-import screen1 from './components/screenspage/Screen1.png';
-import screen2 from './components/screenspage/Screen2.png';
-import screen3 from './components/screenspage/Screen3.png';
+import screen1 from './screenspage/Screen1.png';
+import screen2 from './screenspage/Screen2.png';
+import screen3 from './screenspage/Screen3.png';
 
 
 

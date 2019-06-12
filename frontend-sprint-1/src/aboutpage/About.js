@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import AboutPanel from './components/about/AboutPanel.js';
+import AboutPanel from './components/aboutpage/AboutPanel.js';
 
 class About extends Component{
     render(){

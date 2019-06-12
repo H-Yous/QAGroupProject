@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import LoginPanel from './components/login/LoginPanel.js';
+import LoginPanel from './loginpage/LoginPanel.js';
 
 class Login extends Component{
     render(){
