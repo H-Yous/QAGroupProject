@@ -56,6 +56,14 @@ npm run build
 npm install -g serve
 npx serve -s build
 ```
+#### Run server for stripe 
+```
+npm install react-stripe-elements
+
+npm install express body-parser stripe
+
+node server.js
+
 will open a local instance at `http:\\localhost:5000` and a network instance at `%YOUR_NETWORK_IP%:5000`.
 > Proposed Project Structure, NOT FINAL
 ## Java Backend
