@@ -13,33 +13,22 @@ import qacinemas.enumpackage.ScreenType;
 import qacinemas.enumpackage.ShowSlots;
 
 @Document(collection = "Events")
-public class Events {	
-	
+public class Events {
 
- //   @Transient
-  //  public static final String SEQUENCE_NAME = "users_sequence";
-	
-	
+	// @Transient
+	// public static final String SEQUENCE_NAME = "users_sequence";
+
 	@Id
 	private String id;
+	
+	private String movie;
 
 	@NotBlank
-	private String movie;
-	@NotBlank
-	private String chart;
-	@NotBlank
+	@Indexed(unique = true)
 	private String eventKey;
 
 	public Events() {
-		
-	}
-	
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getMovie() {
@@ -50,19 +39,19 @@ public class Events {
 		this.movie = movie;
 	}
 
-	public String getChart() {
-		return chart;
-	}
-
-	public void setChart(String chart) {
-		this.chart = chart;
-	}
-
 	public String getEventKey() {
 		return eventKey;
 	}
 
 	public void setEventKey(String eventKey) {
 		this.eventKey = eventKey;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

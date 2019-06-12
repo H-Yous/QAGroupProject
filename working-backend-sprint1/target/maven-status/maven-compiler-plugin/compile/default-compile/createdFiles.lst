@@ -1,8 +1,8 @@
 qacinemas\service\NowShowingMovieServiceImpl.class
 qacinemas\models\Booking.class
 qacinemas\QACinemasApp.class
-qacinemas\service\ShowingServiceImpl.class
 qacinemas\enumpackage\ShowSlots.class
+qacinemas\service\EventServiceImpl.class
 qacinemas\service\UpcomingMovieService.class
 qacinemas\service\MovieService.class
 qacinemas\repository\UpcomingMovieRepository.class
@@ -22,12 +22,12 @@ qacinemas\control\MovieController.class
 qacinemas\repository\BookingRepository.class
 qacinemas\control\UpcomingMovieController.class
 qacinemas\enumpackage\DayTypes.class
-qacinemas\service\ShowingService.class
 qacinemas\service\BookingService.class
 qacinemas\repository\NowShowingMovieRepository.class
-qacinemas\repository\ShowingRepository.class
+qacinemas\repository\EventRepository.class
+qacinemas\service\EventService.class
 qacinemas\models\NowShowingMovie.class
 qacinemas\repository\MovieRepo.class
+qacinemas\control\EventController.class
 qacinemas\models\DatabaseSequence.class
-qacinemas\control\ShowingController.class
 qacinemas\service\MovieServiceImpl.class
