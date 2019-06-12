@@ -6,6 +6,7 @@ import { NewReleases } from './NewReleases';
 import { Events } from './Events'; 
 import { Screens } from './Screens'; 
 import { About } from './About'; 
+import Classifications from "./Classifications.js";
 import Contact from './Contact.js'; 
 import  Payment  from './Payment.js'; 
 import { NoMatch } from './NoMatch'; 
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
           <Route path="/payment" component={Payment} />
+          <Route path="/classifications" component={Classifications} />
           <Route component={NoMatch} />
         </Switch>
       </Router>
@@ -37,6 +39,7 @@ class App extends Component {
     </React.Fragment> 
   );
 }
+
 }
 
 export default App;
