@@ -35,7 +35,22 @@ Check npm is installed
 Update npm to the latest version
 > npm install npm@latest -g
 
-### Install Maven
+### Backend Setup
+Go to the folder which you cloned from git hub and into the working-backend-sprint1 folder
+
+> cd working-backend-sprint1
+
+Next build the package
+
+> mvn package
+
+Go into the target folder
+
+> cd target
+
+Finally run the jar file created using java
+
+> java -jar QACinemasAID-0.0.1.jar
 
 ## npm Setup
 Open the command line in the root directory of the application:
@@ -45,6 +60,7 @@ npm install --save reactstrap react react-dom
 npm install react-scripts
 cd qacinemas
 ```
+
 #### Run a local instance
 ```
 npm start
