@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="frontend-sprint-1/node_modules/react-native/ReactAndroid/src/androidTest/java"/>
+	<classpathentry kind="src" path="frontend-sprint-1/node_modules/react-native/ReactAndroid/src/main/java"/>
+	<classpathentry kind="src" path="frontend-sprint-1/node_modules/react-native/ReactAndroid/src/test/java"/>
+	<classpathentry kind="src" path="frontend-sprint-1/node_modules/react-native/template/android/app/src/main/java"/>
+	<classpathentry kind="src" path="working-backend-sprint1/src/main/java"/>
+	<classpathentry kind="src" path="working-backend-sprint1/src/test/java"/>
+	<classpathentry kind="lib" path="frontend-sprint-1/node_modules/react-native/android/com/facebook/react/react-native/0.59.9/react-native-0.59.9-javadoc.jar"/>
+	<classpathentry kind="lib" path="frontend-sprint-1/node_modules/react-native/android/com/facebook/react/react-native/0.59.9/react-native-0.59.9-sources.jar"/>
+	<classpathentry kind="lib" path="frontend-sprint-1/node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar"/>
+	<classpathentry kind="lib" path="frontend-sprint-1/node_modules/react-native/template/android/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
