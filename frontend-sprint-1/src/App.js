@@ -5,6 +5,7 @@ import NowShowing from './NowShowing.js';
 import { NewReleases } from './NewReleases'; 
 import { Events } from './Events'; 
 import { Screens } from './Screens'; 
+import Login from './Login.js';
 import { About } from './About'; 
 import Classifications from "./Classifications.js";
 import Contact from './Contact.js'; 
@@ -30,6 +31,7 @@ class App extends Component {
           <Route path="/screens" component={Screens} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
+          <Route path="/Login" component={Login} />
           <Route path="/payment" component={Payment} />
           <Route path="/classifications" component={Classifications} />
           <Route component={NoMatch} />
