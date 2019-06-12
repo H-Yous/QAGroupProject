@@ -2,11 +2,11 @@ package qacinemas.service;
 
 import java.util.List;
 
-import qacinemas.models.Showing;
+import qacinemas.models.Events;
 
 public interface ShowingService {
 
-	List<Showing> findAll();
-	String createShowing(Showing show);
+	List<Events> findAll();
+	String createShowing(Events show);
 
 }

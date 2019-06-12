@@ -12,17 +12,19 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import qacinemas.models.Showing;
+import qacinemas.models.Events;
 import qacinemas.service.ShowingService;
 
 @RestController
 @RequestMapping(showingsPath)
+@CrossOrigin("*")
 public class ShowingController {
 	
 	@Autowired
@@ -30,12 +32,12 @@ public class ShowingController {
 	
 	@GetMapping(getAllShowsPath)
 	public ResponseEntity<?> getAllShowings(){
-		List<Showing> result = showingService.findAll();
+		List<Events> result = showingService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 	
 	@PostMapping(createShowPath)
-    public ResponseEntity<?> createShowing(@Valid @RequestBody Showing showing) {
+    public ResponseEntity<?> createShowing(@Valid @RequestBody Events showing) {
 		String result=showingService.createShowing(showing);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
     }

@@ -18,13 +18,13 @@ public class Booking {
 	private String screen;
 	
 	@NotBlank
-	private String timeslot;
+	private String timeSlot;
 	
 	@NotBlank
-	private String seat;
+	private String seatNumber;
 	
 	@NotBlank
-	private String customeID;
+	private String customerID;
 	
 	@NotBlank
 	private String price;
@@ -57,27 +57,27 @@ public class Booking {
 	}
 
 	public String getTimeslot() {
-		return timeslot;
+		return timeSlot;
 	}
 
 	public void setTimeslot(String timeslot) {
-		this.timeslot = timeslot;
+		this.timeSlot = timeslot;
 	}
 
 	public String getSeat() {
-		return seat;
+		return seatNumber;
 	}
 
 	public void setSeat(String seat) {
-		this.seat = seat;
+		this.seatNumber = seat;
 	}
 
 	public String getCustomeID() {
-		return customeID;
+		return customerID;
 	}
 
 	public void setCustomeID(String customeID) {
-		this.customeID = customeID;
+		this.customerID = customeID;
 	}
 
 	public String getPrice() {
@@ -87,6 +87,5 @@ public class Booking {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
 	
 }

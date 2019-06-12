@@ -15,7 +15,7 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 
 import qacinemas.QACinemasApp;
-import qacinemas.models.Showing;
+import qacinemas.models.Events;
 import qacinemas.service.ShowingServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -32,7 +32,7 @@ public class TestShowing {
                 .get();
         mongoTemplate.save(showingRef, "Showing");
         
-        Showing show;
+        Events show;
         ShowingServiceImpl showingServiceImpl;
 	}
 }
