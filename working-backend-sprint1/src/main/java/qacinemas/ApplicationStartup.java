@@ -35,7 +35,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	private List<String> movieId = new ArrayList<String>();
 	private List<String> movieTitle = new ArrayList<String>();
-  
+
 	private List<String> moviePoster = new ArrayList<String>();
 	private String posters = "";
 	private List<String> movieDescription = new ArrayList<String>();
@@ -44,45 +44,52 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private List<String> movieActors = new ArrayList<String>();
 	private List<String> movieDirector = new ArrayList<String>();
 
+	private List<String> movieRating = new ArrayList<String>();
+	private List<String> movieRatingDescription = new ArrayList<String>();
+
 	private UpcomingMovie upComingMovie;
 	private NowShowingMovie nowShowingMovie;
 	private NewReleaseMovie newReleaseMovie;
 
 	@Autowired
-	UpcomingMovieRepository upcomingMovieRepository;
+	private UpcomingMovieRepository upcomingMovieRepository;
 
 	@Autowired
-	NowShowingMovieRepository nowShowingMovieRepository;
+	private NowShowingMovieRepository nowShowingMovieRepository;
 
 	@Autowired
-	NewReleaseMovieRepository newReleaseMovieRepository;
+	private NewReleaseMovieRepository newReleaseMovieRepository;
 
-	String currentYear = new SimpleDateFormat("yyyy").format(new Date());
+	private String currentYear = new SimpleDateFormat("yyyy").format(new Date());
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 
-		getUpcomingMovies();
-
-		movieId.clear();
-		movieTitle.clear();
-		moviePoster.clear();
-		movieDescription.clear();
-		movieTitleUrl.clear();
-
-		waitFiveSecsBeforeMakingRequests();
-
-		getNowShowingMovies();
-
-		movieId.clear();
-		movieTitle.clear();
-		moviePoster.clear();
-		movieDescription.clear();
-		movieTitleUrl.clear();
-
-		waitFiveSecsBeforeMakingRequests();
-
-		getNewReleaseMovies();
+//		getUpcomingMovies();
+//
+//		movieId.clear();
+//		movieTitle.clear();
+//		moviePoster.clear();
+//		movieDescription.clear();
+//		movieTitleUrl.clear();
+//
+//		waitFiveSecsBeforeMakingRequests();
+//
+//		getNowShowingMovies();
+//
+//		movieId.clear();
+//		movieTitle.clear();
+//		moviePoster.clear();
+//		movieDescription.clear();
+//		movieTitleUrl.clear();
+//
+//		waitFiveSecsBeforeMakingRequests();
+//
+//		getNewReleaseMovies();
+//		
+//		waitFiveSecsBeforeMakingRequests();
+		
+//		getMovieClassificationInfo();
 	}
 
 	private void getUpcomingMovies() {
@@ -139,11 +146,10 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private void populatemovieDescriptionList(String aMovieUrl) {
 		apiURI = aMovieUrl;
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-    
+
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
 	}
-
 
 	private void populateDBWithUpcomingMovies(int index) {
 
@@ -269,7 +275,23 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		newReleaseMovieRepository.insert(newReleaseMovie);
 	}
+	
+	private void getMovieClassificationInfo()
+	{
+		apiURI = "https://api.themoviedb.org/3/certification/movie/list?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		restTemplate = new RestTemplate();
 
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		
+		JSONObject certificationsObj = returnedJsonStringAsObj.getJSONObject("certifications");
+		
+		resultsArray = certificationsObj.getJSONArray("GB");
+		
+		//JSONArray params = obj.getJsonArray("params");
+		
+	}
+	
 	private void waitFiveSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(5000);
