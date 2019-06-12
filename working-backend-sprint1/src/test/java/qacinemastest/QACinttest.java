@@ -1,8 +1,8 @@
-package qacinemastest.testshows;
+package qacinemastest;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +15,25 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 
 import qacinemas.QACinemasApp;
-import qacinemas.models.Events;
-import qacinemas.service.EventServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
 @ContextConfiguration(classes = {QACinemasApp.class})
-public class TestShowing {
+class QACinttest {
+	@DisplayName("given Movie to save"
+            + " when save Movie using MongoDB template"
+            + " then Movie is saved")
     @Test
     public void test(@Autowired MongoTemplate mongoTemplate) {
-        DBObject showingRef = BasicDBObjectBuilder.start()
-                .add("day", "MONDAY")
-                .add("screentype", "LARGESCREEN")
-                .add("showslot", "FIRSTSLOT")
-                .add("movie", "Avengers")
+        DBObject movieRefVar = BasicDBObjectBuilder.start()
+                .add("title", "Star Wars")
+                .add("Id", "1")
                 .get();
-        mongoTemplate.save(showingRef, "Showing");
         
-        Events show;
-        EventServiceImpl showingServiceImpl;
+        mongoTemplate.save(movieRefVar, "Movies");
+        assertThat(mongoTemplate.findAll(DBObject.class, "Movies")).extracting("title")
+        .containsOnly("Star Wars");
+
 	}
+
 }
