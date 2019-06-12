@@ -35,25 +35,26 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private List<String> movieId = new ArrayList<String>();
 	private List<String> movieTitle = new ArrayList<String>();
 	private List<String> moviePoster = new ArrayList<String>();
+	private String posters = "";
 	private List<String> movieDescription = new ArrayList<String>();
 	private List<String> movieTitleUrl = new ArrayList<String>();
-	private String actors;
+	private String actors = "";
 	private List<String> movieActors = new ArrayList<String>();
 	private List<String> movieDirector = new ArrayList<String>();
 
 	private UpcomingMovie upComingMovie;
 	private NowShowingMovie nowShowingMovie;
 	private NewReleaseMovie newReleaseMovie;
-	
+
 	@Autowired
 	UpcomingMovieRepository upcomingMovieRepository;
-	
+
 	@Autowired
 	NowShowingMovieRepository nowShowingMovieRepository;
-	
+
 	@Autowired
 	NewReleaseMovieRepository newReleaseMovieRepository;
-	
+
 	String currentYear = new SimpleDateFormat("yyyy").format(new Date());
 
 	@Override
@@ -67,6 +68,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
+		waitFiveSecsBeforeMakingRequests();
+
 		getNowShowingMovies();
 
 		movieId.clear();
@@ -75,10 +78,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
+		waitFiveSecsBeforeMakingRequests();
+
 		getNewReleaseMovies();
-
-
-
 	}
 
 	private void getUpcomingMovies() {
@@ -94,7 +96,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
 
-		movieTitleUrl.stream().forEach(x -> populatemoviePosterList(x));
+		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
 		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
 
@@ -112,11 +114,24 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
 	}
 
-	private void populatemoviePosterList(String aMovieUrl) {
-		apiURI = aMovieUrl;
+	private void populatemoviePosterList(String aMovieId) {
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/images?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		restTemplate = new RestTemplate();
+
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		moviePoster.add(returnedJsonStringAsObj.getString("Poster"));
+		resultsArray = returnedJsonStringAsObj.getJSONArray("backdrops");
+
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aMovieImage -> (JSONObject) aMovieImage)
+				.forEach(aMovieImage -> posters += "https://image.tmdb.org/t/p/original"
+						+ aMovieImage.getString("file_path") + ",");
+
+		posters = posters.substring(0, posters.length() - 1);
+		String[] postersSplit = posters.split(",");
+		moviePoster.add(postersSplit[0]);
+		posters = "";
+
 	}
 
 	private void populatemovieDescriptionList(String aMovieUrl) {
@@ -149,7 +164,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
 
-		movieTitleUrl.stream().forEach(x -> populatemoviePosterList(x));
+		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
 		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
 
@@ -178,8 +193,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieId.stream().forEach(x -> populateCurrentYearMovieTitleList(x));
 		movieId.stream().forEach(x -> populateCurrentYearmovieActorsList(x));
 		movieId.stream().forEach(x -> populateCurrentYearMovieDirectorsList(x));
-		movieTitle.stream().forEach(x -> populateCurrentYearMoviePosterList(x));
-		
+		movieId.stream().forEach(x -> populatemoviePosterList(x));
+
 		movieId.stream().forEach(x -> populateDBWithNewReleaseMovieMovies(movieId.indexOf(x)));
 	}
 
@@ -238,16 +253,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	}
 
-	private void populateCurrentYearMoviePosterList(String aMovieTitle) {
-		
-		apiURI = "http://www.omdbapi.com/?apikey=38b54c63&t=" + aMovieTitle;
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		moviePoster.add(returnedJsonStringAsObj.getString("Poster"));
-	}
-	
-	private void populateDBWithNewReleaseMovieMovies(int index)
-	{
+	private void populateDBWithNewReleaseMovieMovies(int index) {
 		newReleaseMovie = new NewReleaseMovie();
 		newReleaseMovie.setMovieId(movieId.get(index));
 		newReleaseMovie.setTitle(movieTitle.get(index));
@@ -256,5 +262,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		newReleaseMovie.setPoster(moviePoster.get(index));
 
 		newReleaseMovieRepository.insert(newReleaseMovie);
+	}
+
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
