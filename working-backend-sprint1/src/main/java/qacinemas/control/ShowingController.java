@@ -1,5 +1,10 @@
 package qacinemas.control;
 
+import static qacinemas.constantspackage.PROJ_CONSTANTS.getAllShowsPath;
+import static qacinemas.constantspackage.PROJ_CONSTANTS.createShowPath;
+import static qacinemas.constantspackage.PROJ_CONSTANTS.showingsPath;
+
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,19 +22,19 @@ import qacinemas.models.Showing;
 import qacinemas.service.ShowingService;
 
 @RestController
-@RequestMapping("/showings")
+@RequestMapping(showingsPath)
 public class ShowingController {
 	
 	@Autowired
 	ShowingService showingService;
 	
-	@GetMapping("/getAllShowings")
+	@GetMapping(getAllShowsPath)
 	public ResponseEntity<?> getAllShowings(){
 		List<Showing> result = showingService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 	
-	@PostMapping("/showing")
+	@PostMapping(createShowPath)
     public ResponseEntity<?> createShowing(@Valid @RequestBody Showing showing) {
 		String result=showingService.createShowing(showing);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
