@@ -13,10 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
-
-import qacinemas.QACinemasApp;
-import qacinemas.models.Events;
-import qacinemas.service.EventServiceImpl;
+import com.qa.QACinemasApp;
+import com.qa.domain.Events;
+import com.qa.service.EventServiceImpl;
 
 @ExtendWith(SpringExtension.class)
 @DataMongoTest

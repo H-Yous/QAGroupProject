@@ -13,8 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
-
-import qacinemas.QACinemasApp;
+import com.qa.QACinemasApp;
 
 
 @ExtendWith(SpringExtension.class)
