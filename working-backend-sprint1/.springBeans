@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.qa.QACinemasApp</config>
+		<config>java:com.qa.cinemas.QACinemasApp</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
