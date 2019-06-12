@@ -1,10 +1,59 @@
-import React from 'react'
+import React, {Component} from 'react'
 
 
-export const Screens = () => (
+import screen1 from './components/screenspage/Screen1.png';
+import screen2 from './components/screenspage/Screen2.png';
+import screen3 from './components/screenspage/Screen3.png';
 
-<div> 
-<h2>Screens</h2>
 
-</div>
-)
+
+import CreateScreen from './components/screenspage/CreateScreen';
+
+
+class Screens extends Component{
+    render(){
+        return(
+            
+            <center>
+                <br/>
+                <br/>
+            <div>
+                Screen One
+                <div>
+                    <img
+                    src={screen1}
+                    height={398}
+                    width={698}
+                    />
+                </div>
+
+                <br/>
+                <br/>
+                Screen Two
+                <div>
+                    <img
+                    src={screen2}
+                    height={500}
+                    width={698}
+                    />
+                </div>
+                <br/>
+                <br/>
+                Screen Three
+                <div>
+                    <img
+                    src={screen3}
+                    height={700}
+                    width={698}
+                    />
+                </div>
+            </div>
+            </center>
+            
+            
+
+           
+        )
+    };
+}
+export default Screens;
