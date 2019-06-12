@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import AboutUsPanel from './components/Login/LoginPanel.js';
+import LoginPanel from './components/login/LoginPanel.js';
 
 class Login extends Component{
     render(){
         return(
-            <Login />
+            <div><LoginPanel /></div>
             
-        );
-    }
+        )
+    };
 }
+
 
 export default Login;

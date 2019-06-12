@@ -7,6 +7,8 @@ import { Events } from './Events';
 import { Screens } from './Screens'; 
 import About from './About'; 
 import Contact from './Contact.js'; 
+import Login from './Login.js';
+
 import { NoMatch } from './NoMatch'; 
 import { Layout } from './components/Layout'; 
 import { NavigationBar} from './components/NavigationBar';
@@ -28,6 +30,7 @@ class App extends Component {
           <Route path="/screens" component={Screens} />
           <Route path="/about" component={About} />
           <Route path="/contact" component={Contact} />
+          <Route path="/Login" component={Login} />
           <Route component={NoMatch} />
         </Switch>
       </Router>
