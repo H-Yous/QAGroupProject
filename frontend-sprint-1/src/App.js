@@ -4,7 +4,7 @@ import Home from './Home';
 import NowShowing from './NowShowing.js'; 
 import { NewReleases } from './NewReleases'; 
 import { Events } from './Events'; 
-import { Screens } from './Screens'; 
+import Screens  from './Screens.js'; 
 import { About } from './About'; 
 import Contact from './Contact.js'; 
 import { NoMatch } from './NoMatch'; 
