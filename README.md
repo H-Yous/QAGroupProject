@@ -138,7 +138,7 @@ node server.js
   * [x] NewReleaseMovieRepository
   * [x] NowShowingMovieRepository
   * [x] UpcomingMovieRepository
-* .service
+* [x] .service
   * [x] BookingService
   * [x] BookingServiceImpl
   * [x] EventService
