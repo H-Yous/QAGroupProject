@@ -6,7 +6,7 @@ import { NewReleases } from './NewReleases';
 import { Events } from './Events'; 
 import { Screens } from './Screens'; 
 import Login from './Login.js';
-import { About } from './About'; 
+import  About  from './aboutpage/About.js'; 
 import Classifications from "./Classifications.js";
 import Contact from './Contact.js'; 
 import  Payment  from './Payment.js'; 
