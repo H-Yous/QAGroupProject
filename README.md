@@ -44,6 +44,10 @@ Next build the package
 
 > mvn package
 
+The command line needs to tell you the build was a success
+
+![alt text](https://github.com/H-Yous/QAGroupProject/blob/dev-branch-booking/buildsuccess.PNG)
+
 Go into the target folder
 
 > cd target
