@@ -28,6 +28,9 @@ This is a full-stack application of a cinema website created for [QA Consulting]
 
 A link to the backlog is given by [Atlassian](https://qacacademypurple.atlassian.net/secure/RapidBoard.jspa?rapidView=29&projectKey=CL2&view=planning.nodetail&selectedIssue=CL2-5).
 
+Image displaying the Architecture
+![alt text](https://github.com/H-Yous/QAGroupProject/blob/dev-branch/Architecture.png)
+
 ## Setup
 Clone this repository to a folder.
 ### Windows Installation
@@ -61,7 +64,7 @@ mvn package
 
 The command line needs to tell you the build was a success
 
-![alt text](https://github.com/H-Yous/QAGroupProject/blob/dev-branch-booking/buildsuccess.PNG)
+![alt text](https://github.com/H-Yous/QAGroupProject/blob/dev-branch/buildsuccess.PNG)
 
 Go into the target folder
 
