@@ -24,6 +24,7 @@ import qacinemas.repository.UpcomingMovieRepository;
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
+	private String getUpComingMoviesURI;
 	private String apiURI;
 
 	private RestTemplate restTemplate;
@@ -34,6 +35,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	private List<String> movieId = new ArrayList<String>();
 	private List<String> movieTitle = new ArrayList<String>();
+  
 	private List<String> moviePoster = new ArrayList<String>();
 	private String posters = "";
 	private List<String> movieDescription = new ArrayList<String>();
@@ -137,15 +139,19 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private void populatemovieDescriptionList(String aMovieUrl) {
 		apiURI = aMovieUrl;
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+    
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
 	}
 
+
 	private void populateDBWithUpcomingMovies(int index) {
+
 		upComingMovie = new UpcomingMovie();
 		upComingMovie.setMovieId(movieId.get(index));
 		upComingMovie.setTitle(movieTitle.get(index));
 		upComingMovie.setDescription(movieDescription.get(index));
+
 		upComingMovie.setPoster(moviePoster.get(index));
 
 		upcomingMovieRepository.insert(upComingMovie);

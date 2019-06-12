@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
-
-
 import './nowShowing.css';
+import posterjpg from './split.jpg';
+
 class Poster extends Component{
-    
     render() {
         const{posterURL} = this.props;
 
-        return (
-            <div className="poster">
-                <img 
-                src={posterURL} 
-                alt='split' 
-                width="100" 
-                height="150"/>
-            </div>
+        return(
+            <img
+                className="poster"
+                src={posterjpg}
+                alt='split'
+                width="200"
+                height="300"
+            />
         )
     }
         
