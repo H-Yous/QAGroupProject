@@ -9,6 +9,7 @@
     "bootstrap": "^4.3.1",
     "emailjs-com": "^2.3.2",
     "express": "^4.17.1",
+    "npm": "^6.9.0",
     "react": "^16.8.6",
     "react-art": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
@@ -35,7 +36,6 @@
     "test": "react-scripts test",
     "proxy": "http://localhost:9000",
     "eject": "react-scripts eject"
-
   },
   "devDependencies": {
     "prop-types": "^15.7.2"

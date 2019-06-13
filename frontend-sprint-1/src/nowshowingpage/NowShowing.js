@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MoviePanel from './components/nowshowing/MoviePanel.js';
+import MoviePanel from './MoviePanel.js';
 
 class NowShowing extends Component{
     render(){

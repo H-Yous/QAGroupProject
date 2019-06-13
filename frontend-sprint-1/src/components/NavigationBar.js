@@ -73,9 +73,9 @@ export const NavigationBar = () => (
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/Login">Login</Link>
-              </Nav.Link>
-              </Nav.Item>
+              <Link to="/login">Login</Link>
+            </Nav.Link>
+          </Nav.Item>
         </Nav>      
         
         <Form inline>
