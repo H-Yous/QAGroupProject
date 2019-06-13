@@ -16,7 +16,6 @@ public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
 	private SequenceGeneratorService sequenceGenerator;
-	
 
 	@Override
 	public List<Booking> findAll() {

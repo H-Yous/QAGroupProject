@@ -12,7 +12,7 @@ import com.qa.cinemas.repositories.UpcomingMovieRepository;
 public class UpcomingMovieServiceImpl implements UpcomingMovieService {
 
 	@Autowired
-	UpcomingMovieRepository upcomingMovieRepository;
+	private UpcomingMovieRepository upcomingMovieRepository;
 
 	@Override
 	public List<UpcomingMovie> findAll() {

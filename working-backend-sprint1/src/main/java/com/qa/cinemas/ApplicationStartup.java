@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.StreamSupport;
 
 import org.json.JSONArray;
@@ -11,6 +12,9 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -322,4 +326,22 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			e.printStackTrace();
 		}
 	}
+	
+	@Bean
+	private JavaMailSender emailSender() {
+		JavaMailSenderImpl javaMailSenderImplementation = new JavaMailSenderImpl();
+	    javaMailSenderImplementation.setHost("smtp.gmail.com");
+	    javaMailSenderImplementation.setPort(587);
+	     
+	    javaMailSenderImplementation.setUsername("purpleqacinemas@gmail.com");
+	    javaMailSenderImplementation.setPassword("qalondon6#teamfaheem");
+	     
+	    Properties props = javaMailSenderImplementation.getJavaMailProperties();
+	    props.put("mail.transport.protocol", "smtp");
+	    props.put("mail.smtp.auth", "true");
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.debug", "true");
+	     
+	    return javaMailSenderImplementation;
+	};
 }

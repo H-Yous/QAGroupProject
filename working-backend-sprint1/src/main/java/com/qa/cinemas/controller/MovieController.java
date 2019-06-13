@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.cinemas.domain.Movie;
-import com.qa.cinemas.repositories.MovieRepo;
+import com.qa.cinemas.repositories.MovieRepository;
 
 @RestController
 @RequestMapping(moviesPath)
@@ -41,36 +41,36 @@ public class MovieController {
 	@GetMapping(getAllMoviesPath)
 	public List<Movie> getAllMovies(){
 		Sort sortByCreatedAtDesc = new Sort(Sort.DEFAULT_DIRECTION.DESC, "createdAt");
-		return movieRepoRefVar.findAll(sortByCreatedAtDesc);
+		return movieRepository.findAll(sortByCreatedAtDesc);
 	}
 	
 	@PostMapping(createMoviePath)
     public Movie createMovie(@Valid @RequestBody Movie movie) {
-        return movieRepoRefVar.save(movie);
+        return movieRepository.save(movie);
     }
 	
 	@GetMapping(value=findByIDMoviePath)
 	public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->ResponseEntity.ok().body(movie))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@PutMapping(value=createMoviePathPut)
 	public ResponseEntity<Movie> updateMovie(@PathVariable("id") String id, @Valid @RequestBody Movie movie){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movieData->{
 					movieData.setTitle(movie.getTitle());
-					Movie updatedMovie = movieRepoRefVar.save(movieData);
+					Movie updatedMovie = movieRepository.save(movieData);
 					return ResponseEntity.ok().body(updatedMovie);
 				}).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@DeleteMapping(value=deleteMoviePath)
 	public ResponseEntity<?> deleteMovie(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->{
-					movieRepoRefVar.deleteById(id);
+					movieRepository.deleteById(id);
 					return ResponseEntity.ok().build();
 				})
 				.orElse(ResponseEntity.notFound().build());

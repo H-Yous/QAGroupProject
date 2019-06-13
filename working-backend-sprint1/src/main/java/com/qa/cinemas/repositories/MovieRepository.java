@@ -4,5 +4,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.qa.cinemas.domain.Movie;
 
-public interface MovieRepo extends MongoRepository<Movie, String> {
+public interface MovieRepository extends MongoRepository<Movie, String> {
 }
