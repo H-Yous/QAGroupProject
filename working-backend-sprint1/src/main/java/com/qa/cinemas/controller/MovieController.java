@@ -36,7 +36,7 @@ import com.qa.cinemas.repositories.MovieRepo;
 public class MovieController {
 	
 	@Autowired
-	MovieRepo movieRepoRefVar;
+	private MovieRepo movieRepoRefVar;
 		
 	@GetMapping(getAllMoviesPath)
 	public List<Movie> getAllMovies(){

@@ -26,4 +26,7 @@ public class CertificationController {
 		List<Certification> result = certificationService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+
+	
+
 }
