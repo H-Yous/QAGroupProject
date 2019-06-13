@@ -25,7 +25,6 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Booking createBooking(Booking booking) {
-		System.out.println("-----------------------CHECK-------------"+booking);
 		return bookingRepository.save(booking);
 	}
 
