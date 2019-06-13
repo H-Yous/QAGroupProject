@@ -1,5 +1,6 @@
 package com.qa.cinemas.controller;
 
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.createEventPath;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.eventsPath;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.findByEventKeyPath;
@@ -25,7 +26,7 @@ import com.qa.cinemas.service.EventServiceImpl;
 
 @RestController
 @RequestMapping(eventsPath)
-@CrossOrigin("*")
+@CrossOrigin(crossOriginsPath)
 public class EventController {
 	
 	@Autowired

@@ -5,33 +5,39 @@ import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="Bookings")
+@Document(collection = "Bookings")
 public class Booking {
+
+	@Override
+	public String toString() {
+		return "Booking [id=" + id + ", day=" + day + ", screen=" + screen + ", timeSlot=" + timeSlot + ", seatNumber="
+				+ seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+	}
 
 	@Id
 	private String id;
 
 	@NotBlank
 	private String day;
-	
+
 	@NotBlank
 	private String screen;
-	
+
 	@NotBlank
 	private String timeSlot;
-	
+
 	@NotBlank
 	private String seatNumber;
-	
+
 	@NotBlank
 	private String customerID;
-	
+
 	@NotBlank
 	private String price;
-	
+
 	public Booking() {
 	}
-	
+
 	public String getId() {
 		return id;
 	}
@@ -87,5 +93,5 @@ public class Booking {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
+
 }

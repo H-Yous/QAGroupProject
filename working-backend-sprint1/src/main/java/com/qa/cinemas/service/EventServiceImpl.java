@@ -33,9 +33,9 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public String createShowing(Events show) {
-		// TODO Auto-generated method stub
-		return null;
+	public String createShowing(Events event) {
+		eventRepository.save(event);
+		return "event saved with: " + event.toString();
 	}
 
 //	@Override

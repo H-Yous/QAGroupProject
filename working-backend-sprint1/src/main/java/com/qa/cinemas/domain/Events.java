@@ -18,6 +18,11 @@ public class Events {
 	// @Transient
 	// public static final String SEQUENCE_NAME = "users_sequence";
 
+	@Override
+	public String toString() {
+		return "Events [id=" + id + ", movie=" + movie + ", eventKey=" + eventKey + "]";
+	}
+
 	@Id
 	private String id;
 	

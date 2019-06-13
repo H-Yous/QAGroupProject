@@ -10,6 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "Movies")
 public class Movie {
 
+	@Override
+	public String toString() {
+		return "Movie [id=" + id + ", title=" + title + "]";
+	}
+
 	@Id
 	private String id;
 
