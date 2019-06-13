@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.NewReleaseMovie;
-import com.qa.cinemas.repositories.NewReleaseMovieRepository;
+
+import repository.NewReleaseMovieRepository;
 
 @Service
 public class NewReleaseMovieServiceImpl implements NewReleaseMovieService {

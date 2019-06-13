@@ -14,11 +14,8 @@ import { Layout } from './components/Layout';
 import { NavigationBar} from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron'; 
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
 import  FooterPage  from './components/FooterPage.js';
-import { env } from './config';
-=======
->>>>>>> 9341c9025a949d4c40026231a064f2b7e58152ff
+
 
 class App extends Component {
   
@@ -39,14 +36,8 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/classifications" component={Classifications} />
             <Route path = "/login" component={Login} />
-<<<<<<< HEAD
             <Route path = "/payment" component={Payment} />
-            <Route path = "/classification" component={Classifications} />
             <Route path = "/contact" component={Contact} />
-            <Route path="/contact" render={ContactPage} />
-=======
-            <Route path="/contact" component={Contact} />
->>>>>>> 9341c9025a949d4c40026231a064f2b7e58152ff
             <Route component={NoMatch} />
           </Switch>
           <FooterPage />

@@ -15,11 +15,10 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import com.qa.cinemas.QACinemasApp;
 
-
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
 @ContextConfiguration(classes = {QACinemasApp.class})
-class TestingMovieDatabase {
+class MovieControllerTest {
 	@DisplayName("given Movie to save"
             + " when save Movie using MongoDB template"
             + " then Movie is saved")

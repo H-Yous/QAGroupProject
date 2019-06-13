@@ -8,10 +8,13 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.Events;
+
+
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
 import com.qa.cinemas.repositories.EventRepository;
+
 
 @Service
 public class EventServiceImpl implements EventService {

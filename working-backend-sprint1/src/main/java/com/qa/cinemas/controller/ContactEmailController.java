@@ -1,6 +1,7 @@
 package com.qa.cinemas.controller;
 
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.contactGmailPath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.contactGmailServer;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.sendEmail;
 
 import javax.validation.Valid;
@@ -19,7 +20,7 @@ import com.qa.cinemas.service.ContactEmailServiceImpl;
 
 @RequestMapping(contactGmailPath)
 @Controller
-@CrossOrigin("*")
+@CrossOrigin(contactGmailServer)
 public class ContactEmailController{
 	@Autowired
 	private ContactEmailServiceImpl contactEmailServiceImpl;
