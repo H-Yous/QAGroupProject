@@ -20,10 +20,8 @@ public class BookingModelListener extends AbstractMongoEventListener<Booking>  {
 
     @Override
     public void onBeforeConvert(BeforeConvertEvent<Booking> event) {
-        if (event.getSource().getId() < 1) {
-            event.getSource().setId(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
+        if (event.getSource().getSalesID() < 1) {
+            event.getSource().setSalesID(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
         }
     }
-
-
 }

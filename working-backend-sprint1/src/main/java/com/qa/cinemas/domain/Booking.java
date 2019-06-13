@@ -15,6 +15,7 @@ import com.qa.cinemas.enums.TimeSlots;
 @Document(collection = "Bookings")
 public class Booking {
 
+
 	@Override
 	public String toString() {
 		return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
@@ -25,7 +26,7 @@ public class Booking {
 	public static final String SEQUENCE_NAME = "bookings_sequence";
 	
 	@Id
-	private long id;
+	private String id;
 
 	@Indexed(unique = true)
 	private long salesID;
@@ -51,22 +52,14 @@ public class Booking {
 	public Booking() {
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getSalesID() {
+	public long getSalesID() {
 		return salesID;
 	}
 
-	public void setSalesID(Long salesID) {
+	public void setSalesID(long salesID) {
 		this.salesID = salesID;
 	}
-
+	
 	public Days getDay() {
 		return day;
 	}
@@ -118,6 +111,15 @@ public class Booking {
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
+	
 
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 }

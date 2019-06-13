@@ -25,8 +25,7 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Booking createBooking(Booking booking) {
-		
-		//booking.setSalesID(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
+		System.out.println("-----------------------CHECK-------------"+booking);
 		return bookingRepository.save(booking);
 	}
 
