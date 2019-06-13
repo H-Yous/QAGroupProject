@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.cinemas.domain.Movie;
-import com.qa.cinemas.repositories.MovieRepo;
+import com.qa.cinemas.repositories.MovieRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +26,7 @@ import com.qa.cinemas.repositories.MovieRepo;
 public class MovieController {
 	
 	@Autowired
-	MovieRepo movieRepoRefVar;
+	private MovieRepository movieRepository;
 	
 	//TmdbMovies tmdbMovies = new TmdbApi("d031a10afed58ff3ceb6bf78a715466a").getMovies();
 	//MovieDb tmdbMovie;
@@ -35,19 +35,19 @@ public class MovieController {
 	@GetMapping("/movies")
 	public List<Movie> getAllMovies(){
 		Sort sortByCreatedAtDesc = new Sort(Sort.DEFAULT_DIRECTION.DESC, "createdAt");
-		return movieRepoRefVar.findAll(sortByCreatedAtDesc);
+		return movieRepository.findAll(sortByCreatedAtDesc);
 	}
 
 	
 	
 	@PostMapping("/movies")
     public Movie createMovie(@Valid @RequestBody Movie movie) {
-        return movieRepoRefVar.save(movie);
+        return movieRepository.save(movie);
     }
 	
 	@GetMapping(value="/movies/{id}")
 	public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->ResponseEntity.ok().body(movie))
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -60,19 +60,19 @@ public class MovieController {
 	
 	@PutMapping(value="/movies/{id}")
 	public ResponseEntity<Movie> updateMovie(@PathVariable("id") String id, @Valid @RequestBody Movie movie){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movieData->{
 					movieData.setTitle(movie.getTitle());
-					Movie updatedMovie = movieRepoRefVar.save(movieData);
+					Movie updatedMovie = movieRepository.save(movieData);
 					return ResponseEntity.ok().body(updatedMovie);
 				}).orElse(ResponseEntity.notFound().build());
 	}
 	
 	@DeleteMapping(value="/movies/{id}")
 	public ResponseEntity<?> deleteMovie(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->{
-					movieRepoRefVar.deleteById(id);
+					movieRepository.deleteById(id);
 					return ResponseEntity.ok().build();
 				})
 				.orElse(ResponseEntity.notFound().build());

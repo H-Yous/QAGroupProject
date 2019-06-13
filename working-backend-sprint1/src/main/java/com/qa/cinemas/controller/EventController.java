@@ -29,7 +29,7 @@ import com.qa.cinemas.service.EventServiceImpl;
 public class EventController {
 	
 	@Autowired
-	EventServiceImpl eventServiceImpl;
+	private EventServiceImpl eventServiceImpl;
 	
 	@GetMapping(getAllEventsPath)
 	public ResponseEntity<?> getAllEvents(){

@@ -27,7 +27,7 @@ import com.qa.cinemas.service.BookingServiceImpl;
 public class BookingController {
 
 	@Autowired
-	BookingServiceImpl bookingServiceImpl;
+	private BookingServiceImpl bookingServiceImpl;
 
 	@GetMapping(getAllBookings)
 	public ResponseEntity<?> getAllShowings() {

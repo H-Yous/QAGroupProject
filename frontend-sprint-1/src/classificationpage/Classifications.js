@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import { Jumbotron as Jumbo, Container, Button } from "react-bootstrap";
+import rating_u from '../assets/urating.png';
+import rating_pg from '../assets/pgrating.png';
+import rating_12a from '../assets/12arating.png';
+import rating_15 from '../assets/15rating.png';
+import rating_18 from '../assets/18rating.png';
 
 class Classifications extends Component {
   getRatings() {}
@@ -24,29 +29,19 @@ class Classifications extends Component {
             <hr />
             <div>
               {" "}
-              <img src="http://localhost:3000/static/media/urating.png" />
-              <p>U</p>
-            </div>
-            <div>
+              <img src={rating_u} />
+            
               {" "}
-              <img src="http://localhost:3000/static/media/pgrating.png" />
-              <p>PG</p>
-            </div>
-            <div>
+              <img src={rating_pg} />
+            
               {" "}
-              <img src="http://localhost:3000/static/media/12arating.png" />
-              <p>12A</p>
-            </div>
-            <div>
+              <img src={rating_12a} />
+            
               {" "}
-              <img src="http://localhost:3000/static/media/15rating.png" />
-              <p>15</p>
-            </div>
-
-            <div>
+              <img src={rating_15} />
+            
               {" "}
-              <img src="http://localhost:3000/static/media/18rating.png" />
-              <p>18</p>
+              <img src={rating_18} />
             </div>
           </b>
           {this.getRatings()}

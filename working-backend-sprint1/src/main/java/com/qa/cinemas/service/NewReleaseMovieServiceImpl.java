@@ -12,7 +12,7 @@ import com.qa.cinemas.repositories.NewReleaseMovieRepository;
 public class NewReleaseMovieServiceImpl implements NewReleaseMovieService {
 	
 	@Autowired
-	NewReleaseMovieRepository newReleaseMovieRepository;
+	private NewReleaseMovieRepository newReleaseMovieRepository;
 
 	@Override
 	public List<NewReleaseMovie> findAll() {

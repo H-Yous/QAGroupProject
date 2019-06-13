@@ -17,7 +17,7 @@ import com.qa.cinemas.service.NewReleaseMovieService;
 public class NewReleaseMovieController {
 	
 	@Autowired
-	NewReleaseMovieService newReleaseMovieService;
+	private NewReleaseMovieService newReleaseMovieService;
 	
 	@GetMapping("/getNewReleasedMovies")
 	public ResponseEntity<?> getNewReleased() {

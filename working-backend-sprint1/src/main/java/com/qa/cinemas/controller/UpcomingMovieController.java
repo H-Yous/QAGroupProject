@@ -19,7 +19,7 @@ import com.qa.cinemas.service.UpcomingMovieService;
 public class UpcomingMovieController {
 	
 	@Autowired
-	UpcomingMovieService upcomingMovieService;
+	private UpcomingMovieService upcomingMovieService;
 
 	@GetMapping("/getUpcomingMovies")
 	public ResponseEntity<?> getUpcoming() {

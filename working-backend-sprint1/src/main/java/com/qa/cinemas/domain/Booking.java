@@ -72,11 +72,11 @@ public class Booking {
 		this.seatNumber = seat;
 	}
 
-	public String getCustomeID() {
+	public String getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomeID(String customeID) {
+	public void setCustomerID(String customeID) {
 		this.customerID = customeID;
 	}
 

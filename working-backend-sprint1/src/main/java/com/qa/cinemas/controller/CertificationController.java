@@ -19,7 +19,7 @@ import com.qa.cinemas.service.CertificationService;
 public class CertificationController {
 	
 	@Autowired
-	CertificationService certificationService;
+	private CertificationService certificationService;
 
 	@GetMapping("/getCertifications")
 	public ResponseEntity<?> getCertifications() {
