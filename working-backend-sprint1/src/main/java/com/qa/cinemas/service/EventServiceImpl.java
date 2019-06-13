@@ -8,17 +8,24 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.Events;
+<<<<<<< HEAD
 import com.qa.cinemas.enums.DayTypes;
 import com.qa.cinemas.enums.ScreenType;
 import com.qa.cinemas.enums.ShowSlots;
 
 import repository.EventRepository;
+=======
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
+import com.qa.cinemas.repositories.EventRepository;
+>>>>>>> 401d2fee1d84b271ba219aca8baf13a94561ce4e
 
 @Service
 public class EventServiceImpl implements EventService {
 
 	@Autowired
-	EventRepository eventRepository;
+	private EventRepository eventRepository;
 
 	@Override
 	public List<Events> findAll() {
@@ -27,16 +34,13 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public Optional<Events> findByEventKey(String eventKey) {
-	//	Events probe = new Events();
-	//	probe.setEventKey(eventKey);
-	//	return eventRepository.findOne(Example.of(probe));
 		return eventRepository.findByEventKey(eventKey);
 	}
 
 	@Override
-	public String createShowing(Events show) {
-		// TODO Auto-generated method stub
-		return null;
+	public String createShowing(Events event) {
+		eventRepository.save(event);
+		return "event saved with: " + event.toString();
 	}
 
 //	@Override
