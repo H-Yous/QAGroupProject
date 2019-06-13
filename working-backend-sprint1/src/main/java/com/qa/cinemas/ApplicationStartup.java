@@ -14,9 +14,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
 import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.domain.UpcomingMovie;
+import com.qa.cinemas.repositories.CertificationRepository;
 import com.qa.cinemas.repositories.NewReleaseMovieRepository;
 import com.qa.cinemas.repositories.NowShowingMovieRepository;
 import com.qa.cinemas.repositories.UpcomingMovieRepository;
@@ -50,6 +52,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private UpcomingMovie upComingMovie;
 	private NowShowingMovie nowShowingMovie;
 	private NewReleaseMovie newReleaseMovie;
+	private Certification certification;
 
 	@Autowired
 	private UpcomingMovieRepository upcomingMovieRepository;
@@ -60,36 +63,39 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	private NewReleaseMovieRepository newReleaseMovieRepository;
 
+	@Autowired
+	private CertificationRepository certificationRepository;
+	
 	private String currentYear = new SimpleDateFormat("yyyy").format(new Date());
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 
-//		getUpcomingMovies();
-//
-//		movieId.clear();
-//		movieTitle.clear();
-//		moviePoster.clear();
-//		movieDescription.clear();
-//		movieTitleUrl.clear();
-//
-//		waitFiveSecsBeforeMakingRequests();
-//
-//		getNowShowingMovies();
-//
-//		movieId.clear();
-//		movieTitle.clear();
-//		moviePoster.clear();
-//		movieDescription.clear();
-//		movieTitleUrl.clear();
-//
-//		waitFiveSecsBeforeMakingRequests();
-//
-//		getNewReleaseMovies();
-//		
-//		waitFiveSecsBeforeMakingRequests();
+		getUpcomingMovies();
+
+		movieId.clear();
+		movieTitle.clear();
+		moviePoster.clear();
+		movieDescription.clear();
+		movieTitleUrl.clear();
+
+		waitFiveSecsBeforeMakingRequests();
+
+		getNowShowingMovies();
+
+		movieId.clear();
+		movieTitle.clear();
+		moviePoster.clear();
+		movieDescription.clear();
+		movieTitleUrl.clear();
+
+		waitFiveSecsBeforeMakingRequests();
+
+		getNewReleaseMovies();
 		
-//		getMovieClassificationInfo();
+		waitFiveSecsBeforeMakingRequests();
+
+		getMovieClassificationInfo();
 	}
 
 	private void getUpcomingMovies() {
@@ -275,23 +281,39 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		newReleaseMovieRepository.insert(newReleaseMovie);
 	}
-	
-	private void getMovieClassificationInfo()
-	{
+
+	private void getMovieClassificationInfo() {
 		apiURI = "https://api.themoviedb.org/3/certification/movie/list?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		
+
 		JSONObject certificationsObj = returnedJsonStringAsObj.getJSONObject("certifications");
-		
+
 		resultsArray = certificationsObj.getJSONArray("GB");
+
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
+				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
+				.forEach(aCertification -> movieRating.add(aCertification.getString("certification")));
+
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
+				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
+				.forEach(aCertification -> movieRatingDescription.add(aCertification.getString("meaning")));
 		
-		//JSONArray params = obj.getJsonArray("params");
-		
+		movieRating.stream().forEach(x -> populateDBWithCertifications(movieRating.indexOf(x)));
+
 	}
 	
+	private void populateDBWithCertifications(int index)
+	{
+		certification = new Certification();
+		certification.setName(movieRating.get(index));
+		certification.setDescription(movieRatingDescription.get(index));
+
+		certificationRepository.insert(certification);
+	}
+
 	private void waitFiveSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(5000);
