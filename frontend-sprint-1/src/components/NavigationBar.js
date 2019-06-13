@@ -71,7 +71,13 @@ export const NavigationBar = () => (
               <Link to="/contact">Contact Us</Link>
             </Nav.Link>
           </Nav.Item>
-        </Nav>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/login">Login</Link>
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>      
+        
         <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-info">Search</Button>
