@@ -8,9 +8,9 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.qa.cinemas.enums.DayTypes;
-import com.qa.cinemas.enums.ScreenType;
-import com.qa.cinemas.enums.ShowSlots;
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
 
 @Document(collection = "Events")
 public class Events {
@@ -18,9 +18,20 @@ public class Events {
 	// @Transient
 	// public static final String SEQUENCE_NAME = "users_sequence";
 
+	@Override
+	public String toString() {
+		return "Events [day=" + day + ", screen=" + screen + ", timeSlot=" + timeSlot + ", id=" + id + ", movie="
+				+ movie + ", eventKey=" + eventKey + "]";
+	}
+
+	private Days day;
+
+	private Screens screen;
+	private TimeSlots timeSlot;
+
 	@Id
 	private String id;
-	
+
 	private String movie;
 
 	@NotBlank
@@ -46,12 +57,36 @@ public class Events {
 	public void setEventKey(String eventKey) {
 		this.eventKey = eventKey;
 	}
-	
+
 	public String getId() {
 		return id;
 	}
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Days getDay() {
+		return day;
+	}
+
+	public void setDay(Days day) {
+		this.day = day;
+	}
+
+	public Screens getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screens screen) {
+		this.screen = screen;
+	}
+
+	public TimeSlots getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(TimeSlots timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 }
