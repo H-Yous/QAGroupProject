@@ -1,8 +1,10 @@
 package com.qa.cinemas.domain;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,20 +21,22 @@ public class Booking {
 				+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
 	}
 
+	@Transient
+	public static final String SEQUENCE_NAME = "bookings_sequence";
+	
 	@Id
-	private String id;
+	private long id;
 
-	@NotBlank
 	@Indexed(unique = true)
-	private String salesID;
+	private long salesID;
 
-	@NotBlank
+	@NotNull
 	private Days day;
 
-	@NotBlank
+	@NotNull
 	private Screens screen;
-
-	@NotBlank
+	
+	@NotNull
 	private TimeSlots timeSlot;
 
 	@NotBlank
@@ -47,19 +51,19 @@ public class Booking {
 	public Booking() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getSalesID() {
+	public Long getSalesID() {
 		return salesID;
 	}
 
-	public void setSalesID(String salesID) {
+	public void setSalesID(Long salesID) {
 		this.salesID = salesID;
 	}
 
@@ -110,5 +114,10 @@ public class Booking {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
+
 
 }

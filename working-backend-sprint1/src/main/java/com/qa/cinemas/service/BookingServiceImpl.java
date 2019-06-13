@@ -14,6 +14,9 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingRepository bookingRepository;
 	
+	@Autowired
+	private SequenceGeneratorService sequenceGenerator;
+	
 
 	@Override
 	public List<Booking> findAll() {
@@ -22,6 +25,8 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Booking createBooking(Booking booking) {
+		
+		//booking.setSalesID(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
 		return bookingRepository.save(booking);
 	}
 
