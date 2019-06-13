@@ -1,4 +1,4 @@
-package com.qa.cinemas.repositories;
+package repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

@@ -18,7 +18,7 @@ import com.qa.cinemas.QACinemasApp;
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
 @ContextConfiguration(classes = {QACinemasApp.class})
-class QACinttest {
+class MovieControllerTest {
 	@DisplayName("given Movie to save"
             + " when save Movie using MongoDB template"
             + " then Movie is saved")

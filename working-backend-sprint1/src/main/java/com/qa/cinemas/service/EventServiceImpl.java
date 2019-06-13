@@ -11,7 +11,8 @@ import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.DayTypes;
 import com.qa.cinemas.enums.ScreenType;
 import com.qa.cinemas.enums.ShowSlots;
-import com.qa.cinemas.repositories.EventRepository;
+
+import repository.EventRepository;
 
 @Service
 public class EventServiceImpl implements EventService {
