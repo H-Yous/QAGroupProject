@@ -41,9 +41,9 @@ class App extends Component {
             <Route path="/events" component={Events} />
             <Route path="/screens" component={Screens} />
             <Route path="/about" component={About} />
-            <Route path = "/" component={Contact} />
-            <Route exact path="/contact" render={ContactPage} />
             <Route path = "/login" component={Login} />
+            <Route path = "/" component={Contact} />
+            <Route path="/contact" render={ContactPage} />
             <Route component={NoMatch} />
           </Switch>
           </Router>
