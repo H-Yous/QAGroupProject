@@ -9,6 +9,8 @@ const Styles = styled.div`
 
 .navbar {
 background-color: #222;
+font-size: 15px;
+
 }
 
 a, .navbar-brand, .navbar-nav .nav-link {
@@ -63,21 +65,10 @@ export const NavigationBar = () => (
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/about">About</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/contact">Contact Us</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
               <Link to="/login">Login</Link>
             </Nav.Link>
           </Nav.Item>
-        </Nav>      
-        
+        </Nav>    
         <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-info">Search</Button>

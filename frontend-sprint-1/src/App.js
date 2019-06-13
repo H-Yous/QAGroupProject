@@ -15,6 +15,7 @@ import { Layout } from './components/Layout';
 import { NavigationBar} from './components/NavigationBar';
 import { Jumbotron } from './components/Jumbotron'; 
 import PropTypes from 'prop-types';
+import  FooterPage  from './components/FooterPage.js';
 import { env } from './config';
 
 class App extends Component {
@@ -42,12 +43,15 @@ class App extends Component {
             <Route path="/screens" component={Screens} />
             <Route path="/about" component={About} />
             <Route path = "/login" component={Login} />
-            <Route path = "/" component={Contact} />
+            <Route path = "/payment" component={Payment} />
+            <Route path = "/classification" component={Classifications} />
+            <Route path = "/contact" component={Contact} />
             <Route path="/contact" render={ContactPage} />
             <Route component={NoMatch} />
           </Switch>
+          <FooterPage />
           </Router>
-        </Layout>
+        </Layout> 
       </React.Fragment> 
     );
   }
