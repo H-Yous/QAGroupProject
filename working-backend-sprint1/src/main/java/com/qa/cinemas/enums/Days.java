@@ -1,5 +1,5 @@
 package com.qa.cinemas.enums;
 
-public enum DayTypes {
+public enum Days {
 	MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY
 }

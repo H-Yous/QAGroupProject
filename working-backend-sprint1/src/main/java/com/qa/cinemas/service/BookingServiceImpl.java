@@ -12,7 +12,10 @@ import com.qa.cinemas.repositories.BookingRepository;
 public class BookingServiceImpl implements BookingService {
 	
 	@Autowired
-	BookingRepository bookingRepository;
+	private BookingRepository bookingRepository;
+	
+	@Autowired
+	private SequenceGeneratorService sequenceGenerator;
 	
 
 	@Override
