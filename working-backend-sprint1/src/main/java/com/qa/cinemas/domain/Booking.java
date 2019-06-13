@@ -3,28 +3,37 @@ package com.qa.cinemas.domain;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
 
 @Document(collection = "Bookings")
 public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", day=" + day + ", screen=" + screen + ", timeSlot=" + timeSlot + ", seatNumber="
-				+ seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+		return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
+				+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
 	}
 
 	@Id
 	private String id;
 
 	@NotBlank
-	private String day;
+	@Indexed(unique = true)
+	private String salesID;
 
 	@NotBlank
-	private String screen;
+	private Days day;
 
 	@NotBlank
-	private String timeSlot;
+	private Screens screen;
+
+	@NotBlank
+	private TimeSlots timeSlot;
 
 	@NotBlank
 	private String seatNumber;
@@ -46,44 +55,52 @@ public class Booking {
 		this.id = id;
 	}
 
-	public String getDay() {
+	public String getSalesID() {
+		return salesID;
+	}
+
+	public void setSalesID(String salesID) {
+		this.salesID = salesID;
+	}
+
+	public Days getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Days day) {
 		this.day = day;
 	}
 
-	public String getScreen() {
+	public Screens getScreen() {
 		return screen;
 	}
 
-	public void setScreen(String screen) {
+	public void setScreen(Screens screen) {
 		this.screen = screen;
 	}
 
-	public String getTimeslot() {
+	public TimeSlots getTimeSlot() {
 		return timeSlot;
 	}
 
-	public void setTimeslot(String timeslot) {
-		this.timeSlot = timeslot;
+	public void setTimeSlot(TimeSlots timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 
-	public String getSeat() {
+	public String getSeatNumber() {
 		return seatNumber;
 	}
 
-	public void setSeat(String seat) {
-		this.seatNumber = seat;
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
 	}
 
-	public String getCustomeID() {
+	public String getCustomerID() {
 		return customerID;
 	}
 
-	public void setCustomeID(String customeID) {
-		this.customerID = customeID;
+	public void setCustomerID(String customerID) {
+		this.customerID = customerID;
 	}
 
 	public String getPrice() {
