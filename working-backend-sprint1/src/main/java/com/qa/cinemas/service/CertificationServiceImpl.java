@@ -11,7 +11,7 @@ import com.qa.cinemas.repositories.CertificationRepository;
 public class CertificationServiceImpl implements CertificationService  {
 	
 	@Autowired
-	CertificationRepository certificationRepository;
+	private CertificationRepository certificationRepository;
 	
 	@Override
 	public List<Certification> findAll() {

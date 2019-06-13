@@ -1,5 +1,5 @@
 package com.qa.cinemas.enums;
 
-public enum ScreenType {
+public enum Screens {
 	LARGESCREEN
 }

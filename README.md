@@ -110,20 +110,29 @@ node server.js
   * .controller
   * .domain
   * .enums
-  * .repositories
+  * .repository
   * .service
-* .test
+* com.qa.resources
+* com.qa.test
 #### Classes
+* [x] ApplicationStartup
+* [x] QACinemasApp
 * [x] .constants
   * [x] PROJ_CONSTANTS
+  * [x] Constants (encrypted) (requires fix)
 * [x] .controller
   * [x] BookingController
+  * [x] CertificationController
+  * [x] ContactEmailController
   * [x] EventController
   * [x] MovieController
   * [x] NewReleaseMovieController
+  * [x] NowShowingMovieController
   * [x] UpcomingMovieController
 * [x] .domain
   * [x] Booking
+  * [x] Certification
+  * [x] ContactEmail
   * [x] DatabaseSequence
   * [x] Events
   * [x] Movie
@@ -134,16 +143,22 @@ node server.js
   * [x] DayTypes
   * [x] ScreenType
   * [x] ShowSlots
-* [x] .repositories 
+* [x] .repository 
   * [x] BookingRepository
+  * [x] CertificationRepository
+  * [x] ContactEmailRepository
   * [x] EventRepository
-  * [x] MovieRepo
+  * [x] MovieRepository
   * [x] NewReleaseMovieRepository
   * [x] NowShowingMovieRepository
   * [x] UpcomingMovieRepository
 * [x] .service
   * [x] BookingService
   * [x] BookingServiceImpl
+  * [x] CertificationService
+  * [x] CertificationServiceImpl
+  * [x] ContactEmailService
+  * [x] ContactEmailServiceImpl
   * [x] EventService
   * [x] EventServiceImpl
   * [x] MovieService
@@ -155,12 +170,18 @@ node server.js
   * [x] UpcomingMovieService
   * [x] UpcomingMovieServiceImpl
   * [x] generateShowSequence
+* [x] .resources
+  * [x] application.properties
+* [x] .test
+  * [x] MovieControllerTest
+* [x] pom.xml
+* [x] settings.xml
 #### Methods
 > TBD, proposed Project Structure, NOT FINAL
 ## React Frontend
 >TBD
 ## List of Tests
->TBD
+* MovieControllerTest [explain what this does]
 ## Current Todos
 - [ ] full setup guide
 - [ ] finalised Project Structure

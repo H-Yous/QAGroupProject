@@ -17,7 +17,7 @@ import com.qa.cinemas.service.NowShowingMovieService;
 public class NowShowingMovieController {
 	
 	@Autowired
-	NowShowingMovieService nowShowingMovieService;
+	private NowShowingMovieService nowShowingMovieService;
 
 	@GetMapping("/getNowShowingMovies")
 	public ResponseEntity<?> getNowShowing() {

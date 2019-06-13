@@ -12,7 +12,7 @@ import com.qa.cinemas.repositories.NowShowingMovieRepository;
 public class NowShowingMovieServiceImpl implements NowShowingMovieService{
 	
 	@Autowired
-	NowShowingMovieRepository nowShowingMovieRepository;
+	private NowShowingMovieRepository nowShowingMovieRepository;
 
 	@Override
 	public List<NowShowingMovie> findAll() {

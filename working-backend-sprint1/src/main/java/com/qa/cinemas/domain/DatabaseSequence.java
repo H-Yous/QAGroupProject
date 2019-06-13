@@ -6,10 +6,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "database_sequences")
 public class DatabaseSequence {
 
+	@Override
+	public String toString() {
+		return "DatabaseSequence [id=" + id + ", sequence=" + seq + "]";
+	}
+
 	@Id
 	private String id;
 
-	private long sequence;
+	private long seq;
 
 	public DatabaseSequence() {
 	}
@@ -22,12 +27,13 @@ public class DatabaseSequence {
 		this.id = id;
 	}
 
-	public long getSequence() {
-		return sequence;
+
+	public long getSeq() {
+		return seq;
 	}
 
-	public void setSequence(long sequence) {
-		this.sequence = sequence;
+	public void setSeq(long seq) {
+		this.seq = seq;
 	}
 
 }

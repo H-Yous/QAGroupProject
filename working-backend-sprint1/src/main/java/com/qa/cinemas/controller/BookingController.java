@@ -3,6 +3,7 @@ package com.qa.cinemas.controller;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.bookingsPath;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.createBooking;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.getAllBookings;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 
 import java.util.List;
 
@@ -23,20 +24,20 @@ import com.qa.cinemas.service.BookingServiceImpl;
 
 @RestController
 @RequestMapping(bookingsPath)
-@CrossOrigin("*")
+@CrossOrigin(crossOriginsPath)
 public class BookingController {
 
 	@Autowired
-	BookingServiceImpl bookingServiceImpl;
+	private BookingServiceImpl bookingServiceImpl;
 
 	@GetMapping(getAllBookings)
-	public ResponseEntity<?> getAllShowings() {
+	public ResponseEntity<?> getAllBookings() {
 		List<Booking> result = bookingServiceImpl.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
 	@PostMapping(createBooking)
-	public ResponseEntity<?> createShowing(@Valid @RequestBody Booking booking) {
+	public ResponseEntity<?> createBookings(@Valid @RequestBody Booking booking) {
 		Booking result = bookingServiceImpl.createBooking(booking);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}

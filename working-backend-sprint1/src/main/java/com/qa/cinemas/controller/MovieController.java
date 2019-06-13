@@ -1,5 +1,15 @@
 package com.qa.cinemas.controller;
 
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.moviesPath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.getAllMoviesPath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.createMoviePath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.createMoviePathPut;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.deleteMoviePath;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.findByIDMoviePath;
+
+
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,67 +28,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.cinemas.domain.Movie;
-import com.qa.cinemas.repositories.MovieRepo;
+import com.qa.cinemas.repositories.MovieRepository;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin("*")
+@RequestMapping(moviesPath)
+@CrossOrigin(crossOriginsPath)
 public class MovieController {
 	
 	@Autowired
-	MovieRepo movieRepoRefVar;
-	
-	//TmdbMovies tmdbMovies = new TmdbApi("d031a10afed58ff3ceb6bf78a715466a").getMovies();
-	//MovieDb tmdbMovie;
-
-	
-	@GetMapping("/movies")
+	private MovieRepo movieRepoRefVar;
+		
+	@GetMapping(getAllMoviesPath)
 	public List<Movie> getAllMovies(){
 		Sort sortByCreatedAtDesc = new Sort(Sort.DEFAULT_DIRECTION.DESC, "createdAt");
-		return movieRepoRefVar.findAll(sortByCreatedAtDesc);
+		return movieRepository.findAll(sortByCreatedAtDesc);
 	}
-
 	
-	
-	@PostMapping("/movies")
+	@PostMapping(createMoviePath)
     public Movie createMovie(@Valid @RequestBody Movie movie) {
-        return movieRepoRefVar.save(movie);
+        return movieRepository.save(movie);
     }
 	
-	@GetMapping(value="/movies/{id}")
+	@GetMapping(value=findByIDMoviePath)
 	public ResponseEntity<Movie> getMovieById(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->ResponseEntity.ok().body(movie))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
-//	@GetMapping(value="/tmdbmovies/{tmdb_id}")
-//	public ResponseEntity<MovieDb> getTmdbMovieById(@PathVariable("tmdb_id") int tmdb_id){
-//		return ResponseEntity.ok().body(tmdbMovies.getMovie(tmdb_id, "en"));
-//	}
-
-	
-	@PutMapping(value="/movies/{id}")
+	@PutMapping(value=createMoviePathPut)
 	public ResponseEntity<Movie> updateMovie(@PathVariable("id") String id, @Valid @RequestBody Movie movie){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movieData->{
 					movieData.setTitle(movie.getTitle());
-					Movie updatedMovie = movieRepoRefVar.save(movieData);
+					Movie updatedMovie = movieRepository.save(movieData);
 					return ResponseEntity.ok().body(updatedMovie);
 				}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@DeleteMapping(value="/movies/{id}")
+	@DeleteMapping(value=deleteMoviePath)
 	public ResponseEntity<?> deleteMovie(@PathVariable("id") String id){
-		return movieRepoRefVar.findById(id)
+		return movieRepository.findById(id)
 				.map(movie->{
-					movieRepoRefVar.deleteById(id);
+					movieRepository.deleteById(id);
 					return ResponseEntity.ok().build();
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
-
-	
 	
 }

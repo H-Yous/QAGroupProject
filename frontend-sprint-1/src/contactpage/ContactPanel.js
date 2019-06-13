@@ -1,67 +1,60 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {View} from 'react-native';
-import {Container, Row, Col} from 'react-bootstrap';
 import Script from 'react-script-tag';
-import ReactTable from 'react-table';
+import axios from 'axios';
+import { PropTypes } from 'prop-types';
+import { withRouter } from "react-router-dom";
 
-export default class ContactPanel extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            feedback: '',
-            formSubmitted: false
-        };
+class ContactPanel extends Component{
+    
+    static contextTypes = {
+        router: PropTypes.object
+    }
+    constructor(props, context){
+        super(props, context);
+        this.state={
+            
+            feedback:'',
+        }
+        const feedbackValue = null;
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    static sender = 'visitor@purpleqacinemas.com';
-
-    handleChange(event) {
-        this.setState({
-            feedback: event.target.value
-        });
+    handleChange = (event) =>{
+        const changeState = this.state;
+        changeState[event.target.name] = event.target.value;
+        this.feedbackValue = event.target.value;
+        this.setState(changeState);
+        console.log(event.target.value);
     }
 
-    handleSubmit (event) {
-        event.preventDefault()
+    handleSubmit = (event) => {
+        event.preventDefault();
+        
+        const submitState = this.state;
+        this.setState(submitState);
+        console.log(this.feedbackValue+": this one!");
 
-        //use this!
-        console.log(process.env.REACT_APP_EMAILJS_RECEIVER);
-
-        const {
-            REACT_APP_EMAILJS_RECEIVER: receiverEmail,
-                REACT_APP_EMAILJS_TEMPLATEID: template
-        } = this.props.env
-
-        this.sendFeedback(
-            template,
-            this.props.senderEmail,
-            receiverEmail,
-            this.state.feedback)
-
-        this.setState({
-            formSubmitted: true
+        axios.defaults.baseURL = 'http://localhost:8080';
+        axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        console.log(this.feedbackValue+": lol");
+        axios.post('/contact/sendEmail', {
+            emailText: this.feedbackValue
         })
-    }
-
-    sendFeedback (templateId, senderEmail, receiverEmail, feedback) {
-        window.emailjs.send(
-            'mailgun',
-            templateId,
-        {
-            senderEmail,
-            receiverEmail,
-            feedback
-        })
-            .then(res => {
-            this.setState({ formEmailSent: true })
-        })
-
-        .catch(err => console.error('Failed to send feedback. Error: ', err))
+            .then((result) => {
+                this.props.history.push('/contact');
+                console.log(result+": result");
+            })
+            .catch(err => {
+                console.error('Failed to send feedback. '+err)
+            })
+        ;
     }
 
     render(){
+        const feedback = this.state;
+
         return(
             <div className="all">
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
@@ -78,13 +71,13 @@ export default class ContactPanel extends Component{
                     </div>
 
                     <div className="contact-container">
-                        <form className="feedback-form" onSubmit={this.handleSubmit}>
+                        <form className="feedback" onSubmit={this.handleSubmit} >
                             <View style={{flex:1, flexDirection:'column', width:800}}>
 
                                 <textarea
                                     className="text-input"
-                                    id="feedback-entry"
-                                    name="feedback-entry"
+                                    id="feedback"
+                                    name="feedback"
                                     onChange={this.handleChange.bind(this)}
                                     value={this.state.feedback}
                                     rows="16"
@@ -108,6 +101,4 @@ export default class ContactPanel extends Component{
     };
 }
 
-ContactPanel.propTypes = {
-    env: PropTypes.object.isRequired
-};
+export default withRouter(ContactPanel);
