@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Jumbotron as Jumbo, Container, Button } from "react-bootstrap";
+
 import axios from "axios";
 
 import uRating from "../assets/urating.png";
@@ -51,6 +52,7 @@ class Classifications extends Component {
       });
   }
 
+
   render() {
     return (
       <React.Fragment>
@@ -71,6 +73,7 @@ class Classifications extends Component {
             <hr />
             <div>
               {" "}
+
               <img src={uRating} width="100" height="100" />
               <p id="uRating" />
             </div>
@@ -97,6 +100,7 @@ class Classifications extends Component {
               <p id="18Rating" />
             </div>
           </b>
+
         </Jumbo>
       </React.Fragment>
     );

@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
@@ -18,7 +19,9 @@ import PropTypes from "prop-types";
 import { env } from "./config";
 
 class App extends Component {
+  
   render() {
+
     const ContactPage = props => {
       return <Contact env={this.props.env.bind(this.props.env)} />;
     };
@@ -46,6 +49,7 @@ class App extends Component {
           </Router>
         </Layout>
       </React.Fragment>
+
     );
   }
 }
