@@ -34,7 +34,6 @@ class App extends Component {
           <Router>
             <NavigationBar />
             <Jumbotron />
-           
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/nowShowing" component={NowShowing} />
@@ -47,7 +46,6 @@ class App extends Component {
               <Route path="/classifications" component={Classifications} />
               <Route path="/booking" component={BookingChart} />
               <Route path="/contact" component={Contact} />
-              <Route path="/contact" render={ContactPage} />
               <Route component={NoMatch} />
             </Switch>
             <br/>
