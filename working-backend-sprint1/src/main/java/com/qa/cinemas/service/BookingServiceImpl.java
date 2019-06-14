@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.Booking;
-
-import repository.BookingRepository;
+import com.qa.cinemas.repository.BookingRepository;
 
 @Service
 public class BookingServiceImpl implements BookingService {

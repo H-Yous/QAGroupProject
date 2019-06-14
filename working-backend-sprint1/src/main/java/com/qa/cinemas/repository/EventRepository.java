@@ -1,4 +1,4 @@
-package repository;
+package com.qa.cinemas.repository;
 
 import java.util.Optional;
 

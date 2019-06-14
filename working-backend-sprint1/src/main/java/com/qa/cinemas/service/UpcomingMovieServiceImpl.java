@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.UpcomingMovie;
-
-import repository.UpcomingMovieRepository;
+import com.qa.cinemas.repository.UpcomingMovieRepository;
 
 @Service
 public class UpcomingMovieServiceImpl implements UpcomingMovieService {

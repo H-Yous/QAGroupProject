@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.cinemas.domain.Movie;
-
-import repository.MovieRepository;
+import com.qa.cinemas.repository.MovieRepository;
 
 @RestController
 @RequestMapping(moviesPath)
@@ -37,7 +36,7 @@ import repository.MovieRepository;
 public class MovieController {
 	
 	@Autowired
-	private MovieRepo movieRepoRefVar;
+	private MovieRepository movieRepository;
 		
 	@GetMapping(getAllMoviesPath)
 	public List<Movie> getAllMovies(){

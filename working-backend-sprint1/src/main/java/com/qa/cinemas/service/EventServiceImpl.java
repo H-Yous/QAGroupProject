@@ -13,7 +13,7 @@ import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
-import com.qa.cinemas.repositories.EventRepository;
+import com.qa.cinemas.repository.EventRepository;
 
 
 @Service

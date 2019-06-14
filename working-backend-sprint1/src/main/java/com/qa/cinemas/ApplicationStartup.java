@@ -22,11 +22,10 @@ import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
 import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.domain.UpcomingMovie;
-
-import repository.CertificationRepository;
-import repository.NewReleaseMovieRepository;
-import repository.NowShowingMovieRepository;
-import repository.UpcomingMovieRepository;
+import com.qa.cinemas.repository.CertificationRepository;
+import com.qa.cinemas.repository.NewReleaseMovieRepository;
+import com.qa.cinemas.repository.NowShowingMovieRepository;
+import com.qa.cinemas.repository.UpcomingMovieRepository;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {

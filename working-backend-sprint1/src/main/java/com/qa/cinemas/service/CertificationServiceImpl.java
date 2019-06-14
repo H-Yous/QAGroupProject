@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.Certification;
-
-import repository.CertificationRepository;
+import com.qa.cinemas.repository.CertificationRepository;
 @Service
 public class CertificationServiceImpl implements CertificationService  {
 	
