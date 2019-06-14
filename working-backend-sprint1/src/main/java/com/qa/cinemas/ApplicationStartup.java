@@ -18,17 +18,30 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.qa.cinemas.controller.EventController;
 import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
 import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.domain.UpcomingMovie;
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
 import com.qa.cinemas.repository.CertificationRepository;
 import com.qa.cinemas.repository.NewReleaseMovieRepository;
 import com.qa.cinemas.repository.NowShowingMovieRepository;
 import com.qa.cinemas.repository.UpcomingMovieRepository;
+import com.qa.cinemas.service.EventServiceImpl;
+import com.qa.cinemas.domain.Events;
+
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfTimeSlots;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfEvents;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
+
+	private Events eventToBeSaved;
 
 	private String getUpComingMoviesURI;
 	private String apiURI;
@@ -69,14 +82,18 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Autowired
 	private CertificationRepository certificationRepository;
-	
+
+	@Autowired
+	private EventServiceImpl eventServiceImpl;
+
 	private String currentYear = new SimpleDateFormat("yyyy").format(new Date());
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
+		System.out.println("RUNNING STARTUP, PLEASE WAIT TILL THIS IS FINISHED BEFORE RUNNING ANYTHING");
+		populateEvents();
 
 		getUpcomingMovies();
-
 		movieId.clear();
 		movieTitle.clear();
 		moviePoster.clear();
@@ -96,10 +113,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		waitFiveSecsBeforeMakingRequests();
 
 		getNewReleaseMovies();
-		
+
 		waitFiveSecsBeforeMakingRequests();
 
 		getMovieClassificationInfo();
+		
+		System.out.println("STARTUP FINISHED");
 	}
 
 	private void getUpcomingMovies() {
@@ -304,13 +323,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
 				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
 				.forEach(aCertification -> movieRatingDescription.add(aCertification.getString("meaning")));
-		
+
 		movieRating.stream().forEach(x -> populateDBWithCertifications(movieRating.indexOf(x)));
 
 	}
-	
-	private void populateDBWithCertifications(int index)
-	{
+
+	private void populateDBWithCertifications(int index) {
 		certification = new Certification();
 		certification.setName(movieRating.get(index));
 		certification.setDescription(movieRatingDescription.get(index));
@@ -326,22 +344,54 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Bean
 	private JavaMailSender emailSender() {
 		JavaMailSenderImpl javaMailSenderImplementation = new JavaMailSenderImpl();
-	    javaMailSenderImplementation.setHost("smtp.gmail.com");
-	    javaMailSenderImplementation.setPort(587);
-	     
-	    javaMailSenderImplementation.setUsername("purpleqacinemas@gmail.com");
-	    javaMailSenderImplementation.setPassword("qalondon6#teamfaheem");
-	     
-	    Properties props = javaMailSenderImplementation.getJavaMailProperties();
-	    props.put("mail.transport.protocol", "smtp");
-	    props.put("mail.smtp.auth", "true");
-	    props.put("mail.smtp.starttls.enable", "true");
-	    props.put("mail.debug", "true");
-	     
-	    return javaMailSenderImplementation;
+		javaMailSenderImplementation.setHost("smtp.gmail.com");
+		javaMailSenderImplementation.setPort(587);
+
+		javaMailSenderImplementation.setUsername("purpleqacinemas@gmail.com");
+		javaMailSenderImplementation.setPassword("qalondon6#teamfaheem");
+
+		Properties props = javaMailSenderImplementation.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return javaMailSenderImplementation;
 	};
+
+	private void populateEvents() {
+		if (eventServiceImpl.findAll().size() < numberOfEvents) {
+			System.out
+					.println("No events or not enough events detected in the database, populating the events database");
+			eventToBeSaved = new Events();
+			eventToBeSaved.setId(0);
+			eventToBeSaved.setMovie("N/A");
+			for (int i = 0; i < numberOfDays; i++) {
+				eventToBeSaved.setDay(Days.values()[i]);
+				for (int j = 0; j < numberOfScreens; j++) {
+					eventToBeSaved.setScreen(Screens.values()[j]);
+					for (int k = 0; k < numberOfTimeSlots; k++) {
+						eventToBeSaved.setTimeSlot(TimeSlots.values()[k]);
+						eventToBeSaved.setEventKey("[" + (i + 1) + "-" + (j + 1) + "-" + (k + 1) + "]");
+						eventToBeSaved.setId(eventToBeSaved.getId() + 1);
+						if ((eventServiceImpl.findByEventKey(eventToBeSaved.getEventKey())).isPresent()) {
+							System.out.println("event key detected, not saving");
+						} else {
+							System.out.println("saving event: " + eventToBeSaved);
+							eventServiceImpl.createEvent(eventToBeSaved);
+							// create event in io Humza Job
+						}
+
+					}
+				}
+			}
+			System.out.println("Finished populating Database");
+		} else {
+			System.out.println("enough events detected, not creating any events");
+		}
+	}
 }

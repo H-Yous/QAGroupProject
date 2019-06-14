@@ -30,7 +30,7 @@ public class Events {
 	private TimeSlots timeSlot;
 
 	@Id
-	private String id;
+	private int id;
 
 	private String movie;
 
@@ -58,11 +58,11 @@ public class Events {
 		this.eventKey = eventKey;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
