@@ -1,13 +1,57 @@
 import React, { Component } from "react";
 import { Jumbotron as Jumbo, Container, Button } from "react-bootstrap";
-import rating_u from '../assets/urating.png';
-import rating_pg from '../assets/pgrating.png';
-import rating_12a from '../assets/12arating.png';
-import rating_15 from '../assets/15rating.png';
-import rating_18 from '../assets/18rating.png';
+
+import axios from "axios";
+
+import uRating from "../assets/urating.png";
+import pgRating from "../assets/pgrating.png";
+import twelveaRating from "../assets/12arating.png";
+import fifteenRating from "../assets/15rating.png";
+import eighteenRating from "../assets/18rating.png";
 
 class Classifications extends Component {
-  getRatings() {}
+  componentDidMount() {
+    var ratingName = new Array(5);
+    var ratingDescription = new Array(5);
+
+    axios
+      .get("http://localhost:8080/api/getCertifications")
+      .then(function(response) {
+        for (var i = 0; i < 5; i++) {
+          ratingName.push(response.data[i].name);
+          ratingDescription.push(response.data[i].description);
+        }
+
+        // handle success
+        for (var i = 0; i < ratingName.length; i++) {
+          if (ratingName[i] == "U") {
+            document.getElementById("uRating").innerHTML = ratingDescription[i];
+          } else if (ratingName[i] == "PG") {
+            document.getElementById("pgRating").innerHTML =
+              ratingDescription[i];
+          } else if (ratingName[i] == "12A") {
+            document.getElementById("12aRating").innerHTML =
+              ratingDescription[i];
+          } else if (ratingName[i] == "15") {
+            document.getElementById("15Rating").innerHTML =
+              ratingDescription[i];
+          } else if (ratingName[i] == "18") {
+            document.getElementById("18Rating").innerHTML =
+              ratingDescription[i];
+          }
+        }
+      })
+      .catch(function(error) {
+        // handle error
+
+        console.log("This is the error");
+        console.log(error);
+      })
+      .finally(function() {
+        // always executed
+      });
+  }
+
 
   render() {
     return (
@@ -29,22 +73,34 @@ class Classifications extends Component {
             <hr />
             <div>
               {" "}
-              <img src={rating_u} />
-            
+
+              <img src={uRating} width="100" height="100" />
+              <p id="uRating" />
+            </div>
+            <hr />
+            <div>
               {" "}
-              <img src={rating_pg} />
-            
+              <img src={pgRating} width="100" height="100" />
+              <p id="pgRating" />
+            </div>
+            <div>
+              <hr /> <img src={twelveaRating} width="100" height="100" />
+              <p id="12aRating" />
+            </div>
+            <hr />
+            <div>
               {" "}
-              <img src={rating_12a} />
-            
+              <img src={fifteenRating} width="100" height="100" />
+              <p id="15Rating" />
+            </div>
+            <hr />
+            <div>
               {" "}
-              <img src={rating_15} />
-            
-              {" "}
-              <img src={rating_18} />
+              <img src={eighteenRating} width="100" height="100" />
+              <p id="18Rating" />
             </div>
           </b>
-          {this.getRatings()}
+
         </Jumbo>
       </React.Fragment>
     );
