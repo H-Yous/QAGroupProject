@@ -2,10 +2,10 @@ package com.qa.cinemas.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.qa.cinemas.domain.User;
+import com.qa.cinemas.domain.UsersModel;
 
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UserRepository extends MongoRepository<UsersModel, String> {
 
-    User findByEmail(String email);
+    UsersModel findByEmail(String email);
 
 }
