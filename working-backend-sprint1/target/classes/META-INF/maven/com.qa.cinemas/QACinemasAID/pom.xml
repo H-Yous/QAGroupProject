@@ -26,6 +26,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/de.flapdoodle.embed/de.flapdoodle.embed.mongo -->
 		<dependency>
 			<groupId>de.flapdoodle.embed</groupId>
@@ -54,7 +58,28 @@
 			<artifactId>json</artifactId>
 			<version>20180130</version>
 		</dependency>
-
+		
+        <dependency>
+        <groupId>com.stripe</groupId>
+        <artifactId>stripe-java</artifactId>
+        <version>10.0.2</version>
+         </dependency>
+         
+         <dependency>
+         <groupId>org.springframework.boot</groupId> 
+         <artifactId>spring-boot-starter-web</artifactId>
+         </dependency>
+         
+         <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-thymeleaf</artifactId>
+         </dependency>
+         
+         <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+         </dependency>
+         
 	</dependencies>
 
 	<build>
