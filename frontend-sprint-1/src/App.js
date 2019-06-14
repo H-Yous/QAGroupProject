@@ -11,6 +11,7 @@ import About from "./aboutpage/About.js";
 import Classifications from "./classificationpage/Classifications.js";
 import Contact from "./contactpage/Contact.js";
 import Payment from "./paymentpage/Payment.js";
+import BookingChart from "./bookingpage/BookingChart.js"
 import { NoMatch } from "./NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
@@ -43,13 +44,17 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/payment" component={Payment} />
               <Route path="/classifications" component={Classifications} />
+              <Route path="/booking" component={BookingChart} />
               <Route path="/contact" component={Contact} />
               <Route component={NoMatch} />
             </Switch>
-            <br />
+            <br/>
+            <br/>
             <FooterPage />
           </Router>
+          
         </Layout>
+        
       </React.Fragment>
 
     );

@@ -1,5 +1,5 @@
 package com.qa.cinemas.enums;
 
 public enum Screens {
-	LARGESCREEN
+	LARGESCREEN,LARGESCREEN2,SMALLSCREEN
 }
