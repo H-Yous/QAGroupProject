@@ -68,11 +68,11 @@ export const NavigationBar = () => (
               <Link to="/login">Login</Link>
             </Nav.Link>
           </Nav.Item>
-
         <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-info">Search</Button>
     </Form>
+    </Nav>
         </Navbar.Collapse>
     </Navbar>
 </Styles>
