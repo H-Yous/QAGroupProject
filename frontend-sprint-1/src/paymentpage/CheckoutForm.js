@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Button } from 'react-bootstrap';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
 
@@ -17,22 +18,24 @@ class CheckoutForm extends Component{
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: token.id
-    });
-  console.log(token.id)
+    })
+    
     if (response.ok) this.setState({complete: true});
-   
    
   }
 
   render(){
     if (this.state.complete) return <h1>Purchase Complete</h1>;
-
+    
     return (
-      <div className="checkout">
-        <p>Would you like to complete the purchase?</p>
-        <CardElement />
-        <button onClick={this.submit}>Send</button>
-      </div>
+      
+<div className="checkout">
+<p>Would you like to complete the purchase?</p>
+<CardElement />
+<br></br>
+<Button variant="primary" size="lg" onClick={this.submit}>Pay Now</Button>
+</div>
+
     );
   }
 

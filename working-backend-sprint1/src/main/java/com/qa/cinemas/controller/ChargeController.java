@@ -28,7 +28,7 @@ public class ChargeController {
     @PostMapping("/charge")
     public void charge(@RequestBody String token) throws StripeException {
     	System.out.print(token);
-    	Stripe.apiKey = "stripe-api";
+    	Stripe.apiKey = "sk_test_QCwagkwuRqvO88QBgFcDwpCp00pZO514Zd";
 
     	
     	Map<String, Object> params = new HashMap<>();

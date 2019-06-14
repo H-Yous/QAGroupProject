@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar, Container, NavbarBrand } from 'react-bootstrap';
+import { Nav, Navbar, Container} from 'react-bootstrap';
 import styled from 'styled-components';
+import qaImage from '../assets/qa.png'
 
 const Styles = styled.div`
 
@@ -28,12 +29,21 @@ class FooterPage extends React.Component{
   render() {
     return(
 
-    <div className="fixed-bottom"> 
+   
      <Styles>
            <Navbar>
            <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
               <Container>
-                    <NavbarBrand>Qa Cinema</NavbarBrand>
+              <Navbar.Brand href="/">
+        <img
+        src={qaImage}
+        width="35"
+        height="35"
+        className="d-inline-block align-top"
+        alt=""
+      />
+      {'Cinemas'}
+        </Navbar.Brand>
                     <Nav.Item>
             <Nav.Link>
               <Link to="/about">About</Link>
@@ -47,7 +57,7 @@ class FooterPage extends React.Component{
               </Container>
             </Navbar>      
       </Styles> 
-          </div>
+         
           
         
     )

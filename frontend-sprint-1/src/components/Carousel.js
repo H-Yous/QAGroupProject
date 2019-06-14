@@ -5,10 +5,23 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
   .carousel {
-    width:600px;
+    width:auto;
     height:auto;
     margin:auto;
+    
   }
+
+  .carousel-indicators .active{
+    background-color: #f00;
+}
+
+.carousel-caption {
+
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+
+}
+
+
 
 `
 class ControlledCarousel extends React.Component {
@@ -28,14 +41,20 @@ class ControlledCarousel extends React.Component {
           document.getElementById("poster1").src=response.data[0].poster;
           document.getElementById("poster2").src=response.data[1].poster;
           document.getElementById("poster3").src=response.data[2].poster;
+          document.getElementById("poster4").src=response.data[3].poster;
+          document.getElementById("poster5").src=response.data[4].poster;
 
           document.getElementById("title1").innerText=response.data[0].title;
           document.getElementById("title2").innerText=response.data[1].title;
           document.getElementById("title3").innerText=response.data[2].title;
+          document.getElementById("title4").innerText=response.data[3].title;
+          document.getElementById("title5").innerText=response.data[4].title;
 
           document.getElementById("desc1").innerText=response.data[0].description;
           document.getElementById("desc2").innerText=response.data[1].description;
           document.getElementById("desc3").innerText=response.data[2].description;
+          document.getElementById("desc4").innerText=response.data[3].description;
+          document.getElementById("desc5").innerText=response.data[4].description;
 
 
 
@@ -85,10 +104,7 @@ class ControlledCarousel extends React.Component {
               <img
                 id="poster1"
                 className="d-block w-100"
-                alt="First slide" 
-                
-                
-                
+                alt="First slide"           
               />
               <Carousel.Caption>
                 <h3 id="title1">First Movie</h3>
@@ -100,9 +116,6 @@ class ControlledCarousel extends React.Component {
                 id="poster2"
                 className="d-block w-100"
                 alt="Third slide"
-               
-               
-                
               />
     
               <Carousel.Caption>
@@ -115,8 +128,6 @@ class ControlledCarousel extends React.Component {
                 id="poster3"
                 className="d-block w-100"
                 alt="Third slide"
-               
-
               />
     
               <Carousel.Caption>
@@ -124,6 +135,33 @@ class ControlledCarousel extends React.Component {
                 <p id="desc3">Movie description</p>
               </Carousel.Caption>
             </Carousel.Item>
+
+            <Carousel.Item>
+              <img
+                id="poster4"
+                className="d-block w-100"
+                alt="Third slide"
+              />
+    
+              <Carousel.Caption>
+                <h3 id="title4">Third Movie</h3>
+                <p id="desc4">Movie description</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item>
+              <img
+                id="poster5"
+                className="d-block w-100"
+                alt="Third slide"
+              />
+    
+              <Carousel.Caption>
+                <h3 id="title5">Third Movie</h3>
+                <p id="desc5">Movie description</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+            
           </Carousel>
           </Styles>
         );
