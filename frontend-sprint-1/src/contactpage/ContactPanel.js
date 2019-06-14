@@ -54,6 +54,7 @@ class ContactPanel extends Component{
 
     render(){
         const feedback = this.state;
+
         return(
             <div className="all">
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
@@ -70,12 +71,13 @@ class ContactPanel extends Component{
                     </div>
 
                     <div className="contact-container">
-                        <form className="feedback-form" onSubmit={this.handleSubmit}>
+                        <form className="feedback" onSubmit={this.handleSubmit} >
                             <View style={{flex:1, flexDirection:'column', width:800}}>
+
                                 <textarea
                                     className="text-input"
-                                    id="feedback-entry"
-                                    name="feedback-entry"
+                                    id="feedback"
+                                    name="feedback"
                                     onChange={this.handleChange.bind(this)}
                                     value={this.state.feedback}
                                     rows="16"
@@ -98,4 +100,5 @@ class ContactPanel extends Component{
         );
     };
 }
+
 export default withRouter(ContactPanel);
