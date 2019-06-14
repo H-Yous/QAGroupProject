@@ -15,17 +15,13 @@ import { NoMatch } from "./NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 import  FooterPage  from "./components/FooterPage";
+import Directions from "./directionspage/Directions.js";
 import { Jumbotron } from "./components/Jumbotron";
 import PropTypes from "prop-types";
 
 class App extends Component {
   
   render() {
-
-    const ContactPage = props => {
-      return <Contact env={this.props.env.bind(this.props.env)} />;
-    };
-
     return (
       <React.Fragment>
         <Layout>
@@ -44,6 +40,7 @@ class App extends Component {
               <Route path="/classifications" component={Classifications} />
               <Route path="/booking" component={BookingChart} />
               <Route path="/contact" component={Contact} />
+              <Route path="/directions" component={Directions} />
               <Route component={NoMatch} />
             </Switch>
             <br></br>
