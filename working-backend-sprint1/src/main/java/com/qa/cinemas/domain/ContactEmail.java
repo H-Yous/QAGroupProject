@@ -5,7 +5,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document (collection = "Emails")
 public class ContactEmail {
+	
+	private String enquirerEmail;
+	
 	private String emailText;
+
+	public String getEnquirerEmail() {
+		return enquirerEmail;
+	}
+
+	public void setEnquirerEmail(String enquirerEmail) {
+		this.enquirerEmail = enquirerEmail;
+	}
 
 	public String getEmailText() {
 		return emailText;
@@ -17,6 +28,6 @@ public class ContactEmail {
 
 	@Override
 	public String toString() {
-		return "Email [emailText=" + emailText + "]";
+		return "ContactEmail [enquirerEmail=" + enquirerEmail + ", emailText=" + emailText + "]";
 	}
 }

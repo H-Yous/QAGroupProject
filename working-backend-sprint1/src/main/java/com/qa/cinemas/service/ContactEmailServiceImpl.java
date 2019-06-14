@@ -24,7 +24,7 @@ public class ContactEmailServiceImpl implements ContactEmailService {
 			
 			helper.setTo(emailReceiver);
 			helper.setText(email.getEmailText());
-			helper.setSubject(emailSubject);
+			helper.setSubject(emailSubject+email.getEnquirerEmail());
 			
 			javaMailSender.send(message);
 			
