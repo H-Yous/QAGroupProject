@@ -25,14 +25,14 @@ a, .navbar-brand, .navbar-nav .nav-link {
 export const NavigationBar = () => (
 <Styles>
     <Navbar expand="lg">
-        <Navbar.Brand href="/">
+      <Navbar.Brand href="/">
         <img
         src={qaImage}
         width="35"
         height="35"
         className="d-inline-block align-top"
         alt=""
-      />
+        />
       {'Cinemas'}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>

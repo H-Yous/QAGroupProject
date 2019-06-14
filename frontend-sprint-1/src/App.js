@@ -33,7 +33,6 @@ class App extends Component {
           <Router>
             <NavigationBar />
             <Jumbotron />
-            <FooterPage />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/nowShowing" component={NowShowing} />
@@ -45,9 +44,10 @@ class App extends Component {
               <Route path="/payment" component={Payment} />
               <Route path="/classifications" component={Classifications} />
               <Route path="/contact" component={Contact} />
-              <Route path="/contact" render={ContactPage} />
               <Route component={NoMatch} />
             </Switch>
+            <br />
+            <FooterPage />
           </Router>
         </Layout>
       </React.Fragment>
