@@ -27,40 +27,5 @@ public class LoginController {
 	@Autowired
 	private CustomUserDetailsService userService;
 	
-	@RequestMapping(value = loginPath, method = RequestMethod.GET)
-	public ModelAndView login() {
-	    ModelAndView modelAndView = new ModelAndView();
-	    modelAndView.setViewName("login");
-	    return modelAndView;
-	}
 
-	@RequestMapping(value = signUpPath, method = RequestMethod.GET)
-	public ModelAndView signup() {
-	    ModelAndView modelAndView = new ModelAndView();
-	    User user = new User();
-	    modelAndView.addObject("user", user);
-	    modelAndView.setViewName("signup");
-	    return modelAndView;
-	}
-	
-	@RequestMapping(value = signUpPath, method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
-	    ModelAndView modelAndView = new ModelAndView();
-	    User userExists = userService.findUserByEmail(user.getEmail());
-	    if (userExists != null) {
-	        bindingResult
-	                .rejectValue("email", "error.user",
-	                        "There is already a user registered with the username provided");
-	    }
-	    if (bindingResult.hasErrors()) {
-	        modelAndView.setViewName("signup");
-	    } else {
-	        userService.saveUser(user);
-	        modelAndView.addObject("successMessage", "User has been registered successfully");
-	        modelAndView.addObject("user", new User());
-	        modelAndView.setViewName("login");
-
-	    }
-	    return modelAndView;
-	}
 }
