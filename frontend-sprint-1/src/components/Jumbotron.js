@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron as Jumbo, Container,Button } from 'react-bootstrap';
+import { Jumbotron as Jumbo, Container, Button } from 'react-bootstrap';
 import styled from 'styled-components'; 
 import artImage from '../assets/art.jpg'
 

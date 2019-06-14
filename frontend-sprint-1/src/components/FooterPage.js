@@ -44,14 +44,19 @@ class FooterPage extends React.Component{
       />
       {'Cinemas'}
         </Navbar.Brand>
-                    <Nav.Item>
+        <Nav.Item>
             <Nav.Link>
-              <Link to="/about">About</Link>
+              <Link to="/directions">Find Us</Link>
+            </Nav.Link>
+          </Nav.Item>
+        <Nav.Item>
+            <Nav.Link>
+              <Link to="/contact">Contact Us</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/about">About</Link>
             </Nav.Link>
           </Nav.Item>
               </Container>
