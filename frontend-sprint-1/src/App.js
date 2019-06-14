@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
@@ -18,7 +17,6 @@ import { NavigationBar } from "./components/NavigationBar";
 import  FooterPage  from "./components/FooterPage";
 import { Jumbotron } from "./components/Jumbotron";
 import PropTypes from "prop-types";
-import { env } from "./config";
 
 class App extends Component {
   

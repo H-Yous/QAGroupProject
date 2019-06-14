@@ -4,7 +4,6 @@ import { Nav, Navbar, Form, FormControl, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import qaImage from '../assets/qa.png'
 
-
 const Styles = styled.div`
 
 .navbar {

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class grabPoster extends React.Component {
     
 

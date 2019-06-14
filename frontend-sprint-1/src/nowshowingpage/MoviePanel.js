@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {Container, Row, Col} from 'react-bootstrap';
-
 import Poster from './Poster.js';
 import Title from './Title.js';
 import Info from './Info.js';

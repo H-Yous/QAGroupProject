@@ -34,7 +34,7 @@ public final class PROJ_CONSTANTS {
 	public static final String contactGmailPath = "/contact";
 	public static final String sendEmail = "/sendEmail";
 	public static final String emailReceiver = "purpleqacinemas@gmail.com";
-	public static final String emailSubject = "Enquiry from visitor at QA Cinemas: ";
+	public static final String emailSubject = "Enquiry from visitor at QA Cinemas with email: ";
 	
 	// number of days,screens, time slots
 	public static final int numberOfDays = Days.values().length;

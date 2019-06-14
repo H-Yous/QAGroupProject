@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import CreateScreen from './CreateScreen.js';
 
 class BookingChart extends Component{
