@@ -14,6 +14,7 @@ import Payment from "./paymentpage/Payment.js";
 import { NoMatch } from "./NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
+import  FooterPage  from "./components/FooterPage";
 import { Jumbotron } from "./components/Jumbotron";
 import PropTypes from "prop-types";
 import { env } from "./config";
@@ -32,6 +33,7 @@ class App extends Component {
           <Router>
             <NavigationBar />
             <Jumbotron />
+            <FooterPage />
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/nowShowing" component={NowShowing} />
