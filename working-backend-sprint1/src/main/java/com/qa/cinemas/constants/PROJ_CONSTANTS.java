@@ -32,4 +32,10 @@ public final class PROJ_CONSTANTS {
 	public static final String emailReceiver = "purpleqacinemas@gmail.com";
 	public static final String emailSubject = "Enquiry from visitor at QA Cinemas";
 	public static final String contactGmailServer = "http://localhost:8080";
+	
+	// login paths
+	public static final String loginPath = "/login";
+	public static final String signUpPath = "/signup";
+
 }
+
