@@ -1,4 +1,4 @@
-package com.qa.cinemas.service;
+package com.qa.cinemas.component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,13 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import com.qa.cinemas.domain.Role;
 import com.qa.cinemas.domain.User;
 import com.qa.cinemas.repository.RoleRepository;
 import com.qa.cinemas.repository.UserRepository;
 
-@Service
+@Component
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
@@ -32,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	    return userRepository.findByEmail(email);
 	}
 	
-	public void saveUser(User user) {
+	public void saveCustomerUser(User user) {
 	    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 	    user.setEnabled(true);
 	    Role userRole = roleRepository.findByRole("Customer");

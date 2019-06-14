@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.qa.cinemas.domain.User;
-import com.qa.cinemas.service.CustomUserDetailsService;
+import com.qa.cinemas.component.CustomUserDetailsService;
 
 @Controller
 @RequestMapping(eventsPath)
