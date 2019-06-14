@@ -84,8 +84,19 @@ class ScreenCreation extends Component{
             
     };
     booked(chart){
-        console.log(chart);
-        console.log(chart.selectedObjects[0]);
+        let screen = document.getElementById('Screen');
+        chart.listSelectedObjects((listOfObjects) =>{
+            listOfObjects.map((object) => {
+                let seatnum = object.label;
+                let ticket = object.selectedTicketType;
+                let price = object.pricing.ticketTypes.filter(obj => obj.ticketType === ticket)
+                    .map((obj) => obj.price)[0];
+                    console.log(seatnum, ticket, price);
+                    console.log(chart);
+            })
+
+            
+        })
         
     }
     
