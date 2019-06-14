@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,13 +41,13 @@ public class EventController {
 	
 	@PostMapping(createEventPath)
     public ResponseEntity<?> createEvent(@Valid @RequestBody Events event) {
-		String result=eventServiceImpl.createShowing(event);
+		String result=eventServiceImpl.createEvent(event);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
     }
 	
 	@PostMapping(findByEventKeyPath)
-    public ResponseEntity<?> findByEventKey(@Valid @RequestBody Events event) {
-		Optional<Events> result=eventServiceImpl.findByEventKey(event.getEventKey());
+    public ResponseEntity<?> findByEventKey(@PathVariable("eventKey") String eventKey) {
+		Optional<Events> result=eventServiceImpl.findByEventKey(eventKey);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
     }
 }

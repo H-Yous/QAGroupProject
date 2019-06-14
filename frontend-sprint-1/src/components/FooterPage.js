@@ -28,7 +28,6 @@ a, .navbar-brand, .navbar-nav .nav-link {
 class FooterPage extends React.Component{
   render() {
     return(
-
    
      <Styles>
            <Navbar>

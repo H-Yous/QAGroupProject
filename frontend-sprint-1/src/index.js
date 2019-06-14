@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { env } from './config';
 
-ReactDOM.render(<App env={env} />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 
 

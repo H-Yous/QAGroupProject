@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
@@ -11,13 +10,13 @@ import About from "./aboutpage/About.js";
 import Classifications from "./classificationpage/Classifications.js";
 import Contact from "./contactpage/Contact.js";
 import Payment from "./paymentpage/Payment.js";
+import BookingChart from "./bookingpage/BookingChart.js"
 import { NoMatch } from "./NoMatch";
 import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 import  FooterPage  from "./components/FooterPage";
 import { Jumbotron } from "./components/Jumbotron";
 import PropTypes from "prop-types";
-import { env } from "./config";
 
 class App extends Component {
   
@@ -43,14 +42,16 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/payment" component={Payment} />
               <Route path="/classifications" component={Classifications} />
+              <Route path="/booking" component={BookingChart} />
               <Route path="/contact" component={Contact} />
-              <Route path="/contact" render={ContactPage} />
               <Route component={NoMatch} />
             </Switch>
             <br></br>
             <FooterPage />
           </Router>
+          
         </Layout>
+        
       </React.Fragment>
 
     );

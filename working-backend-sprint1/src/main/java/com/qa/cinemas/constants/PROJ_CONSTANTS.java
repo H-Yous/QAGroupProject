@@ -1,9 +1,13 @@
 package com.qa.cinemas.constants;
 
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
+
 public final class PROJ_CONSTANTS {
 	private PROJ_CONSTANTS() {
 	}
-
+	
 	// cross origin path
 	public static final String crossOriginsPath="http://localhost:8080";
 	
@@ -27,9 +31,14 @@ public final class PROJ_CONSTANTS {
 	public static final String createBooking = "/createBooking";
 
 	// gmail paths
-	public static final String contactGmailPath = "contact";
-	public static final String sendEmail = "sendEmail";
+	public static final String contactGmailPath = "/contact";
+	public static final String sendEmail = "/sendEmail";
 	public static final String emailReceiver = "purpleqacinemas@gmail.com";
-	public static final String emailSubject = "Enquiry from visitor at QA Cinemas";
-	public static final String contactGmailServer = "http://localhost:8080";
+	public static final String emailSubject = "Enquiry from visitor at QA Cinemas with email: ";
+	
+	// number of days,screens, time slots
+	public static final int numberOfDays = Days.values().length;
+	public static final int numberOfScreens = Screens.values().length;
+	public static final int numberOfTimeSlots = TimeSlots.values().length;
+	public static final int numberOfEvents = numberOfDays*numberOfScreens*numberOfTimeSlots;
 }

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react';
-
 
 /*
 USE THIS CLASS WITH the following:

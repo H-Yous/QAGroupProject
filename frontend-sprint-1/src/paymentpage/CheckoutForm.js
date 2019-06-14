@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Button } from 'react-bootstrap';
 import {CardElement, injectStripe} from 'react-stripe-elements';
 
-
 class CheckoutForm extends Component{
     constructor(props) {
       super(props);

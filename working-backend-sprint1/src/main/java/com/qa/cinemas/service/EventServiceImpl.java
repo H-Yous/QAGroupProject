@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public String createShowing(Events event) {
+	public String createEvent(Events event) {
 		eventRepository.save(event);
 		return "event saved with: " + event.toString();
 	}

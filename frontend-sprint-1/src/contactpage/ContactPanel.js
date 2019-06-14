@@ -13,14 +13,25 @@ class ContactPanel extends Component{
     constructor(props, context){
         super(props, context);
         this.state={
-            
+            enquirerEmail:'',
+            enquirerPlaceholder:'Email address...',
             feedback:'',
+            placeholder:'We aim to process your enquiry within three working days, and will never share your email address.'
         }
+        const enquirerEmailValue = null;
         const feedbackValue = null;
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange = (event) =>{
+    handleEmailChange = (event)=> {
+        const changeState = this.state;
+        changeState[event.target.name] = event.target.value;
+        this.enquirerEmailValue = event.target.value;
+        this.setState(changeState);
+        console.log(event.target.value);
+    }
+
+    handleFeedbackChange = (event) => {
         const changeState = this.state;
         changeState[event.target.name] = event.target.value;
         this.feedbackValue = event.target.value;
@@ -30,21 +41,33 @@ class ContactPanel extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
+        event.persist();
         
         const submitState = this.state;
         this.setState(submitState);
-        console.log(this.feedbackValue+": this one!");
 
         axios.defaults.baseURL = 'http://localhost:8080';
         axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        console.log(this.feedbackValue+": lol");
         axios.post('/contact/sendEmail', {
+            enquirerEmail: this.enquirerEmailValue,
             emailText: this.feedbackValue
         })
             .then((result) => {
                 this.props.history.push('/contact');
-                console.log(result+": result");
+                this.setState({
+                    enquirerEmail:'',
+                    enquirerPlaceholder:'Your email address has been logged.',
+                    feedback: '', 
+                    placeholder:'Email sent!'
+                });
+            })
+            .then(() => new Promise(resolve => setTimeout(resolve, 2500)))
+            .then((result) => {
+                this.setState({
+                    enquirerPlaceholder: 'Email address...',
+                    placeholder: 'We aim to process your enquiry within three working days, and will never share your email address.'
+                })
             })
             .catch(err => {
                 console.error('Failed to send feedback. '+err)
@@ -54,6 +77,7 @@ class ContactPanel extends Component{
 
     render(){
         const feedback = this.state;
+
         return(
             <div className="all">
                 <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
@@ -70,16 +94,29 @@ class ContactPanel extends Component{
                     </div>
 
                     <div className="contact-container">
-                        <form className="feedback-form" onSubmit={this.handleSubmit}>
+                        <form className="feedback" onSubmit={this.handleSubmit} >
                             <View style={{flex:1, flexDirection:'column', width:800}}>
+
+                                <input
+                                    className="text-input"
+                                    id="enquirerEmail"
+                                    name="enquirerEmail"
+                                    onChange={this.handleEmailChange.bind(this)}
+                                    value={this.state.enquirerEmail}
+                                    placeholder={this.state.enquirerPlaceholder}
+                                    required
+                                />
+
+                                <br />
+
                                 <textarea
                                     className="text-input"
-                                    id="feedback-entry"
-                                    name="feedback-entry"
-                                    onChange={this.handleChange.bind(this)}
+                                    id="feedback"
+                                    name="feedback"
+                                    onChange={this.handleFeedbackChange.bind(this)}
                                     value={this.state.feedback}
-                                    rows="16"
-                                    placeholder="We aim to reply to your enquiry within 3 working days."
+                                    rows="14"
+                                    placeholder={this.state.placeholder}
                                     required
                                 />
 
@@ -98,4 +135,5 @@ class ContactPanel extends Component{
         );
     };
 }
+
 export default withRouter(ContactPanel);

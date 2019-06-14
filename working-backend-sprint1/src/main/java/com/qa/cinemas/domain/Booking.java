@@ -45,6 +45,10 @@ public class Booking {
 
 	@NotBlank
 	private String customerID;
+	
+	@NotBlank
+	private String ticketType;
+
 
 	@NotBlank
 	private String price;
@@ -112,7 +116,13 @@ public class Booking {
 		return SEQUENCE_NAME;
 	}
 	
+	public String getTicketType() {
+		return ticketType;
+	}
 
+	public void setTicketType(String ticketType) {
+		this.ticketType = ticketType;
+	}
 
 	public String getId() {
 		return id;
