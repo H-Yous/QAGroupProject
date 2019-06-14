@@ -28,7 +28,8 @@ a, .navbar-brand, .navbar-nav .nav-link {
 class FooterPage extends React.Component{
   render() {
     return(
-   
+      
+      <div className="fixed-bottom"> 
      <Styles>
            <Navbar>
            <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
@@ -56,7 +57,7 @@ class FooterPage extends React.Component{
               </Container>
             </Navbar>      
       </Styles> 
-         
+         </div>
           
         
     )

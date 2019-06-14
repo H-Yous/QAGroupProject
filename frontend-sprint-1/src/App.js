@@ -46,7 +46,10 @@ class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route component={NoMatch} />
             </Switch>
-            <br></br>
+            <br></br><br></br>
+      <br></br><br></br><br></br>
+      <br></br><br></br><br></br>
+      <br></br>
             <FooterPage />
           </Router>
           

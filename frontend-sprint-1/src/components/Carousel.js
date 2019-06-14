@@ -1,5 +1,5 @@
 import React from 'react';
-import { Carousel} from 'react-bootstrap';
+import { Carousel, Jumbotron, Container} from 'react-bootstrap';
 import axios from 'axios'; 
 import styled from 'styled-components'; 
 
@@ -9,16 +9,26 @@ const Styles = styled.div`
     height:auto;
     margin:auto;
     
+  
+    
   }
 
   .carousel-indicators .active{
     background-color: #f00;
+    
 }
 
 .carousel-caption {
-
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
-
+  
+  color: white;
+  &:hover {
+    color: #bbb;
+  }
+ 
+  
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold;
 }
 
 
@@ -95,11 +105,13 @@ class ControlledCarousel extends React.Component {
     
         return (
           <Styles>
+           
           <Carousel
             activeIndex={index}
             direction={direction}
             onSelect={this.handleSelect}
           >
+            
             <Carousel.Item>
               <img
                 id="poster1"
@@ -107,11 +119,14 @@ class ControlledCarousel extends React.Component {
                 alt="First slide"           
               />
               <Carousel.Caption>
+              <div className="overlay" />
                 <h3 id="title1">First Movie</h3>
                 <p id="desc1">Movie description</p>
+                
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
+            
               <img
                 id="poster2"
                 className="d-block w-100"
@@ -119,6 +134,9 @@ class ControlledCarousel extends React.Component {
               />
     
               <Carousel.Caption>
+              
+              <div className="overlay"></div>
+            
                 <h3 id="title2">Second Movie</h3>
                 <p id="desc2">Movie description</p>
               </Carousel.Caption>
@@ -131,6 +149,7 @@ class ControlledCarousel extends React.Component {
               />
     
               <Carousel.Caption>
+              <div className="overlay"></div>
                 <h3 id="title3">Third Movie</h3>
                 <p id="desc3">Movie description</p>
               </Carousel.Caption>
@@ -144,6 +163,7 @@ class ControlledCarousel extends React.Component {
               />
     
               <Carousel.Caption>
+              <div className="overlay"></div>
                 <h3 id="title4">Third Movie</h3>
                 <p id="desc4">Movie description</p>
               </Carousel.Caption>
@@ -157,6 +177,7 @@ class ControlledCarousel extends React.Component {
               />
     
               <Carousel.Caption>
+              <div className="overlay"></div>
                 <h3 id="title5">Third Movie</h3>
                 <p id="desc5">Movie description</p>
               </Carousel.Caption>
