@@ -3,6 +3,10 @@ import { Button } from 'reactstrap';
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react';
 
 import { withRouter } from "react-router-dom";
+//import Payment from "./paymentpage/Payment.js";
+
+
+
 
 
 
@@ -18,21 +22,54 @@ seatnumbers =...
 
 
 class ScreenCreation extends Component{
+    chosenSeats= [];
     constructor(props) {
+        
         super(props);
         this.state = {
             chart: null,
-            chartLoaded: false};
+            chartLoaded: false,
+            redirect: false,
+            
+            
+
+        };
       }
     
     componentDidMount(){
         
     }
 
-    if(chartLoaded){
-        console.log("lol");
+    booked(chart){
+        let screen = document.getElementById('Screen');
+        chart.listSelectedObjects((listOfObjects) =>{
+            listOfObjects.map((object) => {
+                let seatnum = object.label;
+                let ticket = object.selectedTicketType;
+                let price = object.pricing.ticketTypes.filter(obj => obj.ticketType === ticket)
+                    .map((obj) => obj.price)[0];
+                this.chosenSeats.push({seatnum, ticket, price});
+                if(listOfObjects.indexOf(object) === listOfObjects.length -1){
+                    this.handleRedirect(this.chosenSeats);
+                }
+                
+            })
+
+
+        })
+
+
+        
+        
     }
+
     
+    handleRedirect(chosenSeats){
+        
+        this.props.history.push("/payment", {chosenSeats});
+    }
+
+   
     
     render(){
         const{publicKey, eventKey, maxObjects} = this.props;
@@ -69,13 +106,14 @@ class ScreenCreation extends Component{
                     expiresInSeconds={1}
                     maxSelectedObjects={this.props.maxObjects}
                     
-                    selectedObjectsInputName={'chosenSeats'}
+                    
                 />
                 
                
                 
                     <Button onClick={() => {this.booked(this.state.chart)}}>Button</Button>
 
+                    
                 
             </div>
             
@@ -83,25 +121,11 @@ class ScreenCreation extends Component{
             
             
     };
-    booked(chart){
-        let screen = document.getElementById('Screen');
-        chart.listSelectedObjects((listOfObjects) =>{
-            listOfObjects.map((object) => {
-                let seatnum = object.label;
-                let ticket = object.selectedTicketType;
-                let price = object.pricing.ticketTypes.filter(obj => obj.ticketType === ticket)
-                    .map((obj) => obj.price)[0];
-                    console.log(seatnum, ticket, price);
-                    console.log(chart);
-            })
-
             
-        })
-        
-    }
-    
-    
 }
+    
+    
 
-export default ScreenCreation;
+
+export default withRouter(ScreenCreation);
  
