@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
 import { Button } from 'reactstrap';
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react';
-
 import { withRouter } from "react-router-dom";
-//import Payment from "./paymentpage/Payment.js";
-
-
-
-
-
-
-
 /*
 USE THIS CLASS WITH the following:
 <CreateScreen
@@ -18,8 +9,6 @@ eventkey = '1-1-1'
 seatnumbers =...
 />
 */
-
-
 
 class ScreenCreation extends Component{
     chosenSeats= [];
@@ -30,8 +19,6 @@ class ScreenCreation extends Component{
             chart: null,
             chartLoaded: false,
             redirect: false,
-            
-            
 
         };
       }
@@ -39,9 +26,8 @@ class ScreenCreation extends Component{
     componentDidMount(){
         
     }
-
     booked(chart){
-        let screen = document.getElementById('Screen');
+        
         chart.listSelectedObjects((listOfObjects) =>{
             listOfObjects.map((object) => {
                 let seatnum = object.label;
@@ -52,38 +38,26 @@ class ScreenCreation extends Component{
                 if(listOfObjects.indexOf(object) === listOfObjects.length -1){
                     this.handleRedirect(this.chosenSeats);
                 }
-                
             })
-
-
         })
-
-
-        
-        
     }
 
-    
     handleRedirect(chosenSeats){
-        
         this.props.history.push("/payment", {chosenSeats});
     }
 
-   
-    
     render(){
         const{publicKey, eventKey, maxObjects} = this.props;
-        
         
         return(
             <div id="event-manager">
                 <SeatsioSeatingChart
-                    //divId="event-manager"
+                    
                     publicKey={this.props.publicKey}
                     event={this.props.eventKey}
                     id='Screen'
                     onRenderStarted={createdChart => {this.setState({chart: createdChart, chartLoaded: true})}}
-                    //WHAT PRINTS TO THE CONSOLE HERE SHOULD PRINT ABOVE
+                    
                     
                     pricing={[
                         {'category' : 'Normal', 'ticketTypes':[
@@ -108,24 +82,11 @@ class ScreenCreation extends Component{
                     
                     
                 />
-                
-               
-                
                     <Button onClick={() => {this.booked(this.state.chart)}}>Button</Button>
-
-                    
-                
             </div>
             
             ) 
-            
-            
-    };
-            
+    };      
 }
-    
-    
-
-
 export default withRouter(ScreenCreation);
  
