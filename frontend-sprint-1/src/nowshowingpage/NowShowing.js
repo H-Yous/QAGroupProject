@@ -68,7 +68,7 @@ class NowShowing extends Component {
                                   <img src={pgRating} height="50" width="50" />
                                 );
                               } else if (
-                                nowShowingMovie.certification == "50" ||
+                                nowShowingMovie.certification == "12" ||
                                 nowShowingMovie.certification == "12A"
                               ) {
                                 return (
