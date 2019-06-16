@@ -5,6 +5,11 @@ import DetailsForm from './detailsForm';
 import TicketForm from './ticketForm';
 
 class Payment extends Component {
+  //THIS IS WHERE YOU GET THE CHOSEN SEAT STUFF
+  //REFERENCE VIA this.state.chosenSeats[0].
+  //                                       .seatnum
+  //                                       .ticket
+  //                                       .price
   state = this.props.location.state;
   componentDidMount(){
         console.log(this.state);
