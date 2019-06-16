@@ -146,7 +146,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 				.forEach(aMovieImage -> posters += "https://image.tmdb.org/t/p/original"
 						+ aMovieImage.getString("file_path") + ",");
 
-		posters = posters.substring(0, posters.length() - 1);
+		posters = posters.substring(0, posters.length());
 		String[] postersSplit = posters.split(",");
 		moviePoster.add(postersSplit[0]);
 		posters = "";
