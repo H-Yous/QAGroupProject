@@ -20,8 +20,8 @@ import { Jumbotron } from "./components/Jumbotron";
 import { ImageBackground, Text } from "react-native";
 import backgroundImage from "./assets/background.jpg";
 import styled from "styled-components";
-
 const Styles = styled.div``;
+import Confirmation from  "./paymentpage/confirmation"; 
 
 class App extends Component {
   render() {
@@ -44,6 +44,7 @@ class App extends Component {
                   <Route path="/screens" component={Screens} />
                   <Route path="/about" component={About} />
                   <Route path="/login" component={Login} />
+                  <Route path="/confirmation" component={Confirmation} />
                   <Route path="/payment" component={Payment} />
                   <Route path="/classifications" component={Classifications} />
                   <Route path="/booking" component={BookingChart} />

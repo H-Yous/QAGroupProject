@@ -11,9 +11,7 @@ class BookingChart extends Component{
             maxObjects={3}
             />
             </div>
-
-
-
+            
         )
     };
 }

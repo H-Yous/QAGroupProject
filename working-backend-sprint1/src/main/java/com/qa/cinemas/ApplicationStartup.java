@@ -32,16 +32,21 @@ import com.qa.cinemas.repository.NowShowingMovieRepository;
 import com.qa.cinemas.repository.UpcomingMovieRepository;
 import com.qa.cinemas.service.EventServiceImpl;
 import com.qa.cinemas.domain.Events;
+import com.qa.cinemas.service.ChartEventService;
 
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfTimeSlots;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfEvents;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenOne;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenThree;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
 	private Events eventToBeSaved;
+	private ChartEventService chartEventService;
 
 	private String getUpComingMoviesURI;
 	private String apiURI;
@@ -105,7 +110,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getNowShowingMovies();
 
@@ -115,14 +120,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getNewReleaseMovies();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getMovieClassificationInfo();
-		
+
 		System.out.println("STARTUP FINISHED");
 	}
 
@@ -213,12 +218,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
 		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieCertificationListForNowShowingMovies(x));
 
@@ -226,15 +231,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void populateDBWithNowShowingMovies(int index) {
-		nowShowingMovie = new NowShowingMovie();
-		nowShowingMovie.setMovieId(movieId.get(index));
-		nowShowingMovie.setTitle(movieTitle.get(index));
-		nowShowingMovie.setDescription(movieDescription.get(index));
-		nowShowingMovie.setPoster(moviePoster.get(index));
-		nowShowingMovie.setRuntime(movieRunTime.get(index));
-		nowShowingMovie.setCertification(movieCertification.get(index));
 
-		nowShowingMovieRepository.insert(nowShowingMovie);
+		// remove movies without posters
+
+		if (!(moviePoster.get(index).equals(""))) {
+			nowShowingMovie = new NowShowingMovie();
+			nowShowingMovie.setMovieId(movieId.get(index));
+			nowShowingMovie.setTitle(movieTitle.get(index));
+			nowShowingMovie.setDescription(movieDescription.get(index));
+			nowShowingMovie.setPoster(moviePoster.get(index));
+			nowShowingMovie.setRuntime(movieRunTime.get(index));
+			nowShowingMovie.setCertification(movieCertification.get(index));
+
+			nowShowingMovieRepository.insert(nowShowingMovie);
+		}
+
 	}
 
 	private void getNewReleaseMovies() {
@@ -409,9 +420,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		certificationRepository.insert(certification);
 	}
 
-	private void waitFiveSecsBeforeMakingRequests() {
+	private void waitTenSecsBeforeMakingRequests() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -443,13 +454,30 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			eventToBeSaved = new Events();
 			eventToBeSaved.setId(0);
 			eventToBeSaved.setMovie("N/A");
+
+			chartEventService = new ChartEventService();
+			
+			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
 					eventToBeSaved.setScreen(Screens.values()[j]);
+					switch(j+1){
+						case 1: 
+						chartEventService.setChartKey(screenOne);
+						break;
+						
+						case 2:
+						chartEventService.setChartKey(screenTwo);
+						break;
+						
+						case 3:
+						chartEventService.setChartKey(screenThree);
+						break;
+					}
 					for (int k = 0; k < numberOfTimeSlots; k++) {
 						eventToBeSaved.setTimeSlot(TimeSlots.values()[k]);
-						eventToBeSaved.setEventKey("[" + (i + 1) + "-" + (j + 1) + "-" + (k + 1) + "]");
+						eventToBeSaved.setEventKey((i + 1) + "-" + (j + 1) + "-" + (k + 1));
 						eventToBeSaved.setId(eventToBeSaved.getId() + 1);
 						if ((eventServiceImpl.findByEventKey(eventToBeSaved.getEventKey())).isPresent()) {
 							System.out.println("event key detected, not saving");
@@ -457,6 +485,16 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							System.out.println("saving event: " + eventToBeSaved);
 							eventServiceImpl.createEvent(eventToBeSaved);
 							// create event in io Humza Job
+						}
+
+						try{
+							String eventKey = eventToBeSaved.getEventKey();
+							chartEventService.createEvent(eventKey);
+							System.out.println("Event Created on SeatsIO");
+						}catch(Exception e){
+							
+							System.out.println(e);
+							System.out.println("Event Not Created on Seatsio");
 						}
 
 					}
