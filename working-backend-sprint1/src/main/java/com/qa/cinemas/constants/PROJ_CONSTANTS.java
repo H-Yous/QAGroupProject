@@ -15,6 +15,8 @@ public final class PROJ_CONSTANTS {
 	public static final String createMoviePathPut = "/movie/{id}";
 	public static final String deleteMoviePath = "/movie/{id}";
 	
+	public static final String getNowShowingMoviesPath = "/getNowShowingMovies";
+	
 	// showings paths e.g showings/getAllShowings
 	public static final String eventsPath = "/events";
 	public static final String getAllEventsPath = "/getAllEvents";
