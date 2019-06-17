@@ -37,11 +37,15 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfTimeSlots;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfEvents;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenOne;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenThree;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
 	private Events eventToBeSaved;
+	private ChartEventService chartEventService;
 
 	private String getUpComingMoviesURI;
 	private String apiURI;
@@ -165,7 +169,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 				.forEach(aMovieImage -> posters += "https://image.tmdb.org/t/p/original"
 						+ aMovieImage.getString("file_path") + ",");
 
-		posters = posters.substring(0, posters.length() - 1);
+		posters = posters.substring(0, posters.length());
 		String[] postersSplit = posters.split(",");
 		moviePoster.add(postersSplit[0]);
 		posters = "";
@@ -370,10 +374,27 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			eventToBeSaved = new Events();
 			eventToBeSaved.setId(0);
 			eventToBeSaved.setMovie("N/A");
+
+			chartEventService = new ChartEventService();
+			
+			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
 					eventToBeSaved.setScreen(Screens.values()[j]);
+					switch(j+1){
+						case 1: 
+						chartEventService.setChartKey(screenOne);
+						break;
+						
+						case 2:
+						chartEventService.setChartKey(screenTwo);
+						break;
+						
+						case 3:
+						chartEventService.setChartKey(screenThree);
+						break;
+					}
 					for (int k = 0; k < numberOfTimeSlots; k++) {
 						eventToBeSaved.setTimeSlot(TimeSlots.values()[k]);
 						eventToBeSaved.setEventKey("[" + (i + 1) + "-" + (j + 1) + "-" + (k + 1) + "]");
@@ -384,6 +405,16 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							System.out.println("saving event: " + eventToBeSaved);
 							eventServiceImpl.createEvent(eventToBeSaved);
 							// create event in io Humza Job
+						}
+
+						try{
+							String eventKey = (i+1) + "-" + (j+1) + "-" + (k+1);
+							chartEventService.createEvent(eventKey);
+							System.out.println("Event Created on SeatsIO");
+						}catch(Exception e){
+							
+							System.out.println(e);
+							System.out.println("Event Not Created on Seatsio");
 						}
 
 					}

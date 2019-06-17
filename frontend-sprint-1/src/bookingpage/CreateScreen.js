@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import { Button } from 'reactstrap';
 import { SeatsioSeatingChart } from '@seatsio/seatsio-react';
 import { withRouter } from "react-router-dom";
+import BookingService from "./BookingService.js";
+import Axios from 'axios';
+
+
 /*
 USE THIS CLASS WITH the following:
 <CreateScreen
@@ -19,12 +23,39 @@ class ScreenCreation extends Component{
             chart: null,
             chartLoaded: false,
             redirect: false,
-
+            pricing: {
+                normAdult: '',
+                normChild: '',
+                normStudent: '',
+                premAdult: '',
+                premChild: '',
+                premStudent: '',
+                disabled: '',
+            }
+            
         };
       }
     
     componentDidMount(){
         
+        BookingService.getPricingInformation()
+            .then(response => {
+                
+                
+                this.setState({
+                    normAdult : response.data[0],
+                    normChild : response.data[1],
+                    normStudent : response.data[2],
+                    premAdult : response.data[3],
+                    premChild: response.data[4],
+                    premStudent : response.data[5],
+                    disabled : response.data[6]
+                })
+                console.log(this.state.normAdult);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     booked(chart){
         
@@ -61,17 +92,17 @@ class ScreenCreation extends Component{
                     
                     pricing={[
                         {'category' : 'Normal', 'ticketTypes':[
-                            {'ticketType' : 'Adult', 'price': 10.99},
-                            {'ticketType' : 'Child', 'price': 6.99},
-                            {'ticketType' : 'Student', 'price': 8.99}
+                            {'ticketType' : 'Adult', 'price': this.state.normAdult},
+                            {'ticketType' : 'Child', 'price': this.state.normChild},
+                            {'ticketType' : 'Student', 'price': this.state.normStudent}
                         ]},
                         {'category' : 'Premium', 'ticketTypes':[
-                            {'ticketType' : 'Adult', 'price': 14.99},
-                            {'ticketType' : 'Child', 'price': 9.99},
-                            {'ticketType' : 'Student', 'price': 12.99}
+                            {'ticketType' : 'Adult', 'price': this.state.premAdult},
+                            {'ticketType' : 'Child', 'price': this.state.premChild},
+                            {'ticketType' : 'Student', 'price': this.state.premStudent}
                         ]},
                         {'category' : 'Disabled', 'ticketTypes':[
-                            {'ticketTypes' : 'Disabled', 'price': 5}
+                            {'ticketTypes' : 'Disabled', 'price': this.state.disabled}
                         ]}
                     ]}
                     priceFormatter={price => '£' + price}
