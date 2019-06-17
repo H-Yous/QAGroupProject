@@ -56,7 +56,7 @@ class FooterPage extends React.Component {
               <img
                 src={qaImage}
                 className="d-inline-block align-center"
-                alt=""
+                alt="QA Consulting"
               />
               {"Consulting"}
             </Navbar.Brand>
@@ -80,22 +80,22 @@ class FooterPage extends React.Component {
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link>
-                    <Link to="/faq">FAQ</Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link>
                     <Link to="/contact">Contact</Link>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link>
-                    <Link to="/legal">Legal</Link>
+                    <Link to="/faq">FAQ</Link>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link>
-                    <Link to="/about">About QACinemas</Link>
+                    <Link to="/about">About</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/legal">Legal</Link>
                   </Nav.Link>
                 </Nav.Item>
               </Nav>

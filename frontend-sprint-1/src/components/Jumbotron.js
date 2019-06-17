@@ -6,11 +6,9 @@ import artImage from "../assets/art.jpg";
 const Styles = styled.div`
   .jumbo {
     background: url(${artImage}) no-repeat fixed bottom;
-    background-size: cover;
     color: #efefef;
-    height: 100px;
-    position: relative;
-    z-index: -2;
+    height: 75px;
+    z-index: 0;
   }
   .overlay {
     background-color: #000;
