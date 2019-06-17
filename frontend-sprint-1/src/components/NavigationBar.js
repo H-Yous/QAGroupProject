@@ -30,7 +30,7 @@ class NavigationBar extends Component {
   render() {
     return (
       <Styles>
-        <Navbar expand="lg">
+        <Navbar expand="lg" className="fixed-top">
           <Navbar.Brand href="/">
             <img
               src={qaImage}
