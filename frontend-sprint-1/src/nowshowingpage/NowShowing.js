@@ -9,6 +9,7 @@ import fifteenRating from "../assets/15rating.png";
 import eighteenRating from "../assets/18rating.png";
 import tbcRating from "../assets/tbcrating.png";
 import { Button } from "reactstrap";
+
 class NowShowing extends Component {
   state = {
     nowShowingMovies: []
