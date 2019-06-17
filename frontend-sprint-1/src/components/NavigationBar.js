@@ -39,6 +39,7 @@ class NavigationBar extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
+      console.log(result.data);
       for (var i = 0; i < result.data.length; i++) {
         this.state.movieTitles.push(result.data[i].title);
       }

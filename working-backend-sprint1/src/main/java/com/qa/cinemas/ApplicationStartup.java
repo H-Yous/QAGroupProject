@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.StreamSupport;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.controller.EventController;
 import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
@@ -96,7 +102,24 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-
+		System.out.println("APPLICATION RUNNING STARTUP");
+		
+	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+	    MongoDatabase db = mongoClient.getDatabase("QACinema");
+	    MongoCollection collection = db.getCollection("upcomingMovie");
+	    Bson filter = new Document();
+	    collection.deleteMany(filter);
+	    MongoCollection collection2 = db.getCollection("nowShowingMovie");
+	    Bson filter2 = new Document();
+	    collection2.deleteMany(filter2);
+	    MongoCollection collection3 = db.getCollection("newReleaseMovie");
+	    Bson filter3 = new Document();
+	    collection3.deleteMany(filter3);
+	    MongoCollection collection4 = db.getCollection("certification");
+	    Bson filter4 = new Document();
+	    collection4.deleteMany(filter4);
+	    
+		System.out.println("APPLICATION RETRIEVING UPCOMING MOVIES");
 		getUpcomingMovies();
 
 		movieId.clear();
@@ -106,7 +129,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieTitleUrl.clear();
 
 		waitFiveSecsBeforeMakingRequests();
-
+		
+		System.out.println("APPLICATION RETRIEVING NOW SHOWING MOVIES");
 		getNowShowingMovies();
 
 		movieId.clear();
@@ -116,11 +140,13 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieTitleUrl.clear();
 
 		waitFiveSecsBeforeMakingRequests();
-
+		
+		System.out.println("APPLICATION RETRIEVING NEW RELEASES MOVIES");
 		getNewReleaseMovies();
 
 		waitFiveSecsBeforeMakingRequests();
 
+		System.out.println("APPLICATION GETTING CLASSIFICATION INFO");
 		getMovieClassificationInfo();
 		
 		System.out.println("STARTUP FINISHED");
