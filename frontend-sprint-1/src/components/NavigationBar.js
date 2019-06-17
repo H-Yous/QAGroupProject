@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import styled from "styled-components";
@@ -27,6 +28,22 @@ const Styles = styled.div`
 `;
 
 class NavigationBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      upcomingMovies: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
+      console.log(result.data[0].title);
+      this.setState({ upcomingMovies: result.data });
+    });
+  }
+
+  onSearch() {}
+
   render() {
     return (
       <Styles>
@@ -81,7 +98,9 @@ class NavigationBar extends Component {
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  <Button variant="outline-info">Search</Button>
+                  <Button onClick={this.onSearch} variant="outline-info">
+                    Search {console.log(this.state.upcomingMovies)}
+                  </Button>
                 </Form.Group>
               </Form>
             </Nav>
