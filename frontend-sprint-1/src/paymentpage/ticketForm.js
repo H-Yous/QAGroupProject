@@ -23,6 +23,7 @@ class ticketForm extends Component{
             seats: this.chosen.seatnum,
             tickets: this.chosen.ticket,
             price: this.chosen.price,
+            
 
             numOfSeats: Object.keys(this.chosen).length
 
@@ -37,6 +38,10 @@ class ticketForm extends Component{
                 <Col>{x.ticket}</Col>
                 <Col>£{x.price}</Col>
             </Form.Row>
+            
+           
+           
+           
         )
     }
 

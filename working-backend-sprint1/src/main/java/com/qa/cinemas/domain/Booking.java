@@ -15,7 +15,6 @@ import com.qa.cinemas.enums.TimeSlots;
 @Document(collection = "Bookings")
 public class Booking {
 
-
 	@Override
 	public String toString() {
 		return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
@@ -109,6 +108,7 @@ public class Booking {
 	}
 
 	public void setPrice(String price) {
+		 
 		this.price = price;
 	}
 	
