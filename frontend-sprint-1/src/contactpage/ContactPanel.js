@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import Script from 'react-script-tag';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { PropTypes } from 'prop-types';
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import towerbridge from '../assets/towerbridge.jpg';
 
 class ContactPanel extends Component{
     
@@ -80,23 +81,44 @@ class ContactPanel extends Component{
 
         return(
             <div className="all">
-                <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
-                    <div className="widget">
-                        <Script
-                            src="https://static.citymapper.com/js/embed/widget.js"
-                            data-slug="aqdr31qt5m"
-                            data-width="300"
-                            type="text/javascript"
-                            onLoad={this._onMyScriptLoad}
-                            onError={this._onMyScriptError}
-                            async
-                        />
+                <View style={{flex:1, flexDirection:'row-reverse', justifyContent:'space-between'}}>
+
+                <div className="contactinfo-container">
+                        <View style={{flex:1, flexDirection:'column'}}>
+                            <label
+                                className="contactinfoLabel"
+                                id="contactinfo"
+                                name="contactinfo"
+                            >
+                                <b>Enquiries Address:</b><br/>
+                                <i>c/o QA Cinemas, Ltd.</i><br/>
+                                PO Box 555-0123<br/>
+                                Tammouth TM9 8EF<br/>
+                                Alanshire<br/>
+                                United Kingdom<br/>
+                            </label>
+
+                            <br/>
+
+                            <label
+                                className="venuecontactinfoLabel"
+                                id="venuecontactinfo"
+                                name="venuecontactinfo"
+                            >
+                                <b>Venue Address:</b><br/>
+                                <i>3.329, International House</i><br/>
+                                1 St. Katharine's Way<br/>
+                                St. Katharine's & Wapping<br/>
+                                London E1W 1UN<br/>
+                                Greater London<br/>
+                                United Kingdom
+                            </label>
+                        </View>
                     </div>
 
                     <div className="contact-container">
                         <form className="feedback" onSubmit={this.handleSubmit} >
-                            <View style={{flex:1, flexDirection:'column', width:800}}>
-
+                            <View style={{flex:1, flexDirection:'column', width:500}}>
                                 <input
                                     className="text-input"
                                     id="enquirerEmail"
@@ -115,7 +137,7 @@ class ContactPanel extends Component{
                                     name="feedback"
                                     onChange={this.handleFeedbackChange.bind(this)}
                                     value={this.state.feedback}
-                                    rows="14"
+                                    rows="18"
                                     placeholder={this.state.placeholder}
                                     required
                                 />
@@ -126,9 +148,25 @@ class ContactPanel extends Component{
                                     type="submit"
                                     value="Submit"
                                 />
-                                
                             </View>
                         </form>
+                    </div>
+
+                    <div>
+                        <label
+                            className="enquirerEmailLabel"
+                            id="enquirerEmail"
+                            name="enquirerEmail"
+                        >
+                            <i>You can contact us directly here.</i><br/>
+                            <i>Alternatively, you can take a look at our <Link to='/faq'>FAQ</Link>.</i>
+                        </label>
+                        
+                        <br/>
+
+                        <img
+                            src={towerbridge}
+                        />    
                     </div>
                 </View>
             </div>
