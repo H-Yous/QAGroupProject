@@ -20,8 +20,9 @@ import { Jumbotron } from "./components/Jumbotron";
 import { ImageBackground, Text } from "react-native";
 import backgroundImage from "./assets/background.jpg";
 import styled from "styled-components";
+import Confirmation from "./paymentpage/confirmation";
+
 const Styles = styled.div``;
-import Confirmation from  "./paymentpage/confirmation"; 
 
 class App extends Component {
   render() {
