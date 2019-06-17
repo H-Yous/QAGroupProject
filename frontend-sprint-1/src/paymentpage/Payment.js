@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Elements, StripeProvider} from 'react-stripe-elements';
+import { Row,Col } from 'react-bootstrap';
 import CheckoutForm from './CheckoutForm';
 
 import TicketForm from './ticketForm';
@@ -35,9 +36,9 @@ class Payment extends Component {
           console.log(error);
         });
 
-        Axios.post('http://localhost:8080/tickets',{
-          seats: JSON.stringify(seats)
-        })
+        // Axios.post('http://localhost:8080/tickets',{
+        //   seats: JSON.stringify(seats)
+        // })
   }
 
   
@@ -50,8 +51,11 @@ class Payment extends Component {
         <TicketForm 
           chosenSeats = {this.state}
           />
-          
-          <span><h2>£:</h2><h1 id="total">total</h1></span>
+           
+          <h3>£:</h3>
+       
+          <h1 id="total">total</h1>
+   
           <Elements>
           
           <CheckoutForm />

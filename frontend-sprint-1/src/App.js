@@ -18,6 +18,7 @@ import FooterPage from "./components/FooterPage";
 import Directions from "./directionspage/Directions.js";
 import { Jumbotron } from "./components/Jumbotron";
 import PropTypes from "prop-types";
+import Confirmation from  "./paymentpage/confirmation"; 
 
 class App extends Component {
   render() {
@@ -35,6 +36,7 @@ class App extends Component {
               <Route path="/screens" component={Screens} />
               <Route path="/about" component={About} />
               <Route path="/login" component={Login} />
+              <Route path="/confirmation" component={Confirmation} />
               <Route path="/payment" component={Payment} />
               <Route path="/classifications" component={Classifications} />
               <Route path="/booking" component={BookingChart} />

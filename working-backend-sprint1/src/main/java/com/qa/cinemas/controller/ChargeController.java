@@ -32,7 +32,7 @@ public class ChargeController {
     public void charge(@RequestBody String token) throws StripeException {
     	//System.out.print(token);
     
-    	Stripe.apiKey = "api-key";
+    	Stripe.apiKey = "sk_test_QCwagkwuRqvO88QBgFcDwpCp00pZO514Zd";
 
     	
     	Map<String, Object> params = new HashMap<>();
