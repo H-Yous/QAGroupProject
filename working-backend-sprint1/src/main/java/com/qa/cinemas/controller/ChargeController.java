@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,21 +26,30 @@ import lombok.extern.java.Log;
 @CrossOrigin("*")
 public class ChargeController {
 
+	int intTotal; 
 	
     @PostMapping("/charge")
     public void charge(@RequestBody String token) throws StripeException {
-    	System.out.print(token);
+    	//System.out.print(token);
     
     	Stripe.apiKey = "api-key";
 
     	
     	Map<String, Object> params = new HashMap<>();
-    	params.put("amount", 1000);
+    	params.put("amount", intTotal);
     	params.put("currency", "gbp");
     	params.put("description", "Example charge");
     	params.put("source", token);
     	Charge charge = Charge.create(params);
     	
+    }
+    
+    @PostMapping("/total")
+    public void total(@RequestBody String total) {
+    	JSONObject json = new JSONObject(total);
+    	intTotal = json.getInt("total"); 
+    	intTotal = (intTotal * 100); 
+    	System.out.print(intTotal);
     }
     
     
