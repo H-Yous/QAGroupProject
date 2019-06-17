@@ -31,24 +31,56 @@ class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      upcomingMovies: [],
-      movieTitles: []
+      upcomingMovieTitles: [],
+      nowShowingMovieTitles: [],
+      newReleasesMovieTitles: [],
+      filtered: []
     };
     this.onSearch = this.onSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
-      console.log(result.data);
       for (var i = 0; i < result.data.length; i++) {
-        this.state.movieTitles.push(result.data[i].title);
+        this.state.upcomingMovieTitles.push(result.data[i].title);
       }
-      this.setState({ upcomingMovies: result.data });
+    });
+    axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
+      for (var i = 0; i < result.data.length; i++) {
+        this.state.nowShowingMovieTitles.push(result.data[i].title);
+      }
+    });
+    axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
+      for (var i = 0; i < result.data.length; i++) {
+        this.state.newReleasesMovieTitles.push(result.data[i].title);
+      }
     });
   }
 
   onSearch() {
-    console.log(this.state.movieTitles);
+    console.log(this.state.nowShowingMovieTitles);
+    console.log(this.state.upcomingMovieTitles);
+  }
+
+  handleChange(e) {
+    let currentList = [];
+    let newList = [];
+
+    if (e.target.value !== "") {
+      currentList = this.state.upcomingMovieTitles;
+      console.log(currentList[0]);
+      newList = currentList.filter(title => {
+        const lc = title.toLowerCase();
+        const filter = e.target.value.toLowerCase();
+        return lc.includes(filter);
+      });
+    } else {
+      newList = this.state.upcomingMovieTitles;
+    }
+    this.setState({
+      filtered: newList
+    });
   }
 
   render() {
@@ -98,18 +130,18 @@ class NavigationBar extends Component {
                   <Link to="/login">Login</Link>
                 </Nav.Link>
               </Nav.Item>
-              <Form inline>
-                <Form.Group controlId="searchFromBar">
-                  <FormControl
-                    type="text"
-                    placeholder="Search"
-                    className="mr-sm-2"
-                  />
-                  <Button onClick={this.onSearch} variant="outline-info">
-                    Search {console.log(this.state.movieTitles)}
-                  </Button>
-                </Form.Group>
-              </Form>
+              <div inline>
+                <input
+                  type="text"
+                  className="input"
+                  onChange={this.handleChange}
+                  placeholder="Search..."
+                />
+
+                <Button onClick={this.onSearch} variant="outline-info">
+                  Search
+                </Button>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
