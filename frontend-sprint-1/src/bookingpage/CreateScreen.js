@@ -40,8 +40,6 @@ class ScreenCreation extends Component{
         
         BookingService.getPricingInformation()
             .then(response => {
-                
-                
                 this.setState({
                     normAdult : response.data[0],
                     normChild : response.data[1],
