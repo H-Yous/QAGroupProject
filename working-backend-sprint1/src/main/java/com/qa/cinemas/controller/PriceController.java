@@ -1,4 +1,4 @@
-package com.qa.cinemas;
+package com.qa.cinemas.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,7 @@ public class PriceController{
     public List sendPriceList(){
         List<Integer> priceList = new ArrayList<Integer>();
         Collections.addAll(priceList, normAdult, normChild, normStudent, premAdult, premChild, premStudent, disabledTicket);
-        System.out.println(priceList);
+        
         return priceList;
     }
 
