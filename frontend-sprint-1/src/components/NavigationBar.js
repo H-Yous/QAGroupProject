@@ -34,6 +34,7 @@ class NavigationBar extends Component {
       upcomingMovies: [],
       movieTitles: []
     };
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +46,9 @@ class NavigationBar extends Component {
     });
   }
 
-  onSearch() {}
+  onSearch() {
+    console.log(this.state.movieTitles);
+  }
 
   render() {
     return (
