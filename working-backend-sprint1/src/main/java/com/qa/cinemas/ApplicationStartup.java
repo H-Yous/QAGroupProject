@@ -105,7 +105,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getNowShowingMovies();
 
@@ -115,14 +115,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieDescription.clear();
 		movieTitleUrl.clear();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getNewReleaseMovies();
 
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		getMovieClassificationInfo();
-		
+
 		System.out.println("STARTUP FINISHED");
 	}
 
@@ -213,12 +213,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
 		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
+		waitTenSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieCertificationListForNowShowingMovies(x));
 
@@ -226,15 +226,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void populateDBWithNowShowingMovies(int index) {
-		nowShowingMovie = new NowShowingMovie();
-		nowShowingMovie.setMovieId(movieId.get(index));
-		nowShowingMovie.setTitle(movieTitle.get(index));
-		nowShowingMovie.setDescription(movieDescription.get(index));
-		nowShowingMovie.setPoster(moviePoster.get(index));
-		nowShowingMovie.setRuntime(movieRunTime.get(index));
-		nowShowingMovie.setCertification(movieCertification.get(index));
 
-		nowShowingMovieRepository.insert(nowShowingMovie);
+		// remove movies without posters
+
+		if (!(moviePoster.get(index).equals(""))) {
+			nowShowingMovie = new NowShowingMovie();
+			nowShowingMovie.setMovieId(movieId.get(index));
+			nowShowingMovie.setTitle(movieTitle.get(index));
+			nowShowingMovie.setDescription(movieDescription.get(index));
+			nowShowingMovie.setPoster(moviePoster.get(index));
+			nowShowingMovie.setRuntime(movieRunTime.get(index));
+			nowShowingMovie.setCertification(movieCertification.get(index));
+
+			nowShowingMovieRepository.insert(nowShowingMovie);
+		}
+
 	}
 
 	private void getNewReleaseMovies() {
@@ -409,9 +415,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		certificationRepository.insert(certification);
 	}
 
-	private void waitFiveSecsBeforeMakingRequests() {
+	private void waitTenSecsBeforeMakingRequests() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
