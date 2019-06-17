@@ -46,11 +46,6 @@ class App extends Component {
             <br />
             <br />
             <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
             <FooterPage />
           </Router>
         </Layout>
