@@ -31,13 +31,16 @@ class NavigationBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      upcomingMovies: []
+      upcomingMovies: [],
+      movieTitles: []
     };
   }
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
-      console.log(result.data[0].title);
+      for (var i = 0; i < result.data.length; i++) {
+        this.state.movieTitles.push(result.data[i].title);
+      }
       this.setState({ upcomingMovies: result.data });
     });
   }
@@ -99,7 +102,7 @@ class NavigationBar extends Component {
                     className="mr-sm-2"
                   />
                   <Button onClick={this.onSearch} variant="outline-info">
-                    Search {console.log(this.state.upcomingMovies)}
+                    Search {console.log(this.state.movieTitles)}
                   </Button>
                 </Form.Group>
               </Form>
