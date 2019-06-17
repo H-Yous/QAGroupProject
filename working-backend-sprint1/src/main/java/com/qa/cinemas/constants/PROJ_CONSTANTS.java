@@ -9,7 +9,7 @@ public final class PROJ_CONSTANTS {
 	}
 	
 	// cross origin path
-	public static final String crossOriginsPath="http://localhost:8080";
+	public static final String crossOriginsPath="http://localhost:3000";
 	
 	// movies path
 	public static final String moviesPath = "/movies";
