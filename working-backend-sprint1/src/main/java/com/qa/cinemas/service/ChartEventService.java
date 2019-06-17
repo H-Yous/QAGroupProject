@@ -1,4 +1,4 @@
-package com.qa.cinemas;
+package com.qa.cinemas.service;
 
 import java.util.ArrayList;
 import java.util.Collections;

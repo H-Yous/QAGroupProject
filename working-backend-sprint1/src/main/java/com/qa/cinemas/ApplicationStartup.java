@@ -32,6 +32,7 @@ import com.qa.cinemas.repository.NowShowingMovieRepository;
 import com.qa.cinemas.repository.UpcomingMovieRepository;
 import com.qa.cinemas.service.EventServiceImpl;
 import com.qa.cinemas.domain.Events;
+import com.qa.cinemas.service.ChartEventService;
 
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
@@ -397,7 +398,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 					}
 					for (int k = 0; k < numberOfTimeSlots; k++) {
 						eventToBeSaved.setTimeSlot(TimeSlots.values()[k]);
-						eventToBeSaved.setEventKey("[" + (i + 1) + "-" + (j + 1) + "-" + (k + 1) + "]");
+						eventToBeSaved.setEventKey((i + 1) + "-" + (j + 1) + "-" + (k + 1));
 						eventToBeSaved.setId(eventToBeSaved.getId() + 1);
 						if ((eventServiceImpl.findByEventKey(eventToBeSaved.getEventKey())).isPresent()) {
 							System.out.println("event key detected, not saving");
@@ -408,7 +409,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 						}
 
 						try{
-							String eventKey = (i+1) + "-" + (j+1) + "-" + (k+1);
+							String eventKey = eventToBeSaved.getEventKey();
 							chartEventService.createEvent(eventKey);
 							System.out.println("Event Created on SeatsIO");
 						}catch(Exception e){
