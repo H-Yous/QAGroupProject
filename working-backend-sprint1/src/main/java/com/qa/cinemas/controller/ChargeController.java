@@ -20,7 +20,6 @@ import com.stripe.model.Charge;
 
 import lombok.extern.java.Log;
 
-
 @Log
 @RestController
 @CrossOrigin("*")

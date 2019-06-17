@@ -66,10 +66,16 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private List<String> movieRating = new ArrayList<String>();
 	private List<String> movieRatingDescription = new ArrayList<String>();
 
+	private List<String> movieRunTime = new ArrayList<String>();
+	private List<String> movieCertification = new ArrayList<String>();
+	JSONArray releaseDatesArray;;
+
 	private UpcomingMovie upComingMovie;
 	private NowShowingMovie nowShowingMovie;
 	private NewReleaseMovie newReleaseMovie;
 	private Certification certification;
+
+	boolean foundGBCertification = false;
 
 	@Autowired
 	private UpcomingMovieRepository upcomingMovieRepository;
@@ -90,10 +96,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-		System.out.println("RUNNING STARTUP, PLEASE WAIT TILL THIS IS FINISHED BEFORE RUNNING ANYTHING");
-		populateEvents();
 
 		getUpcomingMovies();
+
 		movieId.clear();
 		movieTitle.clear();
 		moviePoster.clear();
@@ -208,6 +213,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
 		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
+		waitFiveSecsBeforeMakingRequests();
+		waitFiveSecsBeforeMakingRequests();
+
+		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
+		waitFiveSecsBeforeMakingRequests();
+		waitFiveSecsBeforeMakingRequests();
+
+		movieId.stream().forEach(x -> populatemovieCertificationListForNowShowingMovies(x));
 
 		movieId.stream().forEach(x -> populateDBWithNowShowingMovies(movieId.indexOf(x)));
 	}
@@ -218,6 +231,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		nowShowingMovie.setTitle(movieTitle.get(index));
 		nowShowingMovie.setDescription(movieDescription.get(index));
 		nowShowingMovie.setPoster(moviePoster.get(index));
+		nowShowingMovie.setRuntime(movieRunTime.get(index));
+		nowShowingMovie.setCertification(movieCertification.get(index));
 
 		nowShowingMovieRepository.insert(nowShowingMovie);
 	}
@@ -291,6 +306,64 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 						movieDirector.add(aCastMember.getString("name"));
 					}
 				});
+
+	}
+
+	private void populatemovieRunTimeListForNowShowingMovies(String aMovieId) {
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+
+		restTemplate = new RestTemplate();
+
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		int runTime = returnedJsonStringAsObj.getInt("runtime");
+
+		movieRunTime.add(Integer.toString(runTime));
+	}
+
+	private void populatemovieCertificationListForNowShowingMovies(String aMovieId) {
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
+				+ "/release_dates?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		restTemplate = new RestTemplate();
+
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
+
+		StreamSupport.stream(resultsArray.spliterator(), false)
+				.map(aMovieCertification -> (JSONObject) aMovieCertification).forEach(aMovieCertification -> {
+					if (aMovieCertification.getString("iso_3166_1").equals("GB")) {
+						releaseDatesArray = aMovieCertification.getJSONArray("release_dates");
+
+						String stringOfReleaseDatesArray = releaseDatesArray.get(0).toString();
+
+						foundGBCertification = true;
+
+						stringOfReleaseDatesArray = stringOfReleaseDatesArray
+								.substring(stringOfReleaseDatesArray.indexOf("\"certification") + 1);
+						stringOfReleaseDatesArray = stringOfReleaseDatesArray.substring(0,
+								stringOfReleaseDatesArray.indexOf("}"));
+						stringOfReleaseDatesArray = stringOfReleaseDatesArray.substring(15,
+								stringOfReleaseDatesArray.length());
+
+						stringOfReleaseDatesArray = stringOfReleaseDatesArray.replace("\"", "");
+
+						if (stringOfReleaseDatesArray.equals("")) {
+							movieCertification.add("N/A");
+						} else {
+							movieCertification.add(stringOfReleaseDatesArray);
+						}
+
+					}
+
+				});
+		if (!(foundGBCertification)) {
+			movieCertification.add("N/A");
+		}
+
+		foundGBCertification = false;
 
 	}
 

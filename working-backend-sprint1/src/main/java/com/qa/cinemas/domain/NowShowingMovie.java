@@ -15,6 +15,26 @@ public class NowShowingMovie {
 	private String description;
 
 	private String poster;
+	
+	private String runtime;
+	
+	private String certification;
+
+	public String getCertification() {
+		return certification;
+	}
+
+	public void setCertification(String certification) {
+		this.certification = certification;
+	}
+
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
 
 	public String getDescription() {
 		return description;

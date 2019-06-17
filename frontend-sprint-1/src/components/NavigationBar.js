@@ -5,6 +5,10 @@ import styled from 'styled-components';
 import qaImage from '../assets/qa.png'
 
 const Styles = styled.div`
+  .navbar {
+    background-color: #222;
+    font-size: 15px;
+  }
 
 .navbar {
 background-color: #222;
@@ -16,13 +20,13 @@ a, .navbar-brand, .navbar-nav .nav-link {
     color: #bbb;
 
     &:hover {
-        color: white;
+      color: white;
     }
-}
+  }
 `;
 
 export const NavigationBar = () => (
-<Styles>
+  <Styles>
     <Navbar expand="lg">
       <Navbar.Brand href="/">
         <img
@@ -74,6 +78,5 @@ export const NavigationBar = () => (
     </Nav>
         </Navbar.Collapse>
     </Navbar>
-</Styles>
-
-)
+  </Styles>
+);

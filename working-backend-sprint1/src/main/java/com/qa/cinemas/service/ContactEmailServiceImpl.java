@@ -16,7 +16,6 @@ import com.qa.cinemas.domain.ContactEmail;
 public class ContactEmailServiceImpl implements ContactEmailService {
 	@Autowired
 	public JavaMailSender javaMailSender;
-
 	public String sendEmail(ContactEmail email) throws Exception{
 		try {
 			MimeMessage message = javaMailSender.createMimeMessage();
