@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.StreamSupport;
 
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.controller.EventController;
 import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
@@ -96,37 +102,73 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-
-		getUpcomingMovies();
-
-		movieId.clear();
-		movieTitle.clear();
-		moviePoster.clear();
-		movieDescription.clear();
-		movieTitleUrl.clear();
-
-		waitFiveSecsBeforeMakingRequests();
-
-		getNowShowingMovies();
+		System.out.println("APPLICATION RUNNING STARTUP"); 
+		if (getCollectionSize("QACinema","upcomingMovie")!=20) {
+			deleteCollection("QACinema","upcomingMovie");
+			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
+			populateUpcomingMovies();
+		} else {
+			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
 		movieId.clear();
 		movieTitle.clear();
 		moviePoster.clear();
 		movieDescription.clear();
 		movieTitleUrl.clear();
-
-		waitFiveSecsBeforeMakingRequests();
-
-		getNewReleaseMovies();
-
-		waitFiveSecsBeforeMakingRequests();
-
-		getMovieClassificationInfo();
 		
-		System.out.println("STARTUP FINISHED");
+		if (getCollectionSize("QACinema","nowShowingMovie")!=20) {
+			deleteCollection("QACinema","nowShowingMovie");
+			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
+			waitFiveSecsBeforeMakingRequests();
+			populateNowShowingMovies();
+		} else {
+			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+
+		movieId.clear();
+		movieTitle.clear();
+		moviePoster.clear();
+		movieDescription.clear();
+		movieTitleUrl.clear();
+
+		if (getCollectionSize("QACinema","newReleaseMovie")!=5) {
+			deleteCollection("QACinema","newReleaseMovie");
+			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
+			waitFiveSecsBeforeMakingRequests();
+			populateNewReleaseMovies();
+		} else {
+			System.out.println("NEWRELASES MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+		
+		if (getCollectionSize("QACinema","certification")!=5) {
+			deleteCollection("QACinema","certification");
+			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
+			waitFiveSecsBeforeMakingRequests();
+			populateMovieClassificationInfo();
+		} else {
+			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+		
+				System.out.println("STARTUP FINISHED");
+	}
+	
+	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
+	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
+	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
+	    return collection.countDocuments();
+	}
+	
+	private void deleteCollection(String databaseCollectionIsIn,String collectionToBeDeleted) {
+	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
+	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
+	    Bson filter = new Document();
+	    collection.deleteMany(filter);
 	}
 
-	private void getUpcomingMovies() {
+	private void populateUpcomingMovies() {
 		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 
@@ -197,7 +239,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		upcomingMovieRepository.insert(upComingMovie);
 	}
 
-	private void getNowShowingMovies() {
+	private void populateNowShowingMovies() {
 		apiURI = "https://api.themoviedb.org/3/movie/now_playing?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 
@@ -237,7 +279,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		nowShowingMovieRepository.insert(nowShowingMovie);
 	}
 
-	private void getNewReleaseMovies() {
+	private void populateNewReleaseMovies() {
 		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 
@@ -378,7 +420,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		newReleaseMovieRepository.insert(newReleaseMovie);
 	}
 
-	private void getMovieClassificationInfo() {
+	private void populateMovieClassificationInfo() {
 		apiURI = "https://api.themoviedb.org/3/certification/movie/list?api_key=e527fe3aa9735362a7f95d86cd6093ad";
 		restTemplate = new RestTemplate();
 

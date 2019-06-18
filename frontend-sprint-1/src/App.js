@@ -13,7 +13,7 @@ import Payment from "./paymentpage/Payment.js";
 import BookingChart from "./bookingpage/BookingChart.js";
 import { NoMatch } from "./NoMatch";
 import { Layout } from "./components/Layout";
-import { NavigationBar } from "./components/NavigationBar";
+import NavigationBar from "./components/NavigationBar.js";
 import FooterPage from "./components/FooterPage";
 import Directions from "./directionspage/Directions.js";
 import { Jumbotron } from "./components/Jumbotron";
