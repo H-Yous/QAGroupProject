@@ -1,0 +1,155 @@
+package com.qa.cinemas.domain;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.qa.cinemas.enums.Days;
+import com.qa.cinemas.enums.Screens;
+import com.qa.cinemas.enums.TimeSlots;
+import com.qa.cinemas.service.ChartEventService;
+
+@Document(collection = "Bookings")
+public class Booking {
+
+	@Override
+	public String toString() {
+		return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
+				+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+	}
+
+	
+	public String toStringTicket(){
+		return "Booking [id=" + id + ", seatNumber=" + seatNumber +", price=" + price + "]";
+	} 
+
+	@Transient
+	public static final String SEQUENCE_NAME = "bookings_sequence";
+	
+	@Id
+	private String id;
+
+	// @Indexed(unique = true)
+	 private long salesID;
+
+	//@NotNull
+	private Days day;
+
+	//@NotNull
+	private Screens screen;
+	
+	//@NotNull
+	private TimeSlots timeSlot;
+
+	@NotBlank
+	private String seatNumber;
+
+	// @NotBlank
+	private String customerID;
+	
+	@NotBlank
+	private String ticketType;
+
+
+	@NotBlank
+	private String price;
+
+	public Booking() {
+	}
+
+	public String bookSeats(){
+		
+		try{
+			ChartEventService bookseat = new ChartEventService();
+			// bookseat.bookObjects();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return "Booked";
+	}
+
+	 public long getSalesID() {
+	 	return salesID;
+	 }
+
+	public void setSalesID(long salesID) {
+		this.salesID = salesID;
+	}
+	
+	public Days getDay() {
+		return day;
+	}
+
+	public void setDay(Days day) {
+		this.day = day;
+	}
+
+	public Screens getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screens screen) {
+		this.screen = screen;
+	}
+
+	public TimeSlots getTimeSlot() {
+		return timeSlot;
+	}
+
+	public void setTimeSlot(TimeSlots timeSlot) {
+		this.timeSlot = timeSlot;
+	}
+
+	public String getSeatNumber() {
+		return seatNumber;
+	}
+
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
+	}
+
+	// public String getCustomerID() {
+	// 	return customerID;
+	// }
+
+	// public void setCustomerID(String customerID) {
+	// 	this.customerID = customerID;
+	// }
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		 
+		this.price = price;
+	}
+	
+	public static String getSequenceName() {
+		return SEQUENCE_NAME;
+	}
+	
+	public String getTicketType() {
+		return ticketType;
+	}
+
+	public void setTicketType(String ticketType) {
+		this.ticketType = ticketType;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+
+
+}
