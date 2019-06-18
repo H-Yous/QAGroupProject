@@ -98,7 +98,7 @@ class Classifications extends Component {
                 <a
                   href="https://bbfc.co.uk/what-classification/pg"
                   target="_blank"
-                  alt="Universal"
+                  alt="Parental Guidance"
                 >
                   <img
                     src={pgRating}
@@ -117,7 +117,7 @@ class Classifications extends Component {
                 <a
                   href="https://bbfc.co.uk/what-classification/12a-and-12"
                   target="_blank"
-                  alt="Universal"
+                  alt="12A"
                 >
                   <img
                     src={twelveaRating}
@@ -136,7 +136,7 @@ class Classifications extends Component {
                 <a
                   href="https://bbfc.co.uk/what-classification/15"
                   target="_blank"
-                  alt="Universal"
+                  alt="15"
                 >
                   <img
                     src={fifteenRating}
@@ -155,7 +155,7 @@ class Classifications extends Component {
                 <a
                   href="https://bbfc.co.uk/what-classification/18"
                   target="_blank"
-                  alt="Universal"
+                  alt="18"
                 >
                   <img
                     src={eighteenRating}
@@ -174,7 +174,7 @@ class Classifications extends Component {
                 <a
                   href="https://bbfc.co.uk/what-classification/r18"
                   target="_blank"
-                  alt="Universal"
+                  alt="Restricted"
                 >
                   <img
                     src={r18rating}
