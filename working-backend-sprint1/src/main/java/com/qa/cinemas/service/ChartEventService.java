@@ -4,85 +4,95 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.qa.cinemas.domain.ChosenSeats;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import seatsio.SeatsioClient;
 import seatsio.events.Event;
 
 import static com.qa.cinemas.constants.Constants.seatsIoApiKey;
 
-
-
+@RestController
+@CrossOrigin("*")
 public class ChartEventService {
 
-    private String secretKey = seatsIoApiKey;
-    private String chartKey;
-    private String eventKey;
-    private SeatsioClient client;
-    private String[] seatsObject;
+	private String secretKey = seatsIoApiKey;
+	private String chartKey;
+	private String eventKey;
+	private SeatsioClient client;
+	private String[] seatsObject;
 
-    public ChartEventService(){
+	public ChartEventService() {
+		client = new SeatsioClient(this.secretKey);
+	}
 
-    }
-    public ChartEventService(String secretKey, String chartKey, String eventKey) {
-        this.secretKey = secretKey;
-        this.chartKey = chartKey;
-        this.eventKey = eventKey;
-        client = new SeatsioClient(this.secretKey);
+	public ChartEventService(String secretKey, String chartKey, String eventKey) {
+		this.secretKey = secretKey;
+		this.chartKey = chartKey;
+		this.eventKey = eventKey;
+		client = new SeatsioClient(this.secretKey);
 
-    }
+	}
 
-    public String createEvent(String eventKey) {
-        this.client.events.create(this.chartKey, eventKey);
+	public String createEvent(String eventKey) {
+		this.client.events.create(this.chartKey, eventKey);
 
-        return "Created Event";
-    }
+		return "Created Event";
+	}
 
-    public String deleteEvent(String eventKey){
-        this.client.events.delete(eventKey);
-        this.client.events.listAll().count();
+	public String deleteEvent(String eventKey) {
+		this.client.events.delete(eventKey);
+		this.client.events.listAll().count();
 
-        return "Deleted Event";
-    }
+		return "Deleted Event";
+	}
 
-    public int countEvents(){
-        return (int) this.client.events.listAll().count();
-    }
+	public int countEvents() {
+		return (int) this.client.events.listAll().count();
+	}
 
-    public void bookObjects(String[] object) {
-        List<String> bookSeats = new ArrayList<String>();
-        Collections.addAll(bookSeats, object);
-        System.out.println(bookSeats);
-        // client.events.book(this.eventKey, bookSeats);
-    }
+	public void bookObjects(String object, String token) {
+		System.out.println(object);
+		List<String> bookSeats = new ArrayList<String>();
+		bookSeats.add(object);
 
-    public String getSecretKey() {
-        return secretKey;
-    }
+		client.events.book(this.eventKey, bookSeats, token);
+	}
 
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
+	public String getSecretKey() {
+		return secretKey;
+	}
 
-    public String getChartKey() {
-        return chartKey;
-    }
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
 
-    public void setChartKey(String chartKey) {
-        this.chartKey = chartKey;
-    }
+	public String getChartKey() {
+		return chartKey;
+	}
 
-    public String getEventKey() {
-        return eventKey;
-    }
+	public void setChartKey(String chartKey) {
+		this.chartKey = chartKey;
+	}
 
-    public void setEventKey(String eventKey) {
-        this.eventKey = eventKey;
-    }
+	public String getEventKey() {
+		return eventKey;
+	}
 
-    public SeatsioClient getClient() {
-        return client;
-    }
+	public void setEventKey(String eventKey) {
+		this.eventKey = eventKey;
+	}
 
-    public void setClient() {
-        this.client = new SeatsioClient(this.secretKey);
-    }
+	public SeatsioClient getClient() {
+		return client;
+	}
+
+	public void setClient() {
+		this.client = new SeatsioClient(this.secretKey);
+	}
 }
