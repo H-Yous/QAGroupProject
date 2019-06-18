@@ -4,6 +4,9 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import styled from "styled-components";
 
 import qaImage from "../assets/qa.png";
+import springImage from "../assets/technologies/spring.png";
+import mongoImage from "../assets/technologies/mongodb.png";
+import reactImage from "../assets/technologies/react.png";
 
 import git from "../assets/social/git.png";
 import hgit from "../assets/social/git-hover.png";
@@ -85,6 +88,31 @@ class FooterPage extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <Nav.Item>
+                  <a href="https://spring.io/" target="_blank">
+                    <img
+                      id="springLink"
+                      src={springImage}
+                      className="img-responsive"
+                      alt="Spring Tool Suite"
+                    />
+                  </a>
+                  <a href="https://www.mongodb.com/" target="_blank">
+                    <img
+                      id="mongoLink"
+                      src={mongoImage}
+                      className="img-responsive"
+                      alt="MongoDB"
+                    />
+                  </a>
+                  <a href="https://reactjs.org/" target="_blank">
+                    <img
+                      id="reactLink"
+                      src={reactImage}
+                      className="img-responsive"
+                      alt="React"
+                    />
+                  </a>
+                  {"|||||"}
                   <a href="http://facebook.com" target="_blank">
                     <img
                       id="fbBtn"
