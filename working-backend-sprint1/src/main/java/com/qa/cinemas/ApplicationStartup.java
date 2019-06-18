@@ -58,40 +58,61 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
  
-		System.out.println("POPULATING UPCOMING MOVIES...");
-		populateUpComingMovies.start();
+		System.out.println("APPLICATION RUNNING STARTUP");
+		populateEvents();
 
-		waitTenSecsBeforeMakingRequests();
+		if (getCollectionSize("QACinema", "upcomingMovie") == 0) {
+			deleteCollection("QACinema", "upcomingMovie");
+			populateUpComingMovies.start();
+			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
+		} else {
+			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
-		System.out.println("POPULATING NOW SHOWING MOVIES...");
-		populateNowShowingMovies.start();
+		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
+			deleteCollection("QACinema", "nowShowingMovie");
+			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNowShowingMovies.start();
+		} else {
+			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
-		waitTenSecsBeforeMakingRequests();
+		if (getCollectionSize("QACinema", "newReleaseMovie") == 0) {
+			deleteCollection("QACinema", "newReleaseMovie");
+			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNewReleaseMovies.start();
 
-		System.out.println("POPULATING NEW RELEASE MOVIES...");
-		populateNewReleaseMovies.start();
+		} else {
+			System.out.println("NEWRELEASES MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
-		waitTenSecsBeforeMakingRequests();
-
-		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
-		populateMovieCertification.start();
+		if (getCollectionSize("QACinema", "certification") != 5) {
+			deleteCollection("QACinema", "certification");
+			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
+			waitTenSecsBeforeMakingRequests();
+			populateMovieCertification.start();
+		} else {
+			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
 		System.out.println("STARTUP FINISHED");
 	}
 
 	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    return collection.countDocuments();
+		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+		MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
+		MongoCollection collection = database.getCollection(collectionToBeDeleted);
+		return collection.countDocuments();
 	}
-	
-	private void deleteCollection(String databaseCollectionIsIn,String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    Bson filter = new Document();
-	    collection.deleteMany(filter);
+
+	private void deleteCollection(String databaseCollectionIsIn, String collectionToBeDeleted) {
+		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
+		MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
+		MongoCollection collection = database.getCollection(collectionToBeDeleted);
+		Bson filter = new Document();
+		collection.deleteMany(filter);
 	}
 
 	private void waitTenSecsBeforeMakingRequests() {
