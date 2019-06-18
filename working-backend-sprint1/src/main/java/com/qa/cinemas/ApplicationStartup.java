@@ -20,8 +20,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.ServerAddress;
 import com.mongodb.MongoClient;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
@@ -85,6 +85,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			waitTenSecsBeforeMakingRequests();
 			populateNewReleaseMovies.start();
 
+
+
 		} else {
 			System.out.println("NEWRELEASES MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
@@ -100,7 +102,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		System.out.println("STARTUP FINISHED");
 	}
-
 	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
 	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
@@ -115,6 +116,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	    Bson filter = new Document();
 	    collection.deleteMany(filter);
 	}
+	
 
 	private void waitTenSecsBeforeMakingRequests() {
 		try {
