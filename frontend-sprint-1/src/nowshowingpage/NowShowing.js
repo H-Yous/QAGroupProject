@@ -54,49 +54,78 @@ class NowShowing extends Component {
                             {(() => {
                               if (nowShowingMovie.certification == "U") {
                                 return (
-                                  <img
-                                    class="card-img-bottom"
-                                    src={uRating}
-                                    height="50"
-                                    width="50"
-                                  />
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/u"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img src={uRating} height="50" width="50" />
+                                  </a>
                                 );
                               } else if (
                                 nowShowingMovie.certification == "PG"
                               ) {
                                 return (
-                                  <img src={pgRating} height="50" width="50" />
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/pg"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img
+                                      src={pgRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
                                 );
                               } else if (
                                 nowShowingMovie.certification == "12" ||
                                 nowShowingMovie.certification == "12A"
                               ) {
                                 return (
-                                  <img
-                                    src={twelveaRating}
-                                    height="50"
-                                    width="50"
-                                  />
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/12a-and-12"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img
+                                      src={twelveaRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
                                 );
                               } else if (
                                 nowShowingMovie.certification == "15"
                               ) {
                                 return (
-                                  <img
-                                    src={fifteenRating}
-                                    height="50"
-                                    width="50"
-                                  />
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/15"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img
+                                      src={fifteenRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
                                 );
                               } else if (
                                 nowShowingMovie.certification == "18"
                               ) {
                                 return (
-                                  <img
-                                    src={eighteenRating}
-                                    height="50"
-                                    width="50"
-                                  />
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/18"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img
+                                      src={eighteenRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
                                 );
                               } else {
                                 return (

@@ -24,8 +24,7 @@ const StyledSearch = styled.div`
 const customStyles = {
   control: (base, state) => ({
     ...base,
-    fontFamily: "Times New Roman",
-    fontSize: 18,
+    fontSize: 16,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
     cursor: "text",
@@ -45,8 +44,7 @@ const customStyles = {
 
   input: styles => ({
     ...styles,
-    color: "black",
-    fontFamily: "Times New Roman, Times, Serif"
+    color: "black"
   }),
 
   menu: styles => ({
