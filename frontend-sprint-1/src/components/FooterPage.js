@@ -64,24 +64,9 @@ class FooterPage extends React.Component {
 
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <Nav.Item id="directionsLink">
+                <Nav.Item id="aboutLink">
                   <Nav.Link>
-                    <Link to="/directions">Directions</Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item id="nearbyLink">
-                  <Nav.Link>
-                    <Link to="/nearby">Nearby</Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item id="servicesLink">
-                  <Nav.Link>
-                    <Link to="/services">Lobby</Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item id="contactLink">
-                  <Nav.Link>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/about">About</Link>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item id="faqLink">
@@ -89,14 +74,9 @@ class FooterPage extends React.Component {
                     <Link to="/faq">FAQ</Link>
                   </Nav.Link>
                 </Nav.Item>
-                <Nav.Item id="aboutLink">
+                <Nav.Item id="contactLink">
                   <Nav.Link>
-                    <Link to="/about">About</Link>
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item id="classificationsLink">
-                  <Nav.Link>
-                    <Link to="/classifications">Classifications</Link>
+                    <Link to="/contact">Contact</Link>
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
