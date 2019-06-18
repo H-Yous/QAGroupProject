@@ -32,63 +32,51 @@ const Styles = styled.div`
   }
 `;
 
-class NavigationBar extends Component {
-  render() {
-    return (
-      <Styles>
-        <Navbar expand="lg" className="fixed-top">
-          <Navbar.Brand href="/">
-            <img
-              src={qaImage}
-              width="35"
-              height="35"
-              className="d-inline-block align-top"
-              alt=""
-            />
-            {"Cinemas"}
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/">Home</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/nowShowing">Now Showing</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/newReleases">New Releases</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/events">Events & Offers</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/screens">Screens</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link>
-                  <Link to="/login">Login</Link>
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
+export const NavigationBar = () => (
+  <Styles>
+    <Navbar className="fixed-top" expand="lg">
+      <Navbar.Brand href="/">
+        <img src={qaImage} className="d-inline-block align-top" alt="" />
+        {"Cinemas"}
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/">Home</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/nowShowing">Now Showing</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/newReleases">New Releases</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item id="classificationsLink">
+            <Nav.Link>
+              <Link to="/classifications">Classifications</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>
+              <Link to="/screens">Screens</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item id="directionsLink">
+            <Nav.Link>
+              <Link to="/directions">Getting Here</Link>
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
                 <SearchBar />
-              </Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </Styles>
-    );
-  }
-}
-
-export default NavigationBar;
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  </Styles>
+);

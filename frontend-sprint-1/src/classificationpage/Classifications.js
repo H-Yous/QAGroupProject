@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Jumbotron as Jumbo, Container, Button } from "react-bootstrap";
+import { Jumbotron as Jumbo, Container, Button, Table } from "react-bootstrap";
 
 import axios from "axios";
 
@@ -8,6 +8,7 @@ import pgRating from "../assets/pgrating.png";
 import twelveaRating from "../assets/12arating.png";
 import fifteenRating from "../assets/15rating.png";
 import eighteenRating from "../assets/18rating.png";
+import r18rating from "../assets/r18rating.png";
 
 class Classifications extends Component {
   componentDidMount() {
@@ -52,56 +53,151 @@ class Classifications extends Component {
       });
   }
 
-
   render() {
     return (
       <React.Fragment>
-        <h1>Classifications</h1>
-        <Jumbo>
-          <b>
-            <p>
-              All film classification decisions are based on the British Board
-              of Film Classification's (BBFC) published and regularly updated
-              guidelines. For more detailed information about BBFC rulings, and
-              for information for parents regarding film classifications and
-              their suitability, please visit{" "}
-              <a href="http://www.bbfc.co.uk/" target="_blank">
+        <Table striped bordered variant="dark" size="sm">
+          <h4 style={{ textAlign: "center", justifyContent: "center" }}>
+            All film classification decisions are based on regularly updated
+            guidelines
+            <br /> issued by the{" "}
+            <a
+              href="https://bbfc.co.uk/what-classification/classification-guidelines"
+              target="_blank"
+            >
+              {" "}
+              British Board of Film Classifications
+            </a>
+            :
+          </h4>
+        </Table>
+        <Table striped bordered variant="dark">
+          <tbody>
+            <tr>
+              <td>
                 {" "}
-                www.bbfc.co.uk (opens in a new window)
-              </a>
-            </p>
-            <hr />
-            <div>
-              {" "}
-
-              <img src={uRating} width="100" height="100" />
-              <p id="uRating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={pgRating} width="100" height="100" />
-              <p id="pgRating" />
-            </div>
-            <div>
-              <hr /> <img src={twelveaRating} width="100" height="100" />
-              <p id="12aRating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={fifteenRating} width="100" height="100" />
-              <p id="15Rating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={eighteenRating} width="100" height="100" />
-              <p id="18Rating" />
-            </div>
-          </b>
-
-        </Jumbo>
+                <a
+                  href="https://bbfc.co.uk/what-classification/u"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={uRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />{" "}
+                </a>
+              </td>
+              <td>
+                <p id="uRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/pg"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={pgRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                <p id="pgRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/12a-and-12"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={twelveaRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                <p id="12aRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/15"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={fifteenRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                <p id="15Rating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/18"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={eighteenRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                <p id="18Rating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/r18"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={r18rating}
+                    width="100"
+                    height="80"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                The R18 category is a special and legally-restricted
+                classification primarily for explicit works of consenting sex or
+                strong fetish material involving adults. Films may only be shown
+                to adults in specially licensed cinemas, and video works may be
+                supplied to adults only in licensed sex shops. R18 video works
+                may not be supplied by mail order.
+                <br />
+                <br />
+                We do not allow for R18 films to be viewed on our premises.
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       </React.Fragment>
     );
   }
