@@ -21,7 +21,7 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.disabledTicket;
 
 @RequestMapping
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 public class PriceController {
 
 	public PriceController() {

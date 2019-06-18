@@ -18,10 +18,10 @@ class Payment extends Component {
     console.log(this.state);
     var total = 0;
     this.seats = "";
-    for (var i = 0; i < this.state.chosenSeats.length; i++) {
-      total = total + this.state.chosenSeats[i].price;
-      this.seats += JSON.stringify(this.state.chosenSeats[i].seatnum);
-      console.log(this.state.chosenSeats[i].seatnum);
+    for (var i = 0; i < this.state.length; i++) {
+      total = total + this.state[i].price;
+      this.seats += JSON.stringify(this.state[i].seatnum);
+      console.log(this.state[i].seatnum);
     }
     console.log(this.seats);
     console.log(total);
@@ -36,7 +36,7 @@ class Payment extends Component {
       .catch(function(error) {
         console.log(error);
       });
-    console.log(this.state.chosenSeats);
+    
   }
 
   render() {
@@ -49,12 +49,11 @@ class Payment extends Component {
 
               <span>
                 <h2>£:</h2>
-                <h1 id="total">total</h1>
+              <h1 id="total">{this.total}</h1>
               </span>
               <Elements>
                 <CheckoutForm chosenSeats={this.state} />
-                chosenSeats = {this.state}
-                seats = {this.seats}/>
+                
               </Elements>
             </div>
           </StripeProvider>

@@ -22,6 +22,10 @@ class NowShowing extends Component {
     });
   }
 
+  handleRedirect(title){
+    this.props.history.push("/booking", title);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -137,6 +141,7 @@ class NowShowing extends Component {
                               <button
                                 type="button"
                                 class="btn btn-primary btn-sm"
+                                onClick={() => {this.handleRedirect(nowShowingMovie.title)}}
                               >
                                 10:00
                               </button>
