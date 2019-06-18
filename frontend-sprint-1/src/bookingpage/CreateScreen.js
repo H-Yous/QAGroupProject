@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { SeatsioSeatingChart } from "@seatsio/seatsio-react";
 import { withRouter } from "react-router-dom";
+import BookingService from "./BookingService";
 /*
 USE THIS CLASS WITH the following:
 <CreateScreen
