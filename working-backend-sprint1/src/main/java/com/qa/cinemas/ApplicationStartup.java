@@ -106,9 +106,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		
 	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 	    MongoDatabase db = mongoClient.getDatabase("QACinema");
-	    MongoCollection collection = db.getCollection("upcomingMovie");
-	    Bson filter = new Document();
-	    collection.deleteMany(filter);
+	//    MongoCollection collection = db.getCollection("upcomingMovie");
+	//    Bson filter = new Document();
+	 //   collection.deleteMany(filter);
 	    MongoCollection collection2 = db.getCollection("nowShowingMovie");
 	    Bson filter2 = new Document();
 	    collection2.deleteMany(filter2);
@@ -120,7 +120,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	    collection4.deleteMany(filter4);
 	    
 		System.out.println("APPLICATION RETRIEVING UPCOMING MOVIES");
-		getUpcomingMovies();
+	//	getUpcomingMovies();
 
 		movieId.clear();
 		movieTitle.clear();
@@ -437,7 +437,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	private void waitFiveSecsBeforeMakingRequests() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

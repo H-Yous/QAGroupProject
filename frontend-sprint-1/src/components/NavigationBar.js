@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import styled from "styled-components";
 import qaImage from "../assets/qa.png";
+import Autosuggest from "react-autosuggest";
+import SearchBar from "./SearchBar";
+import styled from "styled-components";
 
 const Styles = styled.div`
   .navbar {
@@ -28,61 +29,6 @@ const Styles = styled.div`
 `;
 
 class NavigationBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      upcomingMovieTitles: [],
-      nowShowingMovieTitles: [],
-      newReleasesMovieTitles: [],
-      filtered: []
-    };
-    this.onSearch = this.onSearch.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
-        this.state.upcomingMovieTitles.push(result.data[i].title);
-      }
-    });
-    axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
-        this.state.nowShowingMovieTitles.push(result.data[i].title);
-      }
-    });
-    axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
-        this.state.newReleasesMovieTitles.push(result.data[i].title);
-      }
-    });
-  }
-
-  onSearch() {
-    console.log(this.state.nowShowingMovieTitles);
-    console.log(this.state.upcomingMovieTitles);
-  }
-
-  handleChange(e) {
-    let currentList = [];
-    let newList = [];
-
-    if (e.target.value !== "") {
-      currentList = this.state.upcomingMovieTitles;
-      console.log(currentList[0]);
-      newList = currentList.filter(title => {
-        const lc = title.toLowerCase();
-        const filter = e.target.value.toLowerCase();
-        return lc.includes(filter);
-      });
-    } else {
-      newList = this.state.upcomingMovieTitles;
-    }
-    this.setState({
-      filtered: newList
-    });
-  }
-
   render() {
     return (
       <Styles>
@@ -130,18 +76,9 @@ class NavigationBar extends Component {
                   <Link to="/login">Login</Link>
                 </Nav.Link>
               </Nav.Item>
-              <div inline>
-                <input
-                  type="text"
-                  className="input"
-                  onChange={this.handleChange}
-                  placeholder="Search..."
-                />
-
-                <Button onClick={this.onSearch} variant="outline-info">
-                  Search
-                </Button>
-              </div>
+              <Nav.Item>
+                <SearchBar />
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
