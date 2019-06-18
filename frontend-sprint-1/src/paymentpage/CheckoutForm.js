@@ -34,11 +34,13 @@ class CheckoutForm extends Component{
   
     })
     if (response.ok) this.setState({complete: true});
-
-    
   }catch(e){
 
   }
+   
+  }
+
+  handleSubmit(event) {
    
   }
 

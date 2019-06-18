@@ -1,11 +1,14 @@
 package com.qa.cinemas;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfEvents;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfTimeSlots;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenOne;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenThree;
+import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
+
 import java.util.Properties;
-import java.util.stream.StreamSupport;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -18,7 +21,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
@@ -29,76 +31,36 @@ import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.domain.NewReleaseMovie;
 import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.domain.UpcomingMovie;
+import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
-import com.qa.cinemas.repository.CertificationRepository;
-import com.qa.cinemas.repository.NewReleaseMovieRepository;
-import com.qa.cinemas.repository.NowShowingMovieRepository;
-import com.qa.cinemas.repository.UpcomingMovieRepository;
+import com.qa.cinemas.service.ChartEventService;
 import com.qa.cinemas.service.EventServiceImpl;
-import com.qa.cinemas.domain.Events;
-
-import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfDays;
-import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfScreens;
-import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfTimeSlots;
-import static com.qa.cinemas.constants.PROJ_CONSTANTS.numberOfEvents;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
 
 	private Events eventToBeSaved;
+	private ChartEventService chartEventService;
 
-	private String getUpComingMoviesURI;
-	private String apiURI;
-
-	private RestTemplate restTemplate;
-	private String returnedJsonString;
-
-	private JSONObject returnedJsonStringAsObj;
-	private JSONArray resultsArray;
-
-	private List<String> movieId = new ArrayList<String>();
-	private List<String> movieTitle = new ArrayList<String>();
-
-	private List<String> moviePoster = new ArrayList<String>();
-	private String posters = "";
-	private List<String> movieDescription = new ArrayList<String>();
-	private List<String> movieTitleUrl = new ArrayList<String>();
-	private String actors = "";
-	private List<String> movieActors = new ArrayList<String>();
-	private List<String> movieDirector = new ArrayList<String>();
-
-	private List<String> movieRating = new ArrayList<String>();
-	private List<String> movieRatingDescription = new ArrayList<String>();
-
-	private List<String> movieRunTime = new ArrayList<String>();
-	private List<String> movieCertification = new ArrayList<String>();
-	JSONArray releaseDatesArray;;
-
-	private UpcomingMovie upComingMovie;
-	private NowShowingMovie nowShowingMovie;
-	private NewReleaseMovie newReleaseMovie;
-	private Certification certification;
-
-	boolean foundGBCertification = false;
-
-	@Autowired
-	private UpcomingMovieRepository upcomingMovieRepository;
-
-	@Autowired
-	private NowShowingMovieRepository nowShowingMovieRepository;
-
-	@Autowired
-	private NewReleaseMovieRepository newReleaseMovieRepository;
-
-	@Autowired
-	private CertificationRepository certificationRepository;
 
 	@Autowired
 	private EventServiceImpl eventServiceImpl;
 
-	private String currentYear = new SimpleDateFormat("yyyy").format(new Date());
+
+
+	@Autowired
+	private PopulateUpcomingMovies populateUpComingMovies;
+
+	@Autowired
+	PopulateNowShowingMovies populateNowShowingMovies;
+
+	@Autowired
+	PopulateNewReleaseMovies populateNewReleaseMovies;
+
+	@Autowired
+	PopulateMovieCertifications populateMovieCertification;
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
@@ -126,11 +88,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
 
-		movieId.clear();
-		movieTitle.clear();
-		moviePoster.clear();
-		movieDescription.clear();
-		movieTitleUrl.clear();
 
 		if (getCollectionSize("QACinema","newReleaseMovie")!=5) {
 			deleteCollection("QACinema","newReleaseMovie");
@@ -452,6 +409,15 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	}
 
 	private void waitFiveSecsBeforeMakingRequests() {
+
+
+		waitTenSecsBeforeMakingRequests();
+
+	}
+
+	
+
+	private void waitTenSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -485,13 +451,30 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			eventToBeSaved = new Events();
 			eventToBeSaved.setId(0);
 			eventToBeSaved.setMovie("N/A");
+
+			chartEventService = new ChartEventService();
+			
+			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
 					eventToBeSaved.setScreen(Screens.values()[j]);
+					switch(j+1){
+						case 1: 
+						chartEventService.setChartKey(screenOne);
+						break;
+						
+						case 2:
+						chartEventService.setChartKey(screenTwo);
+						break;
+						
+						case 3:
+						chartEventService.setChartKey(screenThree);
+						break;
+					}
 					for (int k = 0; k < numberOfTimeSlots; k++) {
 						eventToBeSaved.setTimeSlot(TimeSlots.values()[k]);
-						eventToBeSaved.setEventKey("[" + (i + 1) + "-" + (j + 1) + "-" + (k + 1) + "]");
+						eventToBeSaved.setEventKey((i + 1) + "-" + (j + 1) + "-" + (k + 1));
 						eventToBeSaved.setId(eventToBeSaved.getId() + 1);
 						if ((eventServiceImpl.findByEventKey(eventToBeSaved.getEventKey())).isPresent()) {
 							System.out.println("event key detected, not saving");
@@ -499,6 +482,16 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							System.out.println("saving event: " + eventToBeSaved);
 							eventServiceImpl.createEvent(eventToBeSaved);
 							// create event in io Humza Job
+						}
+
+						try{
+							String eventKey = eventToBeSaved.getEventKey();
+							chartEventService.createEvent(eventKey);
+							System.out.println("Event Created on SeatsIO");
+						}catch(Exception e){
+							
+							System.out.println(e);
+							System.out.println("Event Not Created on Seatsio");
 						}
 
 					}

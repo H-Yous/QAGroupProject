@@ -16,6 +16,11 @@ const Styles = styled.div`
     font-size: 15px;
   }
 
+  .d-inline-block {
+    height: 35px;
+    width: 35px;
+  }
+
   a,
   .navbar-brand,
   .navbar-nav .nav-link {

@@ -9,6 +9,7 @@ import fifteenRating from "../assets/15rating.png";
 import eighteenRating from "../assets/18rating.png";
 import tbcRating from "../assets/tbcrating.png";
 import { Button } from "reactstrap";
+
 class NowShowing extends Component {
   state = {
     nowShowingMovies: []
@@ -109,13 +110,13 @@ class NowShowing extends Component {
                                 type="button"
                                 class="btn btn-primary btn-sm"
                               >
-                                View Time
+                                10:00
                               </button>
                               <button
                                 type="button"
                                 class="btn btn-primary btn-sm ml-2"
                               >
-                                View Time
+                                13:00
                               </button>
                             </div>
                             <div class="mt-2">
@@ -123,13 +124,20 @@ class NowShowing extends Component {
                                 type="button"
                                 class="btn btn-primary btn-sm"
                               >
-                                View Time
+                                16:00
                               </button>
                               <button
                                 type="button"
                                 class="btn btn-primary btn-sm ml-2"
                               >
-                                View Time
+                                19:00
+                              </button>
+
+                              <button
+                                type="button"
+                                class="btn btn-primary btn-sm ml-2"
+                              >
+                                22:00
                               </button>
                             </div>
                           </div>
@@ -240,13 +248,13 @@ class NowShowing extends Component {
                                       type="button"
                                       class="btn btn-primary btn-sm"
                                     >
-                                      View Time
+                                      10:00
                                     </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary btn-sm ml-2"
                                     >
-                                      View Time
+                                      13:00
                                     </button>
                                   </div>
                                   <div class="mt-2">
@@ -254,13 +262,20 @@ class NowShowing extends Component {
                                       type="button"
                                       class="btn btn-primary btn-sm"
                                     >
-                                      View Time
+                                      16:00
                                     </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary btn-sm ml-2"
                                     >
-                                      View Time
+                                      19:00
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary btn-sm ml-2"
+                                    >
+                                      22:00
                                     </button>
                                   </div>
                                 </div>
@@ -374,13 +389,13 @@ class NowShowing extends Component {
                                       type="button"
                                       class="btn btn-primary btn-sm"
                                     >
-                                      View Time
+                                      10:00
                                     </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary btn-sm ml-2"
                                     >
-                                      View Time
+                                      13:00
                                     </button>
                                   </div>
                                   <div class="mt-2">
@@ -388,13 +403,20 @@ class NowShowing extends Component {
                                       type="button"
                                       class="btn btn-primary btn-sm"
                                     >
-                                      View Time
+                                      16:00
                                     </button>
                                     <button
                                       type="button"
                                       class="btn btn-primary btn-sm ml-2"
                                     >
-                                      View Time
+                                      19:00
+                                    </button>
+
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary btn-sm ml-2"
+                                    >
+                                      22:00
                                     </button>
                                   </div>
                                 </div>
