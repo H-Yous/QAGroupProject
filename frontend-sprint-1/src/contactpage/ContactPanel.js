@@ -189,7 +189,7 @@ class ContactPanel extends Component {
                     style={{ backgroundColor: "lightgray" }}
                     required
                   />
-
+                  <br />
                   <textarea
                     className="text-input"
                     id="feedback"
@@ -203,7 +203,7 @@ class ContactPanel extends Component {
                       backgroundColor: "lightgray"
                     }}
                   />
-
+                  <br />
                   <input type="submit" value="Submit" />
                 </View>
               </form>
