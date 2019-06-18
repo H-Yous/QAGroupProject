@@ -8,6 +8,7 @@ import pgRating from "../assets/pgrating.png";
 import twelveaRating from "../assets/12arating.png";
 import fifteenRating from "../assets/15rating.png";
 import eighteenRating from "../assets/18rating.png";
+import r18rating from "../assets/r18rating.png";
 
 class Classifications extends Component {
   componentDidMount() {
@@ -75,12 +76,18 @@ class Classifications extends Component {
             <tr>
               <td>
                 {" "}
-                <img
-                  src={uRating}
-                  width="100"
-                  height="100"
-                  style={{ jusitfyContent: "center" }}
-                />{" "}
+                <a
+                  href="https://bbfc.co.uk/what-classification/u"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={uRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />{" "}
+                </a>
               </td>
               <td>
                 <p id="uRating" />
@@ -88,12 +95,18 @@ class Classifications extends Component {
             </tr>
             <tr>
               <td>
-                <img
-                  src={pgRating}
-                  width="100"
-                  height="100"
-                  style={{ jusitfyContent: "center" }}
-                />
+                <a
+                  href="https://bbfc.co.uk/what-classification/pg"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={pgRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
               </td>
               <td>
                 <p id="pgRating" />
@@ -101,12 +114,18 @@ class Classifications extends Component {
             </tr>
             <tr>
               <td>
-                <img
-                  src={twelveaRating}
-                  width="100"
-                  height="100"
-                  style={{ jusitfyContent: "center" }}
-                />
+                <a
+                  href="https://bbfc.co.uk/what-classification/12a-and-12"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={twelveaRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
               </td>
               <td>
                 <p id="12aRating" />
@@ -114,12 +133,18 @@ class Classifications extends Component {
             </tr>
             <tr>
               <td>
-                <img
-                  src={fifteenRating}
-                  width="100"
-                  height="100"
-                  style={{ jusitfyContent: "center" }}
-                />
+                <a
+                  href="https://bbfc.co.uk/what-classification/15"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={fifteenRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
               </td>
               <td>
                 <p id="15Rating" />
@@ -127,15 +152,48 @@ class Classifications extends Component {
             </tr>
             <tr>
               <td>
-                <img
-                  src={eighteenRating}
-                  width="100"
-                  height="100"
-                  style={{ jusitfyContent: "center" }}
-                />
+                <a
+                  href="https://bbfc.co.uk/what-classification/18"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={eighteenRating}
+                    width="100"
+                    height="100"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
               </td>
               <td>
                 <p id="18Rating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="https://bbfc.co.uk/what-classification/r18"
+                  target="_blank"
+                  alt="Universal"
+                >
+                  <img
+                    src={r18rating}
+                    width="100"
+                    height="80"
+                    style={{ jusitfyContent: "center" }}
+                  />
+                </a>
+              </td>
+              <td>
+                The R18 category is a special and legally-restricted
+                classification primarily for explicit works of consenting sex or
+                strong fetish material involving adults. Films may only be shown
+                to adults in specially licensed cinemas, and video works may be
+                supplied to adults only in licensed sex shops. R18 video works
+                may not be supplied by mail order.
+                <br />
+                <br />
+                We do not allow for R18 films to be viewed on our premises.
               </td>
             </tr>
           </tbody>
