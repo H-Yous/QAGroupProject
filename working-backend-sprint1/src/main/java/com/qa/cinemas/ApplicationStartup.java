@@ -63,8 +63,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		if (getCollectionSize("QACinema", "upcomingMovie") == 0) {
 			deleteCollection("QACinema", "upcomingMovie");
-			populateUpComingMovies.start();
 			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
+			populateUpComingMovies.start();
+
 		} else {
 			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
 		}

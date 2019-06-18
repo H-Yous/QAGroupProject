@@ -25,7 +25,6 @@ public class PopulateNowShowingMovies {
 
 	private List<String> movieTitle;
 	private List<String> movieId;
-	private List<String> movieTitleUrl;
 
 	private List<String> moviePoster;
 	private List<String> movieDescription;
@@ -43,17 +42,15 @@ public class PopulateNowShowingMovies {
 	public PopulateNowShowingMovies() {
 		movieTitle = new ArrayList<String>();
 		movieId = new ArrayList<String>();
-		movieTitleUrl = new ArrayList<String>();
 		moviePoster = new ArrayList<String>();
 		movieDescription = new ArrayList<String>();
 		movieRunTime = new ArrayList<String>();
 		movieCertification = new ArrayList<String>();
-		
 
 	}
 
 	public void start() {
-		apiURI = "https://api.themoviedb.org/3/movie/now_playing?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		apiURI = "https://api.themoviedb.org/3/movie/now_playing?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-GB&page=1&region=gb";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
@@ -63,13 +60,9 @@ public class PopulateNowShowingMovies {
 		populateMovieTitleList(resultsArray);
 		populateMovieIdList(resultsArray);
 
-		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
-
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
-		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
-		waitTenSecsBeforeMakingRequests();
-		waitTenSecsBeforeMakingRequests();
+		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
 
 		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
 		waitTenSecsBeforeMakingRequests();
@@ -110,12 +103,15 @@ public class PopulateNowShowingMovies {
 
 	}
 
-	private void populatemovieDescriptionList(String aMovieUrl) {
-		apiURI = aMovieUrl;
+	private void populatemovieDescriptionList(String aMovieId) {
+		waitFiveSecsBeforeMakingRequests();
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
+				+ "?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-US";
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
 
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
+		movieDescription.add(returnedJsonStringAsObj.getString("overview"));
 	}
 
 	private void populatemovieRunTimeListForNowShowingMovies(String aMovieId) {
@@ -179,6 +175,15 @@ public class PopulateNowShowingMovies {
 	private void waitTenSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
