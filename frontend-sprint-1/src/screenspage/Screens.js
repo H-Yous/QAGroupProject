@@ -12,6 +12,12 @@ import qual4k from "../assets/filmQuality/4k-fullhd.png";
 import qualhd from "../assets/filmQuality/hd-sign.png";
 import qualfhd from "../assets/filmQuality/1080p-full-hd.png";
 
+import ratingu from "../assets/urating.png";
+import ratingpg from "../assets/pgrating.png";
+import rating12a from "../assets/12arating.png";
+import rating15 from "../assets/15rating.png";
+import rating18 from "../assets/18rating.png";
+
 class Screens extends Component {
   render() {
     return (
@@ -22,19 +28,19 @@ class Screens extends Component {
             justifyContent: "center"
           }}
         >
-          <View style={{ flexDirection: "column" }}>
-            <Table striped bordered variant="light" size="sm">
+          <View style={{ flex: 1, flexDirection: "column" }}>
+            <Table striped borderless variant="dark" size="sm">
               <tr>
                 <td>
-                  <h3>Seating Options</h3>
+                  <h2>Seating Options</h2>
                 </td>
               </tr>
             </Table>
-            <View style={{ flexDirection: "row" }}>
-              <Table striped bordered variant="dark" size="sm">
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td style={{ textAlign: "center", justifyContent: "center" }}>
-                    <b>Standard: </b>
+                    <b>Standard</b>
                     <br />
                     Child: £6
                     <br />
@@ -44,10 +50,10 @@ class Screens extends Component {
                   </td>
                 </tr>
               </Table>
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td style={{ textAlign: "center", justifyContent: "center" }}>
-                    <b>Premium: </b>
+                    <b>Premium</b>
                     <br />
                     Child: £10
                     <br />
@@ -57,10 +63,10 @@ class Screens extends Component {
                   </td>
                 </tr>
               </Table>
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td style={{ textAlign: "center", justifyContent: "center" }}>
-                    <b>Disabled: </b>
+                    <b>Disabled</b>
                     <br />
                     <br />
                     Always £5
@@ -72,24 +78,24 @@ class Screens extends Component {
             </View>
 
             <br />
-            <View style={{ flexDirection: "column" }}>
-              <Table striped bordered variant="light" size="sm">
+            <View style={{ flex: 1, flexDirection: "column" }}>
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
-                    <h3>Screens</h3>
+                    <h2>Screens</h2>
                   </td>
                 </tr>
               </Table>
             </View>
 
-            <View style={{ flexDirection: "row" }}>
-              <Table striped bordered variant="dark" size="sm">
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Optimised For
+                      <br />
                     </h4>
                   </td>
                 </tr>
@@ -103,12 +109,14 @@ class Screens extends Component {
                       <br />
                       <img src={qualfhd} height={204} width={204} />
                       <br />
+                      <br />
+                      <br />
                     </p>
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -134,12 +142,15 @@ class Screens extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <img src={screen1} height={351} width={545} />
+                    <img src={screen1} height={352} width={545} />
+                    <br />
+                    <br />
+                    <br />
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -157,15 +168,29 @@ class Screens extends Component {
                       <br />
                       <br />
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/u"
+                        target="_blank"
+                        alt="Universal"
+                      >
+                        <img src={ratingu} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/pg"
+                        target="_blank"
+                        alt="Parental Guidance"
+                      >
+                        <img src={ratingpg} height={96} width={96} />
+                      </a>
                       <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/12a-and-12"
+                        target="_blank"
+                        alt="12A"
+                      >
+                        <img src={rating12a} height={96} width={96} />
+                      </a>
                       <br />
                       <br />
                       <br />
@@ -176,14 +201,14 @@ class Screens extends Component {
                 </tr>
               </Table>
             </View>
-            <View style={{ flexDirection: "row" }}>
-              <Table striped bordered variant="dark" size="sm">
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Optimised For
+                      <br />
                     </h4>
                   </td>
                 </tr>
@@ -202,12 +227,14 @@ class Screens extends Component {
                       <br />
                       <br />
                       <br />
+                      <br />
+                      <br />
                     </p>
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -235,12 +262,15 @@ class Screens extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <img src={screen2} height={399} width={545} />
+                    <img src={screen2} height={400} width={545} />
+                    <br />
+                    <br />
+                    <br />
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -256,23 +286,45 @@ class Screens extends Component {
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/u"
+                        target="_blank"
+                        alt="Universal"
+                      >
+                        <img src={ratingu} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/pg"
+                        target="_blank"
+                        alt="Parental Guidance"
+                      >
+                        <img src={ratingpg} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/12a-and-12"
+                        target="_blank"
+                        alt="12A"
+                      >
+                        <img src={rating12a} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/15"
+                        target="_blank"
+                        alt="15"
+                      >
+                        <img src={rating15} height={96} width={96} />
+                      </a>
                       <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/18"
+                        target="_blank"
+                        alt="18"
+                      >
+                        <img src={rating18} height={96} width={96} />
+                      </a>
                       <br />
                       <br />
                       <br />
@@ -283,14 +335,14 @@ class Screens extends Component {
               </Table>
             </View>
 
-            <View style={{ flexDirection: "row" }}>
-              <Table striped bordered variant="dark" size="sm">
+            <View style={{ flex: 1, flexDirection: "row" }}>
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Optimised For
+                      <br />
                     </h4>
                   </td>
                 </tr>
@@ -309,12 +361,14 @@ class Screens extends Component {
                       <br />
                       <img src={qual4d} height={90} width={210} />
                       <br />
+                      <br />
+                      <br />
                     </p>
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -343,12 +397,15 @@ class Screens extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <img src={screen3} height={495} width={545} />
+                    <img src={screen3} height={496} width={545} />
+                    <br />
+                    <br />
+                    <br />
                   </td>
                 </tr>
               </Table>
 
-              <Table striped bordered variant="dark" size="sm">
+              <Table striped borderless variant="dark" size="sm">
                 <tr>
                   <td>
                     <h4
@@ -367,23 +424,45 @@ class Screens extends Component {
                       <br />
                       <br />
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/u"
+                        target="_blank"
+                        alt="Universal"
+                      >
+                        <img src={ratingu} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/pg"
+                        target="_blank"
+                        alt="Parental Guidance"
+                      >
+                        <img src={ratingpg} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/12a-and-12"
+                        target="_blank"
+                        alt="12A"
+                      >
+                        <img src={rating12a} height={96} width={96} />
+                      </a>
                       <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/15"
+                        target="_blank"
+                        alt="15"
+                      >
+                        <img src={rating15} height={96} width={96} />
+                      </a>
                       <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      <a
+                        href="https://bbfc.co.uk/what-classification/18"
+                        target="_blank"
+                        alt="18"
+                      >
+                        <img src={rating18} height={96} width={96} />
+                      </a>
                       <br />
                       <br />
                       <br />
