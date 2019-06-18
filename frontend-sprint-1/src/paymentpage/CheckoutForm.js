@@ -3,6 +3,7 @@ import {  Redirect } from 'react-router-dom'
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
 import { withRouter } from "react-router-dom";
+import Axios from 'axios';
 
 
 class CheckoutForm extends Component{
@@ -15,7 +16,9 @@ class CheckoutForm extends Component{
       this.submit = this.submit.bind(this);
       this.state = { validated: false };
       this.chosenSeats = this.props.chosenSeats;
-      console.log(this.chosenSeats);
+      this.seats = this.props.seats;
+      
+      
     }
 
     submit = async (event) => { 
@@ -45,6 +48,32 @@ class CheckoutForm extends Component{
     }
   }
   handleRedirect(chosenSeats){
+    console.log(this.chosenSeats);
+    
+    for (var i = 0; i < this.chosenSeats.length; i++){
+      Axios.post("http://localhost:8080/bookthis", {
+          seats: this.chosenSeats[i].seatnum
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+        .catch(function (error) {
+        console.log(error);
+      });
+
+      Axios.post("http://localhost:8080/token", {
+        token: this.chosenSeats[i].newtoken
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+        .catch(function (error) {
+        console.log(error);
+      });
+      
+    }
+  
+
     this.props.history.push("/confirmation", {chosenSeats});
   }
 
@@ -52,7 +81,13 @@ class CheckoutForm extends Component{
 
     const { validated } = this.state;
     
-    if (this.state.complete) this.handleRedirect(this.chosenSeats);
+    if (this.state.complete) {
+      
+
+      this.handleRedirect(this.chosenSeats);
+
+
+    }
   
 
 
