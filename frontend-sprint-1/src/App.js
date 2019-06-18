@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
 import NowShowing from "./nowshowingpage/NowShowing.js";
-import { NewReleases } from "./newreleasespage/NewReleases";
+import  NewReleases  from "./newreleasespage/NewReleases";
 import { Events } from "./Events";
 import Screens from "./screenspage/Screens";
 import Login from "./loginpage/Login.js";

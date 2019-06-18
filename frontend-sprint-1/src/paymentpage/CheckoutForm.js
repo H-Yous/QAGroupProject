@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
+import {  Redirect } from 'react-router-dom'
+
+
 
 
 class CheckoutForm extends Component{
@@ -48,9 +51,10 @@ class CheckoutForm extends Component{
 
     const { validated } = this.state;
     
-    if (this.state.complete) return <h1>Purchase Complete</h1>;
+    if (this.state.complete) return <Redirect to="/confirmation" />;
 
     return (
+     
 <Form
         noValidate
         validated={validated}
@@ -115,6 +119,7 @@ class CheckoutForm extends Component{
         </Form.Group>
 
       </Form>
+     
     );
   }
 
