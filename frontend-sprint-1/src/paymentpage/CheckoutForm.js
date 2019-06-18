@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import {  Redirect } from 'react-router-dom'
+import React, {Component} from 'react';
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
-
 
 
 class CheckoutForm extends Component{
@@ -36,11 +34,13 @@ class CheckoutForm extends Component{
   
     })
     if (response.ok) this.setState({complete: true});
-
-    
   }catch(e){
 
   }
+   
+  }
+
+  handleSubmit(event) {
    
   }
 
@@ -48,9 +48,7 @@ class CheckoutForm extends Component{
 
     const { validated } = this.state;
     
-    if (this.state.complete) return <Redirect to="/confirmation" />;
-  
-
+    if (this.state.complete) return <h1>Purchase Complete</h1>;
 
     return (
 <Form
@@ -114,7 +112,6 @@ class CheckoutForm extends Component{
 <CardElement style={{base: {fontSize: '18px'}}} />
 <br></br>
 <Button variant="primary" size="lg" onClick={this.submit}>Pay Now</Button>  
-
         </Form.Group>
 
       </Form>
