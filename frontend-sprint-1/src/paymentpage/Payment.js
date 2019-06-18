@@ -21,7 +21,7 @@ class Payment extends Component {
         for (var i = 0; i < this.state.chosenSeats.length; i++) {
           total = total + this.state.chosenSeats[i].price; 
           seats += JSON.stringify(this.state.chosenSeats[i].seatnum)
-          console.log(seats);
+          
         }
         console.log(total);
         document.getElementById("total").innerText= total; 
@@ -42,6 +42,7 @@ class Payment extends Component {
   }
 
   
+  
   render() {
     
     return (
@@ -58,7 +59,8 @@ class Payment extends Component {
    
           <Elements>
           
-          <CheckoutForm />
+          <CheckoutForm 
+          chosenSeats = {this.state}/>
           </Elements>
         </div>
         

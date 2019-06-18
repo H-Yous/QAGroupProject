@@ -26,7 +26,7 @@ class ticketForm extends Component{
             
 
             numOfSeats: Object.keys(this.chosen).length
-
+            
         };
       }
 

@@ -33,7 +33,7 @@ const Styles = styled.div`
 
 export const NavigationBar = () => (
   <Styles>
-    <Navbar className="fixed-top" expand="lg">
+    <Navbar  expand="lg">
       <Navbar.Brand href="/">
         <img src={qaImage} className="d-inline-block align-top" alt="" />
         {"Cinemas"}

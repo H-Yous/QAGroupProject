@@ -49,7 +49,7 @@ class ScreenCreation extends Component{
                     premStudent : response.data[5],
                     disabled : response.data[6]
                 })
-                console.log(this.state.normAdult);
+                console.log(response.data);
             })
             .catch(error => {
                 console.log(error);

@@ -10,10 +10,16 @@ class Confirmation extends Component {
   //                                       .seatnum
   //                                       .ticket
   //                                       .price
-  //state = this.props.location.state;
-
+  state = this.props.location.state;
+  
   componentDidMount(){
-
+    {console.log(this.state)}
+    let total = 0;
+    var seats = '';
+    
+    Axios.get('http://localhost:8080/total')
+      .then(response => total = response.data);
+  
   }
 
 
@@ -22,9 +28,10 @@ class Confirmation extends Component {
         return(
             <Card>
             <Card.Body>
-            {/* <TicketForm 
-          chosenSeats = {this.state}
-          /> */}
+            
+              <TicketForm 
+                chosenSeats = {this.state.chosenSeats}
+              /> 
               <Card.Title>Ticket Confirmation</Card.Title>
               <span>
                   <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 

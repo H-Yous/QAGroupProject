@@ -25,8 +25,12 @@ import Confirmation from "./paymentpage/confirmation";
 const Styles = styled.div``;
 
 class App extends Component {
+
+  
   render() {
+    
     return (
+      
       <React.Fragment>
         <Styles>
           <ImageBackground

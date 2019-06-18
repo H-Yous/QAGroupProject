@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {  Redirect } from 'react-router-dom'
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
-
+import { withRouter } from "react-router-dom";
 
 
 class CheckoutForm extends Component{
@@ -14,41 +14,45 @@ class CheckoutForm extends Component{
       this.state = {complete: false};
       this.submit = this.submit.bind(this);
       this.state = { validated: false };
+      this.chosenSeats = this.props.chosenSeats;
+      console.log(this.chosenSeats);
     }
 
     submit = async (event) => { 
     // User clicked submit
 
-    try{
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      try{
+      const form = event.currentTarget;
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+      }
+      this.setState({ validated: true });
+
+        let {token} = await this.props.stripe.createToken({name: "Name"});
+        let response = await fetch("http://localhost:8080/charge", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: token.id
+    
+      })
+      if (response.ok) this.setState({complete: true});
+
+      
+    }catch(e){
       
     }
-    this.setState({ validated: true });
-
-      let {token} = await this.props.stripe.createToken({name: "Name"});
-      let response = await fetch("http://localhost:8080/charge", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: token.id
-  
-    })
-    if (response.ok) this.setState({complete: true});
-
-    
-  }catch(e){
-
   }
-   
+  handleRedirect(chosenSeats){
+    this.props.history.push("/confirmation", {chosenSeats});
   }
 
   render(){
 
     const { validated } = this.state;
     
-    if (this.state.complete) return <Redirect to="/confirmation" />;
+    if (this.state.complete) this.handleRedirect(this.chosenSeats);
   
 
 
@@ -123,7 +127,7 @@ class CheckoutForm extends Component{
 
 }
 
-export default injectStripe (CheckoutForm);
+export default withRouter(injectStripe (CheckoutForm));
 
 
 
