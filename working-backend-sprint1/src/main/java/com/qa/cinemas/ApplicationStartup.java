@@ -57,7 +57,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-
+ 
 		System.out.println("POPULATING UPCOMING MOVIES...");
 		populateUpComingMovies.start();
 
