@@ -10,8 +10,6 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
 
 import java.util.Properties;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -20,10 +18,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.ServerAddress;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
@@ -57,7 +51,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
- 
+		//new releases
 		System.out.println("POPULATING UPCOMING MOVIES...");
 		populateUpComingMovies.start();
 
@@ -79,20 +73,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		System.out.println("STARTUP FINISHED");
 	}
 
-	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    return collection.countDocuments();
-	}
 	
-	private void deleteCollection(String databaseCollectionIsIn,String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    Bson filter = new Document();
-	    collection.deleteMany(filter);
-	}
 
 	private void waitTenSecsBeforeMakingRequests() {
 		try {

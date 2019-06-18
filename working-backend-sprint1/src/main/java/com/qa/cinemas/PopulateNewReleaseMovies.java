@@ -56,7 +56,7 @@ public class PopulateNewReleaseMovies {
 
 	public void start() {
 
-		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-GB&page=1&region=gb";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
@@ -148,14 +148,18 @@ public class PopulateNewReleaseMovies {
 	}
 
 	private void populateDBWithNewReleaseMovieMovies(int index) {
-		newReleaseMovie = new NewReleaseMovie();
-		newReleaseMovie.setMovieId(movieId.get(index));
-		newReleaseMovie.setTitle(movieTitle.get(index));
-		newReleaseMovie.setActors(movieActors.get(index));
-		newReleaseMovie.setDirector(movieDirector.get(index));
-		newReleaseMovie.setPoster(moviePoster.get(index));
 
-		newReleaseMovieRepository.insert(newReleaseMovie);
+		if (!(moviePoster.get(index).equals(""))) {
+			newReleaseMovie = new NewReleaseMovie();
+			newReleaseMovie.setMovieId(movieId.get(index));
+			newReleaseMovie.setTitle(movieTitle.get(index));
+			newReleaseMovie.setActors(movieActors.get(index));
+			newReleaseMovie.setDirector(movieDirector.get(index));
+			newReleaseMovie.setPoster(moviePoster.get(index));
+
+			newReleaseMovieRepository.insert(newReleaseMovie);
+		}
+
 	}
 
 }

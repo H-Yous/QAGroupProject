@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.domain.UpcomingMovie;
 import com.qa.cinemas.repository.UpcomingMovieRepository;
 
@@ -24,7 +25,6 @@ public class PopulateUpcomingMovies {
 
 	private List<String> movieTitle;
 	private List<String> movieId;
-	private List<String> movieTitleUrl;
 	private String posters = "";
 	private List<String> moviePoster;
 	private List<String> movieDescription;
@@ -37,14 +37,12 @@ public class PopulateUpcomingMovies {
 	public PopulateUpcomingMovies() {
 		movieTitle = new ArrayList<String>();
 		movieId = new ArrayList<String>();
-		movieTitleUrl = new ArrayList<String>();
 		moviePoster = new ArrayList<String>();
 		movieDescription = new ArrayList<String>();
-	
 	}
 
 	public void start() {
-		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-GB&page=1&region=gb";
 		restTemplate = new RestTemplate();
 
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
@@ -54,11 +52,9 @@ public class PopulateUpcomingMovies {
 		populateMovieTitleList(resultsArray);
 		populateMovieIdList(resultsArray);
 
-		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
-
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 
-		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
+		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
 
 		movieId.stream().forEach(x -> populateDBWithUpcomingMovies(movieId.indexOf(x)));
 	}
@@ -93,24 +89,41 @@ public class PopulateUpcomingMovies {
 
 	}
 
-	private void populatemovieDescriptionList(String aMovieUrl) {
-		apiURI = aMovieUrl;
+	private void populatemovieDescriptionList(String aMovieId) {
+
+		waitFiveSecsBeforeMakingRequests();
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
+				+ "?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-US";
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
 
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
+		movieDescription.add(returnedJsonStringAsObj.getString("overview"));
+
 	}
 
 	private void populateDBWithUpcomingMovies(int index) {
 
-		upComingMovie = new UpcomingMovie();
-		upComingMovie.setMovieId(movieId.get(index));
-		upComingMovie.setTitle(movieTitle.get(index));
-		upComingMovie.setDescription(movieDescription.get(index));
+		if (!(moviePoster.get(index).equals(""))) {
+			upComingMovie = new UpcomingMovie();
+			upComingMovie.setMovieId(movieId.get(index));
+			upComingMovie.setTitle(movieTitle.get(index));
+			upComingMovie.setDescription(movieDescription.get(index));
 
-		upComingMovie.setPoster(moviePoster.get(index));
+			upComingMovie.setPoster(moviePoster.get(index));
 
-		upcomingMovieRepository.insert(upComingMovie);
+			upcomingMovieRepository.insert(upComingMovie);
+		}
+
+	}
+
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
