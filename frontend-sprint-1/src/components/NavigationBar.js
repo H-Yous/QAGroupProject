@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import qaImage from "../assets/qa.png";
-import SearchBar from "./SearchBar";
 import styled from "styled-components";
+import qaImage from "../assets/qa.png";
 
 const Styles = styled.div`
   .navbar {
@@ -34,7 +33,7 @@ const Styles = styled.div`
 
 export const NavigationBar = () => (
   <Styles>
-    <Navbar className="fixed-top" expand="lg">
+    <Navbar  expand="lg">
       <Navbar.Brand href="/">
         <img src={qaImage} className="d-inline-block align-top" alt="" />
         {"Cinemas"}
@@ -57,9 +56,9 @@ export const NavigationBar = () => (
               <Link to="/newReleases">New Releases</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item id="classificationsLink">
+          <Nav.Item>
             <Nav.Link>
-              <Link to="/classifications">Classifications</Link>
+              <Link to="/events">Events & Offers</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -67,14 +66,15 @@ export const NavigationBar = () => (
               <Link to="/screens">Screens</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item id="directionsLink">
+          <Nav.Item>
             <Nav.Link>
-              <Link to="/directions">Getting Here</Link>
+              <Link to="/login">Login</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-                <SearchBar />
-          </Nav.Item>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-info">Search</Button>
+          </Form>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

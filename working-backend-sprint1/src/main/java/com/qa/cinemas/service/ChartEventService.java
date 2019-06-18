@@ -4,13 +4,23 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.qa.cinemas.domain.ChosenSeats;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import seatsio.SeatsioClient;
 import seatsio.events.Event;
 
 import static com.qa.cinemas.constants.Constants.seatsIoApiKey;
 
 
-
+@RestController
+// @RequestMapping("/")
+@CrossOrigin("*")
 public class ChartEventService {
 
     private String secretKey = seatsIoApiKey;
@@ -19,8 +29,9 @@ public class ChartEventService {
     private SeatsioClient client;
     private String[] seatsObject;
 
-    public ChartEventService(){
 
+    public ChartEventService(){
+        client = new SeatsioClient(this.secretKey);
     }
     public ChartEventService(String secretKey, String chartKey, String eventKey) {
         this.secretKey = secretKey;
@@ -36,6 +47,8 @@ public class ChartEventService {
         return "Created Event";
     }
 
+    
+
     public String deleteEvent(String eventKey){
         this.client.events.delete(eventKey);
         this.client.events.listAll().count();
@@ -47,11 +60,16 @@ public class ChartEventService {
         return (int) this.client.events.listAll().count();
     }
 
-    public void bookObjects(String[] object) {
+   
+    
+    public void bookObjects(String object, String token) {
+        System.out.println(object);
         List<String> bookSeats = new ArrayList<String>();
-        Collections.addAll(bookSeats, object);
-        System.out.println(bookSeats);
-        // client.events.book(this.eventKey, bookSeats);
+        
+        bookSeats.add(object);
+        
+        client.events.book(this.eventKey, bookSeats, token);
+        
     }
 
     public String getSecretKey() {

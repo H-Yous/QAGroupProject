@@ -10,8 +10,6 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
 
 import java.util.Properties;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -20,10 +18,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
@@ -54,6 +48,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
+<<<<<<< HEAD
 		System.out.println("APPLICATION RUNNING STARTUP");
 		populateEvents();
 
@@ -92,10 +87,31 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		} else {
 			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
+=======
+		//new releases
+		System.out.println("POPULATING UPCOMING MOVIES...");
+		populateUpComingMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING NOW SHOWING MOVIES...");
+		populateNowShowingMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING NEW RELEASE MOVIES...");
+		populateNewReleaseMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
+		populateMovieCertification.start();
+>>>>>>> 1d17771ac88b5f72db4426a48dd9caf43cfd8a5c
 
 		System.out.println("STARTUP FINISHED");
 	}
 
+<<<<<<< HEAD
 	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
 		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 		MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
@@ -110,6 +126,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		Bson filter = new Document();
 		collection.deleteMany(filter);
 	}
+=======
+	
+>>>>>>> 1d17771ac88b5f72db4426a48dd9caf43cfd8a5c
 
 	private void waitTenSecsBeforeMakingRequests() {
 		try {
