@@ -6,6 +6,19 @@ import axios from "axios";
 const StyledSearch = styled.div`
   width: 300px;
   padding: 1px;
+  .select__menu-list::-webkit-scrollbar {
+    width: 4px;
+    height: 0px;
+  }
+  .select__menu-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  .select__menu-list::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  .select__menu-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 `;
 
 const customStyles = {
@@ -25,7 +38,7 @@ const customStyles = {
       ...styles,
       cursor: "pointer",
       backgroundColor: isFocused ? "white" : "white",
-      color: isFocused ? "rgba(255, 80, 86)" : "black",
+      color: isFocused ? "rgba(65, 147, 230)" : "black",
       lineHeight: 2
     };
   },
@@ -45,19 +58,16 @@ const customStyles = {
 
   singleValue: styles => ({
     ...styles,
-    color: "rgba(255, 80, 86)"
+    color: "rgba(65, 147, 230)"
   })
 };
 class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedOption: null,
-      upcomingMovieTitles: [],
-      nowShowingMovieTitles: [],
-      newReleasesMovieTitles: []
-    };
-  }
+  state = {
+    selectedOption: null,
+    upcomingMovieTitles: [],
+    nowShowingMovieTitles: [],
+    newReleasesMovieTitles: []
+  };
   componentDidMount() {
     axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
       var row = new Array();
@@ -94,9 +104,10 @@ class SearchBar extends Component {
           onChange={this.handleChange}
           options={upcomingMovieTitles}
           styles={customStyles}
-          placeholder="Search..."
+          placeholder="Search for movies..."
           autosize={false}
           openMenuOnClick={false}
+          components={{ DropdownIndicator: () => null }}
         />
       </StyledSearch>
     );

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import qaImage from "../assets/qa.png";
-import Autosuggest from "react-autosuggest";
 import SearchBar from "./SearchBar";
 import styled from "styled-components";
 
