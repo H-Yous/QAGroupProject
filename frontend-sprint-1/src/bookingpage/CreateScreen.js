@@ -44,7 +44,7 @@ class ScreenCreation extends Component{
 
     handleRedirect(chosenSeats){
         this.props.history.push("/payment", {chosenSeats});
-
+        
     }
 
     render(){
