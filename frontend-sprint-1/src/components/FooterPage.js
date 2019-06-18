@@ -112,8 +112,10 @@ class FooterPage extends React.Component {
                       alt="React"
                     />
                   </a>
-                  {"|||||"}
-                  <a href="http://facebook.com" target="_blank">
+                  <a
+                    href="https://www.facebook.com/QA-Cinemas-1139717562886878/"
+                    target="_blank"
+                  >
                     <img
                       id="fbBtn"
                       className="img-responsive"
@@ -123,7 +125,7 @@ class FooterPage extends React.Component {
                       alt="Facebook"
                     />
                   </a>
-                  <a href="http://twitter.com" target="_blank">
+                  <a href="https://twitter.com/cinemas_qa" target="_blank">
                     <img
                       id="twBtn"
                       className="img-responsive"
@@ -133,7 +135,10 @@ class FooterPage extends React.Component {
                       alt="Twitter"
                     />
                   </a>
-                  <a href="http://instagram.com" target="_blank">
+                  <a
+                    href="https://www.instagram.com/purpleqacinemas/"
+                    target="_blank"
+                  >
                     <img
                       id="igBtn"
                       className="img-responsive"
@@ -143,7 +148,10 @@ class FooterPage extends React.Component {
                       alt="Instagram"
                     />
                   </a>
-                  <a href="http://linkedin.com" target="_blank">
+                  <a
+                    href="https://www.linkedin.com/company/qaconsulting"
+                    target="_blank"
+                  >
                     <img
                       id="liBtn"
                       className="img-responsive"
