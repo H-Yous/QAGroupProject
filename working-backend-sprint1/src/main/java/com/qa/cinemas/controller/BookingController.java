@@ -36,6 +36,10 @@ public class BookingController {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
+	
+
+	
+
 	@PostMapping(createBooking)
 	public ResponseEntity<?> createBookings(@Valid @RequestBody Booking booking) {
 		Booking result = bookingServiceImpl.createBooking(booking);

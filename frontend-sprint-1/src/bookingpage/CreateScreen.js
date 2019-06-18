@@ -12,6 +12,7 @@ seatnumbers =...
 
 class ScreenCreation extends Component{
     chosenSeats= [];
+    token;
     constructor(props) {
         
         super(props);
@@ -25,6 +26,24 @@ class ScreenCreation extends Component{
     
     componentDidMount(){
         
+
+        BookingService.getPricingInformation()
+            .then(response => {
+                this.setState({
+                    normAdult : response.data[0],
+                    normChild : response.data[1],
+                    normStudent : response.data[2],
+                    premAdult : response.data[3],
+                    premChild: response.data[4],
+                    premStudent : response.data[5],
+                    disabled : response.data[6]
+                })
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     }
     booked(chart){
         
@@ -32,14 +51,22 @@ class ScreenCreation extends Component{
             listOfObjects.map((object) => {
                 let seatnum = object.label;
                 let ticket = object.selectedTicketType;
+                let newtoken = chart.holdToken;
+                console.log(object.holdToken);
+                
                 let price = object.pricing.ticketTypes.filter(obj => obj.ticketType === ticket)
                     .map((obj) => obj.price)[0];
-                this.chosenSeats.push({seatnum, ticket, price});
+                 
+                this.chosenSeats.push({seatnum, ticket, price, newtoken});
+                
                 if(listOfObjects.indexOf(object) === listOfObjects.length -1){
                     this.handleRedirect(this.chosenSeats);
                 }
+
+                
             })
         })
+        console.log(chart.holdToken);
     }
 
     handleRedirect(chosenSeats){
@@ -57,7 +84,7 @@ class ScreenCreation extends Component{
                     publicKey={this.props.publicKey}
                     event={this.props.eventKey}
                     id='Screen'
-                    onRenderStarted={createdChart => {this.setState({chart: createdChart, chartLoaded: true})}}
+                    onRenderStarted={createdChart => {this.setState({chart: createdChart, token : createdChart.token, chartLoaded: true,  })}}
                     
                     
                     pricing={[
@@ -78,6 +105,7 @@ class ScreenCreation extends Component{
                     priceFormatter={price => '£' + price}
                     showLegend={true}
                     holdOnSelect={true}
+                    regenerateHoldToken={true}
                     expiresInSeconds={1}
                     maxSelectedObjects={this.props.maxObjects}
                     

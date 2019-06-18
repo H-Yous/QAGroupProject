@@ -11,16 +11,44 @@ class Payment extends Component {
   //                                       .ticket
   //                                       .price
   state = this.props.location.state;
+  seats;
   componentDidMount(){
    
         console.log(this.state);
         var total = 0;
+
+        this.seats ='';
         for (var i = 0; i < this.state.chosenSeats.length; i++) {
           total = total + this.state.chosenSeats[i].price; 
+
+          this.seats += JSON.stringify(this.state.chosenSeats[i].seatnum)
+          console.log(this.state.chosenSeats[i].seatnum)
+          
+
         }
+        console.log(this.seats);
         console.log(total);
         document.getElementById("total").innerText= total; 
-       
+
+
+        Axios.post('http://localhost:8080/total', {
+          total: total,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+
+
+        
+
+        
+  }
+
+
   }
 
   
@@ -37,7 +65,13 @@ class Payment extends Component {
           <span><h2>£:</h2><h1 id="total">total</h1></span>
           <Elements>
           
-          <CheckoutForm />
+
+          <CheckoutForm 
+
+          chosenSeats = {this.state}
+          seats = {this.seats}/>
+
+
           </Elements>
         </div>
         

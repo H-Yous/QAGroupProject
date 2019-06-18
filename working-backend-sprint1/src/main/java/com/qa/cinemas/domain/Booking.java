@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
+import com.qa.cinemas.service.ChartEventService;
 
 @Document(collection = "Bookings")
 public class Booking {
@@ -21,28 +22,33 @@ public class Booking {
 				+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
 	}
 
+	
+	public String toStringTicket(){
+		return "Booking [id=" + id + ", seatNumber=" + seatNumber +", price=" + price + "]";
+	} 
+
 	@Transient
 	public static final String SEQUENCE_NAME = "bookings_sequence";
 	
 	@Id
 	private String id;
 
-	@Indexed(unique = true)
-	private long salesID;
+	// @Indexed(unique = true)
+	 private long salesID;
 
-	@NotNull
+	//@NotNull
 	private Days day;
 
-	@NotNull
+	//@NotNull
 	private Screens screen;
 	
-	@NotNull
+	//@NotNull
 	private TimeSlots timeSlot;
 
 	@NotBlank
 	private String seatNumber;
 
-	@NotBlank
+	// @NotBlank
 	private String customerID;
 	
 	@NotBlank
@@ -55,9 +61,21 @@ public class Booking {
 	public Booking() {
 	}
 
-	public long getSalesID() {
-		return salesID;
+	public String bookSeats(){
+		
+		try{
+			ChartEventService bookseat = new ChartEventService();
+			// bookseat.bookObjects();
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return "Booked";
 	}
+
+	 public long getSalesID() {
+	 	return salesID;
+	 }
 
 	public void setSalesID(long salesID) {
 		this.salesID = salesID;
@@ -95,13 +113,13 @@ public class Booking {
 		this.seatNumber = seatNumber;
 	}
 
-	public String getCustomerID() {
-		return customerID;
-	}
+	// public String getCustomerID() {
+	// 	return customerID;
+	// }
 
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
-	}
+	// public void setCustomerID(String customerID) {
+	// 	this.customerID = customerID;
+	// }
 
 	public String getPrice() {
 		return price;
@@ -132,4 +150,6 @@ public class Booking {
 		this.id = id;
 	}
 	
+
+
 }
