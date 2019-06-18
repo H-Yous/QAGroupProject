@@ -28,7 +28,10 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/de/flapdoodle/embed/de.flapdoodle.embed.mongo/2.1.2/de.flapdoodle.embed.mongo-2.1.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/de/flapdoodle/embed/de.flapdoodle.embed.process/2.1.2/de.flapdoodle.embed.process-2.1.2.jar" enabled="true" runInBatchMode="false"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar" enabled="true" runInBatchMode="false"/>
+=======
+>>>>>>> db8f1cd28dbc64fe73ffe07e914a6ca2c42562eb
 =======
 >>>>>>> db8f1cd28dbc64fe73ffe07e914a6ca2c42562eb
     <factorypathentry kind="VARJAR" id="M2_REPO/net/java/dev/jna/jna/4.5.2/jna-4.5.2.jar" enabled="true" runInBatchMode="false"/>
@@ -89,7 +92,10 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/thymeleaf/extras/thymeleaf-extras-java8time/3.0.4.RELEASE/thymeleaf-extras-java8time-3.0.4.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.18.8/lombok-1.18.8.jar" enabled="true" runInBatchMode="false"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> db8f1cd28dbc64fe73ffe07e914a6ca2c42562eb
     <factorypathentry kind="VARJAR" id="M2_REPO/com/github/seatsio/seatsio-java/44/seatsio-java-44.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/mashape/unirest/unirest-java/1.4.9/unirest-java-1.4.9.jar" enabled="true" runInBatchMode="false"/>
@@ -105,6 +111,9 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar" enabled="true" runInBatchMode="false"/>
+<<<<<<< HEAD
+>>>>>>> db8f1cd28dbc64fe73ffe07e914a6ca2c42562eb
+=======
 >>>>>>> db8f1cd28dbc64fe73ffe07e914a6ca2c42562eb
     <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/org.junit.jupiter.api_5.4.0.v20190212-2109.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="ECLIPSE_HOME/plugins/org.junit.jupiter.engine_5.4.0.v20190212-2109.jar" enabled="true" runInBatchMode="false"/>

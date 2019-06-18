@@ -12,8 +12,6 @@ import java.util.Properties;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -22,15 +20,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.qa.cinemas.controller.EventController;
-import com.qa.cinemas.domain.Certification;
-import com.qa.cinemas.domain.NewReleaseMovie;
-import com.qa.cinemas.domain.NowShowingMovie;
-import com.qa.cinemas.domain.UpcomingMovie;
 import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
@@ -64,52 +57,28 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-		System.out.println("APPLICATION RUNNING STARTUP"); 
-		if (getCollectionSize("QACinema","upcomingMovie")!=20) {
-			deleteCollection("QACinema","upcomingMovie");
-			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
-			populateUpcomingMovies();
-		} else {
-			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
 
-		movieId.clear();
-		movieTitle.clear();
-		moviePoster.clear();
-		movieDescription.clear();
-		movieTitleUrl.clear();
-		
-		if (getCollectionSize("QACinema","nowShowingMovie")!=20) {
-			deleteCollection("QACinema","nowShowingMovie");
-			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
-			waitFiveSecsBeforeMakingRequests();
-			populateNowShowingMovies();
-		} else {
-			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
+		System.out.println("POPULATING UPCOMING MOVIES...");
+		populateUpComingMovies.start();
 
+		waitTenSecsBeforeMakingRequests();
 
-		if (getCollectionSize("QACinema","newReleaseMovie")!=5) {
-			deleteCollection("QACinema","newReleaseMovie");
-			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
-			waitFiveSecsBeforeMakingRequests();
-			populateNewReleaseMovies();
-		} else {
-			System.out.println("NEWRELASES MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
-		
-		if (getCollectionSize("QACinema","certification")!=5) {
-			deleteCollection("QACinema","certification");
-			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
-			waitFiveSecsBeforeMakingRequests();
-			populateMovieClassificationInfo();
-		} else {
-			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
-		
-				System.out.println("STARTUP FINISHED");
+		System.out.println("POPULATING NOW SHOWING MOVIES...");
+		populateNowShowingMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING NEW RELEASE MOVIES...");
+		populateNewReleaseMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
+		populateMovieCertification.start();
+
+		System.out.println("STARTUP FINISHED");
 	}
-	
+
 	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
 	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
@@ -124,298 +93,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	    Bson filter = new Document();
 	    collection.deleteMany(filter);
 	}
-
-	private void populateUpcomingMovies() {
-		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
-
-		populateMovieTitleList(resultsArray);
-		populateMovieIdList(resultsArray);
-
-		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
-
-		movieId.stream().forEach(x -> populatemoviePosterList(x));
-
-		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
-
-		movieId.stream().forEach(x -> populateDBWithUpcomingMovies(movieId.indexOf(x)));
-
-	}
-
-	private void populateMovieTitleList(JSONArray movies) {
-		StreamSupport.stream(movies.spliterator(), false).map(aMovie -> (JSONObject) aMovie)
-				.forEach(aMovie -> movieTitle.add(aMovie.getString("title")));
-	}
-
-	private void populateMovieIdList(JSONArray movies) {
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aMovie -> (JSONObject) aMovie)
-				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
-	}
-
-	private void populatemoviePosterList(String aMovieId) {
-
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/images?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("backdrops");
-
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aMovieImage -> (JSONObject) aMovieImage)
-				.forEach(aMovieImage -> posters += "https://image.tmdb.org/t/p/original"
-						+ aMovieImage.getString("file_path") + ",");
-
-		posters = posters.substring(0, posters.length());
-		String[] postersSplit = posters.split(",");
-		moviePoster.add(postersSplit[0]);
-		posters = "";
-
-	}
-
-	private void populatemovieDescriptionList(String aMovieUrl) {
-		apiURI = aMovieUrl;
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		movieDescription.add(returnedJsonStringAsObj.getString("Plot"));
-	}
-
-	private void populateDBWithUpcomingMovies(int index) {
-
-		upComingMovie = new UpcomingMovie();
-		upComingMovie.setMovieId(movieId.get(index));
-		upComingMovie.setTitle(movieTitle.get(index));
-		upComingMovie.setDescription(movieDescription.get(index));
-
-		upComingMovie.setPoster(moviePoster.get(index));
-
-		upcomingMovieRepository.insert(upComingMovie);
-	}
-
-	private void populateNowShowingMovies() {
-		apiURI = "https://api.themoviedb.org/3/movie/now_playing?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
-
-		populateMovieTitleList(resultsArray);
-		populateMovieIdList(resultsArray);
-
-		movieTitle.stream().forEach(x -> movieTitleUrl.add("http://www.omdbapi.com/?apikey=38b54c63&t=" + x));
-
-		movieId.stream().forEach(x -> populatemoviePosterList(x));
-
-		movieTitleUrl.stream().forEach(x -> populatemovieDescriptionList(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
-
-		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
-		waitFiveSecsBeforeMakingRequests();
-		waitFiveSecsBeforeMakingRequests();
-
-		movieId.stream().forEach(x -> populatemovieCertificationListForNowShowingMovies(x));
-
-		movieId.stream().forEach(x -> populateDBWithNowShowingMovies(movieId.indexOf(x)));
-	}
-
-	private void populateDBWithNowShowingMovies(int index) {
-		nowShowingMovie = new NowShowingMovie();
-		nowShowingMovie.setMovieId(movieId.get(index));
-		nowShowingMovie.setTitle(movieTitle.get(index));
-		nowShowingMovie.setDescription(movieDescription.get(index));
-		nowShowingMovie.setPoster(moviePoster.get(index));
-		nowShowingMovie.setRuntime(movieRunTime.get(index));
-		nowShowingMovie.setCertification(movieCertification.get(index));
-
-		nowShowingMovieRepository.insert(nowShowingMovie);
-	}
-
-	private void populateNewReleaseMovies() {
-		apiURI = "https://api.themoviedb.org/3/movie/upcoming?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
-
-		populateCurrentYearMovieIdList(resultsArray);
-		movieId.stream().forEach(x -> populateCurrentYearMovieTitleList(x));
-		movieId.stream().forEach(x -> populateCurrentYearmovieActorsList(x));
-		movieId.stream().forEach(x -> populateCurrentYearMovieDirectorsList(x));
-		movieId.stream().forEach(x -> populatemoviePosterList(x));
-
-		movieId.stream().forEach(x -> populateDBWithNewReleaseMovieMovies(movieId.indexOf(x)));
-	}
-
-	private void populateCurrentYearMovieIdList(JSONArray resultsArray) {
-		StreamSupport.stream(resultsArray.spliterator(), false).limit(5).map(aMovie -> (JSONObject) aMovie)
-				.filter(aMovie -> aMovie.getString("release_date").substring(0, 4).equals(currentYear))
-				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
-
-	}
-
-	private void populateCurrentYearMovieTitleList(String aMovieId) {
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-
-		movieTitle.add(returnedJsonStringAsObj.getString("original_title"));
-
-	}
-
-	private void populateCurrentYearmovieActorsList(String aMovieId) {
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/credits?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("cast");
-
-		actors = "";
-
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aCastMember -> (JSONObject) aCastMember)
-				.forEach(aCastMember -> actors += aCastMember.getString("name") + ",");
-
-		actors = actors.substring(0, actors.length() - 1);
-
-		movieActors.add(actors);
-
-	}
-
-	private void populateCurrentYearMovieDirectorsList(String aMovieId) {
-
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/credits?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("crew");
-
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aCrewMember -> (JSONObject) aCrewMember)
-				.forEach(aCastMember -> {
-					if (aCastMember.getString("job").equals("Director")) {
-						movieDirector.add(aCastMember.getString("name"));
-					}
-				});
-
-	}
-
-	private void populatemovieRunTimeListForNowShowingMovies(String aMovieId) {
-
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		int runTime = returnedJsonStringAsObj.getInt("runtime");
-
-		movieRunTime.add(Integer.toString(runTime));
-	}
-
-	private void populatemovieCertificationListForNowShowingMovies(String aMovieId) {
-
-		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
-				+ "/release_dates?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
-
-		StreamSupport.stream(resultsArray.spliterator(), false)
-				.map(aMovieCertification -> (JSONObject) aMovieCertification).forEach(aMovieCertification -> {
-					if (aMovieCertification.getString("iso_3166_1").equals("GB")) {
-						releaseDatesArray = aMovieCertification.getJSONArray("release_dates");
-
-						String stringOfReleaseDatesArray = releaseDatesArray.get(0).toString();
-
-						foundGBCertification = true;
-
-						stringOfReleaseDatesArray = stringOfReleaseDatesArray
-								.substring(stringOfReleaseDatesArray.indexOf("\"certification") + 1);
-						stringOfReleaseDatesArray = stringOfReleaseDatesArray.substring(0,
-								stringOfReleaseDatesArray.indexOf("}"));
-						stringOfReleaseDatesArray = stringOfReleaseDatesArray.substring(15,
-								stringOfReleaseDatesArray.length());
-
-						stringOfReleaseDatesArray = stringOfReleaseDatesArray.replace("\"", "");
-
-						if (stringOfReleaseDatesArray.equals("")) {
-							movieCertification.add("N/A");
-						} else {
-							movieCertification.add(stringOfReleaseDatesArray);
-						}
-
-					}
-
-				});
-		if (!(foundGBCertification)) {
-			movieCertification.add("N/A");
-		}
-
-		foundGBCertification = false;
-
-	}
-
-	private void populateDBWithNewReleaseMovieMovies(int index) {
-		newReleaseMovie = new NewReleaseMovie();
-		newReleaseMovie.setMovieId(movieId.get(index));
-		newReleaseMovie.setTitle(movieTitle.get(index));
-		newReleaseMovie.setActors(movieActors.get(index));
-		newReleaseMovie.setDirector(movieDirector.get(index));
-		newReleaseMovie.setPoster(moviePoster.get(index));
-
-		newReleaseMovieRepository.insert(newReleaseMovie);
-	}
-
-	private void populateMovieClassificationInfo() {
-		apiURI = "https://api.themoviedb.org/3/certification/movie/list?api_key=e527fe3aa9735362a7f95d86cd6093ad";
-		restTemplate = new RestTemplate();
-
-		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
-		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
-
-		JSONObject certificationsObj = returnedJsonStringAsObj.getJSONObject("certifications");
-
-		resultsArray = certificationsObj.getJSONArray("GB");
-
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
-				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
-				.forEach(aCertification -> movieRating.add(aCertification.getString("certification")));
-
-		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
-				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
-				.forEach(aCertification -> movieRatingDescription.add(aCertification.getString("meaning")));
-
-		movieRating.stream().forEach(x -> populateDBWithCertifications(movieRating.indexOf(x)));
-
-	}
-
-	private void populateDBWithCertifications(int index) {
-		certification = new Certification();
-		certification.setName(movieRating.get(index));
-		certification.setDescription(movieRatingDescription.get(index));
-
-		certificationRepository.insert(certification);
-	}
-
-	private void waitFiveSecsBeforeMakingRequests() {
-
-
-		waitTenSecsBeforeMakingRequests();
-
-	}
-
-	
 
 	private void waitTenSecsBeforeMakingRequests() {
 		try {
