@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import styled from "styled-components";
 import qaImage from "../assets/qa.png";
+import SearchBar from "./SearchBar";
+import styled from "styled-components";
 
 const Styles = styled.div`
   .navbar {
@@ -56,9 +57,9 @@ export const NavigationBar = () => (
               <Link to="/newReleases">New Releases</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item id="classificationsLink">
             <Nav.Link>
-              <Link to="/events">Events & Offers</Link>
+              <Link to="/classifications">Classifications</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -66,15 +67,14 @@ export const NavigationBar = () => (
               <Link to="/screens">Screens</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item id="directionsLink">
             <Nav.Link>
-              <Link to="/login">Login</Link>
+              <Link to="/directions">Getting Here</Link>
             </Nav.Link>
           </Nav.Item>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-info">Search</Button>
-          </Form>
+          <Nav.Item>
+                <SearchBar />
+          </Nav.Item>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

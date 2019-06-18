@@ -47,17 +47,9 @@ class ticketForm extends Component{
 
     renderCreate(){
         
-        return this.chosen.chosenSeats.map((x) => this.renderFormRow(x));
-            
-            
+        return this.chosen.chosenSeats.map((x) => this.renderFormRow(x)); 
         
     }
-
-
-    
-
-    
-
 
     render(){
         
