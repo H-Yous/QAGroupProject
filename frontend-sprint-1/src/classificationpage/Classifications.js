@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Jumbotron as Jumbo, Container, Button } from "react-bootstrap";
+import { Jumbotron as Jumbo, Container, Button, Table } from "react-bootstrap";
 
 import axios from "axios";
 
@@ -52,56 +52,94 @@ class Classifications extends Component {
       });
   }
 
-
   render() {
     return (
       <React.Fragment>
-        <h1>Classifications</h1>
-        <Jumbo>
-          <b>
-            <p>
-              All film classification decisions are based on the British Board
-              of Film Classification's (BBFC) published and regularly updated
-              guidelines. For more detailed information about BBFC rulings, and
-              for information for parents regarding film classifications and
-              their suitability, please visit{" "}
-              <a href="http://www.bbfc.co.uk/" target="_blank">
+        <Table striped bordered variant="dark" size="sm">
+          <h4 style={{ textAlign: "center", justifyContent: "center" }}>
+            All film classification decisions are based on regularly updated
+            guidelines
+            <br /> issued by the{" "}
+            <a
+              href="https://bbfc.co.uk/what-classification/classification-guidelines"
+              target="_blank"
+            >
+              {" "}
+              British Board of Film Classifications
+            </a>
+            :
+          </h4>
+        </Table>
+        <Table striped bordered variant="dark">
+          <tbody>
+            <tr>
+              <td>
                 {" "}
-                www.bbfc.co.uk (opens in a new window)
-              </a>
-            </p>
-            <hr />
-            <div>
-              {" "}
-
-              <img src={uRating} width="100" height="100" />
-              <p id="uRating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={pgRating} width="100" height="100" />
-              <p id="pgRating" />
-            </div>
-            <div>
-              <hr /> <img src={twelveaRating} width="100" height="100" />
-              <p id="12aRating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={fifteenRating} width="100" height="100" />
-              <p id="15Rating" />
-            </div>
-            <hr />
-            <div>
-              {" "}
-              <img src={eighteenRating} width="100" height="100" />
-              <p id="18Rating" />
-            </div>
-          </b>
-
-        </Jumbo>
+                <img
+                  src={uRating}
+                  width="100"
+                  height="100"
+                  style={{ jusitfyContent: "center" }}
+                />{" "}
+              </td>
+              <td>
+                <p id="uRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src={pgRating}
+                  width="100"
+                  height="100"
+                  style={{ jusitfyContent: "center" }}
+                />
+              </td>
+              <td>
+                <p id="pgRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src={twelveaRating}
+                  width="100"
+                  height="100"
+                  style={{ jusitfyContent: "center" }}
+                />
+              </td>
+              <td>
+                <p id="12aRating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src={fifteenRating}
+                  width="100"
+                  height="100"
+                  style={{ jusitfyContent: "center" }}
+                />
+              </td>
+              <td>
+                <p id="15Rating" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img
+                  src={eighteenRating}
+                  width="100"
+                  height="100"
+                  style={{ jusitfyContent: "center" }}
+                />
+              </td>
+              <td>
+                <p id="18Rating" />
+              </td>
+            </tr>
+          </tbody>
+        </Table>
       </React.Fragment>
     );
   }

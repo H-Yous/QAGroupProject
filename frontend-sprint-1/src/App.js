@@ -16,7 +16,7 @@ import { Layout } from "./components/Layout";
 import { NavigationBar } from "./components/NavigationBar";
 import FooterPage from "./components/FooterPage";
 import Directions from "./directionspage/Directions.js";
-import { Jumbotron } from "./components/Jumbotron";
+import { Table } from "react-bootstrap";
 import { ImageBackground, Text } from "react-native";
 import backgroundImage from "./assets/background.jpg";
 import styled from "styled-components";
@@ -35,8 +35,13 @@ class App extends Component {
           >
             <Layout>
               <Router>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <NavigationBar />
-                <Jumbotron />
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/nowShowing" component={NowShowing} />
@@ -53,6 +58,8 @@ class App extends Component {
                   <Route path="/directions" component={Directions} />
                   <Route component={NoMatch} />
                 </Switch>
+                <br />
+                <br />
                 <br />
                 <br />
                 <br />

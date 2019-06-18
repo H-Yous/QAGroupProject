@@ -24,7 +24,6 @@ class NowShowing extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>Now Showing</h1>
         {this.state.nowShowingMovies.map(
           (nowShowingMovie, index, moviesArray) => {
             if ((index + 1) % 3 === 1) {
