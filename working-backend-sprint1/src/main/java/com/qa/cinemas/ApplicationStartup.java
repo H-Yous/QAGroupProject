@@ -10,8 +10,6 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
 
 import java.util.Properties;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -20,10 +18,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
@@ -57,65 +51,28 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-		System.out.println("APPLICATION RUNNING STARTUP");
-		
-		
-		
-		if (getCollectionSize("QACinema","upcomingMovie")==0) {
-			deleteCollection("QACinema","upcomingMovie");
-			populateUpComingMovies.start();
-			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
-		}
-		else {
-			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
-		
-		if (getCollectionSize("QACinema","nowShowingMovie")==0) {
-			deleteCollection("QACinema","nowShowingMovie");
-			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
-			waitTenSecsBeforeMakingRequests();
-			populateNowShowingMovies.start();
-		} else {
-			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
-		
-		if (getCollectionSize("QACinema","newReleaseMovie")==0) {
-			deleteCollection("QACinema","newReleaseMovie");
-			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
-			waitTenSecsBeforeMakingRequests();
-			populateNewReleaseMovies.start();
+		//new releases
+		System.out.println("POPULATING UPCOMING MOVIES...");
+		populateUpComingMovies.start();
 
+		waitTenSecsBeforeMakingRequests();
 
+		System.out.println("POPULATING NOW SHOWING MOVIES...");
+		populateNowShowingMovies.start();
 
-		} else {
-			System.out.println("NEWRELEASES MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
+		waitTenSecsBeforeMakingRequests();
 
-		if (getCollectionSize("QACinema","certification")!=5) {
-			deleteCollection("QACinema","certification");
-			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
-			waitTenSecsBeforeMakingRequests();
-			populateMovieCertification.start();
-		} else {
-			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
+		System.out.println("POPULATING NEW RELEASE MOVIES...");
+		populateNewReleaseMovies.start();
+
+		waitTenSecsBeforeMakingRequests();
+
+		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
+		populateMovieCertification.start();
 
 		System.out.println("STARTUP FINISHED");
 	}
-	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    return collection.countDocuments();
-	}
-	
-	private void deleteCollection(String databaseCollectionIsIn,String collectionToBeDeleted) {
-	    MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
-	    MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
-	    MongoCollection collection = database.getCollection(collectionToBeDeleted);
-	    Bson filter = new Document();
-	    collection.deleteMany(filter);
-	}
+
 	
 
 	private void waitTenSecsBeforeMakingRequests() {

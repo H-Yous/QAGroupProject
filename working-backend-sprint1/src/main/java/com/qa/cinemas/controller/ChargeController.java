@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import static com.qa.cinemas.constants.Constants.stripeApiKey;
 
 import com.qa.cinemas.domain.Booking;
 import com.qa.cinemas.domain.stripeToken;
@@ -33,7 +32,7 @@ public class ChargeController {
     public void charge(@RequestBody String token) throws StripeException {
     	//System.out.print(token);
     
-    	Stripe.apiKey = stripeApiKey;
+    	Stripe.apiKey = "sk_test_QCwagkwuRqvO88QBgFcDwpCp00pZO514Zd";
 
     	
     	Map<String, Object> params = new HashMap<>();

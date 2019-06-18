@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
+
 import { withRouter } from "react-router-dom";
 import Axios from 'axios';
 
@@ -10,20 +11,23 @@ import Axios from 'axios';
 class CheckoutForm extends Component{
   
     constructor(props) {
+   
+      
       super(props);
       this.state = {complete: false};
       this.submit = this.submit.bind(this);
       this.state = { validated: false };
+
       this.chosenSeats = this.props.chosenSeats;
 
       this.seats = this.props.seats;
       
+
     }
-   
-  
 
     submit = async (event) => { 
     // User clicked submit
+
 
 
       try{
@@ -49,6 +53,8 @@ class CheckoutForm extends Component{
       
     }
   }
+    
+    
   handleRedirect(chosenSeats){
     console.log(this.chosenSeats);
     
@@ -79,10 +85,9 @@ class CheckoutForm extends Component{
     this.props.history.push("/confirmation", {chosenSeats});
   }
 
-  handleRedirect(chosenSeats){
-    this.props.history.push("/confirmation", {chosenSeats});
+  handleSubmit(event) {
+   
   }
- 
 
   render(){
 
@@ -90,10 +95,11 @@ class CheckoutForm extends Component{
     
 
 
+
     if (this.state.complete) this.handleRedirect(this.chosenSeats);
 
+
     return (
-     
 <Form
         noValidate
         validated={validated}
@@ -126,12 +132,12 @@ class CheckoutForm extends Component{
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               </InputGroup.Prepend>
-              <Form.Control  
+              <Form.Control
                 type="text"
                 placeholder="Email"
                 aria-describedby="inputGroupPrepend"
                 required
-                
+               
               />
               <Form.Control.Feedback type="invalid">
                 Please choose a username.
@@ -156,14 +162,14 @@ class CheckoutForm extends Component{
 <br></br>
 <Button variant="primary" size="lg" onClick={this.submit}>Pay Now</Button>  
         </Form.Group>
-       
+
       </Form>
-     
     );
   }
+
 }
 
-export default withRouter(injectStripe (CheckoutForm));
+export default injectStripe (CheckoutForm);
 
 
 

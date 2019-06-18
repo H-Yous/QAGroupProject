@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {Elements, StripeProvider} from 'react-stripe-elements';
-import { Card } from 'react-bootstrap';
 import CheckoutForm from './CheckoutForm';
+
 import TicketForm from './ticketForm';
-import Axios from 'axios';
-
-
 
 class Payment extends Component {
   //THIS IS WHERE YOU GET THE CHOSEN SEAT STUFF
@@ -19,6 +16,7 @@ class Payment extends Component {
    
         console.log(this.state);
         var total = 0;
+
         this.seats ='';
         for (var i = 0; i < this.state.chosenSeats.length; i++) {
           total = total + this.state.chosenSeats[i].price; 
@@ -31,6 +29,7 @@ class Payment extends Component {
         console.log(this.seats);
         console.log(total);
         document.getElementById("total").innerText= total; 
+
 
         Axios.post('http://localhost:8080/total', {
           total: total,
@@ -52,12 +51,11 @@ class Payment extends Component {
 
   }
 
+  
   render() {
     
     return (
-      
-      <Card style={{ opacity: '0.92' }}>
-      <Card.Body>
+
       <StripeProvider apiKey="pk_test_iXkwILOm0dHnfTVPsiDy8Mw0007ohxGCzC">
         <div className="example">
         <TicketForm 
@@ -67,19 +65,18 @@ class Payment extends Component {
           <span><h2>£:</h2><h1 id="total">total</h1></span>
           <Elements>
           
+
           <CheckoutForm 
 
           chosenSeats = {this.state}
           seats = {this.seats}/>
 
+
           </Elements>
         </div>
-       
-       
+        
       </StripeProvider>
-      </Card.Body>
-      </Card>
-     
+      
     );
   }
 }

@@ -3,6 +3,8 @@ import { Carousel, Jumbotron, Container } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import NewReleaseInfo from "./NewReleaseInfo";
 
 const Styles = styled.div`
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
@@ -21,14 +23,13 @@ class NewReleases extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
-      console.log(result.data.title);
+    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
       this.setState({ newReleasedMovies: result.data });
     });
   }
 
   handleRedirect(movieName) {
-    alert(movieName);
+    this.props.history.push("/newReleaseInfo/" + movieName, { movieName });
   }
 
   render() {
@@ -68,4 +69,4 @@ class NewReleases extends Component {
     );
   }
 }
-export default NewReleases;
+export default withRouter(NewReleases);
