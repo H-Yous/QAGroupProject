@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,20 +22,23 @@ import com.stripe.model.Charge;
 
 import lombok.extern.java.Log;
 
+import static com.qa.cinemas.constants.Constants.stripeApiKey;
+
 @Log
 @RestController
 @CrossOrigin("*")
 public class ChargeController {
 
+
 	int intTotal; 
+	String showMovie; 
 	
     @PostMapping("/charge")
     public void charge(@RequestBody String token) throws StripeException {
     	//System.out.print(token);
     
-    	Stripe.apiKey = "sk_test_QCwagkwuRqvO88QBgFcDwpCp00pZO514Zd";
+    	Stripe.apiKey = stripeApiKey;
 
-    	
     	Map<String, Object> params = new HashMap<>();
     	params.put("amount", intTotal);
     	params.put("currency", "gbp");
@@ -51,6 +55,17 @@ public class ChargeController {
     	intTotal = (intTotal * 100); 
     	System.out.print(intTotal);
     }
+    
+   
+    
+    @GetMapping("/gettotal")
+    public int gettotal() {
+    	int getTotal = intTotal / 100; 
+    	System.out.print(intTotal);
+    	return getTotal; 
+    }
+    
+  
     
     
     

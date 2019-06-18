@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Col,Button,InputGroup } from 'react-bootstrap';
 import {CardElement, injectStripe } from 'react-stripe-elements';
-import {  Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -9,17 +9,20 @@ import {  Redirect } from 'react-router-dom'
 class CheckoutForm extends Component{
   
     constructor(props) {
-   
-      
       super(props);
       this.state = {complete: false};
       this.submit = this.submit.bind(this);
       this.state = { validated: false };
+      this.chosenSeats = this.props.chosenSeats;
+      console.log(this.chosenSeats);
+      console.log(this.submit);
     }
+   
+  
 
     submit = async (event) => { 
     // User clicked submit
-
+    
     try{
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -43,15 +46,16 @@ class CheckoutForm extends Component{
    
   }
 
-  handleSubmit(event) {
-   
+  handleRedirect(chosenSeats){
+    this.props.history.push("/confirmation", {chosenSeats});
   }
+ 
 
   render(){
 
     const { validated } = this.state;
     
-    if (this.state.complete) return <Redirect to="/confirmation" />;
+    if (this.state.complete) this.handleRedirect(this.chosenSeats);
 
     return (
      
@@ -87,12 +91,12 @@ class CheckoutForm extends Component{
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               </InputGroup.Prepend>
-              <Form.Control
+              <Form.Control  
                 type="text"
                 placeholder="Email"
                 aria-describedby="inputGroupPrepend"
                 required
-               
+                
               />
               <Form.Control.Feedback type="invalid">
                 Please choose a username.
@@ -117,15 +121,14 @@ class CheckoutForm extends Component{
 <br></br>
 <Button variant="primary" size="lg" onClick={this.submit}>Pay Now</Button>  
         </Form.Group>
-
+       
       </Form>
      
     );
   }
-
 }
 
-export default injectStripe (CheckoutForm);
+export default withRouter(injectStripe (CheckoutForm));
 
 
 

@@ -7,7 +7,7 @@ class Screens extends Component{
     render(){
         return(
             
-            <center>
+            <center style={{ opacity: '0.9' }}>
                 <br/>
                 <br/>
             <div>
