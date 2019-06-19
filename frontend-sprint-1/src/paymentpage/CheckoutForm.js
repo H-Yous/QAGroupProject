@@ -40,17 +40,11 @@ class CheckoutForm extends Component {
 
     for (var i = 0; i < this.chosenSeats.length; i++) {
       Axios.post("http://localhost:8080/bookthis", {
-        seats: this.chosenSeats[i].seatnum
-      })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-
-      Axios.post("http://localhost:8080/token", {
-        token: this.chosenSeats[i].newtoken
+        seats: this.chosenSeats[i].seatnum,
+        token: this.chosenSeats[i].newtoken,
+        title: this.chosenSeats[i].movieTitle,
+        price: this.chosenSeats[i].price,
+        type: this.chosenSeats[i].ticket
       })
         .then(function(response) {
           console.log(response);
@@ -59,6 +53,8 @@ class CheckoutForm extends Component {
           console.log(error);
         });
     }
+
+    Axios.post("http://localhost:8080/SendBooking");
     this.props.history.push("/confirmation", { chosenSeats });
   }
 
