@@ -14,26 +14,24 @@ seatnumbers =...
 class ScreenCreation extends Component {
   chosenSeats = [];
   // token;
-  
 
   constructor(props) {
     super(props);
     this.state = {
-      movie: '',
+      movie: "",
       chart: null,
       chartLoaded: false,
       redirect: false,
       pricing: {
-        normAdult: '',
-        normChild: '',
-        normStudent: '',
-        premAdult: '',
-        premChild: '',
-        premStudent: '',
-        disabled: ''
+        normAdult: "",
+        normChild: "",
+        normStudent: "",
+        premAdult: "",
+        premChild: "",
+        premStudent: "",
+        disabled: ""
       }
     };
-    
   }
 
   componentDidMount() {
@@ -75,12 +73,9 @@ class ScreenCreation extends Component {
         }
       });
     });
-    
   }
   handleRedirect(chosenSeats) {
-    
     this.props.history.push("/payment", chosenSeats);
-    
   }
 
   render() {
@@ -126,7 +121,6 @@ class ScreenCreation extends Component {
           priceFormatter={price => "£" + price}
           showLegend={true}
           holdOnSelect={true}
-          
           expiresInSeconds={0.01}
           maxSelectedObjects={this.props.maxObjects}
         />

@@ -3,11 +3,11 @@ package com.qa.cinemas.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document (collection = "Emails")
+@Document(collection = "Emails")
 public class ContactEmail {
-	
+
 	private String enquirerEmail;
-	
+
 	private String emailText;
 
 	public String getEnquirerEmail() {

@@ -37,11 +37,4 @@
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/java/com/qa/cinemas/constants/Constants.java</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Constants.java</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

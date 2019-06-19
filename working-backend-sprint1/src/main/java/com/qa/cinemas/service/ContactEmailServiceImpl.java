@@ -16,19 +16,20 @@ import com.qa.cinemas.domain.ContactEmail;
 public class ContactEmailServiceImpl implements ContactEmailService {
 	@Autowired
 	public JavaMailSender javaMailSender;
-	public String sendEmail(ContactEmail email) throws Exception{
+
+	public String sendEmail(ContactEmail email) throws Exception {
 		try {
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
-			
+
 			helper.setTo(emailReceiver);
-			helper.setText("sent from:"+email.getEnquirerEmail()+"\n\n\n"+email.getEmailText());
-			helper.setSubject(emailSubject+email.getEnquirerEmail());
-			
+			helper.setText("sent from:" + email.getEnquirerEmail() + "\n\n\n" + email.getEmailText());
+			helper.setSubject(emailSubject + email.getEnquirerEmail());
+
 			javaMailSender.send(message);
-			
+
 			return ("Email Sent!");
-			
+
 		} catch (Exception e) {
 			return ("Email failed to send: " + e);
 		}

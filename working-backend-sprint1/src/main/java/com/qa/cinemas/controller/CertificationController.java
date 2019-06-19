@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.cinemas.domain.Certification;
 import com.qa.cinemas.service.CertificationService;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.getCertificationsPath;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(crossOriginsPath)
 public class CertificationController {
-	
+
 	@Autowired
 	private CertificationService certificationService;
 
@@ -28,7 +29,5 @@ public class CertificationController {
 		List<Certification> result = certificationService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-
-	
 
 }

@@ -29,25 +29,25 @@ import com.qa.cinemas.service.EventServiceImpl;
 @RequestMapping(eventsPath)
 @CrossOrigin(crossOriginsPath)
 public class EventController {
-	
+
 	@Autowired
 	private EventServiceImpl eventServiceImpl;
-	
+
 	@GetMapping(getAllEventsPath)
-	public ResponseEntity<?> getAllEvents(){
+	public ResponseEntity<?> getAllEvents() {
 		List<Events> result = eventServiceImpl.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-	
+
 	@PostMapping(createEventPath)
-    public ResponseEntity<?> createEvent(@Valid @RequestBody Events event) {
-		String result=eventServiceImpl.createEvent(event);
+	public ResponseEntity<?> createEvent(@Valid @RequestBody Events event) {
+		String result = eventServiceImpl.createEvent(event);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
-    }
-	
+	}
+
 	@PostMapping(findByEventKeyPath)
-    public ResponseEntity<?> findByEventKey(@PathVariable("eventKey") String eventKey) {
-		Optional<Events> result=eventServiceImpl.findByEventKey(eventKey);
+	public ResponseEntity<?> findByEventKey(@PathVariable("eventKey") String eventKey) {
+		Optional<Events> result = eventServiceImpl.findByEventKey(eventKey);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
-    }
+	}
 }

@@ -2,21 +2,21 @@ import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import { View } from "react-native";
 
-import screen1 from "./Screen1.png";
-import screen2 from "./Screen2.png";
-import screen3 from "./Screen3.png";
+import screen1 from "../assets/screens/Screen1.png";
+import screen2 from "../assets/screens/Screen2.png";
+import screen3 from "../assets/screens/Screen3.png";
 
-import qual3d from "../assets/filmQuality/3d-sign.png";
-import qual4d from "../assets/filmQuality/4d-sign.png";
-import qual4k from "../assets/filmQuality/4k-fullhd.png";
-import qualhd from "../assets/filmQuality/hd-sign.png";
-import qualfhd from "../assets/filmQuality/1080p-full-hd.png";
+import qual3d from "../assets/quality/3d-sign.png";
+import qual4d from "../assets/quality/4d-sign.png";
+import qual4k from "../assets/quality/4k-fullhd.png";
+import qualhd from "../assets/quality/hd-sign.png";
+import qualfhd from "../assets/quality/1080p-full-hd.png";
 
-import ratingu from "../assets/urating.png";
-import ratingpg from "../assets/pgrating.png";
-import rating12a from "../assets/12arating.png";
-import rating15 from "../assets/15rating.png";
-import rating18 from "../assets/18rating.png";
+import ratingu from "../assets/rating/urating.png";
+import ratingpg from "../assets/rating/pgrating.png";
+import rating12a from "../assets/rating/12arating.png";
+import rating15 from "../assets/rating/15rating.png";
+import rating18 from "../assets/rating/18rating.png";
 
 class Screens extends Component {
   render() {

@@ -21,14 +21,14 @@ import com.qa.cinemas.service.ContactEmailServiceImpl;
 @RequestMapping(contactGmailPath)
 @Controller
 @CrossOrigin("*")
-public class ContactEmailController{
+public class ContactEmailController {
 	@Autowired
 	private ContactEmailServiceImpl contactEmailServiceImpl;
-	
+
 	@RequestMapping(sendEmail)
 	@ResponseBody
 	public ResponseEntity<?> sendEmail(@Valid @RequestBody ContactEmail email) throws Exception {
-		String result=contactEmailServiceImpl.sendEmail(email);
+		String result = contactEmailServiceImpl.sendEmail(email);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
-    }
+	}
 }

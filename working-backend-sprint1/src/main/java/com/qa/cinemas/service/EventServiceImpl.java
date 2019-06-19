@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.qa.cinemas.domain.Events;
 
-
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
 import com.qa.cinemas.repository.EventRepository;
-
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -26,7 +24,7 @@ public class EventServiceImpl implements EventService {
 	public List<Events> findAll() {
 		return eventRepository.findAll();
 	}
-	
+
 	@Override
 	public Optional<Events> findByEventKey(String eventKey) {
 		return eventRepository.findByEventKey(eventKey);
@@ -50,6 +48,5 @@ public class EventServiceImpl implements EventService {
 //			return "showing saved";
 //		}
 //	}
-	
-	
+
 }

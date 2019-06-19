@@ -10,7 +10,7 @@ import com.qa.cinemas.repository.NewReleaseMovieRepository;
 
 @Service
 public class NewReleaseMovieServiceImpl implements NewReleaseMovieService {
-	
+
 	@Autowired
 	private NewReleaseMovieRepository newReleaseMovieRepository;
 

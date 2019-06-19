@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import uRating from "../assets/urating.png";
-import pgRating from "../assets/pgrating.png";
-import twelveaRating from "../assets/12arating.png";
-import fifteenRating from "../assets/15rating.png";
-import eighteenRating from "../assets/18rating.png";
-import tbcRating from "../assets/tbcrating.png";
+import uRating from "../assets/rating/urating.png";
+import pgRating from "../assets/rating/pgrating.png";
+import twelveaRating from "../assets/rating/12arating.png";
+import fifteenRating from "../assets/rating/15rating.png";
+import eighteenRating from "../assets/rating/18rating.png";
+import tbcRating from "../assets/rating/tbcrating.png";
 
 class NowShowingInfo extends Component {
   constructor(props) {

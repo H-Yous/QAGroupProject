@@ -3,8 +3,7 @@ import styled from "@emotion/styled";
 import Select from "react-select";
 import axios from "axios";
 import { PropTypes } from "prop-types";
-import { Link, withRouter } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { createHashHistory } from "history";
 
 const StyledSearch = styled.div`

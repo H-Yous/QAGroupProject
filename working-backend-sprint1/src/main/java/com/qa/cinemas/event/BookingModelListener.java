@@ -9,19 +9,19 @@ import com.qa.cinemas.domain.Booking;
 import com.qa.cinemas.service.SequenceGeneratorService;
 
 @Component
-public class BookingModelListener extends AbstractMongoEventListener<Booking>  {
+public class BookingModelListener extends AbstractMongoEventListener<Booking> {
 
-    private SequenceGeneratorService sequenceGenerator;
+	private SequenceGeneratorService sequenceGenerator;
 
-    @Autowired
-    public BookingModelListener(SequenceGeneratorService sequenceGenerator) {
-        this.sequenceGenerator = sequenceGenerator;
-    }
+	@Autowired
+	public BookingModelListener(SequenceGeneratorService sequenceGenerator) {
+		this.sequenceGenerator = sequenceGenerator;
+	}
 
-    @Override
-    public void onBeforeConvert(BeforeConvertEvent<Booking> event) {
-        if (event.getSource().getSalesID() < 1) {
-            event.getSource().setSalesID(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
-        }
-    }
+	@Override
+	public void onBeforeConvert(BeforeConvertEvent<Booking> event) {
+		if (event.getSource().getSalesID() < 1) {
+			event.getSource().setSalesID(sequenceGenerator.generateSequence(Booking.SEQUENCE_NAME));
+		}
+	}
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
-import skdlogo from "../assets/skdlogo.svg";
+import skdlogo from "../assets/logo/skdlogo.svg";
 
 export default class DirectionsPanel extends Component {
   render() {

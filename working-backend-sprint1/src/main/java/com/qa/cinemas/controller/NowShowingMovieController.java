@@ -1,4 +1,5 @@
 package com.qa.cinemas.controller;
+
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.getNowShowingMoviesPath;
 import java.util.List;
@@ -18,7 +19,7 @@ import com.qa.cinemas.service.NowShowingMovieService;
 @RequestMapping("/api")
 @CrossOrigin(crossOriginsPath)
 public class NowShowingMovieController {
-	
+
 	@Autowired
 	private NowShowingMovieService nowShowingMovieService;
 
@@ -27,5 +28,4 @@ public class NowShowingMovieController {
 		List<NowShowingMovie> result = nowShowingMovieService.findAll();
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-
 }

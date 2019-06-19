@@ -30,7 +30,7 @@ public class ChartEventService {
 
 	public ChartEventService() {
 		client = new SeatsioClient(this.secretKey);
-		
+
 	}
 
 	public ChartEventService(String secretKey, String chartKey, String eventKey) {

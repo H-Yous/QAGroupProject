@@ -31,7 +31,7 @@ public class PopulateNewReleaseMovies {
 
 	private List<String> movieActors;
 	private List<String> movieDirector;
-	
+
 	private List<String> movieDescription;
 
 	private String posters = "";
@@ -68,23 +68,23 @@ public class PopulateNewReleaseMovies {
 		populateCurrentYearMovieIdList(resultsArray);
 		System.out.println("-NEW RELEASE MOVIE ID'S RETRIEVED " + "(" + movieId.size() + ")");
 		waitFiveSecsBeforeMakingRequests();
-		
+
 		movieId.stream().forEach(x -> populateCurrentYearMovieTitleList(x));
 		System.out.println("-NEW RELEASE MOVIE TITLES RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
-		
+
 		movieId.stream().forEach(x -> populateCurrentYearmovieActorsList(x));
 		System.out.println("-NEW RELEASE MOVIE ACTORS RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
-		
+
 		movieId.stream().forEach(x -> populateCurrentYearMovieDirectorsList(x));
 		System.out.println("-NEW RELEASE MOVIE DIRECTORS RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
-		
+
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 		System.out.println("-NEW RELEASE MOVIE TITLES POSTERS RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
-		
+
 		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
 		System.out.println("-NEW RELEASE MOVIE DESCRIPTIONS RETRIEVED");
 
@@ -96,7 +96,7 @@ public class PopulateNewReleaseMovies {
 		StreamSupport.stream(resultsArray.spliterator(), false).limit(15).map(aMovie -> (JSONObject) aMovie)
 				.filter(aMovie -> aMovie.getString("release_date").substring(0, 4).equals(currentYear))
 				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
-		
+
 	}
 
 	private void populateCurrentYearMovieTitleList(String aMovieId) {
@@ -125,7 +125,7 @@ public class PopulateNewReleaseMovies {
 		actors = actors.substring(0, actors.length() - 1);
 
 		movieActors.add(actors);
-		
+
 	}
 
 	private void populateCurrentYearMovieDirectorsList(String aMovieId) {
@@ -164,7 +164,7 @@ public class PopulateNewReleaseMovies {
 		posters = "";
 
 	}
-	
+
 	private void populatemovieDescriptionList(String aMovieId) {
 
 		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
@@ -174,7 +174,7 @@ public class PopulateNewReleaseMovies {
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 		movieDescription.add(returnedJsonStringAsObj.getString("overview"));
 	}
-	
+
 	private void waitFiveSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(5000);
@@ -183,8 +183,6 @@ public class PopulateNewReleaseMovies {
 			e.printStackTrace();
 		}
 	}
-	
-
 
 	private void populateDBWithNewReleaseMovieMovies(int index) {
 

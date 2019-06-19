@@ -9,8 +9,8 @@ import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.repository.NowShowingMovieRepository;
 
 @Service
-public class NowShowingMovieServiceImpl implements NowShowingMovieService{
-	
+public class NowShowingMovieServiceImpl implements NowShowingMovieService {
+
 	@Autowired
 	private NowShowingMovieRepository nowShowingMovieRepository;
 

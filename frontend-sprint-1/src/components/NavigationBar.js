@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import qaImage from "../assets/qa.png";
+import { Nav, Navbar } from "react-bootstrap";
+import qaImage from "../assets/logo/qa.png";
 import SearchBar from "./SearchBar";
 import styled from "styled-components";
 

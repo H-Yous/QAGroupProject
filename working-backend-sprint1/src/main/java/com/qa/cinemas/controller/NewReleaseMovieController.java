@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.cinemas.domain.NewReleaseMovie;
 import com.qa.cinemas.service.NewReleaseMovieService;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.getNewReleasedMoviesPath;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(crossOriginsPath)
 public class NewReleaseMovieController {
-	
+
 	@Autowired
 	private NewReleaseMovieService newReleaseMovieService;
-	
+
 	@GetMapping(getNewReleasedMoviesPath)
 	public ResponseEntity<?> getNewReleased() {
 		List<NewReleaseMovie> result = newReleaseMovieService.findAll();

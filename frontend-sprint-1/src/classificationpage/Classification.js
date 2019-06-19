@@ -3,14 +3,14 @@ import { Jumbotron as Jumbo, Container, Button, Table } from "react-bootstrap";
 
 import axios from "axios";
 
-import uRating from "../assets/urating.png";
-import pgRating from "../assets/pgrating.png";
-import twelveaRating from "../assets/12arating.png";
-import fifteenRating from "../assets/15rating.png";
-import eighteenRating from "../assets/18rating.png";
-import r18rating from "../assets/r18rating.png";
+import uRating from "../assets/rating/urating.png";
+import pgRating from "../assets/rating/pgrating.png";
+import twelveaRating from "../assets/rating/12arating.png";
+import fifteenRating from "../assets/rating/15rating.png";
+import eighteenRating from "../assets/rating/18rating.png";
+import r18rating from "../assets/rating/r18rating.png";
 
-class Classifications extends Component {
+class Classification extends Component {
   componentDidMount() {
     var ratingName = new Array(5);
     var ratingDescription = new Array(5);
@@ -203,4 +203,4 @@ class Classifications extends Component {
   }
 }
 
-export default Classifications;
+export default Classification;

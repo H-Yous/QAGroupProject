@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class NowShowingMovie {
-	
+
 	@Id
 	private String id;
 
@@ -15,11 +15,11 @@ public class NowShowingMovie {
 	private String description;
 
 	private String poster;
-	
+
 	private String runtime;
-	
+
 	private String certification;
-	
+
 	private String actors;
 	private String director;
 
@@ -94,6 +94,5 @@ public class NowShowingMovie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-
 
 }

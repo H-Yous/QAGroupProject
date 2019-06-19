@@ -3,23 +3,23 @@ import { Link } from "react-router-dom";
 import { Nav, Navbar, Container } from "react-bootstrap";
 import styled from "styled-components";
 
-import qaImage from "../assets/qa.png";
-import springImage from "../assets/technologies/spring.png";
-import mongoImage from "../assets/technologies/mongodb.png";
-import reactImage from "../assets/technologies/react.png";
+import qaImage from "../assets/logo/qa.png";
+import springImage from "../assets/icon/technologies/spring.png";
+import mongoImage from "../assets/icon/technologies/mongodb.png";
+import reactImage from "../assets/icon/technologies/react.png";
 
-import git from "../assets/social/git.png";
-import hgit from "../assets/social/git-hover.png";
+import git from "../assets/icon/social/git.png";
+import hgit from "../assets/icon/social/git-hover.png";
 
-import fbImage from "../assets/social/facebook.png";
-import igImage from "../assets/social/instagram.png";
-import liImage from "../assets/social/linkedin.png";
-import twImage from "../assets/social/twitter.png";
+import fbImage from "../assets/icon/social/facebook.png";
+import igImage from "../assets/icon/social/instagram.png";
+import liImage from "../assets/icon/social/linkedin.png";
+import twImage from "../assets/icon/social/twitter.png";
 
-import hfbImage from "../assets/social/facebook-hover.png";
-import higImage from "../assets/social/instagram-hover.png";
-import hliImage from "../assets/social/linkedin-hover.png";
-import htwImage from "../assets/social/twitter-hover.png";
+import hfbImage from "../assets/icon/social/facebook-hover.png";
+import higImage from "../assets/icon/social/instagram-hover.png";
+import hliImage from "../assets/icon/social/linkedin-hover.png";
+import htwImage from "../assets/icon/social/twitter-hover.png";
 
 const Styles = styled.div`
   .navbar {

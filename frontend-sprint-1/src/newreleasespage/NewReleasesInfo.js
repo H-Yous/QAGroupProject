@@ -3,7 +3,7 @@ import axios from "axios";
 import Card from "react-bootstrap";
 import { Image, View, StyleSheet } from "react-native";
 
-class NewReleaseInfo extends Component {
+class NewReleasesInfo extends Component {
   constructor(props) {
     super(props);
   }
@@ -62,4 +62,4 @@ class NewReleaseInfo extends Component {
   }
 }
 
-export default NewReleaseInfo;
+export default NewReleasesInfo;

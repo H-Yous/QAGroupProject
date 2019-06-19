@@ -27,7 +27,6 @@ public class DatabaseSequence {
 		this.id = id;
 	}
 
-
 	public long getSeq() {
 		return seq;
 	}

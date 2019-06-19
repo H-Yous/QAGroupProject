@@ -1,51 +1,47 @@
 package com.qa.cinemas.domain;
 
+public class Ticket {
 
-public class Ticket{
+	private String title;
+	private String type;
+	private int price;
+	private String seat;
 
+	@Override
+	public String toString() {
+		return title + ", " + type + ", " + price + ", " + seat + ", ";
+	}
 
-    private String title;
-    private String type;
-    private int price;
-    private String seat;
+	public String getTitle() {
+		return title;
+	}
 
-    @Override
-    public String toString(){
-        return title + ", " + type + ", " + price + ", " + seat + ", ";
-    }
+	public String getSeat() {
+		return seat;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setSeat(String seat) {
+		this.seat = seat;
+	}
 
-    public String getSeat() {
-        return seat;
-    }
+	public int getPrice() {
+		return price;
+	}
 
-    public void setSeat(String seat) {
-        this.seat = seat;
-    }
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-    public int getPrice() {
-        return price;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 }

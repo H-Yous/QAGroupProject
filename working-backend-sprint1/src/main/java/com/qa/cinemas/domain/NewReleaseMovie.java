@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class NewReleaseMovie {
-	
+
 	@Id
 	private String id;
 
@@ -64,7 +64,7 @@ public class NewReleaseMovie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
@@ -72,7 +72,5 @@ public class NewReleaseMovie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-
 
 }

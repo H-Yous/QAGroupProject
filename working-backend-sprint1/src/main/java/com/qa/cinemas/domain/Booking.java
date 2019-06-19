@@ -20,17 +20,20 @@ public class Booking {
 
 	// @Override
 	// public String toString() {
-	// 	return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
-	// 			+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+	// return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ",
+	// screen=" + screen + ", timeSlot="
+	// + timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ",
+	// price=" + price + "]";
 	// }
 	@Override
-	public String toString(){
-		return id + ", " + salesID + ", " + day + ", " + screen + ", " + timeSlot + ", " + ticket.toString() + ", " + totalPrice;
+	public String toString() {
+		return id + ", " + salesID + ", " + day + ", " + screen + ", " + timeSlot + ", " + ticket.toString() + ", "
+				+ totalPrice;
 	}
 
 	@Transient
 	public static final String SEQUENCE_NAME = "bookings_sequence";
-	
+
 	@Id
 	private String id;
 
@@ -42,7 +45,7 @@ public class Booking {
 
 	@NotNull
 	private Screens screen;
-	
+
 	@NotNull
 	private TimeSlots timeSlot;
 
@@ -51,7 +54,6 @@ public class Booking {
 
 	@NotBlank
 	private String customerID;
-	
 
 	@NotBlank
 	private int totalPrice;
@@ -66,7 +68,7 @@ public class Booking {
 	public void setSalesID(long salesID) {
 		this.salesID = salesID;
 	}
-	
+
 	public Days getDay() {
 		return day;
 	}
@@ -91,7 +93,6 @@ public class Booking {
 		this.timeSlot = timeSlot;
 	}
 
-
 	public String getCustomerID() {
 		return customerID;
 	}
@@ -105,14 +106,13 @@ public class Booking {
 	}
 
 	public void settotalPrice(int totalprice2) {
-		 
+
 		this.totalPrice = totalprice2;
 	}
-	
+
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
-	
 
 	public String getId() {
 		return id;
@@ -130,6 +130,4 @@ public class Booking {
 		this.ticket = ticket;
 	}
 
-	
-	
 }

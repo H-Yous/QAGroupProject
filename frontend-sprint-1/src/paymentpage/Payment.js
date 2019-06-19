@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import { Card } from "react-bootstrap";
 import CheckoutForm from "./CheckoutForm";
-import TicketForm from "./ticketForm";
+import TicketForm from "./TicketForm";
 import Axios from "axios";
 
 class Payment extends Component {
@@ -36,7 +36,6 @@ class Payment extends Component {
       .catch(function(error) {
         console.log(error);
       });
-    
   }
 
   render() {
@@ -49,11 +48,10 @@ class Payment extends Component {
 
               <span>
                 <h2>£:</h2>
-              <h1 id="total">{this.total}</h1>
+                <h1 id="total">{this.total}</h1>
               </span>
               <Elements>
                 <CheckoutForm chosenSeats={this.state} />
-                
               </Elements>
             </div>
           </StripeProvider>
