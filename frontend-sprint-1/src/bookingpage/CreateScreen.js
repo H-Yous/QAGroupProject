@@ -13,24 +13,27 @@ seatnumbers =...
 
 class ScreenCreation extends Component {
   chosenSeats = [];
-  token;
+  // token;
+  
 
   constructor(props) {
     super(props);
     this.state = {
+      movie: '',
       chart: null,
       chartLoaded: false,
       redirect: false,
       pricing: {
-        normAdult: "",
-        normChild: "",
-        normStudent: "",
-        premAdult: "",
-        premChild: "",
-        premStudent: "",
-        disabled: ""
+        normAdult: '',
+        normChild: '',
+        normStudent: '',
+        premAdult: '',
+        premChild: '',
+        premStudent: '',
+        disabled: ''
       }
     };
+    
   }
 
   componentDidMount() {
@@ -53,31 +56,35 @@ class ScreenCreation extends Component {
   }
 
   booked(chart) {
+    this.movie = this.props.movie;
     chart.listSelectedObjects(listOfObjects => {
       listOfObjects.map(object => {
         let seatnum = object.label;
         let ticket = object.selectedTicketType;
         let newtoken = chart.holdToken;
-        console.log(object.holdToken);
+        let movieTitle = this.movie;
 
         let price = object.pricing.ticketTypes
           .filter(obj => obj.ticketType === ticket)
           .map(obj => obj.price)[0];
-        this.chosenSeats.push({ seatnum, ticket, price, newtoken });
-
+        this.chosenSeats.push({ movieTitle, seatnum, ticket, price, newtoken });
+        console.log(chart.holdToken);
         if (listOfObjects.indexOf(object) === listOfObjects.length - 1) {
           this.handleRedirect(this.chosenSeats);
+          console.log(this.chosenSeats);
         }
       });
     });
-    console.log(chart.holdToken);
+    
   }
   handleRedirect(chosenSeats) {
-    this.props.history.push("/payment", { chosenSeats });
+    
+    this.props.history.push("/payment", chosenSeats);
+    
   }
 
   render() {
-    const { publicKey, eventKey, maxObjects } = this.props;
+    const { publicKey, eventKey, maxObjects, movie } = this.props;
 
     return (
       <div id="event-manager">
@@ -119,8 +126,8 @@ class ScreenCreation extends Component {
           priceFormatter={price => "£" + price}
           showLegend={true}
           holdOnSelect={true}
-          regenerateHoldToken={true}
-          expiresInSeconds={1}
+          
+          expiresInSeconds={0.01}
           maxSelectedObjects={this.props.maxObjects}
         />
         <Button

@@ -1,6 +1,7 @@
 package com.qa.cinemas.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class ChartEventService {
 
 	public ChartEventService() {
 		client = new SeatsioClient(this.secretKey);
+		
 	}
 
 	public ChartEventService(String secretKey, String chartKey, String eventKey) {
@@ -56,12 +58,8 @@ public class ChartEventService {
 		return (int) this.client.events.listAll().count();
 	}
 
-	public void bookObjects(String object, String token) {
-		System.out.println(object);
-		List<String> bookSeats = new ArrayList<String>();
-		bookSeats.add(object);
-
-		client.events.book(this.eventKey, bookSeats, token);
+	public void bookObjects(List<String> seats, String token) {
+		client.events.book(this.eventKey, seats, token);
 	}
 
 	public String getSecretKey() {

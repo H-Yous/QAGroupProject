@@ -23,7 +23,7 @@ class NewReleases extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
+    axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
       this.setState({ newReleasedMovies: result.data });
     });
   }

@@ -57,23 +57,13 @@ export const NavigationBar = () => (
               <Link to="/newReleases">New Releases</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item id="classificationsLink">
-            <Nav.Link>
-              <Link to="/classifications">Classifications</Link>
-            </Nav.Link>
-          </Nav.Item>
           <Nav.Item>
             <Nav.Link>
               <Link to="/screens">Screens</Link>
             </Nav.Link>
           </Nav.Item>
-          <Nav.Item id="directionsLink">
-            <Nav.Link>
-              <Link to="/directions">Getting Here</Link>
-            </Nav.Link>
-          </Nav.Item>
           <Nav.Item>
-                <SearchBar />
+            <SearchBar />
           </Nav.Item>
         </Nav>
       </Navbar.Collapse>

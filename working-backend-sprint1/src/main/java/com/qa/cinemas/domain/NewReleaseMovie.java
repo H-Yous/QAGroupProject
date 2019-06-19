@@ -15,6 +15,7 @@ public class NewReleaseMovie {
 	private String actors;
 	private String director;
 	private String poster;
+	private String description;
 
 	public String getId() {
 		return id;
@@ -63,6 +64,15 @@ public class NewReleaseMovie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 
 
 }
