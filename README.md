@@ -13,6 +13,8 @@
      - [Main Class Methods](#main-class-methods)
      - [Test Class Methods](#test-class-methods)
  * [React Frontend](#react-frontend)
+   * [src](#src)
+   * [src Methods](#src-methods)
 
 ## Introduction
 This is a full-stack application of a cinema website created for [QA Consulting](https://consulting.qa.com/) with CRUD functionality.
@@ -174,6 +176,7 @@ npm start
 > TBD
 
 ## React Frontend
+### src
 (.js unless indicated)
 
 * assets
@@ -234,3 +237,5 @@ npm start
 * server
 * serviceWorker
 * stripeServer.bat
+### src Methods
+> TBC
