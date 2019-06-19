@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Card,Button } from 'react-bootstrap';
 import TicketForm from './ticketForm';
 import Axios from 'axios';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 class Confirmation extends Component {
      //THIS IS WHERE YOU GET THE CHOSEN SEAT STUFF
@@ -12,6 +14,7 @@ class Confirmation extends Component {
   state = this.props.location.state;
 
   componentDidMount(){
+    try{
     {console.log(this.state)}
     var seats = '';
     Axios.get('http://localhost:8080/gettotal')
@@ -19,12 +22,40 @@ class Confirmation extends Component {
         
         document.getElementById("total").innerText=res.data;
       });
+
+      Axios.get('http://localhost:8080/getname')
+      .then(res => {
+        
+        document.getElementById("name").innerText=res.data;
+      });
+
+      Axios.get('http://localhost:8080/getemail')
+      .then(res => {
+        
+        document.getElementById("email").innerText=res.data;
+      });
+    }catch(e){
+
+    }
       
   }
+
+  _exportPdf = () => {
+
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+       document.body.appendChild(canvas);  // if you want see your screenshot in body.
+       const imgData = canvas.toDataURL('image/png');
+       const pdf = new jsPDF();
+       pdf.addImage(imgData, 'PNG', 0, 0);
+       pdf.save("download.pdf"); 
+   });
+
+}
   
     render() {
 
         return(
+          <div id="capture">
             <Card style={{ opacity: '0.92' }}>
             <Card.Body>
             <TicketForm 
@@ -34,17 +65,19 @@ class Confirmation extends Component {
               <span>
               <Card.Subtitle id="ref" className="mb-2 text-muted">Total £:<h1 id="total"></h1></Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 
-              <Card.Subtitle className="mb-2 text-muted">Movie :<p id="movie"></p> </Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Name : <p id="name"></p></Card.Subtitle> 
+              <Card.Subtitle className="mb-2 text-muted">Email :<p id="email"></p> </Card.Subtitle>
            
               </span>
               <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
               </Card.Text>
-              <Button variant="primary">Email Confirmation</Button> 
+              <Button onClick={() => this._exportPdf()} variant="primary">Save Confirmation</Button>
               <Button onClick={() => window.print()} variant="primary">Print Confirmation</Button>
             </Card.Body>
           </Card>
+          </div>
         );
         
     }

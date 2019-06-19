@@ -53,8 +53,8 @@ class Payment extends Component {
               </span>
               <Elements>
                 <CheckoutForm chosenSeats={this.state} />
-                chosenSeats = {this.state}
-                seats = {this.seats}/>
+                
+              
               </Elements>
             </div>
           </StripeProvider>
