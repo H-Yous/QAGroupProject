@@ -9,6 +9,7 @@ import twelveaRating from "../assets/rating/12arating.png";
 import fifteenRating from "../assets/rating/15rating.png";
 import eighteenRating from "../assets/rating/18rating.png";
 import tbcRating from "../assets/rating/tbcrating.png";
+import { thisExpression } from "@babel/types";
 
 class NowShowing extends Component {
   constructor(){
@@ -25,7 +26,7 @@ class NowShowing extends Component {
       this.setState({ nowShowingMovies: result.data });
     });
     axios.get("http://localhost:8080/events/getAllEvents").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
+      for (let i = 0; i < result.data.length; i++) {
         this.state.events.push({
          timeSlot: result.data[i].timeSlot,
          screen: result.data[i].screen,
@@ -34,9 +35,26 @@ class NowShowing extends Component {
          title: result.data[i].movie,
       });
       }
+      console.log(this.state.events);
     });
-    console.log(this.state.events);
+  }
 
+  createButtons =(inputmovitetitle) => {
+    let returnButtons=[];
+
+    
+    //for (let i=0;i<this.state.events.length;i++){
+      for (let i=0;i<5;i++){
+
+          returnButtons.push(
+          <button
+          type="button"
+        >
+        </button>
+          )
+        
+    }
+    return returnButtons
   }
 
   handleRedirect(movieName) {
@@ -162,6 +180,8 @@ class NowShowing extends Component {
                                 );
                               }
                             })()}
+                            <div>
+                           </div>
                             <div class="mt-2">
                               <button
                                 type="button"

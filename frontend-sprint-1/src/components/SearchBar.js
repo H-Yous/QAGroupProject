@@ -82,7 +82,7 @@ class SearchBar extends Component {
   }
   componentDidMount() {
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
+      for (let i = 0; i < result.data.length; i++) {
         this.state.movieTitles.push({
           value: result.data[i].title.toLowerCase,
           label: result.data[i].title,
@@ -92,7 +92,7 @@ class SearchBar extends Component {
       }
     });
     axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
-      for (var i = 0; i < result.data.length; i++) {
+      for (let i = 0; i < result.data.length; i++) {
         this.state.movieTitles.push({
           value: result.data[i].title.toLowerCase,
           label: result.data[i].title,
