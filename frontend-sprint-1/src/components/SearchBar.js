@@ -76,7 +76,8 @@ class SearchBar extends Component {
       selectedOption: null,
       movieTitles: [],
       nowShowingMovieTitles: [],
-      newReleasesMovieTitles: []
+      newReleasesMovieTitles: [],
+      placeholder: "Search for movies..."
     };
   }
   componentDidMount() {
@@ -96,7 +97,7 @@ class SearchBar extends Component {
           value: result.data[i].title.toLowerCase,
           label: result.data[i].title,
           collection: "newReleases",
-          optionPath: "/newReleaseInfo"
+          optionPath: "/newReleasesInfo"
         });
       }
     });
@@ -106,9 +107,11 @@ class SearchBar extends Component {
     this.setState({ selectedOption });
     if (selectedOption.optionPath === "/nowShowingInfo") {
       this.props.history.push("/nowShowingInfo/" + selectedOption.label);
-    } else if (selectedOption.optionPath === "/newReleaseInfo") {
-      this.props.history.push("/newReleaseInfo/" + selectedOption.label);
+    } else if (selectedOption.optionPath === "/newReleasesInfo") {
+      this.props.history.push("/newReleasesInfo/" + selectedOption.label);
     }
+    const submitState = this.state;
+    this.setState(submitState);
   };
 
   render() {
@@ -123,6 +126,7 @@ class SearchBar extends Component {
           placeholder="Search for movies..."
           autosize={false}
           openMenuOnClick={false}
+          placeholder={this.state.placeholder}
           components={{ DropdownIndicator: () => null }}
         />
       </StyledSearch>

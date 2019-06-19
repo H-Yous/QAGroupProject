@@ -29,7 +29,7 @@ class NewReleases extends Component {
   }
 
   handleRedirect(movieName) {
-    this.props.history.push("/newReleaseInfo/" + movieName, { movieName });
+    this.props.history.push("/newReleasesInfo/" + movieName, { movieName });
   }
 
   render() {
