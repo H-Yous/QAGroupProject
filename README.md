@@ -123,7 +123,7 @@ This should open a local hosted copy of the site at `localhost:3000`.
   * Movie
   * NewReleaseMovie
   * NowShowingMovie
-  * stripeToken
+  * StripeToken
   * Ticket
   * TotalPrice
 * .enums
@@ -198,7 +198,7 @@ This should open a local hosted copy of the site at `localhost:3000`.
   * BookingService
   * CreateScreen
 * classificationpage
-  * Classifications
+  * Classification
 * contactpage
   * Contact
   * ContactPanel
@@ -211,25 +211,19 @@ This should open a local hosted copy of the site at `localhost:3000`.
   * *Login
   * *LoginPanel
 * newreleasespage
-  * NewReleaseInfo
   * NewReleases
+  * NewReleasesInfo
 * nowshowinginfo
-  * Info
-  * MoviePanel
   * NowShowing
   * nowShowing.css
   * NowShowingInfo
-  * Poster
-  * ShowTimes
-  * Title
 * paymentspage
   * CheckoutForm
-  * confirmation
-  * detailsForm
+  * Confirmation
+  * DetailsForm
   * Payment
-  * ticketForm
+  * TicketForm
 * screenspage
-  * CreateScreen
   * Screens
 * App
 * App.css
