@@ -12,6 +12,9 @@ class CheckoutForm extends Component {
     this.state = { validated: false };
     this.chosenSeats = this.props.chosenSeats;
     this.seats = this.props.seats;
+    this.textInput = React.createRef();
+    this.textInput1 = React.createRef();
+    this.textInput2 = React.createRef();
   }
 
   submit = async event => {
@@ -34,6 +37,24 @@ class CheckoutForm extends Component {
       if (response.ok) this.setState({ complete: true });
     } catch (e) {}
   };
+
+  handleChange() {
+    const value = this.textInput.current.value;
+    const name1 = this.textInput1.current.value;
+    const name2 = this.textInput2.current.value;
+
+    Axios.post("http://localhost:8080/sendEmail", {
+      email: value,
+      firstname: name1,
+      surname: name2
+    })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 
   handleRedirect(chosenSeats) {
     console.log(this.chosenSeats);
@@ -74,30 +95,36 @@ class CheckoutForm extends Component {
         <Form.Row>
           <Form.Group as={Col} md="4" controlId="validationCustom01">
             <Form.Label>Forename</Form.Label>
-            <Form.Control required type="text" placeholder="Forename..." />
+            <Form.Control
+              ref={this.textInput1}
+              onChange={() => this.handleChange()}
+              required
+              type="text"
+              placeholder="Forename..."
+            />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom02">
             <Form.Label>Surname</Form.Label>
-            <Form.Control required type="text" placeholder="Surname..." />
+            <Form.Control
+              ref={this.textInput2}
+              onChange={() => this.handleChange()}
+              required
+              type="text"
+              placeholder="Surname..."
+            />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustomEmail">
             <Form.Label>E-Mail</Form.Label>
-            <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-              </InputGroup.Prepend>
-              <Form.Control
-                type="text"
-                placeholder="Email"
-                aria-describedby="inputGroupPrepend"
-                required
-              />
-              <Form.Control.Feedback type="invalid">
-                Please choose a username.
-              </Form.Control.Feedback>
-            </InputGroup>
+            <Form.Control
+              ref={this.textInput}
+              onChange={() => this.handleChange()}
+              required
+              type="text"
+              placeholder="Email..."
+            />
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
         <Form.Row />

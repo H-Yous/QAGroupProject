@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.qa.cinemas.domain.Booking;
 import com.qa.cinemas.domain.StripeToken;
 import com.stripe.Stripe;
+import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 
@@ -31,6 +32,9 @@ public class ChargeController {
 
 	int intTotal;
 	String showMovie;
+	String customerEmail;
+	String customerFname;
+	String customerLname;
 
 	@PostMapping("/charge")
 	public void charge(@RequestBody String token) throws StripeException {
@@ -38,12 +42,21 @@ public class ChargeController {
 
 		Stripe.apiKey = stripeApiKey;
 
-		Map<String, Object> params = new HashMap<>();
-		params.put("amount", intTotal);
-		params.put("currency", "gbp");
-		params.put("description", "Example charge");
-		params.put("source", token);
-		Charge charge = Charge.create(params);
+		try {
+			Map<String, Object> params = new HashMap<>();
+
+			params.put("amount", intTotal);
+			params.put("currency", "gbp");
+			params.put("description", "QaCinema Ticket");
+			params.put("source", token);
+			params.put("statement_descriptor", "QaCinema");
+			params.put("receipt_email", customerEmail);
+			Charge charge = Charge.create(params);
+		} catch (CardException e) {
+
+			System.out.println("Status is: " + e.getCode());
+			System.out.println("Message is: " + e.getMessage());
+		}
 
 	}
 
@@ -55,11 +68,32 @@ public class ChargeController {
 		System.out.print(intTotal);
 	}
 
+	@PostMapping("/sendEmail")
+	public void email(@RequestBody String email) {
+		JSONObject json = new JSONObject(email);
+
+		customerEmail = json.getString("email");
+		customerFname = json.getString("firstname");
+		customerLname = json.getString("surname");
+	}
+
 	@GetMapping("/gettotal")
 	public int gettotal() {
 		int getTotal = intTotal / 100;
 		System.out.print(intTotal);
 		return getTotal;
+	}
+
+	@GetMapping("/getname")
+	public String getName() {
+		String fullname = customerFname + " " + customerLname;
+		return fullname;
+	}
+
+	@GetMapping("/getemail")
+	public String getEmail() {
+		String email = customerEmail;
+		return email;
 	}
 
 }
