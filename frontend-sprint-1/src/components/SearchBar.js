@@ -81,24 +81,13 @@ class SearchBar extends Component {
     };
   }
   componentDidMount() {
-    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
-      var row = new Array();
-      for (var i = 0; i < result.data.length; i++) {
-        this.state.movieTitles.push({
-          value: result.data[i].title.toLowerCase,
-          label: result.data[i].title,
-          collection: "upcomingMovies",
-          optionPath: "/path"
-        });
-      }
-    });
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
       for (var i = 0; i < result.data.length; i++) {
         this.state.movieTitles.push({
           value: result.data[i].title.toLowerCase,
           label: result.data[i].title,
           collection: "nowShowing",
-          optionPath: "/path"
+          optionPath: "/nowShowingInfo"
         });
       }
     });
@@ -108,7 +97,7 @@ class SearchBar extends Component {
           value: result.data[i].title.toLowerCase,
           label: result.data[i].title,
           collection: "newReleases",
-          optionPath: "/path"
+          optionPath: "/newReleaseInfo"
         });
       }
     });
@@ -116,8 +105,11 @@ class SearchBar extends Component {
 
   handleChange = selectedOption => {
     this.setState({ selectedOption });
-    console.log(selectedOption.optionPath);
-    this.props.history.push("/newReleases"); // use selectedOption.optionPath
+    if (selectedOption.optionPath === "/nowShowingInfo") {
+      this.props.history.push("/nowShowingInfo/" + selectedOption.label);
+    } else if (selectedOption.optionPath === "/newReleaseInfo") {
+      this.props.history.push("/newReleaseInfo/" + selectedOption.label);
+    }
   };
 
   render() {
