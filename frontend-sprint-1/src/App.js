@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
 import NowShowing from "./nowshowingpage/NowShowing.js";
+import NowShowingInfo from "./nowshowingpage/NowShowingInfo.js";
 import NewReleases from "./newreleasespage/NewReleases";
 import NewReleaseInfo from "./newreleasespage/NewReleaseInfo";
 import Screens from "./screenspage/Screens";
@@ -42,6 +43,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/nowShowing" component={NowShowing} />
+				  <Route path="/nowShowingInfo" component={NowShowingInfo} />
                   <Route path="/newReleases" component={NewReleases} />
                   <Route path="/newReleaseInfo" component={NewReleaseInfo} />
                   <Route path="/screens" component={Screens} />

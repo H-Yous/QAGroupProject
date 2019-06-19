@@ -37,14 +37,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private Events eventToBeSaved;
 	private ChartEventService chartEventService;
 
-
 	@Autowired
 	private EventServiceImpl eventServiceImpl;
-
-
-
-	@Autowired
-	private PopulateUpcomingMovies populateUpComingMovies;
 
 	@Autowired
 	PopulateNowShowingMovies populateNowShowingMovies;
@@ -57,18 +51,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
- 
+
 		System.out.println("APPLICATION RUNNING STARTUP");
 		populateEvents();
-
-		if (getCollectionSize("QACinema", "upcomingMovie") == 0) {
-			deleteCollection("QACinema", "upcomingMovie");
-			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
-			populateUpComingMovies.start();
-
-		} else {
-			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
-		}
 
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
 			deleteCollection("QACinema", "nowShowingMovie");
@@ -152,22 +137,22 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			eventToBeSaved.setMovie("N/A");
 
 			chartEventService = new ChartEventService();
-			
+
 			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
 					eventToBeSaved.setScreen(Screens.values()[j]);
-					switch(j+1){
-						case 1: 
+					switch (j + 1) {
+					case 1:
 						chartEventService.setChartKey(screenOne);
 						break;
-						
-						case 2:
+
+					case 2:
 						chartEventService.setChartKey(screenTwo);
 						break;
-						
-						case 3:
+
+					case 3:
 						chartEventService.setChartKey(screenThree);
 						break;
 					}
@@ -183,12 +168,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							// create event in io Humza Job
 						}
 
-						try{
+						try {
 							String eventKey = eventToBeSaved.getEventKey();
 							chartEventService.createEvent(eventKey);
 							System.out.println("Event Created on SeatsIO");
-						}catch(Exception e){
-							
+						} catch (Exception e) {
+
 							System.out.println(e);
 							System.out.println("Event Not Created on Seatsio");
 						}

@@ -52,13 +52,29 @@ public class PopulateMovieCertifications {
 		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
 				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
 				.forEach(aCertification -> movieRating.add(aCertification.getString("certification")));
+		
+		System.out.println("-CERTIFICATIONS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
 
 		StreamSupport.stream(resultsArray.spliterator(), false).map(aCertification -> (JSONObject) aCertification)
 				.filter(aCertification -> aCertification.getString("certification").matches("U|PG|12A|15|18"))
 				.forEach(aCertification -> movieRatingDescription.add(aCertification.getString("meaning")));
-
+		
+		System.out.println("-CERTIFICATION DESCRIPTIONS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
 		movieRating.stream().forEach(x -> populateDBWithCertifications(movieRating.indexOf(x)));
+		System.out.println("-CERTIFICATION TABLE POPULATED");
 
+	}
+	
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void populateDBWithCertifications(int index) {
