@@ -1,10 +1,8 @@
-import React, {Component} from 'react';
-import CreateScreen from './CreateScreen.js';
+import React, { Component } from "react";
+import CreateScreen from "./CreateScreen.js";
 
 class BookingChart extends Component{
     state = this.props.location.state;
-
-
     render(){
         return(
             <div id="venue_map">{this.state}
@@ -15,11 +13,7 @@ class BookingChart extends Component{
             movie={this.state}
             />
             </div>
-
-
-
         )
     };
 }
-
 export default BookingChart;

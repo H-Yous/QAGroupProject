@@ -28,9 +28,10 @@ const StyledSearch = styled.div`
 const customStyles = {
   control: (base, state) => ({
     ...base,
-    fontSize: 16,
+    fontSize: 14,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
+    backgroundColor: "lightgray",
     cursor: "text",
     borderRadius: 0,
     borderBottom: "solid 1px"

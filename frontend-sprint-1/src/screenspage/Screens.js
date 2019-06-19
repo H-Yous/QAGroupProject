@@ -122,7 +122,7 @@ class Screens extends Component {
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Screen One
+                      ONE
                     </h4>
                   </td>
                 </tr>
@@ -240,7 +240,7 @@ class Screens extends Component {
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Screen Two
+                      TWO
                     </h4>
                   </td>
                 </tr>
@@ -374,7 +374,7 @@ class Screens extends Component {
                     <h4
                       style={{ textAlign: "center", justifyContent: "center" }}
                     >
-                      Screen Three
+                      THREE
                     </h4>
                   </td>
                 </tr>
