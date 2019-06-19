@@ -27,7 +27,7 @@ public class ChosenSeatsController{
 
 
     private ChartEventService chartEvent = new ChartEventService();
-    
+
     private Booking booking = new Booking();
     
     @Autowired
@@ -36,9 +36,6 @@ public class ChosenSeatsController{
     private Ticket ticket = new Ticket();
     private String token;
     private List<String> seats = new ArrayList<String>();
-    private String title;
-    private String price;
-    private String type;
     private int totalprice = 0;
 
     
@@ -48,7 +45,7 @@ public class ChosenSeatsController{
         
         JSONObject bookingAttributes = new JSONObject(object);
         
-        this.seats.add(bookingAttributes.getString("seats"));
+        this.getSeats().add(bookingAttributes.getString("seats"));
 
         this.ticket.setSeat(bookingAttributes.getString("seats"));
         this.ticket.setPrice(bookingAttributes.getInt("price"));
@@ -60,27 +57,40 @@ public class ChosenSeatsController{
         this.booking.getTicket().add(this.ticket);
         this.ticket = new Ticket();
     
-        this.token = bookingAttributes.getString("token");
+        this.setToken(bookingAttributes.getString("token"));
         
-    
 		return "ticketMade";
     }
 
     @PostMapping("/SendBooking")
     public String sendBooking(){
         this.chartEvent.setEventKey("1-1-1");
+        System.out.println(this.getSeats());
         this.chartEvent.bookObjects(this.getSeats(), this.getToken());
         
         this.setDay();
         this.setScreen();
         this.setTimeSlot();
+
         booking.settotalPrice(this.totalprice);
-        this.totalprice = 0;
-        booking.toString();
+        
+
+        System.out.println("\n" + booking.toString());
         bookingServiceImpl.createBooking(this.booking);
-        this.booking = new Booking();
+
+        this.resetAll();
 
         return "bookingmade";
+    }
+
+    // @PostMapping("/resetBooking")
+    public String resetAll(){
+        this.totalprice = 0;
+        this.booking = new Booking();
+        this.setSeats(new ArrayList<String>());
+        this.setToken(" ");
+        System.out.println("All Resetted");
+        return "ALL RESETTED";
     }
 
     public String setDay(){

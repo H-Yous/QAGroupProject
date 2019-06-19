@@ -126,8 +126,8 @@ class ScreenCreation extends Component {
           priceFormatter={price => "£" + price}
           showLegend={true}
           holdOnSelect={true}
-          regenerateHoldToken={true}
-          expiresInSeconds={1}
+          
+          expiresInSeconds={0.01}
           maxSelectedObjects={this.props.maxObjects}
         />
         <Button

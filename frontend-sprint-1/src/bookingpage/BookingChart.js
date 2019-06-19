@@ -11,6 +11,7 @@ class BookingChart extends Component{
             eventKey='1-1-1'
             maxObjects={3}
             movie={this.state}
+            async
             />
             </div>
         )
