@@ -63,37 +63,14 @@ class NewReleasesInfo extends Component {
                         >
                           <div>
                             <img
-                              src={newReleasedMovie.altPoster}
+                              src={newReleasedMovie.poster}
                               width={525}
                               height={317}
                             />
-
                             <div style={{ textAlign: "justify" }}>
                               <br />
                               {newReleasedMovie.description}
-                            </div>
-                          </div>
-                        </View>
-                        <View
-                          style={{
-                            flex: 1,
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            padding: 10
-                          }}
-                        >
-                          <div>
-                            <div>
-                              <b>
-                                <i>Starring</i>
-                              </b>
                               <br />
-                              <p>{newReleasedMovie.actors}</p>
-                              <b>
-                                <i>Director</i>
-                              </b>
-                              <br />
-                              <p>{newReleasedMovie.director}</p>
                               <br />
                               {(() => {
                                 if (newReleasedMovie.certification == "U") {
@@ -185,6 +162,36 @@ class NewReleasesInfo extends Component {
                                   );
                                 }
                               })()}
+                            </div>
+                          </div>
+                        </View>
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            padding: 10
+                          }}
+                        >
+                          <div>
+                            <div>
+                              <img
+                                src={newReleasedMovie.altPoster}
+                                width={525}
+                                height={317}
+                              />
+                              <b>
+                                <br />
+                                <br />
+                                <i>Starring</i>
+                              </b>
+                              <br />
+                              <p>{newReleasedMovie.actors}</p>
+                              <b>
+                                <i>Director</i>
+                              </b>
+                              <br />
+                              <p>{newReleasedMovie.director}</p>
                             </div>
                           </div>
                         </View>
