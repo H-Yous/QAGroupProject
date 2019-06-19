@@ -99,25 +99,11 @@ class ContactPanel extends Component {
                   <div className="contactinfo-container">
                     <View style={{ flex: 1, flexDirection: "column" }}>
                       <label
-                        className="enquirerEmailLabel"
-                        id="enquirerEmail"
-                        name="enquirerEmail"
-                      >
-                        <i>You can contact us directly here.</i>
-                        <br />
-                        <i>
-                          Alternatively, you can take a look at our{" "}
-                          <Link to="/faq">FAQ</Link>.
-                        </i>
-                      </label>
-
-                      <br />
-
-                      <label
                         className="contactinfoLabel"
                         id="contactinfo"
                         name="contactinfo"
                       >
+                        <br />
                         <b>Enquiries Address:</b>
                         <br />
                         <i>c/o QA Cinemas, Ltd.</i>
@@ -130,6 +116,7 @@ class ContactPanel extends Component {
                         <br />
                         United Kingdom
                         <br />
+                        0118 999 881 999 119 725 3
                       </label>
 
                       <br />
@@ -152,6 +139,8 @@ class ContactPanel extends Component {
                         Greater London
                         <br />
                         United Kingdom
+                        <br />
+                        0845 074 7829
                       </label>
 
                       <br />
@@ -171,6 +160,8 @@ class ContactPanel extends Component {
                         <br />
                         Berkshire <br />
                         United Kingdom
+                        <br />
+                        0345 074 7840
                       </label>
                     </View>
                   </div>
@@ -225,6 +216,7 @@ class ContactPanel extends Component {
                 sourceType="profile"
                 screenName="cinemas_qa"
                 options={{ height: 850 }}
+                async
               />
             </td>
             <td>
@@ -239,6 +231,7 @@ class ContactPanel extends Component {
                 onSuccess={() => {}}
                 onAfterRender={() => {}}
                 onFailure={() => {}}
+                async
               />
             </td>
           </tr>

@@ -67,14 +67,14 @@ class FooterPage extends React.Component {
 
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
-                <Nav.Item id="aboutLink">
+                <Nav.Item id="directionsLink">
                   <Nav.Link>
-                    <Link to="/about">About</Link>
+                    <Link to="/directions">Getting Here</Link>
                   </Nav.Link>
                 </Nav.Item>
-                <Nav.Item id="faqLink">
+                <Nav.Item id="classificationsLink">
                   <Nav.Link>
-                    <Link to="/faq">FAQ</Link>
+                    <Link to="/classifications">Classifications</Link>
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item id="contactLink">
@@ -113,7 +113,7 @@ class FooterPage extends React.Component {
                     />
                   </a>
                   <a
-                    href="https://www.facebook.com/QA-Cinemas-1139717562886878/"
+                    href="https://en-gb.facebook.com/QAConsultingUK/"
                     target="_blank"
                   >
                     <img
