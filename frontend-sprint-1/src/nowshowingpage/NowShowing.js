@@ -12,13 +12,14 @@ import tbcRating from "../assets/rating/tbcrating.png";
 import { thisExpression } from "@babel/types";
 
 class NowShowing extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
   this.state = {
     nowShowingMovies: [],
     events: []
 
   };
+  this.createButtons=this.createButtons.bind(this);
 }
 
   componentDidMount() {
@@ -35,22 +36,24 @@ class NowShowing extends Component {
          title: result.data[i].movie,
       });
       }
-      console.log(this.state.events);
     });
   }
 
   createButtons =(inputmovitetitle) => {
     let returnButtons=[];
-
     
     //for (let i=0;i<this.state.events.length;i++){
       for (let i=0;i<5;i++){
-
           returnButtons.push(
-          <button
+            <span>
+          <button 
           type="button"
+          class="btn btn-primary btn-sm"
+
         >
-        </button>
+
+        </button> 
+            </span>
           )
         
     }
@@ -180,8 +183,8 @@ class NowShowing extends Component {
                                 );
                               }
                             })()}
-                            <div>
-                           </div>
+                      
+                    
                             <div class="mt-2">
                               <button
                                 type="button"
