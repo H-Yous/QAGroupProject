@@ -1,6 +1,7 @@
 package com.qa.cinemas.controller;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,11 +27,15 @@ public class ChosenSeatsController{
 
 
     private ChartEventService chartEvent = new ChartEventService();
+    
     private Booking booking = new Booking();
-    BookingServiceImpl bookingservice = new BookingServiceImpl();
+    
+    @Autowired
+    BookingServiceImpl bookingServiceImpl;
+
     private Ticket ticket = new Ticket();
     private String token;
-    private List<String> seats = new ArrayList<>();
+    private List<String> seats = new ArrayList<String>();
     private String title;
     private String price;
     private String type;
@@ -50,11 +55,12 @@ public class ChosenSeatsController{
         totalprice += this.ticket.getPrice();
         this.ticket.setTitle(bookingAttributes.getString("title"));
         this.ticket.setType(bookingAttributes.getString("type"));
-        System.out.println(ticket.toString());
-        //booking.getTicket().add(this.ticket);
+        //System.out.println(ticket.toString());
+        
+        this.booking.getTicket().add(this.ticket);
         this.ticket = new Ticket();
     
-        token = bookingAttributes.getString("token");
+        this.token = bookingAttributes.getString("token");
         
     
 		return "ticketMade";
@@ -62,15 +68,16 @@ public class ChosenSeatsController{
 
     @PostMapping("/SendBooking")
     public String sendBooking(){
-        chartEvent.bookObjects(this.seats, this.token);
-        seats = new ArrayList<String>();
-        chartEvent.setEventKey("1-1-1");
+        this.chartEvent.setEventKey("1-1-1");
+        this.chartEvent.bookObjects(this.getSeats(), this.getToken());
+        
         this.setDay();
         this.setScreen();
         this.setTimeSlot();
         booking.settotalPrice(this.totalprice);
+        this.totalprice = 0;
         booking.toString();
-        //bookingservice.createBooking(this.booking);
+        bookingServiceImpl.createBooking(this.booking);
         this.booking = new Booking();
 
         return "bookingmade";
@@ -138,6 +145,22 @@ public class ChosenSeatsController{
             break;
         }
         return "Timeslot : " + booking.getTimeSlot();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public List<String> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<String> seats) {
+        this.seats = seats;
     }
 
 }

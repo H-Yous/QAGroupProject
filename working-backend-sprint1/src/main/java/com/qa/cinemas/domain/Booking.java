@@ -1,5 +1,6 @@
 package com.qa.cinemas.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -46,8 +47,7 @@ public class Booking {
 	private TimeSlots timeSlot;
 
 	@NotNull
-	private List<Ticket> ticket;
-
+	private List<Ticket> ticket = new ArrayList<Ticket>();
 
 	@NotBlank
 	private String customerID;

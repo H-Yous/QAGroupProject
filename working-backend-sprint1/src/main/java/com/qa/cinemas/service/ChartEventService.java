@@ -30,6 +30,7 @@ public class ChartEventService {
 
 	public ChartEventService() {
 		client = new SeatsioClient(this.secretKey);
+		
 	}
 
 	public ChartEventService(String secretKey, String chartKey, String eventKey) {
@@ -57,12 +58,8 @@ public class ChartEventService {
 		return (int) this.client.events.listAll().count();
 	}
 
-	public void bookObjects(List<String> object, String token) {
-		
-		
-		System.out.println(token);
-
-		client.events.book(this.eventKey, object, token);
+	public void bookObjects(List<String> seats, String token) {
+		client.events.book(this.eventKey, seats, token);
 	}
 
 	public String getSecretKey() {
