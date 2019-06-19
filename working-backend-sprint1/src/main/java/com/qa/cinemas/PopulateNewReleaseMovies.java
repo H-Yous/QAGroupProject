@@ -195,7 +195,10 @@ public class PopulateNewReleaseMovies {
 			newReleaseMovie.setActors(movieActors.get(index));
 			newReleaseMovie.setDirector(movieDirector.get(index));
 			newReleaseMovie.setPoster(moviePoster.get(index));
+<<<<<<< HEAD
+=======
 			newReleaseMovie.setDescription(movieDescription.get(index));
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 			newReleaseMovieRepository.insert(newReleaseMovie);
 		}

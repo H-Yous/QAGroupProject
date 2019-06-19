@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card,Button } from 'react-bootstrap';
+
 import TicketForm from './ticketForm';
 import Axios from 'axios';
 import jsPDF from 'jspdf';
@@ -11,18 +12,38 @@ class Confirmation extends Component {
   //                                       .seatnum
   //                                       .ticket
   //                                       .price
-  state = this.props.location.state;
+  //state = this.props.location.state;
 
+  
   componentDidMount(){
+<<<<<<< HEAD
+
+=======
     try{
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     {console.log(this.state)}
+    let total = 0;
     var seats = '';
+    
+    Axios.get('http://localhost:8080/total')
+      .then(response => total = response.data);
+
     Axios.get('http://localhost:8080/gettotal')
       .then(res => {
         
         document.getElementById("total").innerText=res.data;
       });
 
+<<<<<<< HEAD
+
+  }
+
+
+    render() {
+
+        return(
+            <Card>
+=======
       Axios.get('http://localhost:8080/getname')
       .then(res => {
         
@@ -57,17 +78,28 @@ class Confirmation extends Component {
         return(
           <div id="capture">
             <Card style={{ opacity: '0.92' }}>
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
             <Card.Body>
-            <TicketForm 
-          chosenSeats = {this.state.chosenSeats}
-          /> 
+
+
+            
+              <TicketForm 
+                chosenSeats = {this.state.chosenSeats}
+              /> 
+
+
               <Card.Title>Ticket Confirmation</Card.Title>
               <span>
+<<<<<<< HEAD
+                  <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 
+                  <Card.Subtitle id="ref" className="mb-2 text-muted">Null</Card.Subtitle>
+=======
               <Card.Subtitle id="ref" className="mb-2 text-muted">Total £:<h1 id="total"></h1></Card.Subtitle>
               <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 
               <Card.Subtitle className="mb-2 text-muted">Name : <p id="name"></p></Card.Subtitle> 
               <Card.Subtitle className="mb-2 text-muted">Email :<p id="email"></p> </Card.Subtitle>
            
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
               </span>
               <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of

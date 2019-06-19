@@ -18,7 +18,13 @@ import seatsio.events.Event;
 
 import static com.qa.cinemas.constants.Constants.seatsIoApiKey;
 
+<<<<<<< HEAD
+
 @RestController
+// @RequestMapping("/")
+=======
+@RestController
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 @CrossOrigin("*")
 public class ChartEventService {
 
@@ -28,6 +34,17 @@ public class ChartEventService {
 	private SeatsioClient client;
 	private String[] seatsObject;
 
+<<<<<<< HEAD
+
+    public ChartEventService(){
+        client = new SeatsioClient(this.secretKey);
+    }
+    public ChartEventService(String secretKey, String chartKey, String eventKey) {
+        this.secretKey = secretKey;
+        this.chartKey = chartKey;
+        this.eventKey = eventKey;
+        client = new SeatsioClient(this.secretKey);
+=======
 	public ChartEventService() {
 		client = new SeatsioClient(this.secretKey);
 		
@@ -38,6 +55,7 @@ public class ChartEventService {
 		this.chartKey = chartKey;
 		this.eventKey = eventKey;
 		client = new SeatsioClient(this.secretKey);
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 	}
 
@@ -47,9 +65,17 @@ public class ChartEventService {
 		return "Created Event";
 	}
 
+<<<<<<< HEAD
+    
+
+    public String deleteEvent(String eventKey){
+        this.client.events.delete(eventKey);
+        this.client.events.listAll().count();
+=======
 	public String deleteEvent(String eventKey) {
 		this.client.events.delete(eventKey);
 		this.client.events.listAll().count();
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		return "Deleted Event";
 	}
@@ -58,9 +84,23 @@ public class ChartEventService {
 		return (int) this.client.events.listAll().count();
 	}
 
+<<<<<<< HEAD
+   
+    
+    public void bookObjects(String object, String token) {
+        System.out.println(object);
+        List<String> bookSeats = new ArrayList<String>();
+        
+        bookSeats.add(object);
+        
+        client.events.book(this.eventKey, bookSeats, token);
+        
+    }
+=======
 	public void bookObjects(List<String> seats, String token) {
 		client.events.book(this.eventKey, seats, token);
 	}
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 	public String getSecretKey() {
 		return secretKey;

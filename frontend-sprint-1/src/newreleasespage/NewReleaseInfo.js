@@ -35,7 +35,7 @@ class NewReleaseInfo extends Component {
                   </center>
                   <img
                     class="card-img-top"
-                    src={newReleasedMovie.poster}
+                    src={newReleasedMovie.altPoster}
                     alt="Card image cap"
                   />
                   <div class="card-body">

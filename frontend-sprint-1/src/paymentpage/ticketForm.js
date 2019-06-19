@@ -26,7 +26,7 @@ class ticketForm extends Component{
             
 
             numOfSeats: Object.keys(this.chosen).length
-
+            
         };
       }
 
@@ -47,9 +47,21 @@ class ticketForm extends Component{
 
     renderCreate(){
         
+<<<<<<< HEAD
+        return this.chosen.chosenSeats.map((x) => this.renderFormRow(x));
+            
+            
+=======
         return this.chosen.map((x) => this.renderFormRow(x)); 
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
         
     }
+
+
+    
+
+    
+
 
     render(){
         

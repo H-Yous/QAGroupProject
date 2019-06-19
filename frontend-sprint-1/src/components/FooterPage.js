@@ -4,9 +4,6 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import styled from "styled-components";
 
 import qaImage from "../assets/qa.png";
-import springImage from "../assets/technologies/spring.png";
-import mongoImage from "../assets/technologies/mongodb.png";
-import reactImage from "../assets/technologies/react.png";
 
 import git from "../assets/social/git.png";
 import hgit from "../assets/social/git-hover.png";
@@ -57,7 +54,6 @@ class FooterPage extends React.Component {
           <Navbar>
             <Navbar.Brand href="https://consulting.qa.com/" target="_blank">
               <img
-                id="qacLink"
                 src={qaImage}
                 className="d-inline-block align-center"
                 alt="QA Consulting"
@@ -67,6 +63,16 @@ class FooterPage extends React.Component {
 
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
+<<<<<<< HEAD
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/directions">Directions</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/nearby">Nearby</Link>
+=======
                 <Nav.Item id="directionsLink">
                   <Nav.Link>
                     <Link to="/directions">Getting Here</Link>
@@ -75,11 +81,32 @@ class FooterPage extends React.Component {
                 <Nav.Item id="classificationsLink">
                   <Nav.Link>
                     <Link to="/classifications">Classifications</Link>
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
                   </Nav.Link>
                 </Nav.Item>
-                <Nav.Item id="contactLink">
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/services">Lobby</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                   <Nav.Link>
                     <Link to="/contact">Contact</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/faq">FAQ</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/about">About</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link>
+                    <Link to="/legal">Legal</Link>
                   </Nav.Link>
                 </Nav.Item>
               </Nav>
@@ -88,6 +115,9 @@ class FooterPage extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <Nav.Item>
+<<<<<<< HEAD
+                  <a href="http://facebook.com" target="_blank">
+=======
                   <a href="https://spring.io/" target="_blank">
                     <img
                       id="springLink"
@@ -116,8 +146,8 @@ class FooterPage extends React.Component {
                     href="https://en-gb.facebook.com/QAConsultingUK/"
                     target="_blank"
                   >
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
                     <img
-                      id="fbBtn"
                       className="img-responsive"
                       src={fbImage}
                       onMouseOver={e => (e.currentTarget.src = hfbImage)}
@@ -127,7 +157,6 @@ class FooterPage extends React.Component {
                   </a>
                   <a href="https://twitter.com/cinemas_qa" target="_blank">
                     <img
-                      id="twBtn"
                       className="img-responsive"
                       src={twImage}
                       onMouseOver={e => (e.currentTarget.src = htwImage)}
@@ -140,7 +169,6 @@ class FooterPage extends React.Component {
                     target="_blank"
                   >
                     <img
-                      id="igBtn"
                       className="img-responsive"
                       src={igImage}
                       onMouseOver={e => (e.currentTarget.src = higImage)}
@@ -153,7 +181,6 @@ class FooterPage extends React.Component {
                     target="_blank"
                   >
                     <img
-                      id="liBtn"
                       className="img-responsive"
                       src={liImage}
                       onMouseOver={e => (e.currentTarget.src = hliImage)}
@@ -166,7 +193,6 @@ class FooterPage extends React.Component {
                     target="_blank"
                   >
                     <img
-                      id="gitBtn"
                       src={git}
                       onMouseOver={e => (e.currentTarget.src = hgit)}
                       onMouseOut={e => (e.currentTarget.src = git)}

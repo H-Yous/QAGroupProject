@@ -10,8 +10,6 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
 
 import java.util.Properties;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -20,10 +18,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
-import com.mongodb.ServerAddress;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
@@ -40,6 +34,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	private EventServiceImpl eventServiceImpl;
 
+<<<<<<< HEAD
+	@Autowired
+	private PopulateUpcomingMovies populateUpComingMovies;
+
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 	@Autowired
 	PopulateNowShowingMovies populateNowShowingMovies;
 
@@ -51,9 +51,18 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
-
+<<<<<<< HEAD
+<<<<<<< HEAD
 		System.out.println("APPLICATION RUNNING STARTUP");
 		populateEvents();
+
+		if (getCollectionSize("QACinema", "upcomingMovie") == 0) {
+			deleteCollection("QACinema", "upcomingMovie");
+			populateUpComingMovies.start();
+			System.out.println("APPLICATION POPULATING UPCOMING MOVIES");
+		} else {
+			System.out.println("UPCOMNGMOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
 			deleteCollection("QACinema", "nowShowingMovie");
@@ -82,10 +91,54 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		} else {
 			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
+=======
+		//new releases
+		System.out.println("POPULATING UPCOMING MOVIES...");
+		populateUpComingMovies.start();
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
+
+		System.out.println("APPLICATION RUNNING STARTUP");
+		populateEvents();
+
+		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
+			deleteCollection("QACinema", "nowShowingMovie");
+			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNowShowingMovies.start();
+		} else {
+			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+
+		if (getCollectionSize("QACinema", "newReleaseMovie") == 0) {
+			deleteCollection("QACinema", "newReleaseMovie");
+			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNewReleaseMovies.start();
+
+		} else {
+			System.out.println("NEWRELEASES MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+
+<<<<<<< HEAD
+		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
+		populateMovieCertification.start();
+>>>>>>> 1d17771ac88b5f72db4426a48dd9caf43cfd8a5c
+=======
+		if (getCollectionSize("QACinema", "certification") != 5) {
+			deleteCollection("QACinema", "certification");
+			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
+			waitTenSecsBeforeMakingRequests();
+			populateMovieCertification.start();
+		} else {
+			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		System.out.println("STARTUP FINISHED");
 	}
 
+<<<<<<< HEAD
 	private long getCollectionSize(String databaseCollectionIsIn, String collectionToBeDeleted) {
 		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 		MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
@@ -100,6 +153,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		Bson filter = new Document();
 		collection.deleteMany(filter);
 	}
+=======
+	
+>>>>>>> 1d17771ac88b5f72db4426a48dd9caf43cfd8a5c
 
 	private void waitTenSecsBeforeMakingRequests() {
 		try {

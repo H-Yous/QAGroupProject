@@ -21,10 +21,30 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.disabledTicket;
 
 @RequestMapping
 @RestController
+<<<<<<< HEAD
+@CrossOrigin("http://localhost:3000")
+
+public class PriceController{
+    
+    public PriceController(){
+        
+    }
+
+    @GetMapping("/pricing")
+    public List sendPriceList(){
+        List<Integer> priceList = new ArrayList<Integer>();
+        Collections.addAll(priceList, normAdult, normChild, normStudent, premAdult, premChild, premStudent, disabledTicket);
+        System.out.print(priceList);
+        return priceList;
+    }
+
+    
+=======
 @CrossOrigin(origins = "*")
 public class PriceController {
 
 	public PriceController() {
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 	}
 

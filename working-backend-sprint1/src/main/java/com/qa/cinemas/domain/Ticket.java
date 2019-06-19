@@ -1,6 +1,12 @@
 package com.qa.cinemas.domain;
 
 
+<<<<<<< HEAD
+
+
+public class Ticket{
+    
+=======
 public class Ticket{
 
 
@@ -48,4 +54,5 @@ public class Ticket{
 
 
 
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 }

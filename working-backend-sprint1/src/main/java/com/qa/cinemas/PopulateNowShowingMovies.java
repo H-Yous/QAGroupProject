@@ -55,11 +55,14 @@ public class PopulateNowShowingMovies {
 		movieDescription = new ArrayList<String>();
 		movieRunTime = new ArrayList<String>();
 		movieCertification = new ArrayList<String>();
+<<<<<<< HEAD
+=======
 		
 		movieActors = new ArrayList<String>();
 		movieDirector = new ArrayList<String>();
 		
 		currentYear = new SimpleDateFormat("yyyy").format(new Date());
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 	}
 
@@ -72,20 +75,26 @@ public class PopulateNowShowingMovies {
 		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
 		
 		populateMovieIdList(resultsArray);
+<<<<<<< HEAD
+=======
 		System.out.println("-NOW SHOWING MOVIE ID'S RETRIEVED " + "(" + movieId.size() + ")");
 		waitFiveSecsBeforeMakingRequests();
 		
 		populateMovieTitleList(resultsArray);
 		System.out.println("-NOW SHOWING MOVIE TITLES RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
 		System.out.println("-NOW SHOWING MOVIE POSTERS RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
+<<<<<<< HEAD
+=======
 		System.out.println("-NOW SHOWING MOVIE DESCRIPTIONS RETRIEVED");
 		waitFiveSecsBeforeMakingRequests();
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
 		System.out.println("-NOW SHOWING MOVIE RUNTIMES RETRIEVED");
@@ -141,6 +150,10 @@ public class PopulateNowShowingMovies {
 	}
 
 	private void populatemovieDescriptionList(String aMovieId) {
+<<<<<<< HEAD
+		waitFiveSecsBeforeMakingRequests();
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
 				+ "?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-US";
@@ -244,6 +257,15 @@ public class PopulateNowShowingMovies {
 				});
 	}
 	
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private void waitFiveSecsBeforeMakingRequests() {
 		try {
 			Thread.sleep(5000);

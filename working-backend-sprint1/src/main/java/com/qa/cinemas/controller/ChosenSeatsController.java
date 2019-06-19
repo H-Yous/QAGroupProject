@@ -1,7 +1,10 @@
 package com.qa.cinemas.controller;
 
 import org.json.JSONObject;
+<<<<<<< HEAD
+=======
 import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 
+<<<<<<< HEAD
+import com.qa.cinemas.domain.ChosenSeats;
+=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +25,7 @@ import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
 import com.qa.cinemas.service.BookingServiceImpl;
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 import com.qa.cinemas.service.ChartEventService;
 
 @RestController
@@ -26,6 +33,32 @@ import com.qa.cinemas.service.ChartEventService;
 public class ChosenSeatsController{
 
 
+<<<<<<< HEAD
+    ChartEventService chartEvent = new ChartEventService();
+    private String token;
+
+    @PostMapping("/holdToken")
+    public String getToken(@RequestBody String object){
+        JSONObject holdtoken = new JSONObject(object);
+
+        token = holdtoken.getString("token");
+        return "Got token";
+    }
+
+
+    @PostMapping("/bookthis")
+	public String addSeats(@RequestBody String object){
+        chartEvent.setEventKey("1-1-1");
+        JSONObject seats = new JSONObject(object);
+       
+       
+        
+        chartEvent.bookObjects(seats.getString("seats"), token);
+
+        
+		return "seatBooked";
+	}
+=======
     private ChartEventService chartEvent = new ChartEventService();
 
     private Booking booking = new Booking();
@@ -173,4 +206,5 @@ public class ChosenSeatsController{
         this.seats = seats;
     }
 
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 }

@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,24 +22,35 @@ import com.stripe.model.Charge;
 
 import lombok.extern.java.Log;
 
-import static com.qa.cinemas.constants.Constants.stripeApiKey;
-
 @Log
 @RestController
 @CrossOrigin("*")
 public class ChargeController {
 
-
 	int intTotal; 
+<<<<<<< HEAD
+=======
 	String showMovie; 
 	String customerEmail; 
 	String customerFname;
 	String customerLname;
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 	
     @PostMapping("/charge")
     public void charge(@RequestBody String token) throws StripeException {
     	//System.out.print(token);
     
+<<<<<<< HEAD
+    	Stripe.apiKey = "sk_test_QCwagkwuRqvO88QBgFcDwpCp00pZO514Zd";
+
+    	
+    	Map<String, Object> params = new HashMap<>();
+    	params.put("amount", intTotal);
+    	params.put("currency", "gbp");
+    	params.put("description", "Example charge");
+    	params.put("source", token);
+    	Charge charge = Charge.create(params);
+=======
     	Stripe.apiKey = stripeApiKey;
     	try { 		
     		Map<String, Object> params = new HashMap<>();
@@ -57,6 +67,7 @@ public class ChargeController {
     		  System.out.println("Status is: " + e.getCode());
     		  System.out.println("Message is: " + e.getMessage());
     		}
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     	
     }
     
@@ -68,6 +79,8 @@ public class ChargeController {
     	System.out.print(intTotal);
     }
     
+<<<<<<< HEAD
+=======
     @PostMapping("/sendEmail")
     public void email(@RequestBody String email) {
     	
@@ -106,6 +119,7 @@ public class ChargeController {
     
   
     
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     
     
     

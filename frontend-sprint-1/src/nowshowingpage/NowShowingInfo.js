@@ -37,7 +37,7 @@ class NowShowingInfo extends Component {
                   </center>
                   <img
                     class="card-img-top"
-                    src={nowShowingMovie.poster}
+                    src={nowShowingMovie.altPoster}
                     alt="Card image cap"
                   />
                   <div class="card-body">

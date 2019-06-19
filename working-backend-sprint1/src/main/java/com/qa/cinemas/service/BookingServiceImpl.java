@@ -30,4 +30,6 @@ public class BookingServiceImpl implements BookingService {
 		return bookingRepository.save(booking);
 	}
 
+	
+
 }
