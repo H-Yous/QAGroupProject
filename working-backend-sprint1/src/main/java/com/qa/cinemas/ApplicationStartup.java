@@ -34,9 +34,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	private EventServiceImpl eventServiceImpl;
 
+<<<<<<< HEAD
 	@Autowired
 	private PopulateUpcomingMovies populateUpComingMovies;
 
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 	@Autowired
 	PopulateNowShowingMovies populateNowShowingMovies;
 
@@ -48,6 +51,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
+<<<<<<< HEAD
 <<<<<<< HEAD
 		System.out.println("APPLICATION RUNNING STARTUP");
 		populateEvents();
@@ -91,22 +95,45 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		//new releases
 		System.out.println("POPULATING UPCOMING MOVIES...");
 		populateUpComingMovies.start();
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
-		waitTenSecsBeforeMakingRequests();
+		System.out.println("APPLICATION RUNNING STARTUP");
+		populateEvents();
 
-		System.out.println("POPULATING NOW SHOWING MOVIES...");
-		populateNowShowingMovies.start();
+		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
+			deleteCollection("QACinema", "nowShowingMovie");
+			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNowShowingMovies.start();
+		} else {
+			System.out.println("NOWSHOWING MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
-		waitTenSecsBeforeMakingRequests();
+		if (getCollectionSize("QACinema", "newReleaseMovie") == 0) {
+			deleteCollection("QACinema", "newReleaseMovie");
+			System.out.println("APPLICATION POPULATING NEWRELEASES MOVIES");
+			waitTenSecsBeforeMakingRequests();
+			populateNewReleaseMovies.start();
 
-		System.out.println("POPULATING NEW RELEASE MOVIES...");
-		populateNewReleaseMovies.start();
+		} else {
+			System.out.println("NEWRELEASES MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
 
-		waitTenSecsBeforeMakingRequests();
-
+<<<<<<< HEAD
 		System.out.println("POPULATING MOVIE CLASSIFICATIONS...");
 		populateMovieCertification.start();
 >>>>>>> 1d17771ac88b5f72db4426a48dd9caf43cfd8a5c
+=======
+		if (getCollectionSize("QACinema", "certification") != 5) {
+			deleteCollection("QACinema", "certification");
+			System.out.println("APPLICATION POPULATING CERTIFICATIONS");
+			waitTenSecsBeforeMakingRequests();
+			populateMovieCertification.start();
+		} else {
+			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
+		}
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		System.out.println("STARTUP FINISHED");
 	}

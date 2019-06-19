@@ -31,6 +31,8 @@ public class PopulateNewReleaseMovies {
 
 	private List<String> movieActors;
 	private List<String> movieDirector;
+	
+	private List<String> movieDescription;
 
 	private String posters = "";
 	private String actors = "";
@@ -49,9 +51,9 @@ public class PopulateNewReleaseMovies {
 		movieActors = new ArrayList<String>();
 		movieDirector = new ArrayList<String>();
 		moviePoster = new ArrayList<String>();
+		movieDescription = new ArrayList<String>();
 
 		currentYear = new SimpleDateFormat("yyyy").format(new Date());
-
 	}
 
 	public void start() {
@@ -64,19 +66,37 @@ public class PopulateNewReleaseMovies {
 		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
 
 		populateCurrentYearMovieIdList(resultsArray);
+		System.out.println("-NEW RELEASE MOVIE ID'S RETRIEVED " + "(" + movieId.size() + ")");
+		waitFiveSecsBeforeMakingRequests();
+		
 		movieId.stream().forEach(x -> populateCurrentYearMovieTitleList(x));
+		System.out.println("-NEW RELEASE MOVIE TITLES RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
 		movieId.stream().forEach(x -> populateCurrentYearmovieActorsList(x));
+		System.out.println("-NEW RELEASE MOVIE ACTORS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
 		movieId.stream().forEach(x -> populateCurrentYearMovieDirectorsList(x));
+		System.out.println("-NEW RELEASE MOVIE DIRECTORS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
+		System.out.println("-NEW RELEASE MOVIE TITLES POSTERS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
+		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
+		System.out.println("-NEW RELEASE MOVIE DESCRIPTIONS RETRIEVED");
 
 		movieId.stream().forEach(x -> populateDBWithNewReleaseMovieMovies(movieId.indexOf(x)));
+		System.out.println("-NEW RELEASE MOVIE TABLE POPULATED");
 	}
 
 	private void populateCurrentYearMovieIdList(JSONArray resultsArray) {
-		StreamSupport.stream(resultsArray.spliterator(), false).limit(5).map(aMovie -> (JSONObject) aMovie)
+		StreamSupport.stream(resultsArray.spliterator(), false).limit(15).map(aMovie -> (JSONObject) aMovie)
 				.filter(aMovie -> aMovie.getString("release_date").substring(0, 4).equals(currentYear))
 				.forEach(aMovie -> movieId.add(Integer.toString(aMovie.getInt("id"))));
-
+		
 	}
 
 	private void populateCurrentYearMovieTitleList(String aMovieId) {
@@ -87,7 +107,6 @@ public class PopulateNewReleaseMovies {
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 
 		movieTitle.add(returnedJsonStringAsObj.getString("original_title"));
-
 	}
 
 	private void populateCurrentYearmovieActorsList(String aMovieId) {
@@ -106,7 +125,7 @@ public class PopulateNewReleaseMovies {
 		actors = actors.substring(0, actors.length() - 1);
 
 		movieActors.add(actors);
-
+		
 	}
 
 	private void populateCurrentYearMovieDirectorsList(String aMovieId) {
@@ -124,7 +143,6 @@ public class PopulateNewReleaseMovies {
 						movieDirector.add(aCastMember.getString("name"));
 					}
 				});
-
 	}
 
 	private void populatemoviePosterList(String aMovieId) {
@@ -146,6 +164,27 @@ public class PopulateNewReleaseMovies {
 		posters = "";
 
 	}
+	
+	private void populatemovieDescriptionList(String aMovieId) {
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
+				+ "?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-US";
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		movieDescription.add(returnedJsonStringAsObj.getString("overview"));
+	}
+	
+	private void waitFiveSecsBeforeMakingRequests() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
 
 	private void populateDBWithNewReleaseMovieMovies(int index) {
 
@@ -156,6 +195,10 @@ public class PopulateNewReleaseMovies {
 			newReleaseMovie.setActors(movieActors.get(index));
 			newReleaseMovie.setDirector(movieDirector.get(index));
 			newReleaseMovie.setPoster(moviePoster.get(index));
+<<<<<<< HEAD
+=======
+			newReleaseMovie.setDescription(movieDescription.get(index));
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 			newReleaseMovieRepository.insert(newReleaseMovie);
 		}

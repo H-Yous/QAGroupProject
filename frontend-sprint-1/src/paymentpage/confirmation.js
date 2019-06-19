@@ -3,6 +3,8 @@ import { Card,Button } from 'react-bootstrap';
 
 import TicketForm from './ticketForm';
 import Axios from 'axios';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 class Confirmation extends Component {
      //THIS IS WHERE YOU GET THE CHOSEN SEAT STUFF
@@ -14,7 +16,11 @@ class Confirmation extends Component {
 
   
   componentDidMount(){
+<<<<<<< HEAD
 
+=======
+    try{
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     {console.log(this.state)}
     let total = 0;
     var seats = '';
@@ -28,6 +34,7 @@ class Confirmation extends Component {
         document.getElementById("total").innerText=res.data;
       });
 
+<<<<<<< HEAD
 
   }
 
@@ -36,6 +43,42 @@ class Confirmation extends Component {
 
         return(
             <Card>
+=======
+      Axios.get('http://localhost:8080/getname')
+      .then(res => {
+        
+        document.getElementById("name").innerText=res.data;
+      });
+
+      Axios.get('http://localhost:8080/getemail')
+      .then(res => {
+        
+        document.getElementById("email").innerText=res.data;
+      });
+    }catch(e){
+
+    }
+      
+  }
+
+  _exportPdf = () => {
+
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+       document.body.appendChild(canvas);  // if you want see your screenshot in body.
+       const imgData = canvas.toDataURL('image/png');
+       const pdf = new jsPDF();
+       pdf.addImage(imgData, 'PNG', 0, 0);
+       pdf.save("download.pdf"); 
+   });
+
+}
+  
+    render() {
+
+        return(
+          <div id="capture">
+            <Card style={{ opacity: '0.92' }}>
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
             <Card.Body>
 
 
@@ -47,17 +90,26 @@ class Confirmation extends Component {
 
               <Card.Title>Ticket Confirmation</Card.Title>
               <span>
+<<<<<<< HEAD
                   <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 
                   <Card.Subtitle id="ref" className="mb-2 text-muted">Null</Card.Subtitle>
+=======
+              <Card.Subtitle id="ref" className="mb-2 text-muted">Total £:<h1 id="total"></h1></Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Ref : </Card.Subtitle> 
+              <Card.Subtitle className="mb-2 text-muted">Name : <p id="name"></p></Card.Subtitle> 
+              <Card.Subtitle className="mb-2 text-muted">Email :<p id="email"></p> </Card.Subtitle>
+           
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
               </span>
               <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
               </Card.Text>
-              <Button variant="primary">Email Confirmation</Button> 
+              <Button onClick={() => this._exportPdf()} variant="primary">Save Confirmation</Button>
               <Button onClick={() => window.print()} variant="primary">Print Confirmation</Button>
             </Card.Body>
           </Card>
+          </div>
         );
         
     }

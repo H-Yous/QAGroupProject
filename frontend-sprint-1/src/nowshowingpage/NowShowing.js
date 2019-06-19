@@ -9,7 +9,8 @@ import fifteenRating from "../assets/15rating.png";
 import eighteenRating from "../assets/18rating.png";
 import tbcRating from "../assets/tbcrating.png";
 import { Button } from "reactstrap";
-
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 class NowShowing extends Component {
   state = {
     nowShowingMovies: []
@@ -20,6 +21,10 @@ class NowShowing extends Component {
       console.log(result.data.title);
       this.setState({ nowShowingMovies: result.data });
     });
+  }
+
+  handleRedirect(movieName) {
+    this.props.history.push("/nowShowingInfo/" + movieName, { movieName });
   }
 
   render() {
@@ -40,9 +45,17 @@ class NowShowing extends Component {
                           alt="Card image cap"
                         />
                         <div className="card-body d-flex flex-column">
-                          <h5 className="card-title">
-                            {nowShowingMovie.title}
-                          </h5>
+                          <Link style={{ textDecoration: "none" }}>
+                            <h5
+                              style={{ color: "black" }}
+                              onClick={() => {
+                                this.handleRedirect(nowShowingMovie.title);
+                              }}
+                              className="card-title"
+                            >
+                              {nowShowingMovie.title}
+                            </h5>
+                          </Link>
                           <p className="card-text">
                             {nowShowingMovie.description}
                           </p>
@@ -156,9 +169,23 @@ class NowShowing extends Component {
                                 alt="Card image cap"
                               />
                               <div className="card-body d-flex flex-column">
-                                <h5 className="card-title">
-                                  {this.state.nowShowingMovies[index + 1].title}
-                                </h5>
+                                <Link style={{ textDecoration: "none" }}>
+                                  <h5
+                                    style={{ color: "black" }}
+                                    onClick={() => {
+                                      this.handleRedirect(
+                                        this.state.nowShowingMovies[index + 1]
+                                          .title
+                                      );
+                                    }}
+                                    className="card-title"
+                                  >
+                                    {
+                                      this.state.nowShowingMovies[index + 1]
+                                        .title
+                                    }
+                                  </h5>
+                                </Link>
                                 <p className="card-text">
                                   {
                                     this.state.nowShowingMovies[index + 1]
@@ -297,9 +324,23 @@ class NowShowing extends Component {
                                 alt="Card image cap"
                               />
                               <div className="card-body d-flex flex-column">
-                                <h5 className="card-title">
-                                  {this.state.nowShowingMovies[index + 2].title}
-                                </h5>
+                                <Link style={{ textDecoration: "none" }}>
+                                  <h5
+                                    style={{ color: "black" }}
+                                    onClick={() => {
+                                      this.handleRedirect(
+                                        this.state.nowShowingMovies[index + 2]
+                                          .title
+                                      );
+                                    }}
+                                    className="card-title"
+                                  >
+                                    {
+                                      this.state.nowShowingMovies[index + 2]
+                                        .title
+                                    }
+                                  </h5>
+                                </Link>
                                 <p className="card-text">
                                   {
                                     this.state.nowShowingMovies[index + 2]
@@ -438,4 +479,4 @@ class NowShowing extends Component {
   }
 }
 
-export default NowShowing;
+export default withRouter(NowShowing);

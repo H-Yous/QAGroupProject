@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import styled from "@emotion/styled";
 import Select from "react-select";
 import axios from "axios";
+import { PropTypes } from "prop-types";
+import { Link, withRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { createHashHistory } from "history";
 
 const StyledSearch = styled.div`
   width: 300px;
@@ -24,9 +28,10 @@ const StyledSearch = styled.div`
 const customStyles = {
   control: (base, state) => ({
     ...base,
-    fontSize: 16,
+    fontSize: 14,
     border: state.isFocused ? 0 : 0,
     boxShadow: state.isFocused ? 0 : 0,
+    backgroundColor: "lightgray",
     cursor: "text",
     borderRadius: 0,
     borderBottom: "solid 1px"
@@ -59,48 +64,62 @@ const customStyles = {
     color: "rgba(65, 147, 230)"
   })
 };
+
+const history = createHashHistory();
+
 class SearchBar extends Component {
-  state = {
-    selectedOption: null,
-    upcomingMovieTitles: [],
-    nowShowingMovieTitles: [],
-    newReleasesMovieTitles: []
+  static contextTypes = {
+    router: PropTypes.object
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedOption: null,
+      movieTitles: [],
+      nowShowingMovieTitles: [],
+      newReleasesMovieTitles: []
+    };
+  }
   componentDidMount() {
-    axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
-      var row = new Array();
-      for (var i = 0; i < result.data.length; i++) {
-        this.state.upcomingMovieTitles.push({
-          value: result.data[i].title.toLowerCase,
-          label: result.data[i].title
-        });
-      }
-    });
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
       for (var i = 0; i < result.data.length; i++) {
-        this.state.nowShowingMovieTitles.push(result.data[i].title);
+        this.state.movieTitles.push({
+          value: result.data[i].title.toLowerCase,
+          label: result.data[i].title,
+          collection: "nowShowing",
+          optionPath: "/nowShowingInfo"
+        });
       }
     });
     axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
       for (var i = 0; i < result.data.length; i++) {
-        this.state.newReleasesMovieTitles.push(result.data[i].title);
+        this.state.movieTitles.push({
+          value: result.data[i].title.toLowerCase,
+          label: result.data[i].title,
+          collection: "newReleases",
+          optionPath: "/newReleaseInfo"
+        });
       }
     });
   }
 
   handleChange = selectedOption => {
     this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    if (selectedOption.optionPath === "/nowShowingInfo") {
+      this.props.history.push("/nowShowingInfo/" + selectedOption.label);
+    } else if (selectedOption.optionPath === "/newReleaseInfo") {
+      this.props.history.push("/newReleaseInfo/" + selectedOption.label);
+    }
   };
 
   render() {
-    const { selectedOption, upcomingMovieTitles } = this.state;
+    const { selectedOption, movieTitles } = this.state;
     return (
       <StyledSearch>
         <Select
           value={selectedOption}
           onChange={this.handleChange}
-          options={upcomingMovieTitles}
+          options={movieTitles}
           styles={customStyles}
           placeholder="Search for movies..."
           autosize={false}
@@ -112,4 +131,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

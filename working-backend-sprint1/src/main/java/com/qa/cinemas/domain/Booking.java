@@ -1,5 +1,8 @@
 package com.qa.cinemas.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -16,10 +19,14 @@ import com.qa.cinemas.service.ChartEventService;
 @Document(collection = "Bookings")
 public class Booking {
 
+	// @Override
+	// public String toString() {
+	// 	return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
+	// 			+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+	// }
 	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ", screen=" + screen + ", timeSlot="
-				+ timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ", price=" + price + "]";
+	public String toString(){
+		return id + ", " + salesID + ", " + day + ", " + screen + ", " + timeSlot + ", " + ticket.toString() + ", " + totalPrice;
 	}
 
 	
@@ -45,18 +52,15 @@ public class Booking {
 	//@NotNull
 	private TimeSlots timeSlot;
 
-	@NotBlank
-	private String seatNumber;
+	@NotNull
+	private List<Ticket> ticket = new ArrayList<Ticket>();
 
 	// @NotBlank
 	private String customerID;
 	
-	@NotBlank
-	private String ticketType;
-
 
 	@NotBlank
-	private String price;
+	private int totalPrice;
 
 	public Booking() {
 	}
@@ -105,13 +109,6 @@ public class Booking {
 		this.timeSlot = timeSlot;
 	}
 
-	public String getSeatNumber() {
-		return seatNumber;
-	}
-
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
-	}
 
 	// public String getCustomerID() {
 	// 	return customerID;
@@ -121,26 +118,19 @@ public class Booking {
 	// 	this.customerID = customerID;
 	// }
 
-	public String getPrice() {
-		return price;
+	public int gettotalPrice() {
+		return totalPrice;
 	}
 
-	public void setPrice(String price) {
+	public void settotalPrice(int totalprice2) {
 		 
-		this.price = price;
+		this.totalPrice = totalprice2;
 	}
 	
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
 	
-	public String getTicketType() {
-		return ticketType;
-	}
-
-	public void setTicketType(String ticketType) {
-		this.ticketType = ticketType;
-	}
 
 	public String getId() {
 		return id;
@@ -149,6 +139,16 @@ public class Booking {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public List<Ticket> getTicket() {
+		return ticket;
+	}
+
+	public void setTicket(List<Ticket> ticket) {
+		this.ticket = ticket;
+	}
+
+	
 	
 
 

@@ -22,7 +22,7 @@ public final class PROJ_CONSTANTS {
 	public static final String getNowShowingMoviesPath = "/getNowShowingMovies";
 	public static final String getCertificationsPath = "/getCertifications";
 	public static final String getNewReleasedMoviesPath = "/getNewReleasedMovies";
-	public static final String getUpcomingMoviesPath = "/getUpcomingMovies";
+
 	
 	public static final String bookThisPath = "/bookthis";
 	

@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./homepage/Home";
 import NowShowing from "./nowshowingpage/NowShowing.js";
+import NowShowingInfo from "./nowshowingpage/NowShowingInfo.js";
 import NewReleases from "./newreleasespage/NewReleases";
 import NewReleaseInfo from "./newreleasespage/NewReleaseInfo";
+<<<<<<< HEAD
 import { Events } from "./Events";
 import Screens from "./screenspage/Screens";
 import Login from "./loginpage/Login.js";
 import About from "./aboutpage/About.js";
+=======
+import Screens from "./screenspage/Screens";
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 import Classifications from "./classificationpage/Classifications.js";
 import Contact from "./contactpage/Contact.js";
 import Payment from "./paymentpage/Payment.js";
@@ -45,12 +50,18 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/nowShowing" component={NowShowing} />
+				  <Route path="/nowShowingInfo" component={NowShowingInfo} />
                   <Route path="/newReleases" component={NewReleases} />
                   <Route path="/newReleaseInfo" component={NewReleaseInfo} />
+<<<<<<< HEAD
                   <Route path="/events" component={Events} />
                   <Route path="/screens" component={Screens} />
                   <Route path="/about" component={About} />
                   <Route path="/login" component={Login} />
+=======
+                  <Route path="/screens" component={Screens} />
+                  {/* <Route path="/login" component={Login} /> */}
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
                   <Route path="/confirmation" component={Confirmation} />
                   <Route path="/payment" component={Payment} />
                   <Route path="/classifications" component={Classifications} />

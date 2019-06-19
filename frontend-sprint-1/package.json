@@ -13,15 +13,28 @@
     "emailjs-com": "^2.3.2",
     "express": "^4.17.1",
     "history": "^4.9.0",
+<<<<<<< HEAD
+=======
+    "html2canvas": "^1.0.0-rc.3",
+    "i": "^0.3.6",
+    "jspdf": "^1.5.3",
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     "node-sass": "^4.12.0",
     "npm": "^6.9.0",
+    "pdf-export": "^1.4.1",
     "proxy": "^0.2.4",
     "react": "^16.8.6",
     "react-art": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
+<<<<<<< HEAD
+=======
+    "react-dropdown-input": "^0.1.11",
+    "react-facebook": "^8.0.4",
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
     "react-fela": "^10.5.0",
     "react-helmet": "^5.2.1",
+    "react-instagram-embed": "^1.5.0",
     "react-native": "^0.59.9",
     "react-native-scalable-image": "^0.5.1",
     "react-native-web": "^0.11.4",
@@ -33,6 +46,7 @@
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^3.0.0",
     "react-table": "^6.10.0",
+    "react-twitter-embed": "^2.0.8",
     "reactstrap": "^8.0.0",
     "stripe": "^7.1.0",
     "styled-components": "^4.3.1",

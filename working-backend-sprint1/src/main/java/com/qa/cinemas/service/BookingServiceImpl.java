@@ -13,10 +13,10 @@ import com.qa.cinemas.service.ChartEventService;
 
 @Service
 public class BookingServiceImpl implements BookingService {
-	
+
 	@Autowired
 	private BookingRepository bookingRepository;
-	
+
 	@Autowired
 	private SequenceGeneratorService sequenceGenerator;
 

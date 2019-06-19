@@ -23,7 +23,11 @@ class NewReleases extends Component {
   };
 
   componentDidMount() {
+<<<<<<< HEAD
     axios.get("http://localhost:8080/api/getUpcomingMovies").then(result => {
+=======
+    axios.get("http://localhost:8080/api/getNewReleasedMovies").then(result => {
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
       this.setState({ newReleasedMovies: result.data });
     });
   }
@@ -35,7 +39,6 @@ class NewReleases extends Component {
   render() {
     return (
       <React.Fragment>
-        <h1>New Releases</h1>
         <Styles>
           <Carousel>
             {this.state.newReleasedMovies.map(

@@ -56,17 +56,21 @@ export const NavigationBar = () => (
               <Link to="/newReleases">New Releases</Link>
             </Nav.Link>
           </Nav.Item>
+<<<<<<< HEAD
           <Nav.Item>
             <Nav.Link>
               <Link to="/events">Events & Offers</Link>
             </Nav.Link>
           </Nav.Item>
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
           <Nav.Item>
             <Nav.Link>
               <Link to="/screens">Screens</Link>
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
+<<<<<<< HEAD
             <Nav.Link>
               <Link to="/login">Login</Link>
             </Nav.Link>
@@ -75,6 +79,10 @@ export const NavigationBar = () => (
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-info">Search</Button>
           </Form>
+=======
+            <SearchBar />
+          </Nav.Item>
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
         </Nav>
       </Navbar.Collapse>
     </Navbar>

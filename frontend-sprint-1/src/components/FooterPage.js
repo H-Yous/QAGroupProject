@@ -63,6 +63,7 @@ class FooterPage extends React.Component {
 
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
+<<<<<<< HEAD
                 <Nav.Item>
                   <Nav.Link>
                     <Link to="/directions">Directions</Link>
@@ -71,6 +72,16 @@ class FooterPage extends React.Component {
                 <Nav.Item>
                   <Nav.Link>
                     <Link to="/nearby">Nearby</Link>
+=======
+                <Nav.Item id="directionsLink">
+                  <Nav.Link>
+                    <Link to="/directions">Getting Here</Link>
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item id="classificationsLink">
+                  <Nav.Link>
+                    <Link to="/classifications">Classifications</Link>
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
@@ -104,7 +115,38 @@ class FooterPage extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="ml-auto">
                 <Nav.Item>
+<<<<<<< HEAD
                   <a href="http://facebook.com" target="_blank">
+=======
+                  <a href="https://spring.io/" target="_blank">
+                    <img
+                      id="springLink"
+                      src={springImage}
+                      className="img-responsive"
+                      alt="Spring Tool Suite"
+                    />
+                  </a>
+                  <a href="https://www.mongodb.com/" target="_blank">
+                    <img
+                      id="mongoLink"
+                      src={mongoImage}
+                      className="img-responsive"
+                      alt="MongoDB"
+                    />
+                  </a>
+                  <a href="https://reactjs.org/" target="_blank">
+                    <img
+                      id="reactLink"
+                      src={reactImage}
+                      className="img-responsive"
+                      alt="React"
+                    />
+                  </a>
+                  <a
+                    href="https://en-gb.facebook.com/QAConsultingUK/"
+                    target="_blank"
+                  >
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
                     <img
                       className="img-responsive"
                       src={fbImage}
@@ -113,7 +155,7 @@ class FooterPage extends React.Component {
                       alt="Facebook"
                     />
                   </a>
-                  <a href="http://twitter.com" target="_blank">
+                  <a href="https://twitter.com/cinemas_qa" target="_blank">
                     <img
                       className="img-responsive"
                       src={twImage}
@@ -122,7 +164,10 @@ class FooterPage extends React.Component {
                       alt="Twitter"
                     />
                   </a>
-                  <a href="http://instagram.com" target="_blank">
+                  <a
+                    href="https://www.instagram.com/purpleqacinemas/"
+                    target="_blank"
+                  >
                     <img
                       className="img-responsive"
                       src={igImage}
@@ -131,7 +176,10 @@ class FooterPage extends React.Component {
                       alt="Instagram"
                     />
                   </a>
-                  <a href="http://linkedin.com" target="_blank">
+                  <a
+                    href="https://www.linkedin.com/company/qaconsulting"
+                    target="_blank"
+                  >
                     <img
                       className="img-responsive"
                       src={liImage}

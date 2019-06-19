@@ -1,6 +1,8 @@
 package com.qa.cinemas;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.StreamSupport;
 
@@ -30,9 +32,16 @@ public class PopulateNowShowingMovies {
 	private List<String> movieDescription;
 	private List<String> movieRunTime;
 	private List<String> movieCertification;
+	
+	private List<String> movieActors;
+	private List<String> movieDirector;
 
 	private boolean foundGBCertification = false;
 	private String posters = "";
+	private String actors = "";
+	
+	private String currentYear;
+	
 
 	private NowShowingMovie nowShowingMovie;
 
@@ -46,6 +55,14 @@ public class PopulateNowShowingMovies {
 		movieDescription = new ArrayList<String>();
 		movieRunTime = new ArrayList<String>();
 		movieCertification = new ArrayList<String>();
+<<<<<<< HEAD
+=======
+		
+		movieActors = new ArrayList<String>();
+		movieDirector = new ArrayList<String>();
+		
+		currentYear = new SimpleDateFormat("yyyy").format(new Date());
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 	}
 
@@ -56,22 +73,51 @@ public class PopulateNowShowingMovies {
 		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
 		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
 		resultsArray = returnedJsonStringAsObj.getJSONArray("results");
-
-		populateMovieTitleList(resultsArray);
+		
 		populateMovieIdList(resultsArray);
+<<<<<<< HEAD
+=======
+		System.out.println("-NOW SHOWING MOVIE ID'S RETRIEVED " + "(" + movieId.size() + ")");
+		waitFiveSecsBeforeMakingRequests();
+		
+		populateMovieTitleList(resultsArray);
+		System.out.println("-NOW SHOWING MOVIE TITLES RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		movieId.stream().forEach(x -> populatemoviePosterList(x));
+		System.out.println("-NOW SHOWING MOVIE POSTERS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
 
 		movieId.stream().forEach(x -> populatemovieDescriptionList(x));
+<<<<<<< HEAD
+=======
+		System.out.println("-NOW SHOWING MOVIE DESCRIPTIONS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		movieId.stream().forEach(x -> populatemovieRunTimeListForNowShowingMovies(x));
-		waitTenSecsBeforeMakingRequests();
-		waitTenSecsBeforeMakingRequests();
+		System.out.println("-NOW SHOWING MOVIE RUNTIMES RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
+		movieId.stream().forEach(x -> populateCurrentYearmovieActorsList(x));
+		System.out.println("-NOW SHOWING  MOVIE ACTORS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+		
+		movieId.stream().forEach(x -> populateCurrentYearMovieDirectorsList(x));
+		System.out.println("-NOW SHOWING  MOVIE DIRECTORS RETRIEVED");
+		waitFiveSecsBeforeMakingRequests();
+
 
 		movieId.stream().forEach(x -> populatemovieCertificationListForNowShowingMovies(x));
+		System.out.println("-NOW SHOWING MOVIE CERTIFICATIONS RETRIEVED");
+		
+
+
 
 		movieId.stream().forEach(x -> populateDBWithNowShowingMovies(movieId.indexOf(x)));
-	}
+		System.out.println("-NOW SHOWING MOVIE TABLE POPULATED");
+	}	
 
 	private void populateMovieTitleList(JSONArray movies) {
 		StreamSupport.stream(movies.spliterator(), false).map(aMovie -> (JSONObject) aMovie)
@@ -104,7 +150,10 @@ public class PopulateNowShowingMovies {
 	}
 
 	private void populatemovieDescriptionList(String aMovieId) {
+<<<<<<< HEAD
 		waitFiveSecsBeforeMakingRequests();
+=======
+>>>>>>> 87f86268a074a4f661895c9e07d02a6a3da64ba6
 
 		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId
 				+ "?api_key=e527fe3aa9735362a7f95d86cd6093ad&language=en-US";
@@ -171,10 +220,46 @@ public class PopulateNowShowingMovies {
 		foundGBCertification = false;
 
 	}
+	
+	private void populateCurrentYearmovieActorsList(String aMovieId) {
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/credits?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		restTemplate = new RestTemplate();
 
-	private void waitTenSecsBeforeMakingRequests() {
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		resultsArray = returnedJsonStringAsObj.getJSONArray("cast");
+
+		actors = "";
+
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aCastMember -> (JSONObject) aCastMember)
+				.forEach(aCastMember -> actors += aCastMember.getString("name") + ",");
+
+		actors = actors.substring(0, actors.length() - 1);
+
+		movieActors.add(actors);
+		
+	}
+	
+	private void populateCurrentYearMovieDirectorsList(String aMovieId) {
+
+		apiURI = "https://api.themoviedb.org/3/movie/" + aMovieId + "/credits?api_key=e527fe3aa9735362a7f95d86cd6093ad";
+		restTemplate = new RestTemplate();
+
+		returnedJsonString = restTemplate.getForObject(apiURI, String.class);
+		returnedJsonStringAsObj = new JSONObject(returnedJsonString);
+		resultsArray = returnedJsonStringAsObj.getJSONArray("crew");
+
+		StreamSupport.stream(resultsArray.spliterator(), false).map(aCrewMember -> (JSONObject) aCrewMember)
+				.forEach(aCastMember -> {
+					if (aCastMember.getString("job").equals("Director")) {
+						movieDirector.add(aCastMember.getString("name"));
+					}
+				});
+	}
+	
+	private void waitFiveSecsBeforeMakingRequests() {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -202,8 +287,14 @@ public class PopulateNowShowingMovies {
 			nowShowingMovie.setPoster(moviePoster.get(index));
 			nowShowingMovie.setRuntime(movieRunTime.get(index));
 			nowShowingMovie.setCertification(movieCertification.get(index));
+			nowShowingMovie.setActors(movieActors.get(index));
+			nowShowingMovie.setDirector(movieDirector.get(index));
 
 			nowShowingMovieRepository.insert(nowShowingMovie);
+		}
+		else
+		{
+			System.out.println("Movie: " + movieTitle.get(index) + " has been discarded (no poster)");
 		}
 
 	}
