@@ -4,6 +4,7 @@
  * [Setup](#setup)
    + [Windows Installation](#windows-installation)
    + [Backend Setup](#backend-setup)
+   + [Database Setup](#database-setup)
    + [Frontend Setup](#frontend-setup)
  * [Project Structure](#project-structure)
    + [Java Backend](#java-backend)
@@ -60,7 +61,7 @@ npm i npm@latest -g
 ### Backend Setup
 In your local repository folder, build the package:
 ```
-mvn package
+mvn clean package
 ```
 If you have followed these steps, the following should appear:
 
@@ -69,8 +70,10 @@ If you have followed these steps, the following should appear:
 Inside the folder, navigate to the generated .jar file and run it:
 ```
 cd target
-java -jar QACinemasAID-0.0.1.jar
+java -jar [jar-in-this-folder]
 ```
+### Database Setup
+Download the latest version of MongoDB Compass from the [mongodb](https://www.mongodb.com/products/compass) website.
 
 ## Frontend Setup
 Open the command line in the root directory of the application:
@@ -78,6 +81,7 @@ Open the command line in the root directory of the application:
 npm i
 npm start
 ```
+This should open a local hosted copy of the site at `localhost:3000`.
 
 ## Project Structure
 ### Java Backend
