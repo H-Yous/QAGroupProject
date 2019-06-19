@@ -60,7 +60,7 @@ class NowShowingInfo extends Component {
                           }}
                         >
                           <img
-                            src={nowShowingMovies.poster}
+                            src={nowShowingMovies.altPoster}
                             width={525}
                             height={317}
                           />

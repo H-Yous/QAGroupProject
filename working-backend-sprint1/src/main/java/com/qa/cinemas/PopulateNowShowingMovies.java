@@ -29,6 +29,7 @@ public class PopulateNowShowingMovies {
 	private List<String> movieId;
 
 	private List<String> moviePoster;
+	private List<String> moviePosterAlt;
 	private List<String> movieDescription;
 	private List<String> movieRunTime;
 	private List<String> movieCertification;
@@ -40,7 +41,6 @@ public class PopulateNowShowingMovies {
 	private String posters = "";
 	private String actors = "";
 
-	private String currentYear;
 
 	private NowShowingMovie nowShowingMovie;
 
@@ -58,7 +58,7 @@ public class PopulateNowShowingMovies {
 		movieActors = new ArrayList<String>();
 		movieDirector = new ArrayList<String>();
 
-		currentYear = new SimpleDateFormat("yyyy").format(new Date());
+		moviePosterAlt = new ArrayList<String>();
 
 	}
 
@@ -131,6 +131,11 @@ public class PopulateNowShowingMovies {
 		posters = posters.substring(0, posters.length());
 		String[] postersSplit = posters.split(",");
 		moviePoster.add(postersSplit[0]);
+		if (1 >= postersSplit.length) {
+			moviePosterAlt.add(postersSplit[0]);
+			} else {
+			moviePosterAlt.add(postersSplit[1]);
+			}
 		posters = "";
 
 	}
@@ -258,6 +263,7 @@ public class PopulateNowShowingMovies {
 			nowShowingMovie.setTitle(movieTitle.get(index));
 			nowShowingMovie.setDescription(movieDescription.get(index));
 			nowShowingMovie.setPoster(moviePoster.get(index));
+			nowShowingMovie.setAltPoster(moviePosterAlt.get(index));
 			nowShowingMovie.setRuntime(movieRunTime.get(index));
 			nowShowingMovie.setCertification(movieCertification.get(index));
 			nowShowingMovie.setActors(movieActors.get(index));

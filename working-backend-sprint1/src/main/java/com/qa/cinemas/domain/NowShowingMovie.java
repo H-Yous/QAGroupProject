@@ -15,6 +15,7 @@ public class NowShowingMovie {
 	private String description;
 
 	private String poster;
+	private String altPoster;
 
 	private String runtime;
 
@@ -93,6 +94,13 @@ public class NowShowingMovie {
 
 	public void setPoster(String poster) {
 		this.poster = poster;
+	}
+	public String getAltPoster() {
+		return altPoster;
+	}
+
+	public void setAltPoster(String altPoster) {
+		this.altPoster = altPoster;
 	}
 
 }

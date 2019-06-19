@@ -62,7 +62,7 @@ class NewReleasesInfo extends Component {
                           }}
                         >
                           <img
-                            src={newReleasedMovie.poster}
+                            src={newReleasedMovie.altPoster}
                             width={525}
                             height={317}
                           />

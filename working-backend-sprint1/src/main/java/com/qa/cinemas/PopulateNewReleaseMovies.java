@@ -28,6 +28,7 @@ public class PopulateNewReleaseMovies {
 	private List<String> movieId;
 
 	private List<String> moviePoster;
+	private List<String> moviePosterAlt;
 
 	private List<String> movieActors;
 	private List<String> movieDirector;
@@ -51,6 +52,7 @@ public class PopulateNewReleaseMovies {
 		movieActors = new ArrayList<String>();
 		movieDirector = new ArrayList<String>();
 		moviePoster = new ArrayList<String>();
+		moviePosterAlt = new ArrayList<String>();
 		movieDescription = new ArrayList<String>();
 
 		currentYear = new SimpleDateFormat("yyyy").format(new Date());
@@ -161,6 +163,11 @@ public class PopulateNewReleaseMovies {
 		posters = posters.substring(0, posters.length());
 		String[] postersSplit = posters.split(",");
 		moviePoster.add(postersSplit[0]);
+		if (1 >= postersSplit.length) {
+			moviePosterAlt.add(postersSplit[0]);
+		} else {
+			moviePosterAlt.add(postersSplit[1]);
+		}
 		posters = "";
 
 	}
@@ -193,6 +200,7 @@ public class PopulateNewReleaseMovies {
 			newReleaseMovie.setActors(movieActors.get(index));
 			newReleaseMovie.setDirector(movieDirector.get(index));
 			newReleaseMovie.setPoster(moviePoster.get(index));
+			newReleaseMovie.setAltPoster(moviePosterAlt.get(index));
 			newReleaseMovie.setDescription(movieDescription.get(index));
 
 			newReleaseMovieRepository.insert(newReleaseMovie);
