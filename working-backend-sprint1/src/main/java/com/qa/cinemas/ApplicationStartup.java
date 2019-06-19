@@ -21,6 +21,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.ServerAddress;
+import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -30,6 +31,7 @@ import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
 import com.qa.cinemas.service.ChartEventService;
 import com.qa.cinemas.service.EventServiceImpl;
+import com.qa.cinemas.service.NowShowingMovieServiceImpl;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
@@ -48,11 +50,15 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 	@Autowired
 	PopulateMovieCertifications populateMovieCertification;
+	
+	@Autowired
+	NowShowingMovieServiceImpl nowShowingMovieServiceImpl;
 
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 
 		System.out.println("APPLICATION RUNNING STARTUP");
+		
 		populateEvents();
 
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
@@ -92,7 +98,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		MongoCollection collection = database.getCollection(collectionToBeDeleted);
 		return collection.countDocuments();
 	}
-
+	
 	private void deleteCollection(String databaseCollectionIsIn, String collectionToBeDeleted) {
 		MongoClient mongoClient = new MongoClient(new ServerAddress("localhost", 27017));
 		MongoDatabase database = mongoClient.getDatabase(databaseCollectionIsIn);
@@ -140,8 +146,10 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
+
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
+					int movieCount = 0;
 					eventToBeSaved.setScreen(Screens.values()[j]);
 					switch (j + 1) {
 					case 1:
@@ -164,9 +172,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							System.out.println("event key detected, not saving");
 						} else {
 							System.out.println("saving event: " + eventToBeSaved);
+							eventToBeSaved.setMovie(nowShowingMovieServiceImpl.findAll().get(movieCount).getTitle());
+							movieCount++;
 							eventServiceImpl.createEvent(eventToBeSaved);
-							// create event in io Humza Job
+							if (movieCount == nowShowingMovieServiceImpl.findAll().size()) {
+								movieCount = 0;
+							}
 						}
+
 
 						try {
 							String eventKey = eventToBeSaved.getEventKey();

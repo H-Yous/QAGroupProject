@@ -11,15 +11,32 @@ import eighteenRating from "../assets/rating/18rating.png";
 import tbcRating from "../assets/rating/tbcrating.png";
 
 class NowShowing extends Component {
-  state = {
-    nowShowingMovies: []
+  constructor(){
+    super();
+  this.state = {
+    nowShowingMovies: [],
+    events: []
+
   };
+}
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
-      console.log(result.data.title);
       this.setState({ nowShowingMovies: result.data });
     });
+    axios.get("http://localhost:8080/events/getAllEvents").then(result => {
+      for (var i = 0; i < result.data.length; i++) {
+        this.state.events.push({
+         timeSlot: result.data[i].timeSlot,
+         screen: result.data[i].screen,
+         day: result.data[i].day,
+         eventKey: result.data[i].eventKey,
+         title: result.data[i].movie,
+      });
+      }
+    });
+    console.log(this.state.events);
+
   }
 
   handleRedirect(movieName) {
