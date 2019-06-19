@@ -22,7 +22,7 @@ class NowShowing extends Component {
     });
   }
 
-  handleRedirect(title){
+  handleRedirectBooking(title){
     this.props.history.push("/booking", title);
   }
 

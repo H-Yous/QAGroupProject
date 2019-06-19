@@ -28,6 +28,7 @@ public class ChosenSeatsController{
 
     private ChartEventService chartEvent = new ChartEventService();
 
+    
     private Booking booking = new Booking();
     
     @Autowired
