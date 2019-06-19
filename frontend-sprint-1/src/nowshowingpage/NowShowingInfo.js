@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { View } from "react-native";
+import { Table } from "react-bootstrap";
 import uRating from "../assets/rating/urating.png";
 import pgRating from "../assets/rating/pgrating.png";
 import twelveaRating from "../assets/rating/12arating.png";
@@ -28,98 +30,160 @@ class NowShowingInfo extends Component {
     return (
       <React.Fragment>
         {this.state.nowShowingMovies.map(
-          (nowShowingMovie, index, moviesArray) => {
-            if (nowShowingMovie.title === selectedMovieName) {
+          (nowShowingMovies, index, moviesArray) => {
+            if (nowShowingMovies.title === selectedMovieName) {
               return (
-                <div class="card">
-                  <center>
-                    <h1>{nowShowingMovie.title}</h1>
-                  </center>
-                  <img
-                    class="card-img-top"
-                    src={nowShowingMovie.poster}
-                    alt="Card image cap"
-                  />
-                  <div class="card-body">
-                    <h3 class="card-text">Description</h3>
-                    <p class="card-text">{nowShowingMovie.description}</p>
-                  </div>
+                <React.Fragment>
+                  <Table striped bordered variant="light">
+                    <Table striped bordered variant="dark">
+                      <center>
+                        <h2>
+                          <b>{nowShowingMovies.title}</b>
+                        </h2>
+                      </center>
+                    </Table>
+                    <Table striped bordered variant="dark">
+                      <View
+                        style={{
+                          flex: 1,
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          padding: 10
+                        }}
+                      >
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            padding: 10
+                          }}
+                        >
+                          <img
+                            src={nowShowingMovies.poster}
+                            width={525}
+                            height={317}
+                          />
 
-                  <div class="card-body">
-                    <h3 class="card-text">Actors</h3>
-                    <p class="card-text">{nowShowingMovie.actors}</p>
-                  </div>
-
-                  <div class="card-body">
-                    <h3 class="card-text">Director</h3>
-                    <p class="card-text">{nowShowingMovie.director}</p>
-                  </div>
-                  <div class="mt-auto">
-                    <p>
-                      <small className="text-muted">
-                        {nowShowingMovie.runtime} mins
-                      </small>
-                    </p>
-                    {(() => {
-                      if (nowShowingMovie.certification == "U") {
-                        return (
-                          <a
-                            href="https://bbfc.co.uk/what-classification/u"
-                            target="_blank"
-                            alt="Universal"
-                          >
-                            <img src={uRating} height="50" width="50" />
-                          </a>
-                        );
-                      } else if (nowShowingMovie.certification == "PG") {
-                        return (
-                          <a
-                            href="https://bbfc.co.uk/what-classification/pg"
-                            target="_blank"
-                            alt="Parental Guidance"
-                          >
-                            <img src={pgRating} height="50" width="50" />
-                          </a>
-                        );
-                      } else if (
-                        nowShowingMovie.certification == "12" ||
-                        nowShowingMovie.certification == "12A"
-                      ) {
-                        return (
-                          <a
-                            href="https://bbfc.co.uk/what-classification/12a-and-12"
-                            target="_blank"
-                            alt="12A"
-                          >
-                            <img src={twelveaRating} height="50" width="50" />
-                          </a>
-                        );
-                      } else if (nowShowingMovie.certification == "15") {
-                        return (
-                          <a
-                            href="https://bbfc.co.uk/what-classification/15"
-                            target="_blank"
-                            alt="15"
-                          >
-                            <img src={fifteenRating} height="50" width="50" />
-                          </a>
-                        );
-                      } else if (nowShowingMovie.certification == "18") {
-                        return (
-                          <a
-                            href="https://bbfc.co.uk/what-classification/18"
-                            target="_blank"
-                            alt="18"
-                          >
-                            <img src={eighteenRating} height="50" width="50" />
-                          </a>
-                        );
-                      } else {
-                        return <img src={tbcRating} height="50" width="50" />;
-                      }
-                    })()}
-                  </div>
-                </div>
+                          <div style={{ textAlign: "justify" }}>
+                            <br />
+                            {nowShowingMovies.description}
+                          </div>
+                        </View>
+                        <View
+                          style={{
+                            flex: 1,
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            padding: 10
+                          }}
+                        >
+                          <div>
+                            <b>
+                              <i>Starring</i>
+                            </b>
+                            <br />
+                            <p>{nowShowingMovies.actors}</p>
+                            <b>
+                              <i>Director</i>
+                            </b>
+                            <br />
+                            <p>{nowShowingMovies.director}</p>
+                            <br />
+                            <br />
+                            {(() => {
+                              if (nowShowingMovies.certification == "U") {
+                                return (
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/u"
+                                    target="_blank"
+                                    alt="Universal"
+                                  >
+                                    <img src={uRating} height="50" width="50" />
+                                  </a>
+                                );
+                              } else if (
+                                nowShowingMovies.certification == "PG"
+                              ) {
+                                return (
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/pg"
+                                    target="_blank"
+                                    alt="Parental Guidance"
+                                  >
+                                    <img
+                                      src={pgRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
+                                );
+                              } else if (
+                                nowShowingMovies.certification == "12" ||
+                                nowShowingMovies.certification == "12A"
+                              ) {
+                                return (
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/12a-and-12"
+                                    target="_blank"
+                                    alt="12A"
+                                  >
+                                    <img
+                                      src={twelveaRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
+                                );
+                              } else if (
+                                nowShowingMovies.certification == "15"
+                              ) {
+                                return (
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/15"
+                                    target="_blank"
+                                    alt="15"
+                                  >
+                                    <img
+                                      src={fifteenRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
+                                );
+                              } else if (
+                                nowShowingMovies.certification == "18"
+                              ) {
+                                return (
+                                  <a
+                                    href="https://bbfc.co.uk/what-classification/18"
+                                    target="_blank"
+                                    alt="18"
+                                  >
+                                    <img
+                                      src={eighteenRating}
+                                      height="50"
+                                      width="50"
+                                    />
+                                  </a>
+                                );
+                              } else {
+                                return (
+                                  <img src={tbcRating} height="50" width="50" />
+                                );
+                              }
+                            })()}
+                            <p>
+                              <small className="text-muted">
+                                {nowShowingMovies.runtime} mins
+                              </small>
+                            </p>
+                          </div>
+                        </View>
+                      </View>
+                    </Table>
+                  </Table>
+                </React.Fragment>
               );
             }
           }
@@ -128,4 +192,5 @@ class NowShowingInfo extends Component {
     );
   }
 }
+
 export default NowShowingInfo;
