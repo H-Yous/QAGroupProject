@@ -38,6 +38,8 @@ public class BookingController {
 
 	@PostMapping(createBooking)
 	public ResponseEntity<?> createBookings(@Valid @RequestBody Booking booking) {
+		System.out.println("CREATING BOOKING");
+		System.out.println(booking);
 		Booking result = bookingServiceImpl.createBooking(booking);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}

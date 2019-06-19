@@ -1,5 +1,6 @@
 package com.qa.cinemas.controller;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +13,7 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.util.JSON;
 import com.qa.cinemas.domain.Booking;
 import com.qa.cinemas.domain.Ticket;
 import com.qa.cinemas.domain.ChosenSeats;
@@ -27,69 +29,109 @@ public class ChosenSeatsController {
 
 	private ChartEventService chartEvent = new ChartEventService();
 
-	private Booking booking = new Booking();
+	
 
 	@Autowired
 	BookingServiceImpl bookingServiceImpl;
-
-	private Ticket ticket = new Ticket();
+	private int count = 0;
+	private Ticket ticket1 = new Ticket();
 	private String token;
-	private List<String> seats = new ArrayList<String>();
+	
 	private int totalprice = 0;
 
 	@PostMapping("/bookthis")
-	public String sendTicket(@RequestBody String object) {
+	public String sendTicket (@RequestBody Object object[]) {
+		
+		JSONArray ticketArray = new JSONArray(object);
+		
+		ArrayList<String> seats = new ArrayList<String>();
+		for(int i = 0; i < object.length; i++){
+			seats.add(ticketArray.getJSONObject(i).getString("seat"));
+		}
+		System.out.println(seats);
 
-		JSONObject bookingAttributes = new JSONObject(object);
+		try{
+		String token = ticketArray.getJSONObject(0).getString("token");
+		this.chartEvent.bookObjects(seats, token);
+		} catch (Exception e){
+			System.out.println("Didn't send to chartEvent");
+		}
+		
+		
+		List<Ticket> ticketList = new ArrayList<>();
+			for(int i = 0; i < ticketArray.length(); i++){
+				int price = ticketArray.getJSONObject(i).getInt("price");
+				this.totalprice += price;
+				String seat = ticketArray.getJSONObject(i).getString("seat");
+				String title = ticketArray.getJSONObject(i).getString("title");
+				String token2 = ticketArray.getJSONObject(i).getString("token");
+				String type = ticketArray.getJSONObject(i).getString("type");
+				
+				
+				Ticket ticket = new Ticket(title, type, price, seat, token2);
+				System.out.println(ticket.toString());
+				ticketList.add(ticket);
+				
+			}
+			System.out.println(ticketList);
 
-		this.getSeats().add(bookingAttributes.getString("seats"));
+			Ticket[] ticket = ticketList.toArray(new Ticket[ticketList.size()]);
+	
 
-		this.ticket.setSeat(bookingAttributes.getString("seats"));
-		this.ticket.setPrice(bookingAttributes.getInt("price"));
-		totalprice += this.ticket.getPrice();
-		this.ticket.setTitle(bookingAttributes.getString("title"));
-		this.ticket.setType(bookingAttributes.getString("type"));
-		// System.out.println(ticket.toString());
-
-		this.booking.getTicket().add(this.ticket);
-		this.ticket = new Ticket();
-
-		this.setToken(bookingAttributes.getString("token"));
+		this.createBooking(ticket);
+		
 
 		return "ticketMade";
 	}
 
-	@PostMapping("/SendBooking")
-	public String sendBooking() {
+	public String createBooking(Ticket[] ticket){
 		this.chartEvent.setEventKey("1-1-1");
-		System.out.println(this.getSeats());
-		this.chartEvent.bookObjects(this.getSeats(), this.getToken());
-
-		this.setDay();
-		this.setScreen();
-		this.setTimeSlot();
-
+		Booking booking = new Booking();
+		this.setDay(booking);
+		this.setScreen(booking);
+		this.setTimeSlot(booking);
 		booking.settotalPrice(this.totalprice);
+		booking.setTicket(ticket);
+		booking.setCustomerID(Integer.toString(count));
+		this.count++;
+		this.totalprice = 0;
+		System.out.println(booking.toString());
 
-		System.out.println("\n" + booking.toString());
-		bookingServiceImpl.createBooking(this.booking);
+		bookingServiceImpl.createBooking(booking);
 
-		this.resetAll();
+		return "Booking created";
+	}
+
+	public String sendBooking() {
+		// this.chartEvent.setEventKey("1-1-1");
+		// System.out.println(this.getSeats());
+		// this.chartEvent.bookObjects(this.getSeats(), this.getToken());
+
+		// this.setDay();
+		// this.setScreen();
+		// this.setTimeSlot();
+
+		// booking.settotalPrice(this.totalprice);
+
+		// System.out.println("\n" + booking.toString());
+		// bookingServiceImpl.createBooking(this.booking);
+
+		// this.resetAll();
 
 		return "bookingmade";
 	}
 
 	// @PostMapping("/resetBooking")
 	public String resetAll() {
-		this.totalprice = 0;
-		this.booking = new Booking();
-		this.setSeats(new ArrayList<String>());
-		this.setToken(" ");
-		System.out.println("All Resetted");
+		// this.totalprice = 0;
+		// this.booking = new Booking();
+		// this.setSeats(new ArrayList<String>());
+		// this.setToken(" ");
+		// System.out.println("All Resetted");
 		return "ALL RESETTED";
 	}
 
-	public String setDay() {
+	public String setDay(Booking booking) {
 		switch (this.chartEvent.getEventKey().substring(0, 1)) {
 		case "1":
 			booking.setDay(Days.MONDAY);
@@ -117,7 +159,7 @@ public class ChosenSeatsController {
 		return "Day : " + booking.getDay();
 	}
 
-	public String setScreen() {
+	public String setScreen(Booking booking) {
 		switch (this.chartEvent.getEventKey().substring(2, 3)) {
 		case "1":
 			booking.setScreen(Screens.SMALLSCREEN);
@@ -132,7 +174,7 @@ public class ChosenSeatsController {
 		return "Screen : " + booking.getScreen();
 	}
 
-	public String setTimeSlot() {
+	public String setTimeSlot(Booking booking) {
 		switch (this.chartEvent.getEventKey().substring(4, 5)) {
 		case "1":
 			booking.setTimeSlot(TimeSlots.FIRSTSLOT);
@@ -161,12 +203,6 @@ public class ChosenSeatsController {
 		this.token = token;
 	}
 
-	public List<String> getSeats() {
-		return seats;
-	}
 
-	public void setSeats(List<String> seats) {
-		this.seats = seats;
-	}
 
 }

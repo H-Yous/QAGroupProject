@@ -57,15 +57,15 @@ class ScreenCreation extends Component {
     this.movie = this.props.movie;
     chart.listSelectedObjects(listOfObjects => {
       listOfObjects.map(object => {
-        let seatnum = object.label;
-        let ticket = object.selectedTicketType;
-        let newtoken = chart.holdToken;
-        let movieTitle = this.movie;
+        let seat = object.label;
+        let type = object.selectedTicketType;
+        let token = chart.holdToken;
+        let title = this.movie;
 
         let price = object.pricing.ticketTypes
-          .filter(obj => obj.ticketType === ticket)
+          .filter(obj => obj.ticketType === type)
           .map(obj => obj.price)[0];
-        this.chosenSeats.push({ movieTitle, seatnum, ticket, price, newtoken });
+        this.chosenSeats.push({ title, seat, type, price, token });
         console.log(chart.holdToken);
         if (listOfObjects.indexOf(object) === listOfObjects.length - 1) {
           this.handleRedirect(this.chosenSeats);

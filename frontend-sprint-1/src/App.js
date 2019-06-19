@@ -18,7 +18,7 @@ import Directions from "./directionspage/Directions.js";
 import { ImageBackground, Text } from "react-native";
 import backgroundImage from "./assets/img/background.jpg";
 import styled from "styled-components";
-import Confirmation from "./paymentpage/Confirmation";
+import Confirmation from "./paymentpage/confirmation.js";
 
 const Styles = styled.div``;
 

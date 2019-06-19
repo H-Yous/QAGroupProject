@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import { Card } from "react-bootstrap";
 import CheckoutForm from "./CheckoutForm";
-import TicketForm from "./TicketForm";
+import TicketForm from "./ticketForm.js";
 import Axios from "axios";
 
 class Payment extends Component {
@@ -17,11 +17,10 @@ class Payment extends Component {
   componentDidMount() {
     console.log(this.state);
     var total = 0;
-    this.seats = "";
+    
     for (var i = 0; i < this.state.length; i++) {
       total = total + this.state[i].price;
-      this.seats += JSON.stringify(this.state[i].seatnum);
-      console.log(this.state[i].seatnum);
+      
     }
     console.log(this.seats);
     console.log(total);

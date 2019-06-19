@@ -27,6 +27,7 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Booking createBooking(Booking booking) {
+		System.out.println(booking + "/n ---------------------- BOOKING COMPLETE");
 		return bookingRepository.save(booking);
 	}
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
-import TicketForm from "./TicketForm";
+import TicketForm from "./ticketForm.js";
 import Axios from "axios";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
@@ -16,7 +16,8 @@ class Confirmation extends Component {
   componentDidMount() {
     try {
       {
-        console.log(this.state);
+        console.log(this.state.chosenSeats);
+        console.log(JSON.stringify(this.state.chosenSeats));
       }
       var seats = "";
       Axios.get("http://localhost:8080/gettotal").then(res => {
@@ -30,6 +31,13 @@ class Confirmation extends Component {
         document.getElementById("email").innerText = res.data;
       });
     } catch (e) {}
+
+    try{
+      Axios.post("http://localhost:8080/bookthis", {
+        ticket : [ this.state.chosenSeats ]
+      });
+    }
+    catch(e){}
   }
   _exportPdf = () => {
     html2canvas(document.querySelector("#capture")).then(canvas => {

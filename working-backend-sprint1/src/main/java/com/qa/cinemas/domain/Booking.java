@@ -50,7 +50,7 @@ public class Booking {
 	private TimeSlots timeSlot;
 
 	@NotNull
-	private List<Ticket> ticket = new ArrayList<Ticket>();
+	private Ticket ticket[];
 
 	@NotBlank
 	private String customerID;
@@ -122,11 +122,11 @@ public class Booking {
 		this.id = id;
 	}
 
-	public List<Ticket> getTicket() {
+	public Ticket[] getTicket() {
 		return ticket;
 	}
 
-	public void setTicket(List<Ticket> ticket) {
+	public void setTicket(Ticket[] ticket) {
 		this.ticket = ticket;
 	}
 

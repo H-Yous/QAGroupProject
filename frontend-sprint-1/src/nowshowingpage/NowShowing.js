@@ -25,6 +25,10 @@ class NowShowing extends Component {
   handleRedirect(movieName) {
     this.props.history.push("/nowShowingInfo/" + movieName, { movieName });
   }
+  handleRedirectBooking(title){
+    this.props.history.push("/booking", title);
+  }
+  
 
   render() {
     return (
@@ -149,6 +153,11 @@ class NowShowing extends Component {
                               <button
                                 type="button"
                                 class="btn btn-primary btn-sm"
+                                onClick={() => {
+                                  this.handleRedirectBooking(
+                                    nowShowingMovie.title
+                                  );
+                                }}
                               >
                                 10:00
                               </button>

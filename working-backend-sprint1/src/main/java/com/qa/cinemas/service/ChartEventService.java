@@ -58,8 +58,13 @@ public class ChartEventService {
 		return (int) this.client.events.listAll().count();
 	}
 
-	public void bookObjects(List<String> seats, String token) {
+	public void bookObjects(ArrayList<String> seats, String token) {
+		System.out.println("Got to book Objects");
+		System.out.println(seats + " : SEATS" );
+		System.out.println(token + " : TOKEN" );
 		client.events.book(this.eventKey, seats, token);
+		System.out.println("Sent seats");
+		
 	}
 
 	public String getSecretKey() {
