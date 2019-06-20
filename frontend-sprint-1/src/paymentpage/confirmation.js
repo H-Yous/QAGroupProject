@@ -33,9 +33,13 @@ class Confirmation extends Component {
     } catch (e) {}
 
     try{
-      Axios.post("http://localhost:8080/bookthis", {
-        ticket : [ this.state.chosenSeats ]
-      });
+      let chosen = JSON.stringify(this.state.chosenSeats);
+      
+      Axios({
+        url: 'http://localhost:8080/bookthis',
+        method: 'post',
+        data: this.state.chosenSeats
+      })
     }
     catch(e){}
   }

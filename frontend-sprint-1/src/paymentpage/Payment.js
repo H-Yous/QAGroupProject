@@ -22,7 +22,7 @@ class Payment extends Component {
       total = total + this.state[i].price;
       
     }
-    console.log(this.seats);
+    
     console.log(total);
     document.getElementById("total").innerText = total;
 

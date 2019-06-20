@@ -13,10 +13,10 @@ class TicketForm extends Component {
     super(props);
 
     this.chosen = this.props.chosenSeats;
-    console.log(this.chosen);
+    console.log(this.chosen + "---- CHOSEN");
     this.state = {
-      seats: this.chosen.seatnum,
-      tickets: this.chosen.ticket,
+      seats: this.chosen.seat,
+      tickets: this.chosen.type,
       price: this.chosen.price,
 
       numOfSeats: Object.keys(this.chosen).length
@@ -24,11 +24,11 @@ class TicketForm extends Component {
   }
 
   renderFormRow(x) {
-    console.log(x.seatnum);
+    console.log(x.seat);
     return (
       <Form.Row>
-        <Col>{x.seatnum}</Col>
-        <Col>{x.ticket}</Col>
+        <Col>{x.seat}</Col>
+        <Col>{x.type}</Col>
         <Col>£{x.price}</Col>
       </Form.Row>
     );
