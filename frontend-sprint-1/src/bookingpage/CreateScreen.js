@@ -114,7 +114,7 @@ class ScreenCreation extends Component {
             {
               category: "Disabled",
               ticketTypes: [
-                { ticketTypes: "Disabled", price: this.state.disabled }
+                { ticketType: "Disabled", price: this.state.disabled }
               ]
             }
           ]}

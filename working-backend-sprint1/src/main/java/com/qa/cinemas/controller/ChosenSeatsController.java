@@ -49,7 +49,7 @@ public class ChosenSeatsController {
 			seats.add(ticketArray.getJSONObject(i).getString("seat"));
 		}
 		System.out.println(seats);
-
+		this.chartEvent.setEventKey("1-1-1");
 		try{
 		String token = ticketArray.getJSONObject(0).getString("token");
 		this.chartEvent.bookObjects(seats, token);
@@ -85,7 +85,7 @@ public class ChosenSeatsController {
 	}
 
 	public String createBooking(Ticket[] ticket){
-		this.chartEvent.setEventKey("1-1-1");
+		
 		Booking booking = new Booking();
 		this.setDay(booking);
 		this.setScreen(booking);
