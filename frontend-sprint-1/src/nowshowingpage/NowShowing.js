@@ -15,6 +15,20 @@ class NowShowing extends Component {
     nowShowingMovies: []
   };
 
+  enumTimeSlotConverter(enumInput) {
+    if (enumInput == "FIRSTSLOT") {
+      return "9:15-11:45";
+    } else if (enumInput == "SECONDSLOT") {
+      return "12:30-14:45";
+    } else if (enumInput == "THIRDSLOT") {
+      return "15:00-17:15";
+    } else if (enumInput == "FOURTHSLOT") {
+      return "18:00-20:15";
+    } else {
+      return "20:45-22:00";
+    }
+  }
+
   componentDidMount() {
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
       this.setState({ nowShowingMovies: result.data });
@@ -27,18 +41,6 @@ class NowShowing extends Component {
   handleRedirectBooking(title, eventKey) {
     this.props.history.push("/booking", { title, eventKey });
   }
-
-  createButtons = inputmovitetitle => {
-    let returnButtons = [];
-    for (let i = 0; i < 5; i++) {
-      returnButtons.push(
-        <span>
-          <button type="button" class="btn btn-primary btn-sm" />
-        </span>
-      );
-    }
-    return returnButtons;
-  };
 
   render() {
     console.log(this.state.nowShowingMovies[0]);
@@ -163,63 +165,30 @@ class NowShowing extends Component {
                             <div>
                               {nowShowingMovie.events.map(event => {
                                 return (
-                                  <button
-                                    type="button"
-                                    class="btn btn-primary btn-sm"
-                                    onClick={() => {
-                                      this.handleRedirectBooking(
-                                        nowShowingMovie.title,
-                                        event.eventKey
-                                      );
-                                    }}
-                                  >
-                                    {" "}
-                                    Day: {event.day}
-                                    Timeslot: {event.timeSlot}
-                                  </button>
+                                  <React.Fragment>
+                                    <div style={{ padding: 5 }}>
+                                      <button
+                                        type="button"
+                                        class="btn btn-primary btn-sm"
+                                        style={{ paddingBottom: 5 }}
+                                        onClick={() => {
+                                          this.handleRedirectBooking(
+                                            nowShowingMovie.title,
+                                            event.eventKey
+                                          );
+                                        }}
+                                      >
+                                        {event.day}
+                                        {" : "}
+                                        {this.enumTimeSlotConverter(
+                                          event.timeSlot
+                                        )}
+                                      </button>
+                                      <br />
+                                    </div>
+                                  </React.Fragment>
                                 );
                               })}
-                            </div>
-
-                            <div class="mt-2">
-                              <button
-                                type="button"
-                                class="btn btn-primary btn-sm"
-                                onClick={() => {
-                                  this.handleRedirectBooking(
-                                    nowShowingMovie.title
-                                  );
-                                }}
-                              >
-                                10:00
-                              </button>
-                              <button
-                                type="button"
-                                class="btn btn-primary btn-sm ml-2"
-                              >
-                                13:00
-                              </button>
-                            </div>
-                            <div class="mt-2">
-                              <button
-                                type="button"
-                                class="btn btn-primary btn-sm"
-                              >
-                                16:00
-                              </button>
-                              <button
-                                type="button"
-                                class="btn btn-primary btn-sm ml-2"
-                              >
-                                19:00
-                              </button>
-
-                              <button
-                                type="button"
-                                class="btn btn-primary btn-sm ml-2"
-                              >
-                                22:00
-                              </button>
                             </div>
                           </div>
                         </div>
@@ -368,40 +337,33 @@ class NowShowing extends Component {
                                       );
                                     }
                                   })()}
-                                  <div class="mt-2">
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm"
-                                    >
-                                      10:00
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      13:00
-                                    </button>
-                                  </div>
-                                  <div class="mt-2">
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm"
-                                    >
-                                      16:00
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      19:00
-                                    </button>
-
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      22:00
-                                    </button>
+                                  <div>
+                                    {nowShowingMovie.events.map(event => {
+                                      return (
+                                        <React.Fragment>
+                                          <div style={{ padding: 5 }}>
+                                            <button
+                                              type="button"
+                                              class="btn btn-primary btn-sm"
+                                              style={{ paddingBottom: 5 }}
+                                              onClick={() => {
+                                                this.handleRedirectBooking(
+                                                  nowShowingMovie.title,
+                                                  event.eventKey
+                                                );
+                                              }}
+                                            >
+                                              {event.day}
+                                              {" : "}
+                                              {this.enumTimeSlotConverter(
+                                                event.timeSlot
+                                              )}
+                                            </button>
+                                            <br />
+                                          </div>
+                                        </React.Fragment>
+                                      );
+                                    })}
                                   </div>
                                 </div>
                               </div>
@@ -553,40 +515,35 @@ class NowShowing extends Component {
                                       );
                                     }
                                   })()}
-                                  <div class="mt-2">
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm"
-                                    >
-                                      10:00
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      13:00
-                                    </button>
-                                  </div>
-                                  <div class="mt-2">
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm"
-                                    >
-                                      16:00
-                                    </button>
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      19:00
-                                    </button>
-
-                                    <button
-                                      type="button"
-                                      class="btn btn-primary btn-sm ml-2"
-                                    >
-                                      22:00
-                                    </button>
+                                  <div>
+                                    {nowShowingMovie.events.map(event => {
+                                      return (
+                                        <React.Fragment>
+                                          <div style={{ padding: 5 }}>
+                                            <button
+                                              type="button"
+                                              class="btn btn-primary btn-sm"
+                                              style={{ paddingBottom: 5 }}
+                                              onClick={() => {
+                                                this.handleRedirectBooking(
+                                                  nowShowingMovie.title[
+                                                    index + 2
+                                                  ],
+                                                  event.eventKey
+                                                );
+                                              }}
+                                            >
+                                              {event.day}
+                                              {" : "}
+                                              {this.enumTimeSlotConverter(
+                                                event.timeSlot
+                                              )}
+                                            </button>
+                                            <br />
+                                          </div>
+                                        </React.Fragment>
+                                      );
+                                    })}
                                   </div>
                                 </div>
                               </div>

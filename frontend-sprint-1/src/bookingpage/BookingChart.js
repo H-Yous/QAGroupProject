@@ -10,7 +10,7 @@ class BookingChart extends Component {
         <Table striped borderless variant="light" size="sm">
           <tr>
             <h3>
-              <center>{this.state.eventKey}</center>
+              <center>{this.state.title}</center>
             </h3>
           </tr>
           <tr>
