@@ -66,8 +66,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		System.out.println("APPLICATION RUNNING STARTUP");
 
-		populateEvents();
-
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
 			deleteCollection("QACinema", "nowShowingMovie");
 			System.out.println("APPLICATION POPULATING NOWSHOWING MOVIES");
@@ -96,6 +94,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
 
+		populateEvents();
+		
 		List<NowShowingMovie> nowShowingList = nowShowingMovieServiceImpl.findAll();
 		List<Events> eventsList = eventServiceImpl.findAll(); 
 	

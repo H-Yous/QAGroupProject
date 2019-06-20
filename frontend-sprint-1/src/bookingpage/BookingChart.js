@@ -10,7 +10,7 @@ class BookingChart extends Component {
         <Table striped borderless variant="light" size="sm">
           <tr>
             <h3>
-              <center>{this.state.title}</center>
+              <center>{this.state.movie}</center>
             </h3>
           </tr>
           <tr>
@@ -18,7 +18,7 @@ class BookingChart extends Component {
               publicKey="254e39d5-d1cd-4d23-bc63-ae26cc602338"
               eventKey={this.state.eventKey}
               maxObjects={3}
-              movie={this.state.title}
+              movie={this.state.movie}
               async
             />
           </tr>

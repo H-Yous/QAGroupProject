@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Carousel, Jumbotron, Container } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import axios from "axios";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import NewReleasesInfo from "./NewReleasesInfo";
 
 const Styles = styled.div`
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
@@ -56,6 +55,14 @@ class NewReleases extends Component {
                         >
                           {newReleasedMovie.title}
                         </h3>
+                        <p
+                          style={{ color: "white" }}
+                          onClick={() => {
+                            this.handleRedirect(newReleasedMovie.title);
+                          }}
+                        >
+                          {newReleasedMovie.description}
+                        </p>
                       </Link>
                     </Carousel.Caption>
                   </Carousel.Item>
