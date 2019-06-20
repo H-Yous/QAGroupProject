@@ -17,7 +17,6 @@ class NowShowing extends Component {
 
   componentDidMount() {
     axios.get("http://localhost:8080/api/getNowShowingMovies").then(result => {
-      console.log(result.data.title);
       this.setState({ nowShowingMovies: result.data });
     });
   }
@@ -25,12 +24,24 @@ class NowShowing extends Component {
   handleRedirect(movieName) {
     this.props.history.push("/nowShowingInfo/" + movieName, { movieName });
   }
-  handleRedirectBooking(title){
+  handleRedirectBooking(title) {
     this.props.history.push("/booking", title);
   }
-  
+
+  createButtons = inputmovitetitle => {
+    let returnButtons = [];
+    for (let i = 0; i < 5; i++) {
+      returnButtons.push(
+        <span>
+          <button type="button" class="btn btn-primary btn-sm" />
+        </span>
+      );
+    }
+    return returnButtons;
+  };
 
   render() {
+    console.log(this.state.nowShowingMovies[0]);
     return (
       <React.Fragment>
         {this.state.nowShowingMovies.map(
@@ -149,6 +160,20 @@ class NowShowing extends Component {
                                 );
                               }
                             })()}
+                            <div>
+                              {nowShowingMovie.events.map(event => {
+                                return (
+                                  <button
+                                    type="button"
+                                    class="btn btn-primary btn-sm"
+                                  >
+                                    {event.day}
+                                    {event.timeSlot}
+                                  </button>
+                                );
+                              })}
+                            </div>
+
                             <div class="mt-2">
                               <button
                                 type="button"
