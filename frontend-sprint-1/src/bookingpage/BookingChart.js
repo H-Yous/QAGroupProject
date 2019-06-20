@@ -10,15 +10,15 @@ class BookingChart extends Component {
         <Table striped borderless variant="light" size="sm">
           <tr>
             <h3>
-              <center>{this.state}</center>
+              <center>{this.state.eventKey}</center>
             </h3>
           </tr>
           <tr>
             <CreateScreen
               publicKey="254e39d5-d1cd-4d23-bc63-ae26cc602338"
-              eventKey="1-1-1"
+              eventKey={this.state.eventKey}
               maxObjects={3}
-              movie={this.state}
+              movie={this.state.title}
               async
             />
           </tr>

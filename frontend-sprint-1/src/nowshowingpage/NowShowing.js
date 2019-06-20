@@ -24,8 +24,8 @@ class NowShowing extends Component {
   handleRedirect(movieName) {
     this.props.history.push("/nowShowingInfo/" + movieName, { movieName });
   }
-  handleRedirectBooking(title) {
-    this.props.history.push("/booking", title);
+  handleRedirectBooking(title, eventKey) {
+    this.props.history.push("/booking", { title, eventKey });
   }
 
   createButtons = inputmovitetitle => {
@@ -166,9 +166,16 @@ class NowShowing extends Component {
                                   <button
                                     type="button"
                                     class="btn btn-primary btn-sm"
+                                    onClick={() => {
+                                      this.handleRedirectBooking(
+                                        nowShowingMovie.title,
+                                        event.eventKey
+                                      );
+                                    }}
                                   >
-                                    {event.day}
-                                    {event.timeSlot}
+                                    {" "}
+                                    Day: {event.day}
+                                    Timeslot: {event.timeSlot}
                                   </button>
                                 );
                               })}
