@@ -50,7 +50,7 @@ public class ChargeController {
 			params.put("description", "QaCinema Ticket");
 			params.put("source", token);
 			params.put("statement_descriptor", "QaCinema");
-			params.put("receipt_email", "onlinehumza@gmail.com");
+			params.put("receipt_email", customerEmail);
 			Charge charge = Charge.create(params);
 		} catch (CardException e) {
 
