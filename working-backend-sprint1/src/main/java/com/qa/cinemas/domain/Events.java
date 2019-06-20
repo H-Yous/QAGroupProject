@@ -18,6 +18,8 @@ public class Events {
 	// @Transient
 	// public static final String SEQUENCE_NAME = "users_sequence";
 
+	
+
 	@Override
 	public String toString() {
 		return "Events [day=" + day + ", screen=" + screen + ", timeSlot=" + timeSlot + ", id=" + id + ", movie="
@@ -35,7 +37,6 @@ public class Events {
 	private String movie;
 
 	@NotBlank
-	@Indexed(unique = true)
 	private String eventKey;
 
 	public Events() {

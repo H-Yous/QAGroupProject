@@ -9,5 +9,6 @@ import com.qa.cinemas.domain.Events;
 public interface EventRepository extends MongoRepository<Events, String> {
 
 	public Optional<Events> findByEventKey(String eventKey);
+	public Optional<Events> findByMovie(String movie);
 
 }

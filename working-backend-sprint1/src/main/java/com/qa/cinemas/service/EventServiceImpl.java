@@ -29,6 +29,10 @@ public class EventServiceImpl implements EventService {
 	public Optional<Events> findByEventKey(String eventKey) {
 		return eventRepository.findByEventKey(eventKey);
 	}
+	
+	public Optional<Events> findByMovie(String movie) {
+		return eventRepository.findByMovie(movie);
+	}
 
 	@Override
 	public String createEvent(Events event) {

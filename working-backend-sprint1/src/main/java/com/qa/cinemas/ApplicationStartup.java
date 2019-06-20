@@ -8,6 +8,8 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenOne;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenThree;
 import static com.qa.cinemas.constants.PROJ_CONSTANTS.screenTwo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.bson.Document;
@@ -25,11 +27,14 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.qa.cinemas.domain.Events;
+import com.qa.cinemas.domain.NowShowingMovie;
 import com.qa.cinemas.enums.Days;
 import com.qa.cinemas.enums.Screens;
 import com.qa.cinemas.enums.TimeSlots;
+import com.qa.cinemas.repository.NowShowingMovieRepository;
 import com.qa.cinemas.service.ChartEventService;
 import com.qa.cinemas.service.EventServiceImpl;
+import com.qa.cinemas.service.NowShowingMovieServiceImpl;
 
 @Component
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
@@ -38,7 +43,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	private ChartEventService chartEventService;
 
 	@Autowired
-	private EventServiceImpl eventServiceImpl;
+	EventServiceImpl eventServiceImpl;
 
 	@Autowired
 	PopulateNowShowingMovies populateNowShowingMovies;
@@ -49,10 +54,18 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	@Autowired
 	PopulateMovieCertifications populateMovieCertification;
 
+	@Autowired
+	NowShowingMovieServiceImpl nowShowingMovieServiceImpl;
+	
+	@Autowired
+	NowShowingMovieRepository nowShowingMovieRepository;
+	
+
 	@Override
 	public void onApplicationEvent(final ApplicationReadyEvent event) {
 
 		System.out.println("APPLICATION RUNNING STARTUP");
+
 		populateEvents();
 
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
@@ -83,6 +96,24 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
 
+		List<NowShowingMovie> nowShowingList = nowShowingMovieServiceImpl.findAll();
+		List<Events> eventsList = eventServiceImpl.findAll(); 
+	
+
+		for (int j = 0; j < nowShowingList.size(); j++) {
+			List<Events> saveEventList = new ArrayList<>();
+			for (int i = 0; i < eventsList.size(); i++) {
+				if (nowShowingList.get(j).getTitle()
+						.equals(eventsList.get(i).getMovie())) {
+					saveEventList.add(eventsList.get(i));
+				}
+			}
+			Events[] saveArray= new Events[saveEventList.size()];
+			saveArray=saveEventList.toArray(saveArray);
+			nowShowingList.get(j).setEvents(saveArray);
+			nowShowingMovieRepository.save(nowShowingList.get(j));
+		}
+		
 		System.out.println("STARTUP FINISHED");
 	}
 
@@ -129,7 +160,11 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 	};
 
 	private void populateEvents() {
+		List<NowShowingMovie> nowShowingList = nowShowingMovieServiceImpl.findAll();
+
 		if (eventServiceImpl.findAll().size() < numberOfEvents) {
+			int movieCount = 0;
+
 			System.out
 					.println("No events or not enough events detected in the database, populating the events database");
 			eventToBeSaved = new Events();
@@ -140,6 +175,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 			chartEventService.setClient();
 			for (int i = 0; i < numberOfDays; i++) {
+
 				eventToBeSaved.setDay(Days.values()[i]);
 				for (int j = 0; j < numberOfScreens; j++) {
 					eventToBeSaved.setScreen(Screens.values()[j]);
@@ -164,8 +200,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							System.out.println("event key detected, not saving");
 						} else {
 							System.out.println("saving event: " + eventToBeSaved);
+							eventToBeSaved.setMovie(nowShowingList.get(movieCount).getTitle());
+							movieCount++;
 							eventServiceImpl.createEvent(eventToBeSaved);
-							// create event in io Humza Job
+							if (movieCount == nowShowingList.size()) {
+								movieCount = 0;
+							}
 						}
 
 						try {
