@@ -32,16 +32,13 @@ class Confirmation extends Component {
       });
     } catch (e) {}
 
-    try{
+    try {
       let chosen = JSON.stringify(this.state.chosenSeats);
-      
-      Axios({
-        url: 'http://localhost:8080/bookthis',
-        method: 'post',
-        data: this.state.chosenSeats
-      })
-    }
-    catch(e){}
+
+      Axios.post("http://localhost:8080/booking/createBooking", {
+        ticket: this.state.chosenSeats
+      });
+    } catch (e) {}
   }
   _exportPdf = () => {
     html2canvas(document.querySelector("#capture")).then(canvas => {

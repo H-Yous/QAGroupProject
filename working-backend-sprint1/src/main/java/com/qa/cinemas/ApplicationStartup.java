@@ -66,7 +66,6 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
 		System.out.println("APPLICATION RUNNING STARTUP");
 
-		populateEvents();
 
 		if (getCollectionSize("QACinema", "nowShowingMovie") == 0) {
 			deleteCollection("QACinema", "nowShowingMovie");
@@ -95,6 +94,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 		} else {
 			System.out.println("CERTIFICATION MOVIES COLLECTION DETECTED, NOT POPULATING");
 		}
+
+		
+		populateEvents();
 
 		List<NowShowingMovie> nowShowingList = nowShowingMovieServiceImpl.findAll();
 		List<Events> eventsList = eventServiceImpl.findAll(); 
@@ -199,6 +201,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 						if ((eventServiceImpl.findByEventKey(eventToBeSaved.getEventKey())).isPresent()) {
 							System.out.println("event key detected, not saving");
 						} else {
+						
 							System.out.println("saving event: " + eventToBeSaved);
 							eventToBeSaved.setMovie(nowShowingList.get(movieCount).getTitle());
 							movieCount++;
@@ -206,6 +209,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 							if (movieCount == nowShowingList.size()) {
 								movieCount = 0;
 							}
+							
 						}
 
 						try {
