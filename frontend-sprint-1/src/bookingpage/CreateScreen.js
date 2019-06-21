@@ -129,7 +129,7 @@ class ScreenCreation extends Component {
             this.booked(this.state.chart);
           }}
         >
-          Button
+          Book Selected Tickets
         </Button>
       </div>
     );

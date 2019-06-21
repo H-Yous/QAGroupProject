@@ -53,8 +53,8 @@ class BookingChart extends Component {
     this.props.history.push(
       "/payment",
       {
-      chosenSeats,
-      this.props.location.state.eventKey
+      {chosenSeats,
+      this.props.location.state.eventKey}
       }
     );
   }

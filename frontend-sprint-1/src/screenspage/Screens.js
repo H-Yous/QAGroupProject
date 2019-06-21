@@ -31,7 +31,7 @@ class Screens extends Component {
           <View style={{ flex: 1, flexDirection: "column" }}>
             <Table striped borderless variant="dark" size="sm">
               <tr>
-                <td>
+                <td style={{ textAlign: "center", justifyContent: "center" }}>
                   <h2>Seating Options</h2>
                 </td>
               </tr>
@@ -81,7 +81,7 @@ class Screens extends Component {
             <View style={{ flex: 1, flexDirection: "column" }}>
               <Table striped borderless variant="dark" size="sm">
                 <tr>
-                  <td>
+                  <td style={{ textAlign: "center", justifyContent: "center" }}>
                     <h2>Screens</h2>
                   </td>
                 </tr>

@@ -34,7 +34,7 @@ class NowShowingInfo extends Component {
             if (nowShowingMovies.title === selectedMovieName) {
               return (
                 <React.Fragment>
-                  <Table striped bordered variant="light">
+                  <Table striped bordered variant="dark">
                     <Table striped bordered variant="dark">
                       <center>
                         <h2>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { Table } from "react-bootstrap";
 
 import uRating from "../assets/rating/urating.png";
 import pgRating from "../assets/rating/pgrating.png";
@@ -17,7 +18,7 @@ class NowShowing extends Component {
 
   enumTimeSlotConverter(enumInput) {
     if (enumInput == "FIRSTSLOT") {
-      return "9:15-11:45";
+      return "09:15-11:45";
     } else if (enumInput == "SECONDSLOT") {
       return "12:30-14:45";
     } else if (enumInput == "THIRDSLOT") {
@@ -38,8 +39,8 @@ class NowShowing extends Component {
   handleRedirect(movieName) {
     this.props.history.push("/nowShowingInfo/" + movieName, { movieName });
   }
-  handleRedirectBooking(title, eventKey) {
-    this.props.history.push("/booking", { title, eventKey });
+  handleRedirectBooking(movie, eventKey) {
+    this.props.history.push("/booking", { movie, eventKey });
   }
 
   render() {
@@ -48,37 +49,40 @@ class NowShowing extends Component {
       <React.Fragment>
         {this.state.nowShowingMovies.map(
           (nowShowingMovie, index, moviesArray) => {
-            if ((index + 1) % 3 === 1) {
-              return (
-                <div className="row">
-                  <div className="col">
-                    <div className="card-deck">
-                      <div className="card">
-                        <img
-                          className="card-img-top"
-                          src={nowShowingMovie.poster}
-                          alt="Card image cap"
-                        />
-                        <div className="card-body d-flex flex-column">
-                          <Link style={{ textDecoration: "none" }}>
-                            <h5
-                              style={{ color: "black" }}
-                              onClick={() => {
-                                this.handleRedirect(nowShowingMovie.title);
-                              }}
-                              className="card-title"
-                            >
-                              {nowShowingMovie.title}
-                            </h5>
-                          </Link>
+            return (
+              <div className="row">
+                <div className="col">
+                  <div className="card-deck">
+                    <Table striped borderless variant="dark">
+                      <tr>
+                        <td>
+                          <img
+                            className="card-img-top"
+                            src={nowShowingMovie.poster}
+                            style={{ width: 500, height: 300 }}
+                            alt="Card image cap"
+                          />
+                          <div style={{ textAlign: "center" }}>
+                            <Link style={{ textDecoration: "none" }}>
+                              <h3
+                                style={{ color: "white" }}
+                                onClick={() => {
+                                  this.handleRedirect(nowShowingMovie.title);
+                                }}
+                                className="card-title"
+                              >
+                                {nowShowingMovie.title}
+                              </h3>
+                            </Link>
+                          </div>
+                        </td>
+                        <td>
                           <p className="card-text">
                             {nowShowingMovie.description}
                           </p>
                           <div class="mt-auto">
                             <p>
-                              <small className="text-muted">
-                                {nowShowingMovie.runtime} mins
-                              </small>
+                              <small>{nowShowingMovie.runtime} mins</small>
                             </p>
                             {(() => {
                               if (nowShowingMovie.certification == "U") {
@@ -162,400 +166,43 @@ class NowShowing extends Component {
                                 );
                               }
                             })()}
-                            <div>
-                              {nowShowingMovie.events.map(event => {
-                                return (
-                                  <React.Fragment>
-                                    <div style={{ padding: 5 }}>
-                                      <button
-                                        type="button"
-                                        class="btn btn-primary btn-sm"
-                                        style={{ paddingBottom: 5 }}
-                                        onClick={() => {
-                                          this.handleRedirectBooking(
-                                            nowShowingMovie.title,
-                                            event.eventKey
-                                          );
-                                        }}
-                                      >
-                                        {event.day}
-                                        {" : "}
-                                        {this.enumTimeSlotConverter(
-                                          event.timeSlot
-                                        )}
-                                      </button>
-                                      <br />
-                                    </div>
-                                  </React.Fragment>
-                                );
-                              })}
-                            </div>
                           </div>
-                        </div>
-                      </div>
-                      {(() => {
-                        if (typeof moviesArray[index + 1] != "undefined") {
-                          return (
-                            <div className="card">
-                              <img
-                                className="card-img-top"
-                                src={
-                                  this.state.nowShowingMovies[index + 1].poster
-                                }
-                                alt="Card image cap"
-                              />
-                              <div className="card-body d-flex flex-column">
-                                <Link style={{ textDecoration: "none" }}>
-                                  <h5
-                                    style={{ color: "black" }}
-                                    onClick={() => {
-                                      this.handleRedirect(
-                                        this.state.nowShowingMovies[index + 1]
-                                          .title
-                                      );
-                                    }}
-                                    className="card-title"
+                          <div>
+                            <br />
+                            {nowShowingMovie.events.map(event => {
+                              return (
+                                <React.Fragment>
+                                  <span
+                                    style={{ padding: 2, textAlign: "center" }}
                                   >
-                                    {
-                                      this.state.nowShowingMovies[index + 1]
-                                        .title
-                                    }
-                                  </h5>
-                                </Link>
-                                <p className="card-text">
-                                  {
-                                    this.state.nowShowingMovies[index + 1]
-                                      .description
-                                  }
-                                </p>
-                                <div class="mt-auto">
-                                  {" "}
-                                  <p>
-                                    <small className="text-muted">
-                                      {
-                                        this.state.nowShowingMovies[index + 1]
-                                          .runtime
-                                      }{" "}
-                                      mins
-                                    </small>
-                                  </p>
-                                  {(() => {
-                                    if (
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "U"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/u"
-                                          target="_blank"
-                                          alt="Universal"
-                                        >
-                                          <img
-                                            src={uRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "PG"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/pg"
-                                          target="_blank"
-                                          alt="Parental Guidance"
-                                        >
-                                          <img
-                                            src={pgRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "12" ||
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "12A"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/12a-and-12"
-                                          target="_blank"
-                                          alt="12A"
-                                        >
-                                          <img
-                                            src={twelveaRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "15"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/15"
-                                          target="_blank"
-                                          alt="15"
-                                        >
-                                          <img
-                                            src={fifteenRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 1]
-                                        .certification == "18"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/18"
-                                          target="_blank"
-                                          alt="18"
-                                        >
-                                          <img
-                                            src={eighteenRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else {
-                                      return (
-                                        <img
-                                          src={tbcRating}
-                                          height="50"
-                                          width="50"
-                                        />
-                                      );
-                                    }
-                                  })()}
-                                  <div>
-                                    {nowShowingMovie.events.map(event => {
-                                      return (
-                                        <React.Fragment>
-                                          <div style={{ padding: 5 }}>
-                                            <button
-                                              type="button"
-                                              class="btn btn-primary btn-sm"
-                                              style={{ paddingBottom: 5 }}
-                                              onClick={() => {
-                                                this.handleRedirectBooking(
-                                                  nowShowingMovie.title,
-                                                  event.eventKey
-                                                );
-                                              }}
-                                            >
-                                              {event.day}
-                                              {" : "}
-                                              {this.enumTimeSlotConverter(
-                                                event.timeSlot
-                                              )}
-                                            </button>
-                                            <br />
-                                          </div>
-                                        </React.Fragment>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })()}
-                      {(() => {
-                        if (typeof moviesArray[index + 2] != "undefined") {
-                          return (
-                            <div className="card">
-                              <img
-                                className="card-img-top"
-                                src={
-                                  this.state.nowShowingMovies[index + 2].poster
-                                }
-                                alt="Card image cap"
-                              />
-                              <div className="card-body d-flex flex-column">
-                                <Link style={{ textDecoration: "none" }}>
-                                  <h5
-                                    style={{ color: "black" }}
-                                    onClick={() => {
-                                      this.handleRedirect(
-                                        this.state.nowShowingMovies[index + 2]
-                                          .title
-                                      );
-                                    }}
-                                    className="card-title"
-                                  >
-                                    {
-                                      this.state.nowShowingMovies[index + 2]
-                                        .title
-                                    }
-                                  </h5>
-                                </Link>
-                                <p className="card-text">
-                                  {
-                                    this.state.nowShowingMovies[index + 2]
-                                      .description
-                                  }
-                                </p>
-                                <div class="mt-auto">
-                                  <p>
-                                    <small className="text-muted">
-                                      {
-                                        this.state.nowShowingMovies[index + 2]
-                                          .runtime
-                                      }{" "}
-                                      mins
-                                    </small>
-                                  </p>
-
-                                  {(() => {
-                                    if (
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "U"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/u"
-                                          target="_blank"
-                                          alt="Universal"
-                                        >
-                                          <img
-                                            src={uRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "PG"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/pg"
-                                          target="_blank"
-                                          alt="Parental Guidance"
-                                        >
-                                          <img
-                                            src={pgRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "12" ||
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "12A"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/12a-and-12"
-                                          target="_blank"
-                                          alt="12A"
-                                        >
-                                          <img
-                                            src={twelveaRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "15"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/15"
-                                          target="_blank"
-                                          alt="15"
-                                        >
-                                          <img
-                                            src={fifteenRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else if (
-                                      this.state.nowShowingMovies[index + 2]
-                                        .certification == "18"
-                                    ) {
-                                      return (
-                                        <a
-                                          href="https://bbfc.co.uk/what-classification/18"
-                                          target="_blank"
-                                          alt="18"
-                                        >
-                                          <img
-                                            src={eighteenRating}
-                                            height="50"
-                                            width="50"
-                                          />
-                                        </a>
-                                      );
-                                    } else {
-                                      return (
-                                        <img
-                                          src={tbcRating}
-                                          height="50"
-                                          width="50"
-                                        />
-                                      );
-                                    }
-                                  })()}
-                                  <div>
-                                    {nowShowingMovie.events.map(event => {
-                                      return (
-                                        <React.Fragment>
-                                          <div style={{ padding: 5 }}>
-                                            <button
-                                              type="button"
-                                              class="btn btn-primary btn-sm"
-                                              style={{ paddingBottom: 5 }}
-                                              onClick={() => {
-                                                this.handleRedirectBooking(
-                                                  nowShowingMovie.title[
-                                                    index + 2
-                                                  ],
-                                                  event.eventKey
-                                                );
-                                              }}
-                                            >
-                                              {event.day}
-                                              {" : "}
-                                              {this.enumTimeSlotConverter(
-                                                event.timeSlot
-                                              )}
-                                            </button>
-                                            <br />
-                                          </div>
-                                        </React.Fragment>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })()}
-                    </div>
+                                    <button
+                                      type="button"
+                                      class="btn btn-primary btn-sm"
+                                      onClick={() => {
+                                        this.handleRedirectBooking(
+                                          event.movie,
+                                          event.eventKey
+                                        );
+                                      }}
+                                    >
+                                      {event.day}
+                                      <br />
+                                      {this.enumTimeSlotConverter(
+                                        event.timeSlot
+                                      )}
+                                    </button>
+                                  </span>
+                                </React.Fragment>
+                              );
+                            })}
+                          </div>
+                        </td>
+                      </tr>
+                    </Table>
                   </div>
                 </div>
-              );
-            }
+              </div>
+            );
           }
         )}
       </React.Fragment>
