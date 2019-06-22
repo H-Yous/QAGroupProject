@@ -52,10 +52,7 @@ class BookingChart extends Component {
   handleRedirect(chosenSeats) {
     this.props.history.push(
       "/payment",
-      {
-      {chosenSeats,
-      this.props.location.state.eventKey}
-      }
+      chosenSeats,    
     );
   }
 
