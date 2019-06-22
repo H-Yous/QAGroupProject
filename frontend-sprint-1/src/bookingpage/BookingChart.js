@@ -29,7 +29,7 @@ class BookingChart extends Component {
   }
   componentDidMount() {}
   booked(chart) {
-    this.movie = this.props.location.state.title;
+    this.movie = this.props.location.state.movie;
     chart.listSelectedObjects(listOfObjects => {
       listOfObjects.map(object => {
         let seat = object.label;
@@ -43,16 +43,20 @@ class BookingChart extends Component {
         this.chosenSeats.push({ title, seat, type, price, token });
         console.log(chart.holdToken);
         if (listOfObjects.indexOf(object) === listOfObjects.length - 1) {
-          this.handleRedirect(this.chosenSeats);
+          this.handleRedirect(this.chosenSeats,this.props.location.state.eventKey);
           console.log(this.chosenSeats);
         }
       });
     });
   }
-  handleRedirect(chosenSeats) {
+  handleRedirect(chosenSeats,eventKey) {
     this.props.history.push(
       "/payment",
-      chosenSeats,    
+      {
+      chosenSeats,
+     eventKey
+    }
+      
     );
   }
 
@@ -62,7 +66,7 @@ class BookingChart extends Component {
         <Table striped borderless variant="light" size="sm">
           <tr>
             <h3>
-              <center>{this.props.location.state.eventKey}</center>
+              <center>{this.props.location.state.movie}</center>
             </h3>
           </tr>
           <tr>

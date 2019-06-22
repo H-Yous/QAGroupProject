@@ -16,8 +16,9 @@ class Confirmation extends Component {
   componentDidMount() {
     try {
       {
-        console.log(this.state.chosenSeats);
-        console.log(JSON.stringify(this.state.chosenSeats));
+        console.log(this.state.chosenSeats.data);
+        console.log("-------------------" + this.state.eventKey);
+
       }
       var seats = "";
       Axios.get("http://localhost:8080/gettotal").then(res => {
@@ -33,10 +34,10 @@ class Confirmation extends Component {
     } catch (e) {}
 
     try {
-      let chosen = JSON.stringify(this.state.chosenSeats);
 
-      Axios.post("http://localhost:8080/booking/createBooking", {
-        ticket: this.state.chosenSeats
+      Axios.post("http://localhost:8080/bookthis", {
+        ticket: this.state.chosenSeats,
+        eventKey: this.state.eventKey
       });
     } catch (e) {}
   }

@@ -11,6 +11,7 @@ class CheckoutForm extends Component {
     this.submit = this.submit.bind(this);
     this.state = { validated: false };
     this.chosenSeats = this.props.chosenSeats;
+    this.eventKey = this.props.eventKey;
     this.seats = this.props.seats;
     this.textInput = React.createRef();
     this.textInput1 = React.createRef();
@@ -56,15 +57,15 @@ class CheckoutForm extends Component {
       });
   }
 
-  handleRedirect(chosenSeats) {
-    this.props.history.push("/confirmation", { chosenSeats });
+  handleRedirect(chosenSeats,eventKey) {
+    this.props.history.push("/confirmation", { chosenSeats, eventKey });
   }
 
   render() {
     const { validated } = this.state;
 
     if (this.state.complete) {
-      this.handleRedirect(this.chosenSeats);
+      this.handleRedirect(this.chosenSeats,this.eventKey);
     }
 
     return (

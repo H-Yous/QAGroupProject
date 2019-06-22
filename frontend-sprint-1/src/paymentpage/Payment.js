@@ -15,11 +15,12 @@ class Payment extends Component {
   seats;
 
   componentDidMount() {
-    console.log(this.state);
+    console.log(this.state.eventKey);
+    console.log("----- /payment" + this.state.chosenSeats);
     var total = 0;
     
-    for (var i = 0; i < this.state.length; i++) {
-      total = total + this.state[i].price;
+    for (var i = 0; i < this.state.chosenSeats.length; i++) {
+      total = total + this.state.chosenSeats[i].price;
       
     }
     
@@ -43,14 +44,14 @@ class Payment extends Component {
         <Card.Body>
           <StripeProvider apiKey="pk_test_iXkwILOm0dHnfTVPsiDy8Mw0007ohxGCzC">
             <div className="example">
-              <TicketForm chosenSeats={this.state} />
+              <TicketForm chosenSeats={this.state.chosenSeats} />
 
               <span>
                 <h2>£:</h2>
                 <h1 id="total">{this.total}</h1>
               </span>
               <Elements>
-                <CheckoutForm chosenSeats={this.state} />
+                <CheckoutForm chosenSeats={this.state.chosenSeats} eventKey={this.state.eventKey} />
               </Elements>
             </div>
           </StripeProvider>

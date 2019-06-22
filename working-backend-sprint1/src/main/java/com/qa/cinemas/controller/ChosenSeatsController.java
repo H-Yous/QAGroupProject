@@ -13,6 +13,8 @@ import static com.qa.cinemas.constants.PROJ_CONSTANTS.crossOriginsPath;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.mongodb.util.JSON;
 import com.qa.cinemas.domain.Booking;
 import com.qa.cinemas.domain.Ticket;
@@ -40,23 +42,23 @@ public class ChosenSeatsController {
 	private int totalprice = 0;
 
 	@PostMapping("/bookthis")
-	public String sendTicket (@RequestBody Object object[]) {
+	public String sendTicket (@Valid @RequestBody Booking booking) {
 		
-		JSONArray ticketArray = new JSONArray(object);
+		System.out.println(booking);
+		JSONArray ticketArray = new JSONArray(booking.getTicket());
 		
 		ArrayList<String> seats = new ArrayList<String>();
-		for(int i = 0; i < object.length; i++){
+		for(int i = 0; i < booking.getTicket().length; i++){
 			seats.add(ticketArray.getJSONObject(i).getString("seat"));
 		}
 		System.out.println(seats);
-		this.chartEvent.setEventKey("1-1-1");
+		this.chartEvent.setEventKey(booking.getEventKey());
 		try{
 		String token = ticketArray.getJSONObject(0).getString("token");
 		this.chartEvent.bookObjects(seats, token);
 		} catch (Exception e){
 			System.out.println("Didn't send to chartEvent");
 		}
-		
 		
 		List<Ticket> ticketList = new ArrayList<>();
 			for(int i = 0; i < ticketArray.length(); i++){
@@ -78,20 +80,18 @@ public class ChosenSeatsController {
 			Ticket[] ticket = ticketList.toArray(new Ticket[ticketList.size()]);
 	
 
-		this.createBooking(ticket);
+		this.createBooking(booking);
 		
 
 		return "ticketMade";
 	}
 
-	public String createBooking(Ticket[] ticket){
+	public String createBooking(Booking booking){
 		
-		Booking booking = new Booking();
 		this.setDay(booking);
 		this.setScreen(booking);
 		this.setTimeSlot(booking);
 		booking.settotalPrice(this.totalprice);
-		booking.setTicket(ticket);
 		booking.setCustomerID(Integer.toString(count));
 		this.count++;
 		this.totalprice = 0;

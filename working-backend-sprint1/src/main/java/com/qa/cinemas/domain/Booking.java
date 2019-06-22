@@ -1,6 +1,7 @@
 package com.qa.cinemas.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;
@@ -18,17 +19,12 @@ import com.qa.cinemas.enums.TimeSlots;
 @Document(collection = "Bookings")
 public class Booking {
 
-	// @Override
-	// public String toString() {
-	// return "Booking [id=" + id + ", salesID=" + salesID + ", day=" + day + ",
-	// screen=" + screen + ", timeSlot="
-	// + timeSlot + ", seatNumber=" + seatNumber + ", customerID=" + customerID + ",
-	// price=" + price + "]";
-	// }
+
 	@Override
 	public String toString() {
-		return id + ", " + salesID + ", " + day + ", " + screen + ", " + timeSlot + ", " + ticket.toString() + ", "
-				+ totalPrice;
+		return "Booking [id=" + id + ", salesID=" + salesID + ", eventKey=" + eventKey + ", day=" + day + ", screen="
+				+ screen + ", timeSlot=" + timeSlot + ", ticket=" + Arrays.toString(ticket) + ", customerID="
+				+ customerID + ", totalPrice=" + totalPrice + "]";
 	}
 
 	@Transient
@@ -40,22 +36,26 @@ public class Booking {
 	@Indexed(unique = true)
 	private long salesID;
 
-	@NotNull
+	private String eventKey;
+	
+	public String getEventKey() {
+		return eventKey;
+	}
+
+	public void setEventKey(String eventKey) {
+		this.eventKey = eventKey;
+	}
+
 	private Days day;
 
-	@NotNull
 	private Screens screen;
 
-	@NotNull
 	private TimeSlots timeSlot;
 
-	@NotNull
-	private Ticket ticket[];
+	private Ticket[] ticket;
 
-	@NotBlank
 	private String customerID;
 
-	@NotBlank
 	private int totalPrice;
 
 	public Booking() {
